@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50">
+  <rect x="18" y="14" width="22" height="22" rx="6" fill="#f26522"/>
+  <circle cx="29" cy="22" r="4" fill="#ffffff"/>
+  <path d="M25 30 Q29 33 33 30" stroke="#ffffff" stroke-width="2" fill="none"/>
+  <text x="48" y="31" font-family="sans-serif" font-size="16" font-weight="bold" fill="#231f20">Appbrew</text>
+</svg>
