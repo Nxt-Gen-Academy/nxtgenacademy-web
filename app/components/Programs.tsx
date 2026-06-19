@@ -84,7 +84,7 @@ export default function Programs() {
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading 
           eyebrow="Programs" 
-          title="Our Flagship Programs" 
+          title="Our Nxt Gen Programs" 
           subtitle="Master high-demand skills with our comprehensive, industry-aligned curriculums designed for the modern AI era."
         />
         

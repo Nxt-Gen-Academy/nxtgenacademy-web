@@ -74,7 +74,7 @@ export default function AlumniNetwork() {
         <ScrollReveal direction="fade" delay={400}>
           <div
             ref={trackRef}
-            className="mt-16 flex gap-6 overflow-x-auto pb-8 scroll-smooth snap-x snap-mandatory hide-scrollbar"
+            className="mt-10 flex gap-6 overflow-x-auto pt-6 pb-8 scroll-smooth snap-x snap-mandatory hide-scrollbar"
           >
             {testimonials.map((person, index) => {
               const accentClass = ACCENTS[index % ACCENTS.length];
@@ -82,21 +82,26 @@ export default function AlumniNetwork() {
               return (
                 <Card
                   key={`${person.name}-${index}`}
-                  className="min-w-[300px] max-w-[300px] sm:min-w-[340px] sm:max-w-[340px] snap-start rounded-3xl border border-border/60 bg-card/40 backdrop-blur-sm shadow-[0_20px_40px_-15px_oklch(0.04_0.015_250/0.4)] flex flex-col justify-between overflow-hidden gap-0 ring-1 ring-white/5 hover:border-primary/30 hover:shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.2)] hover:-translate-y-1 transition-all duration-500 group"
+                  className="min-w-[300px] max-w-[300px] sm:min-w-[340px] sm:max-w-[340px] snap-start rounded-3xl border border-border/60 bg-card/40 backdrop-blur-sm shadow-[0_20px_40px_-15px_oklch(0.04_0.015_250/0.4)] flex flex-col justify-between overflow-hidden gap-0 ring-1 ring-white/5 hover:border-primary hover:-translate-y-1 transition-[border-color,transform] duration-300 group py-0 translate-z-0"
                 >
                   <CardContent className="p-0 flex flex-col justify-between h-full">
                     <div>
-                      <div
-                        className={`relative h-32 rounded-t-3xl bg-gradient-to-br ${accentClass.split(' ')[0]} ${accentClass.split(' ')[1]} ${accentClass.split(' ')[2]} border-b ${accentClass.split(' ')[3]} overflow-hidden`}
-                      >
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_oklch(0.97_0.005_250/0.1),_transparent_60%)]" />
-                        <div className="absolute inset-0 grid-pattern opacity-20 mix-blend-overlay" />
+                      <div className="relative h-64 overflow-hidden border-b border-border/40 bg-muted/20">
+                        {person.image ? (
+                          <img
+                            src={person.image}
+                            alt={person.name}
+                            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                          />
+                        ) : (
+                          <div className={`h-full w-full grid place-items-center text-3xl font-heading font-medium text-foreground bg-gradient-to-br ${accentClass.split(' ')[0]} ${accentClass.split(' ')[1]} ${accentClass.split(' ')[2]}`}>
+                            {getInitials(person.name)}
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent z-10" />
                       </div>
                       
-                      <div className="px-6 pb-2 pt-10 relative z-20">
-                        <div className="absolute left-6 -top-8 h-16 w-16 rounded-2xl bg-card border border-border/80 shadow-md grid place-items-center text-xl font-heading font-medium text-foreground group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-300 z-30">
-                          {getInitials(person.name)}
-                        </div>
+                      <div className="px-6 pb-2 pt-6 relative z-20">
                         <div className="font-heading font-medium text-lg text-foreground line-clamp-1 group-hover:text-primary transition-colors">
                           {person.name}
                         </div>
