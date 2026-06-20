@@ -22,60 +22,32 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  // Pre-fill fields when user is logged in
+  // Pre-fill fields when user is logged in, restoring cached choices if any
   useEffect(() => {
     if (session?.user) {
       setName(session.user.name || "");
       setEmail(session.user.email || "");
-    }
-  }, [session]);
 
-  // Handle cached lead submission after Google sign-in redirect
-  useEffect(() => {
-    const processPendingEnquiry = async () => {
-      if (typeof window === "undefined" || !session?.user) return;
+      if (typeof window !== "undefined") {
+        const flag = localStorage.getItem("pending_enquiry_flag");
+        if (flag === "true") {
+          // Clear flag immediately to prevent double detection
+          localStorage.removeItem("pending_enquiry_flag");
 
-      const flag = localStorage.getItem("pending_enquiry_flag");
-      if (flag === "true") {
-        // Clear flag immediately to prevent double submission
-        localStorage.removeItem("pending_enquiry_flag");
+          const cachedPhone = localStorage.getItem("pending_enquiry_phone");
+          const cachedCourse = localStorage.getItem("pending_enquiry_course");
+          const cachedWhatsApp = localStorage.getItem("pending_enquiry_whatsapp");
 
-        const cachedPhone = localStorage.getItem("pending_enquiry_phone") || "";
-        const cachedCourse = localStorage.getItem("pending_enquiry_course") || "Business analytics with AI";
-        const cachedWhatsApp = localStorage.getItem("pending_enquiry_whatsapp") !== "false";
+          if (cachedPhone) setPhone(cachedPhone);
+          if (cachedCourse) setCourse(cachedCourse);
+          if (cachedWhatsApp) setWhatsAppUpdates(cachedWhatsApp !== "false");
 
-        // Clear rest of cached data
-        localStorage.removeItem("pending_enquiry_phone");
-        localStorage.removeItem("pending_enquiry_course");
-        localStorage.removeItem("pending_enquiry_whatsapp");
-
-        setIsSubmitting(true);
-        try {
-          const dbResult = await saveEnquiry({
-            name: session.user.name,
-            email: session.user.email,
-            phone: cachedPhone,
-            course: cachedCourse,
-            whatsAppUpdates: cachedWhatsApp,
-          });
-
-          if (dbResult.success) {
-            setName(session.user.name);
-            setCourse(cachedCourse);
-            setSubmitted(true);
-          } else {
-            console.error("Failed to save pending enquiry:", dbResult.error);
-          }
-        } catch (err) {
-          console.error("Error processing pending enquiry:", err);
-        } finally {
-          setIsSubmitting(false);
+          // Clean up cache
+          localStorage.removeItem("pending_enquiry_phone");
+          localStorage.removeItem("pending_enquiry_course");
+          localStorage.removeItem("pending_enquiry_whatsapp");
         }
       }
-    };
-
-    if (session?.user) {
-      processPendingEnquiry();
     }
   }, [session]);
 
