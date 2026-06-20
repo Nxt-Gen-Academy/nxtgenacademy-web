@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { saveEnquiry } from "@/app/actions/save-enquiry";
 import { CheckCircle, User } from "lucide-react";
 
 export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
@@ -91,18 +90,34 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
     setError("");
 
     try {
-      const dbResult = await saveEnquiry({
-        name,
-        email,
-        phone,
-        course,
-        whatsAppUpdates,
+      const response = await fetch("/api/save-enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          course,
+          whatsAppUpdates,
+        }),
       });
 
-      if (dbResult.success) {
-        setSubmitted(true);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setSubmitted(true);
+        } else {
+          setError(data.error || "Failed to submit enquiry. Please try again.");
+        }
       } else {
-        setError(dbResult.error || "Failed to submit enquiry. Please try again.");
+        let errorMsg = "Failed to submit enquiry. Please try again.";
+        try {
+          const data = await response.json();
+          if (data.error) errorMsg = data.error;
+        } catch (_) {}
+        setError(errorMsg);
       }
     } catch (err) {
       console.error("Submit Error:", err);
