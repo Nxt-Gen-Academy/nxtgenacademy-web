@@ -7,25 +7,55 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { CheckCircle, User } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+const formSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits").regex(/^[0-9]+$/, "Phone must contain only numbers"),
+  course: z.enum(["Business analytics with AI", "Data Analytics with AI", "AI Product Management"]),
+  whatsAppUpdates: z.boolean(),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [course, setCourse] = useState("Business analytics with AI");
-  const [whatsAppUpdates, setWhatsAppUpdates] = useState(true);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      course: "Business analytics with AI",
+      whatsAppUpdates: true,
+    },
+  });
+
+  const currentPhone = watch("phone");
+  const currentCourse = watch("course");
+  const currentWhatsApp = watch("whatsAppUpdates");
+  const currentName = watch("name");
 
   // Pre-fill fields when user is logged in, restoring cached choices if any
   useEffect(() => {
     if (session?.user) {
-      setName(session.user.name || "");
-      setEmail(session.user.email || "");
+      if (session.user.name) setValue("name", session.user.name);
+      if (session.user.email) setValue("email", session.user.email);
 
       if (typeof window !== "undefined") {
         const flag = localStorage.getItem("pending_enquiry_flag");
@@ -37,9 +67,9 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
           const cachedCourse = localStorage.getItem("pending_enquiry_course");
           const cachedWhatsApp = localStorage.getItem("pending_enquiry_whatsapp");
 
-          if (cachedPhone) setPhone(cachedPhone);
-          if (cachedCourse) setCourse(cachedCourse);
-          if (cachedWhatsApp) setWhatsAppUpdates(cachedWhatsApp !== "false");
+          if (cachedPhone) setValue("phone", cachedPhone);
+          if (cachedCourse) setValue("course", cachedCourse as FormValues["course"]);
+          if (cachedWhatsApp) setValue("whatsAppUpdates", cachedWhatsApp !== "false");
 
           // Clean up cache
           localStorage.removeItem("pending_enquiry_phone");
@@ -48,7 +78,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
         }
       }
     }
-  }, [session]);
+  }, [session, setValue]);
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
@@ -56,9 +86,9 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
 
     // Cache current form choices so they persist across the redirect
     if (typeof window !== "undefined") {
-      localStorage.setItem("pending_enquiry_phone", phone);
-      localStorage.setItem("pending_enquiry_course", course);
-      localStorage.setItem("pending_enquiry_whatsapp", String(whatsAppUpdates));
+      localStorage.setItem("pending_enquiry_phone", currentPhone);
+      localStorage.setItem("pending_enquiry_course", currentCourse);
+      localStorage.setItem("pending_enquiry_whatsapp", String(currentWhatsApp));
       localStorage.setItem("pending_enquiry_flag", "true");
     }
 
@@ -79,13 +109,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
     }
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !email.trim()) {
-      setError("Name and Email are required.");
-      return;
-    }
-
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     setError("");
 
@@ -96,11 +120,11 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name,
-          email,
-          phone,
-          course,
-          whatsAppUpdates,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          course: data.course,
+          whatsAppUpdates: data.whatsAppUpdates,
         }),
       });
 
@@ -135,16 +159,16 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
           Enquiry Submitted!
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Thank you, <strong>{name}</strong>. Your interest in <em>{course}</em> has been registered. We will contact you shortly.
+          Thank you, <strong>{currentName}</strong>. Your interest in <em>{currentCourse}</em> has been registered. We will contact you shortly.
         </p>
         <Button
           onClick={() => {
             setSubmitted(false);
             if (!session?.user) {
-              setName("");
-              setEmail("");
+              setValue("name", "");
+              setValue("email", "");
             }
-            setPhone("");
+            setValue("phone", "");
           }}
           variant="outline"
           className="mt-2 rounded-xl text-xs"
@@ -237,7 +261,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
       )}
 
       {/* Enquiry Form */}
-      <form onSubmit={handleFormSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <Label
             htmlFor={`${idPrefix}name`}
@@ -249,12 +273,11 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
             id={`${idPrefix}name`}
             type="text"
             placeholder="Enter Name"
-            value={name}
-            required
+            {...register("name")}
             disabled={!!session?.user || isSubmitting}
-            onChange={(e) => setName(e.target.value)}
-            className="h-auto px-3 py-2.5 rounded-xl border border-border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed"
+            className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.name ? 'border-red-500' : 'border-border'}`}
           />
+          {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -268,12 +291,11 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
             id={`${idPrefix}email`}
             type="email"
             placeholder="Enter Email"
-            value={email}
-            required
+            {...register("email")}
             disabled={!!session?.user || isSubmitting}
-            onChange={(e) => setEmail(e.target.value)}
-            className="h-auto px-3 py-2.5 rounded-xl border border-border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed"
+            className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.email ? 'border-red-500' : 'border-border'}`}
           />
+          {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -283,19 +305,19 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
           >
             Phone Number
           </Label>
-          <div className="flex items-center rounded-xl border border-border bg-card/60 px-3 py-2.5 text-sm focus-within:ring-2 focus-within:ring-primary/50 transition">
+          <div className={`flex items-center rounded-xl border bg-card/60 px-3 py-2.5 text-sm focus-within:ring-2 focus-within:ring-primary/50 transition ${errors.phone ? 'border-red-500' : 'border-border'}`}>
             <span className="text-muted-foreground">+91</span>
             <span className="mx-2 h-5 w-px bg-border" />
             <Input
               id={`${idPrefix}phone`}
               type="tel"
               placeholder="Enter Phone Number"
-              value={phone}
+              {...register("phone")}
               disabled={isSubmitting}
-              onChange={(e) => setPhone(e.target.value)}
               className="h-auto p-0 border-0 bg-transparent rounded-none focus-visible:ring-0 focus-visible:border-transparent text-sm text-foreground w-full disabled:opacity-70"
             />
           </div>
+          {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -306,10 +328,9 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
             <Label className="flex items-center gap-2 font-normal cursor-pointer">
               <input
                 type="radio"
-                name={`${idPrefix}course`}
-                checked={course === "Business analytics with AI"}
+                value="Business analytics with AI"
+                {...register("course")}
                 disabled={isSubmitting}
-                onChange={() => setCourse("Business analytics with AI")}
                 className="accent-primary"
               />
               Business analytics with AI
@@ -317,10 +338,9 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
             <Label className="flex items-center gap-2 font-normal cursor-pointer">
               <input
                 type="radio"
-                name={`${idPrefix}course`}
-                checked={course === "Data Analytics with AI"}
+                value="Data Analytics with AI"
+                {...register("course")}
                 disabled={isSubmitting}
-                onChange={() => setCourse("Data Analytics with AI")}
                 className="accent-primary"
               />
               Data Analytics with AI
@@ -328,23 +348,22 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
             <Label className="flex items-center gap-2 font-normal cursor-pointer">
               <input
                 type="radio"
-                name={`${idPrefix}course`}
-                checked={course === "AI Product Management"}
+                value="AI Product Management"
+                {...register("course")}
                 disabled={isSubmitting}
-                onChange={() => setCourse("AI Product Management")}
                 className="accent-primary"
               />
               AI Product Management
             </Label>
           </div>
+          {errors.course && <p className="text-xs text-red-500">{errors.course.message}</p>}
         </div>
 
         <Label className="flex items-center gap-2 text-xs text-muted-foreground font-normal cursor-pointer">
           <input
             type="checkbox"
-            checked={whatsAppUpdates}
+            {...register("whatsAppUpdates")}
             disabled={isSubmitting}
-            onChange={(e) => setWhatsAppUpdates(e.target.checked)}
             className="accent-primary"
           />
           Send me updates on WhatsApp
