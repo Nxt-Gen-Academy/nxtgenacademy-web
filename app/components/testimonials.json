@@ -1,6 +1,6 @@
 [
   {
-    "name": "Aarav Kulkarni",
+    "name": "Rohan Deshmukh",
     "role": "Ex-Team Lead at Zolo Stays",
     "message": "With 9 years in non-tech roles, shifting to Data Engineering seemed unrealistic. NxtGen Academy's Cloud and SQL lessons simplified everything. Resume and portfolio guidance helped me get shortlisted. I'm now working at Airbnb India Tech.",
     "rating": 5,
@@ -9,7 +9,7 @@
     "image": "/alumni/Untitled.jpg"
   },
   {
-    "name": "Vikram Joshi",
+    "name": "Arjun Mehta",
     "role": "BA Economics, Ex-Sales Coordinator (3 yrs)",
     "message": "My background was sales admin, not technical, but NxtGen Academy's SQL and dashboard training changed everything. Resume and interview support made a big difference. I secured a Business Analyst role at Cognizant.",
     "rating": 5,
@@ -18,7 +18,7 @@
     "image": "/alumni/Untitled1.jpg"
   },
   {
-    "name": "Meera Sharma",
+    "name": "Sneha Sen",
     "role": "Ex-Junior Developer at eClerx (1.5 yrs)",
     "message": "I had basic development experience but wanted a data-focused role. NxtGen Academy's ETL and orchestration tasks helped me understand DE clearly. Project reviews shaped my thinking. I cracked a DE role at Uber India Tech.",
     "rating": 5,
@@ -27,7 +27,7 @@
     "image": "/alumni/Untitled3.jpg"
   },
   {
-    "name": "Priya Nair",
+    "name": "Anjali Pillai",
     "role": "B.Sc Bio, Ex-Quality Assistant (2 yrs)",
     "message": "Switching from a bio-science role felt risky, but NxtGen Academy's weekly dataset tasks helped me understand analytics well. Mock interview sets prepared me for real rounds. I joined Infosys BPM's data insights team.",
     "rating": 5,
@@ -36,7 +36,7 @@
     "image": "/alumni/Untitled4.jpg"
   },
   {
-    "name": "Aditi Verma",
+    "name": "Kriti Saxena",
     "role": "Placed at KPMG Advisory",
     "message": "As an economics graduate, I wanted a business-focused analytics role. NxtGen Academy's problem-solving sessions and real datasets helped me think analytically. Mock interviews boosted my confidence, and I landed a role at KPMG.",
     "rating": 5,
@@ -45,7 +45,7 @@
     "image": "/alumni/Untitled5.jpg"
   },
   {
-    "name": "Ananya Mehra",
+    "name": "Riya Chatterjee",
     "role": "BMS Fresher",
     "message": "As a fresher, I lacked hands-on understanding, but NxtGen Academy's practical assignments helped me grasp campaign structures quickly. The portfolio review helped me stand out. I joined Gozoop as a junior digital marketer.",
     "rating": 5,
@@ -54,7 +54,7 @@
     "image": "/alumni/Untitled6.jpg"
   },
   {
-    "name": "Siddharth Malhotra",
+    "name": "Kabir Thapar",
     "role": "Senior Software Engineer, Infosys (12+ yrs)",
     "message": "I never imagined transitioning from a service-based workflow to a high-scale product company after 12 years. NxtGen Academy's Full Stack program rebuilt my fundamentals, strengthened my system design skills, and the placement team guided me throughout. Cracking Walmart Global Tech felt impossible before, but NxtGen Academy made it achievable.",
     "rating": 5,
@@ -63,7 +63,7 @@
     "image": "/alumni/Untitled7.jpg"
   },
   {
-    "name": "Manish Arora",
+    "name": "Nikhil Bhatia",
     "role": "Placed at McKinsey & Company (Business Insights)",
     "message": "I struggled with storytelling earlier, but NxtGen Academy's dashboard-building and business case practice made everything clear. The resume suggestions boosted my profile. I cracked two rounds and got placed at McKinsey's insights team.",
     "rating": 5,
@@ -72,7 +72,7 @@
     "image": "/alumni/Untitled8.jpg"
   },
   {
-    "name": "Divya Kapoor",
+    "name": "Sonali Singhania",
     "role": "Ex-Technical Support at WNS (2.7 yrs)",
     "message": "Switching from support seemed impossible until I started hands-on security labs at NxtGen Academy. SIEM tools and alert investigation tasks gave me confidence. I joined Tenable India after a successful second interview.",
     "rating": 5,
@@ -81,7 +81,7 @@
     "image": "/alumni/Untitled9.jpg"
   },
   {
-    "name": "Kavya Rao",
+    "name": "Nisha Hegde",
     "role": "Junior Developer, Tech Mahindra (2 yrs)",
     "message": "I always wanted to work in a product company but didn't know how to compete. NxtGen Academy's portfolio projects and mock assessments boosted my confidence. Joining Razorpay as a full stack developer completely accelerated my career.",
     "rating": 5,
@@ -90,12 +90,21 @@
     "image": "/alumni/Untitled10.jpg"
   },
   {
-    "name": "Tanvi Iyer",
+    "name": "Shruti Venkat",
     "role": "Ex-Data Engineer at CloudMatrix Solutions (9 yrs)",
     "message": "With 9 years in data engineering, I wanted ML roles. NxtGen Academy's clear explanations, ML pipelines, and real projects helped me grow fast. I joined Bloomberg through a hiring network shared with me.",
     "rating": 5,
     "linkedin": "",
     "course": "Data Science, ML & AI Program",
     "image": "/alumni/Untitled11.jpg"
+  },
+  {
+    "name": "Pooja Shenoy",
+    "role": "Ex-Associate Analyst at Cognizant",
+    "message": "The structured DevOps curriculum and hands-on AWS labs at NxtGen Academy were exactly what I needed. The interview prep and resume reviews built up my confidence to transition into a Cloud DevOps Engineer role at PhonePe.",
+    "rating": 5,
+    "linkedin": "",
+    "course": "Data Engineering & DevOps Career Program",
+    "image": "/alumni/Untitled12.jpg"
   }
 ]
