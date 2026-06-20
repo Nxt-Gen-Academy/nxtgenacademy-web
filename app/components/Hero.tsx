@@ -29,6 +29,11 @@ export default function Hero() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
+    // If returning from Google sign-in redirect with a pending enquiry, open dialog immediately
+    if (typeof window !== "undefined" && localStorage.getItem("pending_enquiry_flag") === "true") {
+      setIsDialogOpen(true);
+    }
+
     const timer = setTimeout(() => {
       setIsDialogOpen(true);
     }, 4000); // Popup dialog after 4 seconds
