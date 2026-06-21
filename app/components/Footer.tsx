@@ -20,11 +20,11 @@ export default function Footer() {
             </p>
             
             <div className="mt-8 flex gap-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
+              <a href="https://www.linkedin.com/company/nxtgenacademy-ai/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
                 <LiaLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
+              <a href="https://www.instagram.com/nxtgen.academy.ai?igsh=MThjb3NmdXB6YzNsaA==" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
                 <LiaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>

@@ -4,8 +4,6 @@ import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Card, CardContent } from "@/components/ui/card";
-import { buttonVariants } from "@/components/ui/button";
-import { LiaLinkedin } from "react-icons/lia";
 import testimonials from "./testimonials.json";
 import ScrollReveal from "./ScrollReveal";
 
@@ -78,7 +76,6 @@ export default function AlumniNetwork() {
           >
             {testimonials.map((person, index) => {
               const accentClass = ACCENTS[index % ACCENTS.length];
-              const linkedinUrl = person.linkedin || `https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(person.name)}`;
               return (
                 <Card
                   key={`${person.name}-${index}`}
@@ -101,7 +98,7 @@ export default function AlumniNetwork() {
                         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent z-10" />
                       </div>
                       
-                      <div className="px-6 pb-2 pt-6 relative z-20">
+                      <div className="px-6 pb-6 pt-6 relative z-20">
                         <div className="font-heading font-medium text-lg text-foreground line-clamp-1 group-hover:text-primary transition-colors">
                           {person.name}
                         </div>
@@ -123,20 +120,6 @@ export default function AlumniNetwork() {
                           "{person.message}"
                         </p>
                       </div>
-                    </div>
-
-                    <div className="p-6 pt-4 mt-auto">
-                      <a
-                        href={linkedinUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${buttonVariants({
-                          variant: "outline",
-                        })} w-full rounded-xl px-4 py-4 h-auto text-sm font-medium border-border/80 bg-background/40 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-300 flex items-center justify-center gap-2 group/btn`}
-                      >
-                        <LiaLinkedin className="h-5 w-5 text-[#0A66C2] group-hover/btn:text-white transition-colors" />
-                        Connect on LinkedIn
-                      </a>
                     </div>
                   </CardContent>
                 </Card>
