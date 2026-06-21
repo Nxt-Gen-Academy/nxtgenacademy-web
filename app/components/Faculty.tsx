@@ -93,8 +93,8 @@ export default function Faculty() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <SectionHeading
             eyebrow="Introducing the Faculty"
-            title="Learn From The Best"
-            subtitle="Get mentored directly by active practitioners working at top product companies."
+            title="Learn From The Best. Get Hired from the Best."
+            subtitle="Get mentored directly by active practitioners working at top Multi-National companies."
           />
           
           {/* Slider Controls */}

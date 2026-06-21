@@ -31,7 +31,6 @@ export default function Home() {
       <Faculty />
       <Journey />
       <Projects />
-      <Stories />
       <AlumniNetwork />
       <Curriculum />
       <Pricing />
