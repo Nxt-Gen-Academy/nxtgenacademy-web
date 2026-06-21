@@ -1,7 +1,6 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { LiaLinkedin } from "react-icons/lia";
 import SectionHeading from "./SectionHeading";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -94,9 +93,6 @@ export default function HearFromLearners() {
                 {item.role}
               </p>
             </div>
-          </div>
-          <div className="text-slate-400 group-hover:text-blue-600 transition-colors">
-            <LiaLinkedin className="h-6 w-6" />
           </div>
         </div>
 
