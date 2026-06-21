@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { LiaLinkedin, LiaTwitter, LiaInstagram } from "react-icons/lia";
+import { LiaLinkedin, LiaInstagram } from "react-icons/lia";
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
       
       <div className="max-w-7xl mx-auto px-4 py-16 sm:py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-5">
             <div className="flex items-center gap-2 mb-6">
               <div className="rounded-lg bg-transparent">
                 <Image src="/logo.png" alt="logo" width={140} height={40} className="h-auto w-[140px]" />
@@ -24,10 +24,6 @@ export default function Footer() {
                 <LiaLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
-                <LiaTwitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
                 <LiaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
@@ -35,7 +31,7 @@ export default function Footer() {
             </div>
           </div>
           
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h4 className="font-display font-medium text-foreground mb-6">Programs</h4>
             <ul className="space-y-4 text-sm font-medium">
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Business Analytics</a></li>
@@ -44,13 +40,29 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h4 className="font-display font-medium text-foreground mb-6">Company</h4>
             <ul className="space-y-4 text-sm font-medium">
               <li><a href="#why" className="text-muted-foreground hover:text-primary transition-colors">Why Us</a></li>
               <li><a href="#faculty" className="text-muted-foreground hover:text-primary transition-colors">Faculty</a></li>
               <li><a href="#projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</a></li>
               <li><a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a></li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-3">
+            <h4 className="font-display font-medium text-foreground mb-6">Contact Us</h4>
+            <ul className="space-y-4 text-sm font-medium">
+              <li>
+                <a href="mailto:info@nxtgenacademy.co.in" className="text-muted-foreground hover:text-primary transition-colors block break-all">
+                  info@nxtgenacademy.co.in
+                </a>
+              </li>
+              <li>
+                <a href="tel:+919116205994" className="text-muted-foreground hover:text-primary transition-colors block">
+                  +91 91162 05994
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -62,9 +74,9 @@ export default function Footer() {
             © {new Date().getFullYear()} NxtGen Academy. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs text-muted-foreground font-medium">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Refund Policy</a>
+            <a href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="/refund" className="hover:text-primary transition-colors">Refund Policy</a>
           </div>
         </div>
       </div>

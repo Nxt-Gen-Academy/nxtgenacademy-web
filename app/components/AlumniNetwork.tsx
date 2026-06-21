@@ -45,7 +45,7 @@ export default function AlumniNetwork() {
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             eyebrow="Placement Stories"
-            title="Learner Voices That Inspire Us"
+            title="Nxt Gen Voices That Inspire Us"
             subtitle="Early feedback from active learners experiencing the value of our hands-on training and expert mentorship."
           />
           
