@@ -1,21 +1,20 @@
+import AISkillGap from "./components/AISkillGap";
+import AlumniNetwork from "./components/AlumniNetwork";
 import Curriculum from "./components/Curriculum";
+import Faculty from "./components/Faculty";
 import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
+import HearFromLearners from "./components/HearFromLearners";
 import Hero from "./components/Hero";
 import Journey from "./components/Journey";
 import Nav from "./components/Nav";
-import AlumniNetwork from "./components/AlumniNetwork";
+import OutcomeRecipe from "./components/OutcomeRecipe";
 import Pricing from "./components/Pricing";
 import Programs from "./components/Programs";
 import Projects from "./components/Projects";
-import OutcomeRecipe from "./components/OutcomeRecipe";
-import Stories from "./components/Stories";
 import Trust from "./components/Trust";
 import WhyUs from "./components/WhyUs";
-import HearFromLearners from "./components/HearFromLearners";
-import Faculty from "./components/Faculty";
-import AISkillGap from "./components/AISkillGap";
 
 export default function Home() {
   return (
