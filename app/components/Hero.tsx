@@ -12,9 +12,9 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import SignUpForm from "./SignUpForm";
+import { authClient } from "@/lib/auth-client";
 
 const stats = [
   { label: "Companies Hiring", value: "800+", icon: Building2 },
@@ -24,81 +24,16 @@ const stats = [
   { label: "Highest Salary Hike", value: "400%", icon: Sparkles },
 ];
 
-function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
-  return (
-    <form className="mt-5 space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor={`${idPrefix}name`} className="text-xs text-muted-foreground uppercase tracking-wider">Name</Label>
-        <Input
-          id={`${idPrefix}name`}
-          type="text"
-          placeholder="Enter Name"
-          className="h-auto px-3 py-2.5 rounded-xl border border-border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground"
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor={`${idPrefix}email`} className="text-xs text-muted-foreground uppercase tracking-wider">Email</Label>
-        <Input
-          id={`${idPrefix}email`}
-          type="email"
-          placeholder="Enter Email"
-          className="h-auto px-3 py-2.5 rounded-xl border border-border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground"
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor={`${idPrefix}phone`} className="text-xs text-muted-foreground uppercase tracking-wider">Phone Number</Label>
-        <div className="flex items-center rounded-xl border border-border bg-card/60 px-3 py-2.5 text-sm focus-within:ring-2 focus-within:ring-primary/50 transition">
-          <span className="text-muted-foreground">+91</span>
-          <span className="mx-2 h-5 w-px bg-border" />
-          <Input
-            id={`${idPrefix}phone`}
-            type="tel"
-            placeholder="Enter Phone Number"
-            className="h-auto p-0 border-0 bg-transparent rounded-none focus-visible:ring-0 focus-visible:border-transparent text-sm text-foreground"
-          />
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <div className="text-xs text-muted-foreground">
-          Your Course of Interest
-        </div>
-        <div className="grid gap-2 text-sm text-foreground">
-          <Label className="flex items-center gap-2 font-normal cursor-pointer">
-            <input type="radio" name={`${idPrefix}course`} defaultChecked />
-            Business analytics with AI
-          </Label>
-          <Label className="flex items-center gap-2 font-normal cursor-pointer">
-            <input type="radio" name={`${idPrefix}course`} />
-            Data Analytics with AI
-          </Label>
-          <Label className="flex items-center gap-2 font-normal cursor-pointer">
-            <input type="radio" name={`${idPrefix}course`} />
-            AI Product Management
-          </Label>
-        </div>
-      </div>
-
-      <Label className="flex items-center gap-2 text-xs text-muted-foreground font-normal cursor-pointer">
-        <input type="checkbox" defaultChecked />
-        Send me updates on WhatsApp
-      </Label>
-
-      <Button
-        type="submit"
-        size="lg"
-        className="w-full rounded-xl h-auto py-3 text-sm font-medium hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition"
-      >
-        Send OTP
-      </Button>
-    </form>
-  );
-}
-
 export default function Hero() {
+  const { data: session } = authClient.useSession();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
+    // If returning from Google sign-in redirect with a pending enquiry, open dialog immediately
+    if (typeof window !== "undefined" && localStorage.getItem("pending_enquiry_flag") === "true") {
+      setIsDialogOpen(true);
+    }
+
     const timer = setTimeout(() => {
       setIsDialogOpen(true);
     }, 4000); // Popup dialog after 4 seconds
@@ -145,14 +80,25 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="#pricing"
-                className={`${buttonVariants({
-                  size: "lg",
-                })} rounded-xl px-6 py-3.5 h-auto font-medium hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300`}
-              >
-                Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5" />
-              </a>
+              {session?.user ? (
+                <a
+                  href="/dashboard"
+                  className={`${buttonVariants({
+                    size: "lg",
+                  })} rounded-xl px-6 py-3.5 h-auto font-medium bg-primary text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300`}
+                >
+                  Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5" />
+                </a>
+              ) : (
+                <a
+                  href="#pricing"
+                  className={`${buttonVariants({
+                    size: "lg",
+                  })} rounded-xl px-6 py-3.5 h-auto font-medium hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300`}
+                >
+                  Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5" />
+                </a>
+              )}
               <a
                 href="#curriculum"
                 className={`${buttonVariants({
@@ -228,43 +174,6 @@ export default function Hero() {
                 Book a Live Class, For Free!
               </DialogTitle>
             </DialogHeader>
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              className="mt-5 w-full rounded-xl bg-card/60 hover:bg-card h-auto py-2.5 font-medium transition text-foreground"
-            >
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-background shrink-0">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M23.49 12.27c0-.86-.07-1.49-.22-2.14H12v4.03h6.81c-.14 1-.9 2.51-2.58 3.52l-.02.14 3.56 2.76.25.03c2.34-2.16 3.47-5.34 3.47-8.34z"
-                    fill="#4285F4"
-                  />
-                  <path
-                    d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.79-2.94c-1.01.7-2.37 1.2-4.16 1.2-3.17 0-5.85-2.08-6.81-4.96l-.13.01-3.69 2.85-.04.12C3.3 21.16 7.38 24 12 24z"
-                    fill="#34A853"
-                  />
-                  <path
-                    d="M5.19 14.39a7.4 7.4 0 0 1-.38-2.39c0-.83.15-1.63.36-2.39l-.01-.16-3.74-2.9-.12.06A11.99 11.99 0 0 0 0 12c0 1.94.47 3.77 1.3 5.39l3.89-2.99z"
-                    fill="#FBBC05"
-                  />
-                  <path
-                    d="M12 4.75c2.33 0 3.9 1 4.8 1.84l3.51-3.42C17.95 1 15.24 0 12 0 7.38 0 3.3 2.83 1.3 6.61l3.86 2.99c.96-2.88 3.64-4.85 6.84-4.85z"
-                    fill="#EA4335"
-                  />
-                </svg>
-              </span>
-              Sign up with Google
-            </Button>
-            <div className="mt-4 flex items-center gap-3 text-xs text-muted-foreground">
-              <span className="h-px flex-1 bg-border" />
-              OR
-              <span className="h-px flex-1 bg-border" />
-            </div>
 
             <SignUpForm idPrefix="modal-" />
 
