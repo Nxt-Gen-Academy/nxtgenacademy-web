@@ -5,9 +5,18 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
 import { CheckCircle, User } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -15,7 +24,11 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits").regex(/^[0-9]+$/, "Phone must contain only numbers"),
-  course: z.enum(["Business analytics with AI", "Data Analytics with AI", "AI Product Management"]),
+  qualification: z.string().optional(),
+  profession: z.string().optional(),
+  course: z.string().min(1, "Please select a course"),
+  source: z.string().optional(),
+  message: z.string().optional(),
   whatsAppUpdates: z.boolean(),
 });
 
@@ -34,6 +47,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
     handleSubmit,
     setValue,
     watch,
+    control,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -41,7 +55,11 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
       name: "",
       email: "",
       phone: "",
-      course: "Business analytics with AI",
+      qualification: "",
+      profession: "",
+      course: "",
+      source: "",
+      message: "",
       whatsAppUpdates: true,
     },
   });
@@ -68,7 +86,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
           const cachedWhatsApp = localStorage.getItem("pending_enquiry_whatsapp");
 
           if (cachedPhone) setValue("phone", cachedPhone);
-          if (cachedCourse) setValue("course", cachedCourse as FormValues["course"]);
+          if (cachedCourse) setValue("course", cachedCourse);
           if (cachedWhatsApp) setValue("whatsAppUpdates", cachedWhatsApp !== "false");
 
           // Clean up cache
@@ -86,8 +104,8 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
 
     // Cache current form choices so they persist across the redirect
     if (typeof window !== "undefined") {
-      localStorage.setItem("pending_enquiry_phone", currentPhone);
-      localStorage.setItem("pending_enquiry_course", currentCourse);
+      localStorage.setItem("pending_enquiry_phone", currentPhone || "");
+      localStorage.setItem("pending_enquiry_course", currentCourse || "");
       localStorage.setItem("pending_enquiry_whatsapp", String(currentWhatsApp));
       localStorage.setItem("pending_enquiry_flag", "true");
     }
@@ -119,27 +137,21 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          course: data.course,
-          whatsAppUpdates: data.whatsAppUpdates,
-        }),
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
-        const data = await response.json();
-        if (data.success) {
+        const resData = await response.json();
+        if (resData.success) {
           setSubmitted(true);
         } else {
-          setError(data.error || "Failed to submit enquiry. Please try again.");
+          setError(resData.error || "Failed to submit enquiry. Please try again.");
         }
       } else {
         let errorMsg = "Failed to submit enquiry. Please try again.";
         try {
-          const data = await response.json();
-          if (data.error) errorMsg = data.error;
+          const resData = await response.json();
+          if (resData.error) errorMsg = resData.error;
         } catch (_) {}
         setError(errorMsg);
       }
@@ -169,6 +181,11 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
               setValue("email", "");
             }
             setValue("phone", "");
+            setValue("qualification", "");
+            setValue("profession", "");
+            setValue("course", "");
+            setValue("source", "");
+            setValue("message", "");
           }}
           variant="outline"
           className="mt-2 rounded-xl text-xs"
@@ -230,22 +247,10 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
           >
             <span className="grid h-5 w-5 place-items-center rounded-full bg-white shrink-0 shadow-sm">
               <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" aria-hidden="true">
-                <path
-                  d="M23.49 12.27c0-.86-.07-1.49-.22-2.14H12v4.03h6.81c-.14 1-.9 2.51-2.58 3.52l-.02.14 3.56 2.76.25.03c2.34-2.16 3.47-5.34 3.47-8.34z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.79-2.94c-1.01.7-2.37 1.2-4.16 1.2-3.17 0-5.85-2.08-6.81-4.96l-.13.01-3.69 2.85-.04.12C3.3 21.16 7.38 24 12 24z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M5.19 14.39a7.4 7.4 0 0 1-.38-2.39c0-.83.15-1.63.36-2.39l-.01-.16-3.74-2.9-.12.06A11.99 11.99 0 0 0 0 12c0 1.94.47 3.77 1.3 5.39l3.89-2.99z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M12 4.75c2.33 0 3.9 1 4.8 1.84l3.51-3.42C17.95 1 15.24 0 12 0 7.38 0 3.3 2.83 1.3 6.61l3.86 2.99c.96-2.88 3.64-4.85 6.84-4.85z"
-                  fill="#EA4335"
-                />
+                <path d="M23.49 12.27c0-.86-.07-1.49-.22-2.14H12v4.03h6.81c-.14 1-.9 2.51-2.58 3.52l-.02.14 3.56 2.76.25.03c2.34-2.16 3.47-5.34 3.47-8.34z" fill="#4285F4" />
+                <path d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.79-2.94c-1.01.7-2.37 1.2-4.16 1.2-3.17 0-5.85-2.08-6.81-4.96l-.13.01-3.69 2.85-.04.12C3.3 21.16 7.38 24 12 24z" fill="#34A853" />
+                <path d="M5.19 14.39a7.4 7.4 0 0 1-.38-2.39c0-.83.15-1.63.36-2.39l-.01-.16-3.74-2.9-.12.06A11.99 11.99 0 0 0 0 12c0 1.94.47 3.77 1.3 5.39l3.89-2.99z" fill="#FBBC05" />
+                <path d="M12 4.75c2.33 0 3.9 1 4.8 1.84l3.51-3.42C17.95 1 15.24 0 12 0 7.38 0 3.3 2.83 1.3 6.61l3.86 2.99c.96-2.88 3.64-4.85 6.84-4.85z" fill="#EA4335" />
               </svg>
             </span>
             {isLoading ? "Signing in..." : "Sign up with Google"}
@@ -262,112 +267,172 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
 
       {/* Enquiry Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="space-y-2">
-          <Label
-            htmlFor={`${idPrefix}name`}
-            className="text-xs text-muted-foreground uppercase tracking-wider"
-          >
-            Name
-          </Label>
-          <Input
-            id={`${idPrefix}name`}
-            type="text"
-            placeholder="Enter Name"
-            {...register("name")}
-            disabled={!!session?.user || isSubmitting}
-            className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.name ? 'border-red-500' : 'border-border'}`}
-          />
-          {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
-        </div>
-
-        <div className="space-y-2">
-          <Label
-            htmlFor={`${idPrefix}email`}
-            className="text-xs text-muted-foreground uppercase tracking-wider"
-          >
-            Email
-          </Label>
-          <Input
-            id={`${idPrefix}email`}
-            type="email"
-            placeholder="Enter Email"
-            {...register("email")}
-            disabled={!!session?.user || isSubmitting}
-            className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.email ? 'border-red-500' : 'border-border'}`}
-          />
-          {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
-        </div>
-
-        <div className="space-y-2">
-          <Label
-            htmlFor={`${idPrefix}phone`}
-            className="text-xs text-muted-foreground uppercase tracking-wider"
-          >
-            Phone Number
-          </Label>
-          <div className={`flex items-center rounded-xl border bg-card/60 px-3 py-2.5 text-sm focus-within:ring-2 focus-within:ring-primary/50 transition ${errors.phone ? 'border-red-500' : 'border-border'}`}>
-            <span className="text-muted-foreground">+91</span>
-            <span className="mx-2 h-5 w-px bg-border" />
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor={`${idPrefix}name`} className="text-xs text-muted-foreground uppercase tracking-wider">
+              Name
+            </Label>
             <Input
-              id={`${idPrefix}phone`}
-              type="tel"
-              placeholder="Enter Phone Number"
-              {...register("phone")}
+              id={`${idPrefix}name`}
+              type="text"
+              placeholder="Enter Name"
+              {...register("name")}
+              disabled={!!session?.user || isSubmitting}
+              className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.name ? 'border-red-500' : 'border-border'}`}
+            />
+            {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor={`${idPrefix}email`} className="text-xs text-muted-foreground uppercase tracking-wider">
+              Email
+            </Label>
+            <Input
+              id={`${idPrefix}email`}
+              type="email"
+              placeholder="Enter Email"
+              {...register("email")}
+              disabled={!!session?.user || isSubmitting}
+              className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.email ? 'border-red-500' : 'border-border'}`}
+            />
+            {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor={`${idPrefix}phone`} className="text-xs text-muted-foreground uppercase tracking-wider">
+              Phone Number
+            </Label>
+            <div className={`flex items-center rounded-xl border bg-card/60 px-3 py-2.5 text-sm focus-within:ring-2 focus-within:ring-primary/50 transition ${errors.phone ? 'border-red-500' : 'border-border'}`}>
+              <span className="text-muted-foreground">+91</span>
+              <span className="mx-2 h-5 w-px bg-border" />
+              <Input
+                id={`${idPrefix}phone`}
+                type="tel"
+                placeholder="Enter Phone Number"
+                {...register("phone")}
+                disabled={isSubmitting}
+                className="h-auto p-0 border-0 bg-transparent rounded-none focus-visible:ring-0 focus-visible:border-transparent text-sm text-foreground w-full disabled:opacity-70"
+              />
+            </div>
+            {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor={`${idPrefix}qualification`} className="text-xs text-muted-foreground uppercase tracking-wider">
+              Qualification
+            </Label>
+            <Input
+              id={`${idPrefix}qualification`}
+              type="text"
+              placeholder="Enter Qualification"
+              {...register("qualification")}
               disabled={isSubmitting}
-              className="h-auto p-0 border-0 bg-transparent rounded-none focus-visible:ring-0 focus-visible:border-transparent text-sm text-foreground w-full disabled:opacity-70"
+              className="h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed border-border"
             />
           </div>
-          {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
+
+          <div className="space-y-2">
+            <Label htmlFor={`${idPrefix}profession`} className="text-xs text-muted-foreground uppercase tracking-wider">
+              Profession
+            </Label>
+            <Input
+              id={`${idPrefix}profession`}
+              type="text"
+              placeholder="Enter Profession"
+              {...register("profession")}
+              disabled={isSubmitting}
+              className="h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed border-border"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor={`${idPrefix}course`} className="text-xs text-muted-foreground uppercase tracking-wider">
+              Course Interested In
+            </Label>
+            <Controller
+              control={control}
+              name="course"
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value} disabled={isSubmitting}>
+                  <SelectTrigger className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus:ring-2 focus:ring-primary/50 w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.course ? 'border-red-500' : 'border-border'}`}>
+                    <SelectValue placeholder="Select a course" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl border-border bg-card">
+                    <SelectItem value="Business analytics with AI">Business analytics with AI</SelectItem>
+                    <SelectItem value="Data Analytics with AI">Data Analytics with AI</SelectItem>
+                    <SelectItem value="AI Product Management">AI Product Management</SelectItem>
+                    <SelectItem value="Data Engineering & DevOps Career Program">Data Engineering & DevOps Career Program</SelectItem>
+                    <SelectItem value="Cyber Security & Ethical Hacking Program">Cyber Security & Ethical Hacking Program</SelectItem>
+                    <SelectItem value="Software Engineering Specialization Program">Software Engineering Specialization Program</SelectItem>
+                    <SelectItem value="Data Science, ML & AI Program">Data Science, ML & AI Program</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.course && <p className="text-xs text-red-500">{errors.course.message}</p>}
+          </div>
         </div>
 
         <div className="space-y-2">
-          <div className="text-xs text-muted-foreground uppercase tracking-wider">
-            Your Course of Interest
-          </div>
-          <div className="grid gap-2 text-sm text-foreground">
-            <Label className="flex items-center gap-2 font-normal cursor-pointer">
-              <input
-                type="radio"
-                value="Business analytics with AI"
-                {...register("course")}
-                disabled={isSubmitting}
-                className="accent-primary"
-              />
-              Business analytics with AI
-            </Label>
-            <Label className="flex items-center gap-2 font-normal cursor-pointer">
-              <input
-                type="radio"
-                value="Data Analytics with AI"
-                {...register("course")}
-                disabled={isSubmitting}
-                className="accent-primary"
-              />
-              Data Analytics with AI
-            </Label>
-            <Label className="flex items-center gap-2 font-normal cursor-pointer">
-              <input
-                type="radio"
-                value="AI Product Management"
-                {...register("course")}
-                disabled={isSubmitting}
-                className="accent-primary"
-              />
-              AI Product Management
-            </Label>
-          </div>
-          {errors.course && <p className="text-xs text-red-500">{errors.course.message}</p>}
+          <Label htmlFor={`${idPrefix}source`} className="text-xs text-muted-foreground uppercase tracking-wider">
+            How did you hear about us?
+          </Label>
+          <Controller
+            control={control}
+            name="source"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value} disabled={isSubmitting}>
+                <SelectTrigger className="h-auto px-3 py-2.5 rounded-xl border bg-card/60 border-border text-sm focus:ring-2 focus:ring-primary/50 w-full disabled:opacity-70 disabled:cursor-not-allowed">
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent className="rounded-xl border-border bg-card">
+                  <SelectItem value="Google">Google Search</SelectItem>
+                  <SelectItem value="LinkedIn">LinkedIn</SelectItem>
+                  <SelectItem value="Instagram">Instagram / Facebook</SelectItem>
+                  <SelectItem value="YouTube">YouTube</SelectItem>
+                  <SelectItem value="Referral">Friend / Colleague</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
         </div>
 
-        <Label className="flex items-center gap-2 text-xs text-muted-foreground font-normal cursor-pointer">
-          <input
-            type="checkbox"
-            {...register("whatsAppUpdates")}
+        <div className="space-y-2">
+          <Label htmlFor={`${idPrefix}message`} className="text-xs text-muted-foreground uppercase tracking-wider">
+            Your Message (Optional)
+          </Label>
+          <Textarea
+            id={`${idPrefix}message`}
+            placeholder="Enter Message"
+            {...register("message")}
             disabled={isSubmitting}
-            className="accent-primary"
+            className="h-24 px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus-visible:ring-2 focus-visible:ring-primary/50 text-foreground w-full disabled:opacity-70 disabled:cursor-not-allowed border-border resize-none"
           />
-          Send me updates on WhatsApp
-        </Label>
+        </div>
+
+        <div className="flex items-center space-x-2 pt-2">
+          <Controller
+            control={control}
+            name="whatsAppUpdates"
+            render={({ field }) => (
+              <Checkbox 
+                id={`${idPrefix}whatsapp`}
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                disabled={isSubmitting}
+                className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+              />
+            )}
+          />
+          <Label 
+            htmlFor={`${idPrefix}whatsapp`}
+            className="text-xs text-muted-foreground font-normal cursor-pointer leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Send me updates on WhatsApp
+          </Label>
+        </div>
 
         {/* Form Submit Button */}
         <Button
