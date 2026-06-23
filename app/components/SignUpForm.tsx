@@ -359,13 +359,10 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
                     <SelectValue placeholder="Select a course" />
                   </SelectTrigger>
                   <SelectContent className="rounded-xl border-border bg-card">
-                    <SelectItem value="Business analytics with AI">Business analytics with AI</SelectItem>
-                    <SelectItem value="Data Analytics with AI">Data Analytics with AI</SelectItem>
-                    <SelectItem value="AI Product Management">AI Product Management</SelectItem>
-                    <SelectItem value="Data Engineering & DevOps Career Program">Data Engineering & DevOps Career Program</SelectItem>
-                    <SelectItem value="Cyber Security & Ethical Hacking Program">Cyber Security & Ethical Hacking Program</SelectItem>
-                    <SelectItem value="Software Engineering Specialization Program">Software Engineering Specialization Program</SelectItem>
-                    <SelectItem value="Data Science, ML & AI Program">Data Science, ML & AI Program</SelectItem>
+                    <SelectItem value="Data Analytics">Data Analytics</SelectItem>
+                    <SelectItem value="Business Analytics">Business Analytics</SelectItem>
+                    <SelectItem value="Product Management">Product Management</SelectItem>
+                    <SelectItem value="Not sure yet">Not sure yet</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -387,11 +384,10 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
                   <SelectValue placeholder="Select an option" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl border-border bg-card">
-                  <SelectItem value="Google">Google Search</SelectItem>
-                  <SelectItem value="LinkedIn">LinkedIn</SelectItem>
-                  <SelectItem value="Instagram">Instagram / Facebook</SelectItem>
+                  <SelectItem value="Instagram">Instagram</SelectItem>
                   <SelectItem value="YouTube">YouTube</SelectItem>
-                  <SelectItem value="Referral">Friend / Colleague</SelectItem>
+                  <SelectItem value="Friend / referral">Friend / referral</SelectItem>
+                  <SelectItem value="Google search">Google search</SelectItem>
                   <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
