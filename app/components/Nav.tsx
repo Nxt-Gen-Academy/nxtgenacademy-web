@@ -83,13 +83,13 @@ export default function Nav() {
                   Go to Dashboard
                 </a>
               )}
-              <a
-                href="/#cta"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
                 className={`${buttonVariants()} rounded-xl bg-foreground text-background px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.62_0.22_258/0.4)] transition-all group/button border-0 hidden sm:flex`}
               >
                 Apply{" "}
                 <ArrowUpRight className="h-4 w-4 ml-1 group-hover/button:rotate-45 transition-transform" />
-              </a>
+              </button>
               
               <button 
                 className="md:hidden p-2 text-foreground"
@@ -126,13 +126,15 @@ export default function Nav() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="/#cta"
-              className={`${buttonVariants({ size: "lg" })} mt-4 w-full rounded-xl`}
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button
+              className={`${buttonVariants({ size: "lg" })} mt-4 w-full rounded-xl cursor-pointer`}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                window.dispatchEvent(new CustomEvent("open-signup-dialog"));
+              }}
             >
               Apply Now
-            </a>
+            </button>
           </nav>
         </div>
       )}

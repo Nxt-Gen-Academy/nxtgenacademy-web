@@ -90,14 +90,14 @@ export default function Hero() {
                   Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5" />
                 </a>
               ) : (
-                <a
-                  href="#pricing"
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
                   className={`${buttonVariants({
                     size: "lg",
-                  })} rounded-xl px-6 py-3.5 h-auto font-medium hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300`}
+                  })} rounded-xl px-6 py-3.5 h-auto font-medium hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300 cursor-pointer`}
                 >
                   Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5" />
-                </a>
+                </button>
               )}
               <a
                 href="#curriculum"
