@@ -15,7 +15,7 @@ export default function FinalCTA() {
               <img
                 src="/final_cta.jpg"
                 alt="Start your journey"
-                className="w-full object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
             {/* Content */}
