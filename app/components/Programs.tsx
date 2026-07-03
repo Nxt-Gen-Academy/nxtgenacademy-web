@@ -78,10 +78,14 @@ const programs = [
 
 export default function Programs() {
   return (
-    <section id="programs" className="py-32 px-4 relative">
+    <section id="programs" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
       <div className="section-divider" />
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading 
           eyebrow="Programs" 
           title="Our Nxt Gen Programs" 
@@ -92,8 +96,11 @@ export default function Programs() {
           {programs.map((p, i) => (
             <ScrollReveal key={p.title} direction="up" delay={i * 150}>
               <Card
-                className="card-premium h-full group"
+                className="card-premium h-full group relative overflow-hidden"
               >
+                {/* Spotlight gradient effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+                
                 {/* Top subtle gradient border effect */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
@@ -120,7 +127,7 @@ export default function Programs() {
                         {p.stack.map((s) => (
                           <span
                             key={s}
-                            className="text-xs px-3 py-1.5 rounded-lg bg-background/80 text-foreground border border-border/80 shadow-sm group-hover:border-primary/20 transition-colors"
+                            className="text-[11px] px-3 py-1.5 rounded-full bg-white/[0.03] text-foreground/90 border border-white/5 shadow-sm backdrop-blur-md group-hover:bg-primary/10 group-hover:border-primary/30 group-hover:text-primary transition-colors duration-300"
                           >
                             {s}
                           </span>
@@ -146,12 +153,10 @@ export default function Programs() {
                   <button
                     type="button"
                     onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                    className={`${buttonVariants({
-                      variant: "outline",
-                    })} mt-10 w-full h-auto py-3.5 justify-center text-sm font-medium border-border/80 bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary group/button cursor-pointer transition-all duration-300 rounded-xl shadow-sm`}
+                    className="hero-btn-ghost mt-10 w-full h-auto py-3.5 inline-flex items-center justify-center text-sm font-semibold rounded-xl border border-border/60 bg-card/30 text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50 group/button cursor-pointer shadow-sm"
                   >
                     View curriculum
-                    <ArrowUpRight className="h-4 w-4 ml-2 group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5 transition-transform" />
+                    <ArrowUpRight className="h-4 w-4 ml-2 group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5 transition-transform duration-300" />
                   </button>
                 </CardContent>
               </Card>

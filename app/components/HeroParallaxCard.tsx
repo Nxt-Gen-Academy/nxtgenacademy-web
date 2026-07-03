@@ -100,7 +100,7 @@ export default function HeroParallaxCard() {
         const nx = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2)));
         const ny = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
 
-        const maxTilt = 8; // degrees
+        const maxTilt = 16; // degrees
         const tiltX = nx * maxTilt;
         const tiltY = -ny * maxTilt;
 
@@ -110,7 +110,7 @@ export default function HeroParallaxCard() {
         /* Dynamic shadow that shifts opposite to tilt */
         const shadowX = -nx * 20;
         const shadowY = -ny * 20;
-        cardRef.current!.style.boxShadow = `${shadowX}px ${shadowY}px 60px -12px oklch(0.62 0.22 258 / 0.25), 0 8px 32px -8px rgba(0,0,0,0.4)`;
+        cardRef.current!.style.boxShadow = `${shadowX}px ${shadowY}px 40px -12px rgba(0,0,0,0.5), 0 8px 32px -8px rgba(0,0,0,0.4)`;
 
         /* Badges: depth-multiplied offsets */
         badgeRefs.current.forEach((el, i) => {
@@ -131,7 +131,7 @@ export default function HeroParallaxCard() {
     if (cardRef.current) {
       cardRef.current.style.transition = "transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 500ms ease-out";
       cardRef.current.style.transform = "rotateX(0deg) rotateY(0deg)";
-      cardRef.current.style.boxShadow = "0 20px 60px -12px oklch(0.62 0.22 258 / 0.18), 0 8px 24px -8px rgba(0,0,0,0.3)";
+      cardRef.current.style.boxShadow = "0 20px 40px -12px rgba(0,0,0,0.4), 0 8px 24px -8px rgba(0,0,0,0.3)";
     }
     badgeRefs.current.forEach((el) => {
       if (!el) return;
@@ -175,7 +175,7 @@ export default function HeroParallaxCard() {
       ref={containerRef}
       className="relative w-full max-w-[460px] mx-auto"
       style={{
-        perspective: animationDisabled ? "none" : "1200px",
+        perspective: animationDisabled ? "none" : "800px",
       }}
     >
       {/* ── Main Card ── */}
@@ -185,7 +185,7 @@ export default function HeroParallaxCard() {
         style={{
           transformStyle: "preserve-3d",
           willChange: animationDisabled ? "auto" : "transform",
-          boxShadow: "0 20px 60px -12px oklch(0.62 0.22 258 / 0.18), 0 8px 24px -8px rgba(0,0,0,0.3)",
+          boxShadow: "0 20px 40px -12px rgba(0,0,0,0.4), 0 8px 24px -8px rgba(0,0,0,0.3)",
         }}
       >
         {/* Card background – dark gradient with brand tint */}

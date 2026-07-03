@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 
 const WORD1 = "NxtGen";
 const WORD2 = "Academy";
-const STAGGER = 45;          // ms between each char
-const CHAR_ANIM = 650;       // ms per char animation
-const WORD2_OFFSET = WORD1.length * STAGGER + 120; // extra pause between words
+const STAGGER = 45;
+const CHAR_ANIM = 650;
+const WORD2_OFFSET = WORD1.length * STAGGER + 120;
 const TOTAL_CHARS = WORD1.length + WORD2.length;
 const ALL_IN = WORD2_OFFSET + (WORD2.length - 1) * STAGGER + CHAR_ANIM;
 const HOLD = 450;
-const EXIT_DURATION = 750;
+const TEXT_EXIT_DURATION = 850;
+const BG_EXIT_DURATION = 750;
 
-type Phase = "pending" | "reveal" | "hold" | "exit" | "done";
+type Phase = "pending" | "reveal" | "hold" | "text-exit" | "bg-exit" | "done";
 
 export default function IntroReveal() {
   const [phase, setPhase] = useState<Phase>("pending");
@@ -28,21 +29,22 @@ export default function IntroReveal() {
 
     const t0 = setTimeout(() => setPhase("reveal"), 60);
     const t1 = setTimeout(() => setPhase("hold"), 60 + ALL_IN);
-    const t2 = setTimeout(() => setPhase("exit"), 60 + ALL_IN + HOLD);
-    const t3 = setTimeout(() => {
+    const t2 = setTimeout(() => setPhase("text-exit"), 60 + ALL_IN + HOLD);
+    const t3 = setTimeout(() => setPhase("bg-exit"), 60 + ALL_IN + HOLD + TEXT_EXIT_DURATION);
+    const t4 = setTimeout(() => {
       setPhase("done");
       document.body.style.overflow = "";
-    }, 60 + ALL_IN + HOLD + EXIT_DURATION + 80);
+    }, 60 + ALL_IN + HOLD + TEXT_EXIT_DURATION + BG_EXIT_DURATION + 80);
 
     return () => {
-      [t0, t1, t2, t3].forEach(clearTimeout);
+      [t0, t1, t2, t3, t4].forEach(clearTimeout);
       document.body.style.overflow = "";
     };
   }, []);
 
-  /* Sync hero fade-in when exit phase starts */
+  /* Sync hero fade-in when background exit phase starts */
   useEffect(() => {
-    if (phase !== "exit") return;
+    if (phase !== "bg-exit") return;
     const hero = document.querySelector("#top > .relative");
     if (!(hero instanceof HTMLElement)) return;
 
@@ -69,27 +71,28 @@ export default function IntroReveal() {
 
   if (phase === "done") return null;
 
-  const animating = phase === "reveal" || phase === "hold" || phase === "exit";
-  const exiting = phase === "exit";
+  const animating = phase === "reveal" || phase === "hold" || phase === "text-exit" || phase === "bg-exit";
+  const textExiting = phase === "text-exit" || phase === "bg-exit";
+  const bgExiting = phase === "bg-exit";
 
   return (
     <div
       aria-hidden="true"
-      className={`intro-overlay ${exiting ? "intro-overlay-exit" : ""}`}
+      className={`intro-overlay ${bgExiting ? "intro-overlay-exit" : ""}`}
     >
       {/* Accent glows */}
-      <div className="intro-glow intro-glow-1" />
-      <div className="intro-glow intro-glow-2" />
+      <div className={`intro-glow intro-glow-1 ${bgExiting ? "intro-glow-exit" : ""}`} />
+      <div className={`intro-glow intro-glow-2 ${bgExiting ? "intro-glow-exit" : ""}`} />
 
       {/* Two-line stacked text */}
-      <div className={`intro-text-wrapper ${exiting ? "intro-text-exit" : ""}`}>
-        {/* Line 1: "NxtGen" — bold, gradient */}
+      <div className="intro-text-wrapper">
+        {/* Line 1: "NxtGen" — bold */}
         <div className="intro-text-line intro-text-line-1">
           {WORD1.split("").map((char, i) => (
             <span key={i} className="intro-char-mask">
               <span
-                className={`intro-char ${animating ? "intro-char-in" : ""}`}
-                style={{ animationDelay: `${i * STAGGER}ms` }}
+                className={`intro-char ${animating && !textExiting ? "intro-char-in" : ""} ${textExiting ? "intro-char-out" : ""}`}
+                style={{ animationDelay: `${textExiting ? i * STAGGER : i * STAGGER}ms` }}
               >
                 {char}
               </span>
@@ -97,13 +100,13 @@ export default function IntroReveal() {
           ))}
         </div>
 
-        {/* Line 2: "Academy" — lighter weight, accent color */}
+        {/* Line 2: "Academy" — lighter weight */}
         <div className="intro-text-line intro-text-line-2">
           {WORD2.split("").map((char, i) => (
             <span key={i} className="intro-char-mask">
               <span
-                className={`intro-char ${animating ? "intro-char-in" : ""}`}
-                style={{ animationDelay: `${WORD2_OFFSET + i * STAGGER}ms` }}
+                className={`intro-char ${animating && !textExiting ? "intro-char-in" : ""} ${textExiting ? "intro-char-out" : ""}`}
+                style={{ animationDelay: `${textExiting ? (i * STAGGER) + 100 : WORD2_OFFSET + i * STAGGER}ms` }}
               >
                 {char}
               </span>

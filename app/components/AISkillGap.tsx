@@ -64,7 +64,11 @@ export default function AISkillGap() {
   };
 
   return (
-    <section id="skill-gap" className="py-32 px-4 relative overflow-hidden bg-background">
+    <section id="skill-gap" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
       
       <div className="max-w-7xl mx-auto relative z-10">
@@ -87,8 +91,8 @@ export default function AISkillGap() {
                 }}
                 className={`px-5 py-2.5 rounded-full text-[12px] font-bold border transition-all cursor-pointer ${
                   activeTab === tab
-                    ? "bg-primary border-primary text-primary-foreground shadow-[0_4px_20px_oklch(0.62_0.22_258/0.25)]"
-                    : "bg-transparent border-border/60 text-muted-foreground hover:border-border hover:text-foreground"
+                    ? "bg-primary/20 border-primary/50 text-primary shadow-[0_0_15px_oklch(0.58_0.20_255/0.25)] backdrop-blur-sm"
+                    : "bg-white/[0.02] border-white/5 text-muted-foreground hover:border-white/20 hover:text-foreground backdrop-blur-sm"
                 }`}
               >
                 {tab}
@@ -99,7 +103,9 @@ export default function AISkillGap() {
 
         {/* Chart Container */}
         <ScrollReveal direction="up" delay={300}>
-          <div className="relative bg-card/40 rounded-[32px] border border-border/50 shadow-[0_0_100px_oklch(0.62_0.22_258/0.05)] overflow-hidden w-full max-w-[1100px] mx-auto p-8 lg:p-16 backdrop-blur-sm">
+          <div className="relative bg-white/[0.02] rounded-[32px] border border-white/5 shadow-2xl overflow-hidden w-full max-w-[1100px] mx-auto p-8 lg:p-16 backdrop-blur-md group">
+            {/* Spotlight gradient effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
             <style>{`
               @keyframes draw-chart-line {
                   0% { stroke-dashoffset: 1500; }

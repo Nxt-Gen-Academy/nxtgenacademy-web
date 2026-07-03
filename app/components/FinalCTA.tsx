@@ -8,7 +8,7 @@ export default function FinalCTA() {
     <section id="cta" className="py-24 px-4 pb-32 relative">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up">
-          <div className="relative rounded-3xl overflow-hidden  border border-border/40 text-left group min-h-[400px]">
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] text-left group min-h-[400px]">
 
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
@@ -32,9 +32,7 @@ export default function FinalCTA() {
                 <button
                   type="button"
                   onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className={`${buttonVariants({
-                    size: "lg",
-                  })} rounded-xl px-8 py-6 h-auto text-base font-semibold shadow-sm hover:shadow-md transition-all duration-300 border-0 cursor-pointer w-full sm:w-auto`}
+                  className="rounded-xl px-8 py-6 h-auto text-base font-semibold transition-all duration-300 border-0 cursor-pointer w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_oklch(0.62_0.22_258/0.3)] hover:shadow-[0_0_30px_oklch(0.62_0.22_258/0.5)] hover:-translate-y-0.5"
                 >
                   Start Your AI Career Journey
                 </button>

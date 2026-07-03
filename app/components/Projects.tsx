@@ -14,9 +14,14 @@ const list = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-32 px-4 relative">
+    <section id="projects" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Real Industry Projects"
           title="Real industry projects. Real portfolio outcomes."
@@ -27,7 +32,7 @@ export default function Projects() {
           {list.map((p, i) => (
             <ScrollReveal key={p.t} direction="up" delay={i * 100}>
               <div
-                className="group relative aspect-[4/5] rounded-3xl border border-border/50 bg-card overflow-hidden hover:border-primary/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] ring-1 ring-white/5"
+                className="group relative aspect-[4/5] rounded-3xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-white/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
               >
                 {/* Background image */}
                 {p.img ? (
@@ -51,7 +56,7 @@ export default function Projects() {
                 {/* Content */}
                 <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div className="flex justify-between items-start">
-                    <span className="inline-flex items-center rounded-full border border-border/80 bg-background/50 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/90 shadow-sm group-hover:bg-primary/20 group-hover:text-primary-foreground group-hover:border-primary/40 transition-colors">
+                    <span className="inline-flex items-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-white/90 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:bg-primary/30 group-hover:text-white group-hover:border-primary/50 transition-colors">
                       {p.k}
                     </span>
                     <span className="font-mono text-sm font-bold text-white/30 group-hover:text-white/50 transition-colors">

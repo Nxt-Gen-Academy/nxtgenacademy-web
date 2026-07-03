@@ -50,21 +50,27 @@ const row3 = [
 
 export default function Trust() {
   return (
-    <section className="py-24 border-y border-border/40 relative overflow-hidden bg-background/40">
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background/80 pointer-events-none z-10" />
+    <section className="py-24 relative overflow-hidden bg-background">
+      {/* Ambient background glows */}
+      <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10 -translate-y-1/2 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] -z-10 -translate-y-1/2 mix-blend-screen pointer-events-none" />
+      
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none z-10" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-20">
         <ScrollReveal direction="up">
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-accent text-center font-medium">
-            Companies Our Skills Align With
-          </p>
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary backdrop-blur-md shadow-[0_0_20px_oklch(0.58_0.20_255/0.15)]">
+              <span className="font-semibold text-primary/90">Trusted by Industry Leaders</span>
+            </div>
+          </div>
           <p className="mt-4 text-base text-muted-foreground text-center max-w-xl mx-auto">
             Curriculum aligned with modern AI-driven industry requirements for global tech leaders.
           </p>
         </ScrollReveal>
       </div>
       
-      <div className="mt-14 space-y-5 w-full relative z-0">
+      <div className="mt-14 space-y-6 w-full relative z-0 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
         <ScrollReveal direction="fade" delay={200}>
           {/* Row 1: Left to Right */}
           <div className="logo-marquee w-full">
@@ -139,13 +145,10 @@ export default function Trust() {
         <ScrollReveal direction="up" delay={500}>
           <a
             href="#"
-            className={`${buttonVariants({
-              variant: "outline",
-              size: "lg",
-            })} rounded-xl px-7 py-3.5 h-auto font-medium hover:bg-card border-border/80 hover:border-primary/50 transition-all duration-300 group`}
+            className="hero-btn-ghost group inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm border border-border/60 bg-card/30 text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50"
           >
             See Placement Reports
-            <ArrowUpRight className="h-4 w-4 ml-1.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </ScrollReveal>
       </div>

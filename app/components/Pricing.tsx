@@ -57,10 +57,15 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-32 px-4 relative">
+    <section id="pricing" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading 
           eyebrow="Pricing" 
           title="Flexible Learning Plans" 
@@ -72,17 +77,20 @@ export default function Pricing() {
           {plans.map((pl, idx) => (
             <ScrollReveal key={pl.n} direction="up" delay={idx * 150}>
               <Card
-                className={`relative rounded-3xl p-8 flex flex-col justify-between border border-border/50 gap-0 overflow-visible h-full transition-all duration-300 hover:-translate-y-1 ${
+                className={`relative rounded-3xl p-8 flex flex-col justify-between gap-0 overflow-visible h-full transition-all duration-500 hover:-translate-y-1 group ${
                   pl.featured 
-                    ? "bg-card/80 ring-1 ring-primary/30 z-10" 
-                    : "bg-card/40 backdrop-blur-sm"
+                    ? "bg-white/[0.04] border border-primary/30 z-10 shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] backdrop-blur-lg" 
+                    : "bg-white/[0.02] border border-white/5 backdrop-blur-md shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] hover:border-white/20"
                 }`}
               >
+                {/* Spotlight gradient effect on hover */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-0" />
+                
                 {/* Featured glowing background */}
                 {pl.featured && (
                   <>
-                    <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent rounded-3xl pointer-events-none" />
-                    <div className="absolute -top-px inset-x-10 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent rounded-3xl pointer-events-none z-0" />
+                    <div className="absolute -top-px inset-x-10 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent z-10 blur-[1px]" />
                   </>
                 )}
                 
@@ -112,7 +120,7 @@ export default function Pricing() {
                       EMI available · Scholarships open
                     </p>
                     
-                    <div className="w-full h-px bg-border/60 my-8" />
+                    <div className="w-full h-px bg-white/10 my-8" />
                     
                     <ul className="space-y-4 text-sm">
                       {pl.f.map((x) => (
@@ -128,16 +136,13 @@ export default function Pricing() {
                 <CardFooter className="p-0 mt-10 mb-2 border-0 bg-transparent rounded-none relative z-10">
                   <a
                     href="#cta"
-                    className={`${buttonVariants({
-                      variant: pl.featured ? "default" : "outline",
-                      size: "lg",
-                    })} w-full rounded-xl h-auto py-4 font-semibold text-base transition-all duration-300 group ${
+                    className={`w-full h-auto py-4 rounded-xl flex items-center justify-center font-semibold text-sm transition-all duration-300 ease-out group/btn cursor-pointer ${
                       pl.featured
-                        ? ""
-                        : "bg-background/50 hover:bg-card border-border/80"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_oklch(0.62_0.22_258/0.3)] hover:shadow-[0_0_30px_oklch(0.62_0.22_258/0.5)] hover:-translate-y-0.5"
+                        : "border border-border/60 bg-card/30 text-foreground backdrop-blur-sm hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50"
                     }`}
                   >
-                    Enroll Now <ArrowUpRight className="h-5 w-5 ml-1.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    Enroll Now <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </a>
                 </CardFooter>
               </Card>

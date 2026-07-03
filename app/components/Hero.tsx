@@ -8,6 +8,8 @@ import {
   Building2,
   GraduationCap,
   TrendingUp,
+  Users,
+  Sparkles,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -19,6 +21,8 @@ const stats = [
   { label: "Companies Hiring", value: "800+", icon: Building2 },
   { label: "Students Placed", value: "1,500+", icon: GraduationCap },
   { label: "Highest Package", value: "48 LPA", icon: TrendingUp },
+  { label: "Industry Experts", value: "1200+", icon: Users },
+  { label: "Highest Salary Hike", value: "400%", icon: Sparkles },
 ];
 
 export default function Hero() {
@@ -60,20 +64,24 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-0 pointer-events-none" />
       
       <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Decorative Ambient Glows */}
+        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] pointer-events-none mix-blend-screen" />
+        <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/15 blur-[120px] pointer-events-none mix-blend-screen" />
+        
         {/* ── Two-Column Hero Layout ── */}
-        <div className="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+        <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
           {/* ── LEFT COLUMN: Content ── */}
           <div className="max-w-2xl">
             {/* Eyebrow */}
-            <div className="hero-eyebrow flex items-center gap-2 text-xs font-mono uppercase tracking-[0.15em] text-primary/80 mb-6">
-              <Flame className="h-3.5 w-3.5 text-amber-400" />
-              Learn what matters
+            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-[0_0_20px_oklch(0.58_0.20_255/0.15)]">
+              <Flame className="h-3.5 w-3.5 text-amber-500" />
+              <span className="font-semibold text-primary/90">Learn what matters</span>
             </div>
 
             {/* Main Heading */}
             <h1 className="hero-headline font-heading leading-[1.08] font-extrabold tracking-[-0.02em] text-foreground">
               <span className="block">Build your career in</span>
-              <span className="hero-accent-text block text-primary">AI &amp; Analytics</span>
+              <span className="hero-accent-text block text-primary pb-2">AI &amp; Analytics</span>
             </h1>
 
             {/* Subheading */}
@@ -86,51 +94,87 @@ export default function Hero() {
               {session?.user ? (
                 <a
                   href="/dashboard"
-                  className="hero-btn-primary inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_30px_oklch(0.62_0.22_258/0.45)]"
+                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.3)]"
                 >
-                  Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5" />
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
+                  <span className="relative flex items-center">
+                    Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
                 </a>
               ) : (
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className="hero-btn-primary inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_30px_oklch(0.62_0.22_258/0.45)] cursor-pointer"
+                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.3)] cursor-pointer"
                 >
-                  Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5" />
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
+                  <span className="relative flex items-center">
+                    Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
                 </button>
               )}
               <a
                 href="#curriculum"
-                className="hero-btn-ghost inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm border border-border/60 bg-card/30 text-foreground backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50 hover:shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
+                className="hero-btn-ghost inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm border border-border/60 bg-card/30 text-foreground backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50"
               >
                 View Curriculum
               </a>
             </div>
 
             {/* Stat Row */}
-            <div className="hero-stat-row mt-10 flex items-center gap-0">
-              {stats.map((stat, i) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={stat.label} className="flex items-center">
-                    {i > 0 && (
-                      <div className="w-px h-10 bg-border/40 mx-6 sm:mx-8" />
-                    )}
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-lg bg-primary/10 text-primary grid place-items-center border border-primary/15 shrink-0">
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <div className="text-2xl sm:text-[28px] font-heading font-bold tracking-tight text-foreground leading-none">
-                          {stat.value}
+            <div className="hero-stat-row mt-12 flex flex-col items-center sm:items-start gap-4 p-4 sm:px-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl max-w-fit">
+              {/* Top Row (3 items) */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-y-4 gap-x-0">
+                {stats.slice(0, 3).map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div key={stat.label} className="flex items-center">
+                      {i > 0 && (
+                        <div className="w-px h-10 bg-border/50 mx-4 sm:mx-6 hidden sm:block" />
+                      )}
+                      <div className="flex items-center gap-3.5">
+                        <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
+                          <Icon className="h-4 w-4" />
                         </div>
-                        <div className="text-[11px] sm:text-xs text-muted-foreground mt-1 leading-none">
-                          {stat.label}
+                        <div>
+                          <div className="text-2xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
+                            {stat.value}
+                          </div>
+                          <div className="text-[11px] sm:text-[13px] text-muted-foreground mt-1.5 leading-none font-medium">
+                            {stat.label}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+              
+              {/* Bottom Row (2 items) */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-y-4 gap-x-0 w-full">
+                {stats.slice(3).map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div key={stat.label} className="flex items-center">
+                      {i > 0 && (
+                        <div className="w-px h-10 bg-border/50 mx-4 sm:mx-6 hidden sm:block" />
+                      )}
+                      <div className="flex items-center gap-3.5">
+                        <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <div className="text-2xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
+                            {stat.value}
+                          </div>
+                          <div className="text-[11px] sm:text-[13px] text-muted-foreground mt-1.5 leading-none font-medium">
+                            {stat.label}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Social proof line */}

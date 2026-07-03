@@ -36,10 +36,15 @@ export default function AlumniNetwork() {
   return (
     <section
       id="alumni"
-      className="py-32 px-4 relative overflow-hidden bg-gradient-to-b from-transparent via-card/20 to-transparent"
+      className="py-32 relative overflow-hidden bg-background"
     >
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 px-4">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             eyebrow="Placement Stories"
@@ -52,7 +57,7 @@ export default function AlumniNetwork() {
               <button
                 type="button"
                 onClick={() => handleScroll(-1)}
-                className="h-12 w-12 rounded-xl border border-border/80 bg-card/60 hover:bg-card hover:border-primary/50 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
+                className="h-12 w-12 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
                 aria-label="Scroll testimonials left"
               >
                 <ArrowLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
@@ -60,7 +65,7 @@ export default function AlumniNetwork() {
               <button
                 type="button"
                 onClick={() => handleScroll(1)}
-                className="h-12 w-12 rounded-xl border border-border/80 bg-card/60 hover:bg-card hover:border-primary/50 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
+                className="h-12 w-12 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
                 aria-label="Scroll testimonials right"
               >
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
@@ -79,11 +84,14 @@ export default function AlumniNetwork() {
               return (
                 <Card
                   key={`${person.name}-${index}`}
-                  className="min-w-[300px] max-w-[300px] sm:min-w-[340px] sm:max-w-[340px] snap-start rounded-3xl border border-border/60 bg-card/40 backdrop-blur-sm shadow-[0_20px_40px_-15px_oklch(0.04_0.015_250/0.4)] flex flex-col justify-between overflow-hidden gap-0 ring-1 ring-white/5 hover:border-primary hover:-translate-y-1 transition-[border-color,transform] duration-300 group py-0 translate-z-0"
+                  className="min-w-[300px] max-w-[300px] sm:min-w-[340px] sm:max-w-[340px] snap-start rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden gap-0 hover:border-white/20 hover:-translate-y-1 transition-[border-color,transform] duration-300 group py-0 translate-z-0 relative"
                 >
-                  <CardContent className="p-0 flex flex-col justify-between h-full">
+                  {/* Spotlight gradient effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-0" />
+                  
+                  <CardContent className="p-0 flex flex-col justify-between h-full relative z-10">
                     <div>
-                      <div className="relative h-64 overflow-hidden border-b border-border/40 bg-muted/20">
+                      <div className="relative h-64 overflow-hidden border-b border-white/5 bg-white/[0.02]">
                         {person.image ? (
                           <img
                             src={person.image}
@@ -95,7 +103,7 @@ export default function AlumniNetwork() {
                             {getInitials(person.name)}
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent z-10 pointer-events-none" />
                       </div>
                       
                       <div className="px-6 pb-6 pt-6 relative z-20">
@@ -105,8 +113,8 @@ export default function AlumniNetwork() {
                         <div className="text-sm font-medium text-muted-foreground line-clamp-1 mt-1">
                           {person.role}
                         </div>
-                        <div className="mt-4 flex items-center justify-between gap-2 border-b border-border/40 pb-4">
-                          <div className="inline-flex items-center rounded-md border border-border/50 bg-background/50 px-2 py-1 text-[10px] font-mono uppercase tracking-[0.1em] text-foreground/80 truncate max-w-[150px]">
+                        <div className="mt-4 flex items-center justify-between gap-2 border-b border-white/5 pb-4">
+                          <div className="inline-flex items-center rounded-md border border-white/10 bg-white/[0.03] backdrop-blur-md px-2 py-1 text-[10px] font-mono uppercase tracking-[0.1em] text-foreground/80 truncate max-w-[150px]">
                             {person.course.replace(/ - testimonials| - DCS| – testimonials/i, "")}
                           </div>
                           <div className="flex gap-0.5 text-amber-400 text-sm shrink-0 drop-shadow-sm">
