@@ -121,60 +121,27 @@ export default function Hero() {
             </div>
 
             {/* Stat Row */}
-            <div className="hero-stat-row mt-12 flex flex-col items-center sm:items-start gap-4 p-4 sm:px-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl max-w-fit">
-              {/* Top Row (3 items) */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-y-4 gap-x-0">
-                {stats.slice(0, 3).map((stat, i) => {
-                  const Icon = stat.icon;
-                  return (
-                    <div key={stat.label} className="flex items-center">
-                      {i > 0 && (
-                        <div className="w-px h-10 bg-border/50 mx-4 sm:mx-6 hidden sm:block" />
-                      )}
-                      <div className="flex items-center gap-3.5">
-                        <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
-                          <Icon className="h-4 w-4" />
+            <div className="hero-stat-row mt-12 flex flex-wrap justify-center lg:justify-start gap-y-6 gap-x-6 sm:gap-x-10 p-5 sm:px-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl max-w-fit mx-auto lg:mx-0">
+              {stats.map((stat, i) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={stat.label} className="flex items-center min-w-[130px] sm:min-w-[150px]">
+                    <div className="flex items-center gap-3.5 w-full">
+                      <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
+                          {stat.value}
                         </div>
-                        <div>
-                          <div className="text-2xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
-                            {stat.value}
-                          </div>
-                          <div className="text-[11px] sm:text-[13px] text-muted-foreground mt-1.5 leading-none font-medium">
-                            {stat.label}
-                          </div>
+                        <div className="text-[10px] sm:text-[13px] text-muted-foreground mt-1 sm:mt-1.5 leading-tight font-medium">
+                          {stat.label}
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-              
-              {/* Bottom Row (2 items) */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-y-4 gap-x-0 w-full">
-                {stats.slice(3).map((stat, i) => {
-                  const Icon = stat.icon;
-                  return (
-                    <div key={stat.label} className="flex items-center">
-                      {i > 0 && (
-                        <div className="w-px h-10 bg-border/50 mx-4 sm:mx-6 hidden sm:block" />
-                      )}
-                      <div className="flex items-center gap-3.5">
-                        <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
-                          <Icon className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <div className="text-2xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
-                            {stat.value}
-                          </div>
-                          <div className="text-[11px] sm:text-[13px] text-muted-foreground mt-1.5 leading-none font-medium">
-                            {stat.label}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Social proof line */}
