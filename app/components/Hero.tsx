@@ -35,15 +35,25 @@ export default function Hero() {
       setIsDialogOpen(true);
     }
 
-    const timer = setTimeout(() => {
-      setIsDialogOpen(true);
-    }, 4000); // Popup dialog after 4 seconds
+    const hasPoppedUp = sessionStorage.getItem("heroPopupPopped");
+    let timer: NodeJS.Timeout;
+
+    if (!hasPoppedUp) {
+      sessionStorage.setItem("heroPopupPopped", "true");
+      // Intro animation takes ~3.5s on first visit. We want 2.5s delay after it exits.
+      const isIntroSkipped = sessionStorage.getItem("introPlayed");
+      const delay = isIntroSkipped ? 2500 : 6000;
+      
+      timer = setTimeout(() => {
+        setIsDialogOpen(true);
+      }, delay);
+    }
 
     const handleOpen = () => setIsDialogOpen(true);
     window.addEventListener("open-signup-dialog", handleOpen);
 
     return () => {
-      clearTimeout(timer);
+      if (timer) clearTimeout(timer);
       window.removeEventListener("open-signup-dialog", handleOpen);
     };
   }, []);

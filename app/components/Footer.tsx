@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { LiaLinkedin, LiaInstagram } from "react-icons/lia";
 
 export default function Footer() {
@@ -34,19 +35,19 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h4 className="font-display font-medium text-foreground mb-6">Programs</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Business Analytics</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Data Analytics</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Product Management</a></li>
+              <li><Link href="/#programs" className="text-muted-foreground hover:text-primary transition-colors">Business Analytics</Link></li>
+              <li><Link href="/#programs" className="text-muted-foreground hover:text-primary transition-colors">Data Analytics</Link></li>
+              <li><Link href="/#programs" className="text-muted-foreground hover:text-primary transition-colors">Product Management</Link></li>
             </ul>
           </div>
           
           <div className="lg:col-span-2">
             <h4 className="font-display font-medium text-foreground mb-6">Company</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><a href="#why" className="text-muted-foreground hover:text-primary transition-colors">Why Us</a></li>
-              <li><a href="#faculty" className="text-muted-foreground hover:text-primary transition-colors">Faculty</a></li>
-              <li><a href="#projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</a></li>
-              <li><a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a></li>
+              <li><Link href="/#why" className="text-muted-foreground hover:text-primary transition-colors">Why Us</Link></li>
+              <li><Link href="/#faculty" className="text-muted-foreground hover:text-primary transition-colors">Faculty</Link></li>
+              <li><Link href="/#projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</Link></li>
+              <li><Link href="/#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
             </ul>
           </div>
 
@@ -74,9 +75,9 @@ export default function Footer() {
             © {new Date().getFullYear()} NxtGen Academy. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs text-muted-foreground font-medium">
-            <a href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="/terms" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="/refund" className="hover:text-primary transition-colors">Refund Policy</a>
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+            <Link href="/refund" className="hover:text-primary transition-colors">Refund Policy</Link>
           </div>
         </div>
       </div>
