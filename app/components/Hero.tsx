@@ -171,7 +171,7 @@ export default function Hero() {
           </div>
 
           {/* ── RIGHT COLUMN: 3D Parallax Card ── */}
-          <div className="hidden lg:block">
+          <div className="w-full flex justify-center lg:block mt-12 lg:mt-0">
             <HeroParallaxCard />
           </div>
         </div>
