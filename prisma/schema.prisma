@@ -90,3 +90,18 @@ model Enquiry {
 
   @@map("enquiry")
 }
+
+model MentorApplication {
+  id         String   @id @default(uuid())
+  fullName   String
+  email      String
+  phone      String
+  linkedin   String
+  expertise  String
+  experience Int
+  goals      String
+  createdAt  DateTime @default(now())
+
+  @@map("mentor_application")
+}
+

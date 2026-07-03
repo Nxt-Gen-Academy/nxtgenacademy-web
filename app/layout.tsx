@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import IntroReveal from "./components/IntroReveal";
+import { Toaster } from "@/components/ui/sonner";
+import Providers from "./components/Providers";
 
 const sansFont = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -46,7 +48,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <IntroReveal />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
+        <Toaster />
       </body>
     </html>
   );
