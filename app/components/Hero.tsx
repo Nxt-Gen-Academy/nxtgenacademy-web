@@ -11,10 +11,11 @@ import {
   Users,
   Sparkles,
 } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import SignUpForm from "./SignUpForm";
 import { authClient } from "@/lib/auth-client";
+import HeroParallaxCard from "./HeroParallaxCard";
 
 const stats = [
   { label: "Companies Hiring", value: "800+", icon: Building2 },
@@ -63,105 +64,139 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-0 pointer-events-none" />
       
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="max-w-4xl">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-amber-400 mb-8">
-              <Flame className="h-3.5 w-3.5" />
-              Learn what matters
+        {/* Decorative Ambient Glows */}
+        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] pointer-events-none mix-blend-screen" />
+        <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/15 blur-[120px] pointer-events-none mix-blend-screen" />
+        
+        {/* ── Two-Column Hero Layout ── */}
+        <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+          {/* ── LEFT COLUMN: Content ── */}
+          <div className="max-w-2xl">
+            {/* Eyebrow */}
+            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-[0_0_20px_oklch(0.58_0.20_255/0.15)]">
+              <Flame className="h-3.5 w-3.5 text-amber-500" />
+              <span className="font-semibold text-primary/90">Learn what matters</span>
             </div>
 
-            <h1 className="font-heading text-[clamp(2.6rem,7vw,6rem)] leading-[1.05] font-medium max-w-5xl text-foreground">
-              Build your career in{" "}
-              <span className="text-primary font-heading font-medium py-2">AI & Analytics</span>
+            {/* Main Heading */}
+            <h1 className="hero-headline font-heading leading-[1.08] font-extrabold tracking-[-0.02em] text-foreground">
+              <span className="block">Build your career in</span>
+              <span className="hero-accent-text block text-primary pb-2">AI &amp; Analytics</span>
             </h1>
 
-            <p className="mt-8 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+            {/* Subheading */}
+            <p className="hero-subheading mt-7 text-muted-foreground leading-[1.6] max-w-[480px]">
               Equip yourself with the tools, projects, and mentorship needed to land high-paying roles. Join our expert-led cohorts today.
             </p>
 
+            {/* CTA Buttons */}
             <div className="mt-10 flex flex-wrap gap-4">
               {session?.user ? (
                 <a
                   href="/dashboard"
-                  className={`${buttonVariants({
-                    size: "lg",
-                  })} rounded-xl px-6 py-3.5 h-auto font-medium bg-primary text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300`}
+                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.3)]"
                 >
-                  Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5" />
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
+                  <span className="relative flex items-center">
+                    Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
                 </a>
               ) : (
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className={`${buttonVariants({
-                    size: "lg",
-                  })} rounded-xl px-6 py-3.5 h-auto font-medium hover:shadow-[0_0_40px_oklch(0.62_0.22_258/0.5)] transition duration-300 cursor-pointer`}
+                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.3)] cursor-pointer"
                 >
-                  Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5" />
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
+                  <span className="relative flex items-center">
+                    Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
                 </button>
               )}
               <a
                 href="#curriculum"
-                className={`${buttonVariants({
-                  variant: "outline",
-                  size: "lg",
-                })} rounded-xl px-6 py-3.5 h-auto font-medium bg-card/40 hover:bg-card/80 transition duration-300`}
+                className="hero-btn-ghost inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm border border-border/60 bg-card/30 text-foreground backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50"
               >
                 View Curriculum
               </a>
             </div>
 
-            <div className="mt-6 flex flex-col items-start gap-y-5 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2 mt-6 mb-8">
-                <Flame className="h-4 w-4 text-amber-400" />
-                <span className="font-medium text-foreground">5K+</span>
-                <span>Students Already Enrolled</span>
+            {/* Stat Row */}
+            <div className="hero-stat-row mt-12 flex flex-col items-center sm:items-start gap-4 p-4 sm:px-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl max-w-fit">
+              {/* Top Row (3 items) */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-y-4 gap-x-0">
+                {stats.slice(0, 3).map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div key={stat.label} className="flex items-center">
+                      {i > 0 && (
+                        <div className="w-px h-10 bg-border/50 mx-4 sm:mx-6 hidden sm:block" />
+                      )}
+                      <div className="flex items-center gap-3.5">
+                        <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <div className="text-2xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
+                            {stat.value}
+                          </div>
+                          <div className="text-[11px] sm:text-[13px] text-muted-foreground mt-1.5 leading-none font-medium">
+                            {stat.label}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-2xl font-semibold text-foreground">
-                  4.8/5
-                </span>
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star
-                      key={index}
-                      className="h-4 w-4 text-amber-400"
-                      fill={index < 4 ? "currentColor" : "none"}
-                    />
-                  ))}
-                </div>
-                <span>from 1500+ reviews</span>
+              
+              {/* Bottom Row (2 items) */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-y-4 gap-x-0 w-full">
+                {stats.slice(3).map((stat, i) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div key={stat.label} className="flex items-center">
+                      {i > 0 && (
+                        <div className="w-px h-10 bg-border/50 mx-4 sm:mx-6 hidden sm:block" />
+                      )}
+                      <div className="flex items-center gap-3.5">
+                        <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <div className="text-2xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
+                            {stat.value}
+                          </div>
+                          <div className="text-[11px] sm:text-[13px] text-muted-foreground mt-1.5 leading-none font-medium">
+                            {stat.label}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </div>
-        </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5 mt-24">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <div
-                key={stat.label}
-                className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card/25 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:bg-card/45 hover:shadow-[0_12px_30px_-10px_oklch(0.62_0.22_258/0.2)] last:sm:col-span-2 last:lg:col-span-1"
-              >
-                <div className="absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-primary/5 blur-xl transition-all duration-500 group-hover:bg-primary/15 group-hover:scale-150" />
-                
-                <div className="flex items-start justify-between gap-4">
-                  <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
-                    {stat.label}
-                  </div>
-                  <div className="rounded-lg bg-primary/5 p-2 text-primary border border-primary/10 group-hover:bg-primary/15 group-hover:text-primary-foreground group-hover:border-primary/30 transition-all duration-300 shrink-0">
-                    <Icon className="h-4 w-4" />
-                  </div>
-                </div>
-                
-                <div className="mt-6">
-                  <div className="text-3xl md:text-4xl font-heading font-medium tracking-tight transition-all duration-300 group-hover:translate-x-1">
-                    {stat.value}
-                  </div>
-                </div>
+            {/* Social proof line */}
+            <div className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star
+                    key={index}
+                    className="h-3.5 w-3.5 text-amber-400"
+                    fill={index < 4 ? "currentColor" : "none"}
+                  />
+                ))}
               </div>
-            );
-          })}
+              <span className="font-medium text-foreground/80">4.8/5</span>
+              <span className="text-muted-foreground/60">from 1500+ reviews</span>
+            </div>
+          </div>
+
+          {/* ── RIGHT COLUMN: 3D Parallax Card ── */}
+          <div className="hidden lg:block">
+            <HeroParallaxCard />
+          </div>
         </div>
       </div>
 
@@ -178,7 +213,7 @@ export default function Hero() {
             <SignUpForm idPrefix="modal-" />
 
             <p className="mt-4 text-[11px] text-muted-foreground text-center">
-              By continuing, you agree to Terms & Conditions for Signup
+              By continuing, you agree to Terms &amp; Conditions for Signup
             </p>
           </div>
         </DialogContent>

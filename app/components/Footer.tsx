@@ -19,12 +19,12 @@ export default function Footer() {
               A premium, outcome-driven learning ecosystem designed to engineer your transition into high-growth tech careers.
             </p>
             
-            <div className="mt-8 flex gap-4">
-              <a href="https://www.linkedin.com/company/nxtgenacademy-ai/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
+            <div className="mt-8 flex gap-4 relative z-20">
+              <a href="https://www.linkedin.com/company/nxtgenacademy-ai/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
                 <LiaLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="https://www.instagram.com/nxtgen.academy.ai?igsh=MThjb3NmdXB6YzNsaA==" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border/80 bg-card/50 flex items-center justify-center text-muted-foreground hover:bg-card hover:text-primary hover:border-primary/50 transition-all shadow-sm">
+              <a href="https://www.instagram.com/nxtgen.academy.ai?igsh=MThjb3NmdXB6YzNsaA==" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
                 <LiaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
       </div>
       
-      <div className="border-t border-border/40 bg-background/50">
+      <div className="border-t border-white/5 bg-black/40 backdrop-blur-sm relative z-20">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground font-medium">
             © {new Date().getFullYear()} NxtGen Academy. All rights reserved.

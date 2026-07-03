@@ -1,3 +1,4 @@
+import Accreditations from "./components/Accreditations";
 import AISkillGap from "./components/AISkillGap";
 import AlumniNetwork from "./components/AlumniNetwork";
 import Curriculum from "./components/Curriculum";
@@ -22,6 +23,7 @@ export default function Home() {
       <Nav />
       <Hero />
       <Trust />
+      <Accreditations />
       <OutcomeRecipe />
       <Programs />
       <WhyUs />

@@ -85,9 +85,13 @@ export default function Faculty() {
   };
 
   return (
-    <section id="faculty" className="py-32 px-4 relative overflow-hidden">
+    <section id="faculty" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[10%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-[radial-gradient(ellipse_at_right,_oklch(0.62_0.22_258/0.05),_transparent_60%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
@@ -102,14 +106,14 @@ export default function Faculty() {
             <div className="flex gap-3 self-end sm:self-auto mb-4">
               <button
                 onClick={() => scroll("left")}
-                className="h-12 w-12 rounded-xl border border-border/80 bg-card/60 hover:bg-card hover:border-primary/50 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
+                className="h-12 w-12 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
                 aria-label="Previous slide"
               >
                 <ChevronLeft className="h-6 w-6 group-hover:-translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={() => scroll("right")}
-                className="h-12 w-12 rounded-xl border border-border/80 bg-card/60 hover:bg-card hover:border-primary/50 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
+                className="h-12 w-12 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
                 aria-label="Next slide"
               >
                 <ChevronRight className="h-6 w-6 group-hover:translate-x-0.5 transition-transform" />
@@ -129,20 +133,23 @@ export default function Faculty() {
               return (
                 <div
                   key={f.name}
-                  className="flex-none w-[280px] sm:w-[320px] snap-start rounded-2xl overflow-hidden border border-border bg-card/40 backdrop-blur-sm shadow-sm flex flex-col group transition-all duration-500 hover:shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] hover:-translate-y-1 hover:border-primary/30"
+                  className="flex-none w-[280px] sm:w-[320px] snap-start rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-sm flex flex-col group transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:border-white/20 relative"
                 >
+                  {/* Spotlight gradient effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-0" />
+                  
                   {/* Accent Header */}
                   <div
-                    className={`relative h-28 bg-gradient-to-br ${accentClass.split(' ')[0]} ${accentClass.split(' ')[1]} ${accentClass.split(' ')[2]} border-b ${accentClass.split(' ')[3]} overflow-hidden`}
+                    className={`relative h-28 bg-gradient-to-br ${accentClass.split(' ')[0]} ${accentClass.split(' ')[1]} ${accentClass.split(' ')[2]} border-b border-white/5 overflow-hidden z-10`}
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_oklch(0.97_0.005_250/0.1),_transparent_60%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.1),_transparent_60%)]" />
                     <div className="absolute inset-0 grid-pattern opacity-20 mix-blend-overlay" />
                   </div>
 
                   {/* Faculty Info */}
                   <div className="p-6 pt-10 flex flex-col flex-grow relative z-20">
                     {/* Initials Avatar */}
-                    <div className="absolute left-6 -top-7 h-14 w-14 rounded-xl bg-card border border-border/80 shadow-md grid place-items-center text-lg font-heading font-medium text-foreground group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-300 z-30">
+                    <div className="absolute left-6 -top-7 h-14 w-14 rounded-xl bg-card border border-white/10 shadow-lg grid place-items-center text-lg font-heading font-medium text-foreground group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-300 z-30">
                       {getInitials(f.name)}
                     </div>
 

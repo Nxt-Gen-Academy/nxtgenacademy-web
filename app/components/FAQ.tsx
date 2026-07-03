@@ -180,23 +180,31 @@ export default function FAQ() {
   const visibleQs = showAll ? qs : qs.slice(0, INITIAL_VISIBLE);
 
   return (
-    <section id="faq" className="py-32 px-4 relative">
+    <section id="faq" className="py-32 relative overflow-hidden bg-background">
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[30%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-4xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="FAQ"
           title="We've answered the most common queries."
           subtitle="Everything you need to know about our programs, placement support, and learning experience — so you can get started with confidence."
         />
 
-        <div className="mt-16 bg-card/20 backdrop-blur-sm border border-border/50 rounded-3xl p-6 sm:p-10">
-          <Accordion defaultValue={["item-0"]}>
+        <div className="mt-16 bg-white/[0.02] backdrop-blur-md border border-white/5 shadow-2xl rounded-3xl p-6 sm:p-10 relative overflow-hidden group">
+          {/* Spotlight gradient effect on hover */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+          
+          <div className="relative z-10">
+            <Accordion defaultValue={["item-0"]}>
             {visibleQs.map((it, i) => (
               <ScrollReveal key={it.q} direction="up" delay={i * 50}>
-                <AccordionItem
-                  value={`item-${i}`}
-                  className="border-b border-border/50 last:border-0"
-                >
+                  <AccordionItem
+                    value={`item-${i}`}
+                    className="border-b border-white/5 last:border-0"
+                  >
                   <AccordionTrigger className="w-full flex items-center justify-between text-left py-6 font-heading text-lg sm:text-xl font-medium hover:text-primary transition-colors hover:no-underline group">
                     {it.q}
                   </AccordionTrigger>
@@ -210,7 +218,8 @@ export default function FAQ() {
                 </AccordionItem>
               </ScrollReveal>
             ))}
-          </Accordion>
+            </Accordion>
+          </div>
         </div>
 
         <ScrollReveal direction="up" delay={200}>
@@ -218,7 +227,7 @@ export default function FAQ() {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="group inline-flex items-center gap-2 rounded-full border border-border/80 bg-background hover:bg-card px-8 py-3.5 text-sm font-semibold text-foreground hover:border-primary/50 hover:shadow-[0_8px_30px_-10px_oklch(0.62_0.22_258/0.3)] transition-all duration-300 cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 px-8 py-3.5 text-sm font-semibold text-foreground hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.5)] transition-all duration-300 cursor-pointer"
             >
               {showAll ? "View Less FAQs" : "View All FAQs"}
               <ChevronDown

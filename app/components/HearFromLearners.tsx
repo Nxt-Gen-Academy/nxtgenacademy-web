@@ -76,20 +76,23 @@ export default function HearFromLearners() {
   const renderCard = (item: typeof allTestimonials[0], idx: number, colId: string) => (
     <Card
       key={`${colId}-${idx}`}
-      className="w-full border border-slate-200/80 bg-white p-6 hover:border-indigo-500/40 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] rounded-2xl group flex flex-col gap-4"
+      className="card-premium relative overflow-hidden group flex flex-col gap-4 mb-6"
     >
-      <CardContent className="p-0 flex flex-col gap-4">
+      {/* Spotlight gradient effect on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+      
+      <CardContent className="p-6 flex flex-col gap-4 relative z-10">
         {/* Card Header */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center font-bold text-xs tracking-wider shrink-0 border border-slate-100`}>
+            <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center font-bold text-xs tracking-wider shrink-0 border border-white/10 shadow-inner`}>
               {item.initials}
             </div>
             <div>
-              <h4 className="font-heading font-medium text-xs text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <h4 className="font-heading font-medium text-sm text-foreground group-hover:text-primary transition-colors">
                 {item.name}
               </h4>
-              <p className="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+              <p className="text-[11px] text-muted-foreground font-medium mt-0.5 line-clamp-1">
                 {item.role}
               </p>
             </div>
@@ -97,18 +100,18 @@ export default function HearFromLearners() {
         </div>
 
         {/* Card Content Text */}
-        <p className="text-xs text-slate-700 leading-relaxed font-normal line-clamp-4 group-hover:text-slate-900 transition-colors">
+        <p className="text-xs text-foreground/80 leading-relaxed font-normal line-clamp-4 group-hover:text-foreground transition-colors">
           "{item.text}"
         </p>
 
         {/* Card Footer Rating */}
-        <div className="flex items-center gap-1.5 pt-2 border-t border-slate-100">
+        <div className="flex items-center gap-1.5 pt-4 mt-2 border-t border-border/50">
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400 shrink-0" />
+              <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500 shrink-0" />
             ))}
           </div>
-          <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider font-semibold">
+          <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider font-semibold">
             Verified Learner
           </span>
         </div>
@@ -119,8 +122,12 @@ export default function HearFromLearners() {
   return (
     <section
       id="learners"
-      className="py-24 relative overflow-hidden bg-background"
+      className="py-32 relative overflow-hidden bg-background"
     >
+      {/* Background Enhancements */}
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      
       <div className="section-divider" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -132,7 +139,7 @@ export default function HearFromLearners() {
         />
 
         {/* 3-Column Vertical Marquee Container */}
-        <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-border/40 bg-card/10 p-6 md:p-8">
+        <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md p-6 md:p-8 shadow-2xl">
           
           {/* Top/Bottom Fade Gradients matching page dark background */}
           <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background via-background/80 to-transparent z-10" />
