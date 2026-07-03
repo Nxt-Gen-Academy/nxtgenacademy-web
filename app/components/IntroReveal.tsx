@@ -25,6 +25,12 @@ export default function IntroReveal() {
       return;
     }
 
+    if (sessionStorage.getItem("introPlayed")) {
+      setPhase("done");
+      return;
+    }
+    sessionStorage.setItem("introPlayed", "true");
+
     document.body.style.overflow = "hidden";
 
     const t0 = setTimeout(() => setPhase("reveal"), 60);

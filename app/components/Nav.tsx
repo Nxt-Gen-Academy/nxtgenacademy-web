@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 
@@ -54,7 +55,7 @@ export default function Nav() {
               ? "glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-background/70" 
               : "bg-transparent"
           }`}>
-            <a href="/" className="flex items-center gap-2 group">
+            <Link href="/" className="flex items-center gap-2 group">
               <div className="rounded-lg grid place-items-center transition-all duration-300 group-hover:scale-105">
                 <Image
                   src="/logo.png"
@@ -65,11 +66,11 @@ export default function Nav() {
                   className={`transition-all duration-300 ${isScrolled ? "w-[90px] h-auto" : "w-[140px] h-auto"}`}
                 />
               </div>
-            </a>
+            </Link>
             
             <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               {navLinks.map((link) => (
-                <a 
+                <Link 
                   key={link.href}
                   href={link.href} 
                   className={`nav-link-underline transition-colors hover:text-foreground ${
@@ -77,18 +78,24 @@ export default function Nav() {
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
             
             <div className="flex items-center gap-3">
+              <Link
+                href="/apply-mentor"
+                className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2.5 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all hidden lg:flex`}
+              >
+                Apply as Mentor
+              </Link>
               {session?.user && (
-                <a
+                <Link
                   href="/dashboard"
                   className={`${buttonVariants({ variant: "outline" })} rounded-xl px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground border-border/80 transition-all hidden sm:flex`}
                 >
                   Go to Dashboard
-                </a>
+                </Link>
               )}
               <button
                 onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
@@ -115,24 +122,31 @@ export default function Nav() {
         <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-md pt-24 px-6 md:hidden">
           <nav className="flex flex-col gap-6 text-lg font-medium">
             {session?.user && (
-              <a 
+              <Link 
                 href="/dashboard" 
                 className="border-b border-border/50 pb-4 text-primary font-semibold hover:text-primary-foreground transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Go to Dashboard
-              </a>
+              </Link>
             )}
             {navLinks.map((link) => (
-              <a 
+              <Link 
                 key={link.href}
                 href={link.href} 
                 className="border-b border-border/50 pb-4 text-foreground/80 hover:text-primary transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
+            <Link 
+              href="/apply-mentor" 
+              className="border-b border-border/50 pb-4 text-foreground/80 hover:text-primary transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Apply as Mentor
+            </Link>
             <button
               className={`${buttonVariants({ size: "lg" })} mt-4 w-full rounded-xl cursor-pointer`}
               onClick={() => {
