@@ -68,7 +68,7 @@ export default function Nav() {
               </div>
             </Link>
             
-            <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+            <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               {navLinks.map((link) => (
                 <Link 
                   key={link.href}
@@ -83,30 +83,32 @@ export default function Nav() {
             </nav>
             
             <div className="flex items-center gap-3">
-              <Link
-                href="/apply-mentor"
-                className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2.5 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all hidden lg:flex`}
-              >
-                Apply as Mentor
-              </Link>
-              {session?.user && (
+              <div className="hidden lg:flex items-center gap-3">
                 <Link
-                  href="/dashboard"
-                  className={`${buttonVariants({ variant: "outline" })} rounded-xl px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground border-border/80 transition-all hidden sm:flex`}
+                  href="/apply-mentor"
+                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2.5 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all`}
                 >
-                  Go to Dashboard
+                  Apply as Mentor
                 </Link>
-              )}
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                className={`${buttonVariants()} rounded-xl bg-foreground text-background px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.62_0.22_258/0.4)] transition-all group/button border-0 hidden sm:flex`}
-              >
-                Apply{" "}
-                <ArrowUpRight className="h-4 w-4 ml-1 group-hover/button:rotate-45 transition-transform" />
-              </button>
+                {session?.user && (
+                  <Link
+                    href="/dashboard"
+                    className={`${buttonVariants({ variant: "outline" })} rounded-xl px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground border-border/80 transition-all`}
+                  >
+                    Go to Dashboard
+                  </Link>
+                )}
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
+                  className={`${buttonVariants()} rounded-xl bg-foreground text-background px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.62_0.22_258/0.4)] transition-all group/button border-0`}
+                >
+                  Apply{" "}
+                  <ArrowUpRight className="h-4 w-4 ml-1 group-hover/button:rotate-45 transition-transform" />
+                </button>
+              </div>
               
               <button 
-                className="md:hidden p-2 text-foreground"
+                className="lg:hidden p-2 text-foreground"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle mobile menu"
               >
@@ -119,7 +121,7 @@ export default function Nav() {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-md pt-24 px-6 md:hidden">
+        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-md pt-24 px-6 lg:hidden">
           <nav className="flex flex-col gap-6 text-lg font-medium">
             {session?.user && (
               <Link 
