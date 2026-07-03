@@ -71,7 +71,7 @@ export default function Faculty() {
             display: flex;
             width: max-content;
             gap: 30px;
-            animation: scrollInfinite 30s linear infinite;
+            animation: scrollInfinite 12s linear infinite;
         }
         .infinite-carousel-track:hover {
             animation-play-state: paused;
