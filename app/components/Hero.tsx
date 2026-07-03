@@ -43,7 +43,7 @@ export default function Hero() {
       // Intro animation takes ~3.5s on first visit. We want 2.5s delay after it exits.
       const isIntroSkipped = sessionStorage.getItem("introPlayed");
       const delay = isIntroSkipped ? 2500 : 6000;
-      
+
       timer = setTimeout(() => {
         setIsDialogOpen(true);
       }, delay);
@@ -72,12 +72,12 @@ export default function Hero() {
       <div className="absolute inset-0 bg-background/85 z-0" />
       <div className="absolute inset-0 grid-pattern opacity-30 z-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-0 pointer-events-none" />
-      
+
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Decorative Ambient Glows */}
         <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] pointer-events-none mix-blend-screen" />
         <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/15 blur-[120px] pointer-events-none mix-blend-screen" />
-        
+
         {/* ── Two-Column Hero Layout ── */}
         <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
           {/* ── LEFT COLUMN: Content ── */}
