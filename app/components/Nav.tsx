@@ -55,8 +55,15 @@ export default function Nav() {
               : "bg-transparent"
           }`}>
             <a href="/" className="flex items-center gap-2 group">
-              <div className="rounded-lg grid place-items-center transition-transform group-hover:scale-105">
-                <Image src="/logo.png" alt="logo" width={100} height={100} priority />
+              <div className="rounded-lg grid place-items-center transition-all duration-300 group-hover:scale-105">
+                <Image
+                  src="/logo.png"
+                  alt="logo"
+                  width={140}
+                  height={140}
+                  priority
+                  className={`transition-all duration-300 ${isScrolled ? "w-[90px] h-auto" : "w-[140px] h-auto"}`}
+                />
               </div>
             </a>
             

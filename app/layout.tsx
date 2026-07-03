@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import IntroReveal from "./components/IntroReveal";
 
 const sansFont = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -43,7 +44,10 @@ export default function RootLayout({
       lang="en"
       className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <IntroReveal />
+        {children}
+      </body>
     </html>
   );
 }
