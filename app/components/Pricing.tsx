@@ -16,7 +16,7 @@ import ScrollReveal from "./ScrollReveal";
 const plans = [
   {
     n: "Starter Plan",
-    p: "45,000",
+    p: "50,000",
     d: "Self-paced foundation + mentor calls.",
     f: [
       "Core curriculum access",
@@ -28,7 +28,7 @@ const plans = [
   },
   {
     n: "Professional Plan",
-    p: "70,000",
+    p: "80,000",
     d: "Live cohort with projects and reviews.",
     f: [
       "Everything in Starter",
@@ -42,7 +42,7 @@ const plans = [
   },
   {
     n: "Premium Placement Plan",
-    p: "95,000",
+    p: "1,50,000",
     d: "Full placement support with dedicated guidance.",
     f: [
       "Everything in Professional",
