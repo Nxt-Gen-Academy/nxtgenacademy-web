@@ -2,7 +2,7 @@
 
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
-import { BookOpen, Trophy, Sparkles, ArrowRight, Network } from "lucide-react";
+import { BookOpen, Trophy, Sparkles, ArrowRight, Network, Loader2 } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -12,6 +12,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AuroraBackground } from "@/components/ui/animated-background";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -93,7 +96,8 @@ export default function ApplyMentorPage() {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting },
+    reset,
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -107,11 +111,28 @@ export default function ApplyMentorPage() {
     }
   });
 
-  const onSubmit = async (data: FormValues) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    alert("Application Sent! Our team will contact you shortly.");
-    console.log(data);
+  const mutation = useMutation({
+    mutationFn: async (data: FormValues) => {
+      const response = await axios.post("/api/api-mentor", data);
+      return response.data;
+    },
+    onSuccess: () => {
+      toast.success("Application Sent!", {
+        description: "Our team will contact you shortly.",
+      });
+      reset();
+    },
+    onError: (error: any) => {
+      console.error("Submission error:", error);
+      const message = error.response?.data?.error || "Failed to submit application. Please try again.";
+      toast.error("Submission Failed", {
+        description: message,
+      });
+    },
+  });
+
+  const onSubmit = (data: FormValues) => {
+    mutation.mutate(data);
   };
 
   return (
@@ -191,11 +212,11 @@ export default function ApplyMentorPage() {
                           <SelectValue placeholder="Select domain" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="data-science">Data Science & AI</SelectItem>
-                          <SelectItem value="full-stack">Full Stack Development</SelectItem>
-                          <SelectItem value="cloud">Cloud & DevOps</SelectItem>
-                          <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
-                          <SelectItem value="product">Product Management</SelectItem>
+                          <SelectItem value="Data Science & AI">Data Science & AI</SelectItem>
+                          <SelectItem value="Full Stack Development">Full Stack Development</SelectItem>
+                          <SelectItem value="Cloud & DevOps">Cloud & DevOps</SelectItem>
+                          <SelectItem value="Cybersecurity">Cybersecurity</SelectItem>
+                          <SelectItem value="Product Management">Product Management</SelectItem>
                         </SelectContent>
                       </Select>
                     )}
@@ -217,8 +238,19 @@ export default function ApplyMentorPage() {
               </div>
 
               <div className="pt-2">
-                <Button type="submit" disabled={isSubmitting} className="w-full rounded-lg h-11 font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200">
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
+                <Button 
+                  type="submit" 
+                  disabled={mutation.isPending} 
+                  className="w-full rounded-lg h-11 font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 flex items-center justify-center gap-2"
+                >
+                  {mutation.isPending ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Submitting...</span>
+                    </>
+                  ) : (
+                    "Submit Application"
+                  )}
                 </Button>
               </div>
             </form>
