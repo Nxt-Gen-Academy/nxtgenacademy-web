@@ -2,39 +2,34 @@
 
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
-import { LiaLinkedin } from "react-icons/lia";
 import ScrollReveal from "./ScrollReveal";
 
 const facultyMembers = [
   {
     name: "Aditya Verma",
-    role: "Technical Instructor and SDE",
+    role: "Business analyst",
     image: "/faculty/gladden.png",
-    linkedin: "https://linkedin.com",
     company: "Barclays",
     companyLogo: "/logos/barclays.svg"
   },
   {
     name: "Vishal Sharma",
-    role: "Software Engineer-2",
+    role: "Data analyst",
     image: "/faculty/vishal.png",
-    linkedin: "https://linkedin.com",
     company: "Zepto",
     companyLogo: "/logos/zepto.svg"
   },
   {
     name: "Bhavesh Bansal",
-    role: "Senior Software Engineer",
+    role: "Product manager",
     image: "/faculty/bhavesh.png",
-    linkedin: "https://linkedin.com",
     company: "Appbrew",
     companyLogo: "/logos/appbrew.svg"
   },
   {
     name: "Rahul Jaiswal",
-    role: "Full Stack (MERN) Trainer",
+    role: "Associate Product Manager",
     image: "/faculty/rahul.png",
-    linkedin: "https://linkedin.com",
     company: "DUCAT",
     companyLogo: "/logos/ducat.svg"
   },
@@ -42,7 +37,6 @@ const facultyMembers = [
     name: "Rohit Sen",
     role: "Senior Software Engineer",
     image: "/faculty/rohit.png",
-    linkedin: "https://linkedin.com",
     company: "Microsoft",
     companyLogo: "/logos/microsoft.svg"
   }
@@ -112,9 +106,6 @@ export default function Faculty() {
                       <p className="text-[0.75rem] text-blue-500 uppercase tracking-widest font-semibold mb-1">{f.role}</p>
                       <h4 className="text-white text-[1.3rem] font-bold m-0 mb-2 font-display">{f.name}</h4>
                       <p className="text-slate-400 text-[0.95rem] font-medium mb-4">{f.company}</p>
-                      <a href={f.linkedin} className="absolute right-[25px] bottom-[25px] w-9 h-9 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center transition-all duration-300 hover:bg-blue-500 hover:text-white hover:-translate-y-0.5" target="_blank" rel="noopener noreferrer">
-                        <LiaLinkedin className="h-5 w-5" />
-                      </a>
                     </div>
                   </div>
                 ))}
@@ -137,9 +128,6 @@ export default function Faculty() {
                       <p className="text-[0.75rem] text-blue-500 uppercase tracking-widest font-semibold mb-1">{f.role}</p>
                       <h4 className="text-white text-[1.3rem] font-bold m-0 mb-2 font-display">{f.name}</h4>
                       <p className="text-slate-400 text-[0.95rem] font-medium mb-4">{f.company}</p>
-                      <a href={f.linkedin} className="absolute right-[25px] bottom-[25px] w-9 h-9 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center transition-all duration-300 hover:bg-blue-500 hover:text-white hover:-translate-y-0.5" target="_blank" rel="noopener noreferrer">
-                        <LiaLinkedin className="h-5 w-5" />
-                      </a>
                     </div>
                   </div>
                 ))}
