@@ -38,19 +38,19 @@ export default function AlumniNetwork() {
       <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px]">
         “{item.quote}”
       </p>
-      <div className="flex items-center justify-between pt-6 border-t border-border/50">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="relative h-10 w-10 rounded-full overflow-hidden bg-white/5 flex-shrink-0">
-            <img
-              alt={item.name}
-              loading="lazy"
-              width="40"
-              height="40"
-              className="object-cover h-full w-full"
-              src={item.image}
-            />
-          </div>
-          <div className="min-w-0">
+      <div className="flex gap-3 pt-6 border-t border-border/50">
+        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-white/5 flex-shrink-0">
+          <img
+            alt={item.name}
+            loading="lazy"
+            width="40"
+            height="40"
+            className="object-cover h-full w-full"
+            src={item.image}
+          />
+        </div>
+        <div className="">
+          <div className="flex flex-col justify-center">
             <p className="text-sm font-heading font-semibold text-foreground truncate">
               {item.name}
             </p>
@@ -59,26 +59,11 @@ export default function AlumniNetwork() {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-check text-emerald-400 flex-shrink-0"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-          <span className="text-emerald-400 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded whitespace-nowrap">
-            {item.tag}
-          </span>
-        </div>
+      </div>
+      <div className="self-start mt-3">
+        <span className="text-emerald-400 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded whitespace-nowrap">
+          {item.tag}
+        </span>
       </div>
     </div>
   );
@@ -89,7 +74,7 @@ export default function AlumniNetwork() {
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
-      
+
       <div className="section-divider" />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 mb-12">
@@ -105,7 +90,7 @@ export default function AlumniNetwork() {
       <div className="relative mb-6">
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        
+
         {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
         <div className="flex animate-marquee-left hover:[animation-play-state:paused]">
           {/* Loop 1: First 5 cards (with right margin padding equal to standard card gaps) */}
@@ -123,7 +108,7 @@ export default function AlumniNetwork() {
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        
+
         {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
         <div className="flex animate-marquee-right hover:[animation-play-state:paused]">
           {/* Loop 1: First 5 cards */}
