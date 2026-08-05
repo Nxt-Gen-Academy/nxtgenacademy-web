@@ -29,7 +29,7 @@ export default function Footer() {
                 <LiaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
+              <a href="https://www.youtube.com/@nxtgenacademy" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
                 <LiaYoutube className="h-5 w-5" />
                 <span className="sr-only">YouTube</span>
               </a>

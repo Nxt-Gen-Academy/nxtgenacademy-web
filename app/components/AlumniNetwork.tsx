@@ -144,7 +144,7 @@ export default function AlumniNetwork() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-border/50">
               <div className="text-center">
                 <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>1200+</span>
+                  <span>800+</span>
                 </p>
                 <p className="text-muted-foreground text-sm">Alumni Placed</p>
               </div>
@@ -162,7 +162,7 @@ export default function AlumniNetwork() {
               </div>
               <div className="text-center">
                 <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>67%</span>
+                  <span>72%</span>
                 </p>
                 <p className="text-muted-foreground text-sm">Avg. Salary Hike</p>
               </div>
