@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LiaLinkedin, LiaInstagram } from "react-icons/lia";
+import { LiaLinkedin, LiaInstagram, LiaYoutube } from "react-icons/lia";
 
 export default function Footer() {
   return (
@@ -29,6 +29,10 @@ export default function Footer() {
                 <LiaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
+              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
+                <LiaYoutube className="h-5 w-5" />
+                <span className="sr-only">YouTube</span>
+              </a>
             </div>
           </div>
           
@@ -47,7 +51,7 @@ export default function Footer() {
               <li><Link href="/#why" className="text-muted-foreground hover:text-primary transition-colors">Why Us</Link></li>
               <li><Link href="/#faculty" className="text-muted-foreground hover:text-primary transition-colors">Faculty</Link></li>
               <li><Link href="/#projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</Link></li>
-              <li><Link href="/#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
+              <li><Link href="/#alumni" className="text-muted-foreground hover:text-primary transition-colors">Alumni</Link></li>
             </ul>
           </div>
 
@@ -63,6 +67,10 @@ export default function Footer() {
                 <a href="tel:+919116205994" className="text-muted-foreground hover:text-primary transition-colors block">
                   +91 91162 05994
                 </a>
+              </li>
+              <li className="text-muted-foreground leading-relaxed">
+                <span className="text-foreground block mb-1">Address:</span>
+                SAS Tower, Bay (former, Unit No. 309, 3rd Floor, Tower-A of Eleven, Medicity, Support Area, Sector 38, Gurugram, Haryana 122001
               </li>
             </ul>
           </div>

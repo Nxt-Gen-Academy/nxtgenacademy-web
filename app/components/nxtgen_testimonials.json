@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Sameer Sharma",
+    "role": "Associate Product Manager",
+    "company": "Airbnb India",
+    "quote": "With 9 years in non-tech roles, shifting to Data Engineering seemed unrealistic. NxtGen Academy's Cloud and SQL lessons simplified everything.",
+    "tag": "Non-Tech \u2192 PM Switch",
+    "image": "/alumni/Untitled.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Vikram Joshi",
+    "role": "Business Analyst",
+    "company": "Cognizant",
+    "quote": "My background was sales admin, not technical, but NxtGen's SQL and dashboard training changed everything. Resume and interview support made a big difference.",
+    "tag": "Sales \u2192 BA Switch",
+    "image": "/alumni/Untitled1.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Priya Singh",
+    "role": "Data Analyst",
+    "company": "Uber India Tech",
+    "quote": "I had basic development experience but wanted a data-focused role. NxtGen's ETL and orchestration tasks helped me understand DE clearly.",
+    "tag": "Dev \u2192 DE Switch",
+    "image": "/alumni/Untitled3.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Neha Gupta",
+    "role": "Quality Assistant",
+    "company": "Infosys BPM",
+    "quote": "Switching from a bio-science role felt risky, but NxtGen's weekly weekly dataset tasks helped me understand analytics well. Mock interviews prepared me.",
+    "tag": "Bio-Sci \u2192 Analytics",
+    "image": "/alumni/Untitled4.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Kiran Rao",
+    "role": "Analyst",
+    "company": "KPMG Advisory",
+    "quote": "As an economics graduate, I wanted a business-focused analytics role. NxtGen's problem-solving sessions and real datasets helped me think analytically.",
+    "tag": "Econ \u2192 KPMG Analyst",
+    "image": "/alumni/Untitled5.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Mira Reddy",
+    "role": "Full Stack Developer",
+    "company": "Razorpay",
+    "quote": "I always wanted to work in a product company but didn't know how to compete. NxtGen's portfolio projects and mock assessments boosted my confidence.",
+    "tag": "Dev \u2192 Razorpay Switch",
+    "image": "/alumni/Untitled10.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Ananya Nair",
+    "role": "Data Scientist",
+    "company": "Bloomberg",
+    "quote": "With 9 years in data engineering, I wanted ML roles. NxtGen's clear explanations, ML pipelines, and real projects helped me grow fast.",
+    "tag": "DE \u2192 DS Switch",
+    "image": "/alumni/Untitled11.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Divya Iyer",
+    "role": "Cloud DevOps Engineer",
+    "company": "PhonePe",
+    "quote": "The structured Data Analyst curriculum and hands-on AWS labs at NxtGen were exactly what I needed. The interview prep built up my confidence.",
+    "tag": "Analyst \u2192 Cloud DevOps",
+    "image": "/alumni/Untitled12.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Amit Patel",
+    "role": "Senior Data Analyst",
+    "company": "Walmart Global Tech",
+    "quote": "I never imagined transitioning to a high-scale product company after 12 years. NxtGen rebuilt my fundamentals and strengthened system design.",
+    "tag": "120% Salary Hike",
+    "image": "/alumni/Untitled7.jpg",
+    "rating": 5
+  },
+  {
+    "name": "Karan Malhotra",
+    "role": "Insights Analyst",
+    "company": "McKinsey & Company",
+    "quote": "I struggled with storytelling earlier, but NxtGen's dashboard-building and business case practice made everything clear. The resume suggestions boosted.",
+    "tag": "McKinsey Analyst",
+    "image": "/alumni/Untitled8.jpg",
+    "rating": 5
+  }
+]
