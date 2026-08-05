@@ -1,138 +1,172 @@
 "use client";
 
-import { useRef } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import SectionHeading from "./SectionHeading";
-import { Card, CardContent } from "@/components/ui/card";
-import testimonials from "./testimonials.json";
 import ScrollReveal from "./ScrollReveal";
-
-const ACCENTS = [
-  "from-rose-500/20 via-fuchsia-500/10 to-transparent border-rose-500/20",
-  "from-amber-500/20 via-orange-500/10 to-transparent border-amber-500/20",
-  "from-sky-500/20 via-cyan-500/10 to-transparent border-sky-500/20",
-  "from-emerald-500/20 via-teal-500/10 to-transparent border-emerald-500/20",
-  "from-indigo-500/20 via-violet-500/10 to-transparent border-indigo-500/20",
-  "from-lime-500/20 via-emerald-500/10 to-transparent border-lime-500/20",
-];
-
-function getInitials(name: string) {
-  const parts = name.trim().split(" ");
-  if (parts.length === 0) return "";
-  if (parts.length === 1) return parts[0][0]?.toUpperCase() ?? "";
-  return `${parts[0][0] ?? ""}${parts[parts.length - 1][0] ?? ""}`.toUpperCase();
-}
+import SectionHeading from "./SectionHeading";
+import testimonials from "./nxtgen_testimonials.json";
 
 export default function AlumniNetwork() {
-  const trackRef = useRef<HTMLDivElement>(null);
+  // We have exactly 10 unique testimonials.
+  // Row 1 (moving left) uses first 5 testimonials, Row 2 (moving right) uses last 5 testimonials.
+  const row1Items = testimonials.slice(0, 5);
+  const row2Items = testimonials.slice(5, 10);
 
-  const handleScroll = (direction: number) => {
-    trackRef.current?.scrollBy({
-      left: direction * 360,
-      behavior: "smooth",
-    });
-  };
+  const renderCard = (item: typeof testimonials[0], key: string) => (
+    <div
+      key={key}
+      className="w-[300px] sm:w-[340px] flex-shrink-0 bg-card/40 backdrop-blur-sm rounded-lg md:rounded-xl p-6 border border-border/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-border hover:bg-card/60"
+    >
+      <div className="flex gap-0.5 mb-4">
+        {Array.from({ length: item.rating }).map((_, i) => (
+          <svg
+            key={i}
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-star fill-amber-400 text-amber-400"
+            aria-hidden="true"
+          >
+            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+          </svg>
+        ))}
+      </div>
+      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px]">
+        “{item.quote}”
+      </p>
+      <div className="flex items-center justify-between pt-6 border-t border-border/50">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="relative h-10 w-10 rounded-full overflow-hidden bg-white/5 flex-shrink-0">
+            <img
+              alt={item.name}
+              loading="lazy"
+              width="40"
+              height="40"
+              className="object-cover h-full w-full"
+              src={item.image}
+            />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-heading font-semibold text-foreground truncate">
+              {item.name}
+            </p>
+            <p className="text-muted-foreground text-xs truncate">
+              {item.role}, {item.company}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-check text-emerald-400 flex-shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          <span className="text-emerald-400 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded whitespace-nowrap">
+            {item.tag}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <section
-      id="alumni"
-      className="py-32 relative overflow-hidden bg-background"
-    >
-      {/* Background Enhancements */}
+    <section id="alumni" className="py-16 md:py-24 bg-background overflow-hidden relative">
+      {/* Background Enhancements to match existing website design system */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
       
       <div className="section-divider" />
-      <div className="max-w-7xl mx-auto relative z-10 px-4">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="Placement Stories"
-            title="Nxt Gen Voices That Inspire Us"
-            subtitle="Early feedback from active learners experiencing the value of our hands-on training and expert mentorship."
-          />
-          
-          <ScrollReveal direction="up" delay={200}>
-            <div className="flex items-center gap-3 shrink-0 mb-2">
-              <button
-                type="button"
-                onClick={() => handleScroll(-1)}
-                className="h-12 w-12 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
-                aria-label="Scroll testimonials left"
-              >
-                <ArrowLeft className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
-              </button>
-              <button
-                type="button"
-                onClick={() => handleScroll(1)}
-                className="h-12 w-12 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 text-foreground flex items-center justify-center transition-all duration-300 cursor-pointer shadow-sm group"
-                aria-label="Scroll testimonials right"
-              >
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            </div>
-          </ScrollReveal>
+
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 mb-12">
+        <SectionHeading
+          eyebrow="Student Testimonials"
+          title="What Our learners Say About NxtGen Academy"
+          subtitle="Real stories from professionals who transformed their careers through our programs."
+          align="center"
+        />
+      </div>
+
+      {/* Row 1: Left moving marquee */}
+      <div className="relative mb-6">
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        
+        {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
+        <div className="flex animate-marquee-left hover:[animation-play-state:paused]">
+          {/* Loop 1: First 5 cards (with right margin padding equal to standard card gaps) */}
+          <div className="flex gap-6 flex-shrink-0 pr-6">
+            {row1Items.map((item, idx) => renderCard(item, `row1-loop1-${idx}`))}
+          </div>
+          {/* Loop 2: Duplicate 5 cards to provide the seamless reset loop */}
+          <div className="flex gap-6 flex-shrink-0 pr-6">
+            {row1Items.map((item, idx) => renderCard(item, `row1-loop2-${idx}`))}
+          </div>
         </div>
+      </div>
 
-        <ScrollReveal direction="fade" delay={400}>
-          <div
-            ref={trackRef}
-            className="mt-10 flex gap-6 overflow-x-auto pt-6 pb-8 scroll-smooth snap-x snap-mandatory hide-scrollbar"
-          >
-            {testimonials.map((person, index) => {
-              const accentClass = ACCENTS[index % ACCENTS.length];
-              return (
-                <Card
-                  key={`${person.name}-${index}`}
-                  className="min-w-[300px] max-w-[300px] sm:min-w-[340px] sm:max-w-[340px] snap-start rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden gap-0 hover:border-white/20 hover:-translate-y-1 transition-[border-color,transform] duration-300 group py-0 translate-z-0 relative"
-                >
-                  {/* Spotlight gradient effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-0" />
-                  
-                  <CardContent className="p-0 flex flex-col justify-between h-full relative z-10">
-                    <div>
-                      <div className="relative h-64 overflow-hidden border-b border-white/5 bg-white/[0.02]">
-                        {person.image ? (
-                          <img
-                            src={person.image}
-                            alt={person.name}
-                            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                          />
-                        ) : (
-                          <div className={`h-full w-full grid place-items-center text-3xl font-heading font-medium text-foreground bg-gradient-to-br ${accentClass.split(' ')[0]} ${accentClass.split(' ')[1]} ${accentClass.split(' ')[2]}`}>
-                            {getInitials(person.name)}
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent z-10 pointer-events-none" />
-                      </div>
-                      
-                      <div className="px-6 pb-6 pt-6 relative z-20">
-                        <div className="font-heading font-medium text-lg text-foreground line-clamp-1 group-hover:text-primary transition-colors">
-                          {person.name}
-                        </div>
-                        <div className="text-sm font-medium text-muted-foreground line-clamp-1 mt-1">
-                          {person.role}
-                        </div>
-                        <div className="mt-4 flex items-center justify-between gap-2 border-b border-white/5 pb-4">
-                          <div className="inline-flex items-center rounded-md border border-white/10 bg-white/[0.03] backdrop-blur-md px-2 py-1 text-[10px] font-mono uppercase tracking-[0.1em] text-foreground/80 truncate max-w-[150px]">
-                            {person.course.replace(/ - testimonials| - DCS| – testimonials/i, "")}
-                          </div>
-                          <div className="flex gap-0.5 text-amber-400 text-sm shrink-0 drop-shadow-sm">
-                            {Array.from({ length: person.rating || 5 }).map((_, i) => (
-                              <span key={i}>★</span>
-                            ))}
-                          </div>
-                        </div>
+      {/* Row 2: Right moving marquee */}
+      <div className="relative">
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        
+        {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
+        <div className="flex animate-marquee-right hover:[animation-play-state:paused]">
+          {/* Loop 1: First 5 cards */}
+          <div className="flex gap-6 flex-shrink-0 pr-6">
+            {row2Items.map((item, idx) => renderCard(item, `row2-loop1-${idx}`))}
+          </div>
+          {/* Loop 2: Duplicate 5 cards */}
+          <div className="flex gap-6 flex-shrink-0 pr-6">
+            {row2Items.map((item, idx) => renderCard(item, `row2-loop2-${idx}`))}
+          </div>
+        </div>
+      </div>
 
-                        <p className="mt-5 text-sm leading-relaxed text-foreground/80 line-clamp-4 min-h-[80px] italic">
-                          "{person.message}"
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+      {/* Stats Counter Section */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
+        <ScrollReveal direction="up" delay={100} duration={500}>
+          <div className="bg-card/30 rounded-lg md:rounded-xl border border-border/50 py-8 px-6 backdrop-blur-sm shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-border/50">
+              <div className="text-center">
+                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                  <span>1200+</span>
+                </p>
+                <p className="text-muted-foreground text-sm">Alumni Placed</p>
+              </div>
+              <div className="text-center">
+                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                  <span>95%</span>
+                </p>
+                <p className="text-muted-foreground text-sm">Placement Rate</p>
+              </div>
+              <div className="text-center">
+                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                  <span>150+</span>
+                </p>
+                <p className="text-muted-foreground text-sm">Hiring Partners</p>
+              </div>
+              <div className="text-center">
+                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                  <span>67%</span>
+                </p>
+                <p className="text-muted-foreground text-sm">Avg. Salary Hike</p>
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </div>

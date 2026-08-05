@@ -34,7 +34,7 @@ export default function Home() {
       <Projects />
       <AlumniNetwork />
       <Curriculum />
-      <Pricing />
+      {/* <Pricing /> */}
       <FAQ />
       <FinalCTA />
       <Footer />

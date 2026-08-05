@@ -54,6 +54,18 @@
   --color-chart-1: var(--chart-1);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --animate-marquee-left: marquee-horizontal-left 20s linear infinite;
+  --animate-marquee-right: marquee-horizontal-right 20s linear infinite;
+
+  @keyframes marquee-horizontal-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-horizontal-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
 }
 
 :root {

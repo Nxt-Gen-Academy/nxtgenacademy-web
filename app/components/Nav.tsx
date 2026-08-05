@@ -18,7 +18,7 @@ export default function Nav() {
       setIsScrolled(window.scrollY > 50);
 
       // Simple active section tracking
-      const sections = ["programs", "why", "projects", "pricing", "faq"];
+      const sections = ["programs", "why", "projects", "alumni", "faq"];
       let current = "";
       
       for (const section of sections) {
@@ -42,7 +42,7 @@ export default function Nav() {
     { href: "/#programs", label: "Programs" },
     { href: "/#why", label: "Why Us" },
     { href: "/#projects", label: "Projects" },
-    { href: "/#pricing", label: "Pricing" },
+    { href: "/#alumni", label: "Alumni" },
     { href: "/#faq", label: "FAQ" },
   ];
 
