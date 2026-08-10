@@ -7,7 +7,6 @@ const WORD2 = "Academy";
 const STAGGER = 45;
 const CHAR_ANIM = 650;
 const WORD2_OFFSET = WORD1.length * STAGGER + 120;
-const TOTAL_CHARS = WORD1.length + WORD2.length;
 const ALL_IN = WORD2_OFFSET + (WORD2.length - 1) * STAGGER + CHAR_ANIM;
 const HOLD = 450;
 const TEXT_EXIT_DURATION = 850;
@@ -18,20 +17,30 @@ type Phase = "pending" | "reveal" | "hold" | "text-exit" | "bg-exit" | "done";
 export default function IntroReveal() {
   const [phase, setPhase] = useState<Phase>("pending");
 
+  // Manage body scroll-lock declaratively based on animation phase
+  useEffect(() => {
+    if (phase !== "done" && phase !== "pending") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [phase]);
+
   useEffect(() => {
     // Respect reduced motion — skip animation
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setPhase("done");
+      requestAnimationFrame(() => setPhase("done"));
       return;
     }
 
     if (sessionStorage.getItem("introPlayed")) {
-      setPhase("done");
+      requestAnimationFrame(() => setPhase("done"));
       return;
     }
     sessionStorage.setItem("introPlayed", "true");
-
-    document.body.style.overflow = "hidden";
 
     const t0 = setTimeout(() => setPhase("reveal"), 60);
     const t1 = setTimeout(() => setPhase("hold"), 60 + ALL_IN);
@@ -39,12 +48,10 @@ export default function IntroReveal() {
     const t3 = setTimeout(() => setPhase("bg-exit"), 60 + ALL_IN + HOLD + TEXT_EXIT_DURATION);
     const t4 = setTimeout(() => {
       setPhase("done");
-      document.body.style.overflow = "";
     }, 60 + ALL_IN + HOLD + TEXT_EXIT_DURATION + BG_EXIT_DURATION + 80);
 
     return () => {
-      [t0, t1, t2, t3, t4].forEach(clearTimeout);
-      document.body.style.overflow = "";
+      [t0, t1, t2, t3, t4].forEach((t) => clearTimeout(t));
     };
   }, []);
 
