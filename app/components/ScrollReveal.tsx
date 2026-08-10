@@ -37,27 +37,32 @@ export default function ScrollReveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Unobserve once revealed to keep it visible
           if (currentRef) observer.unobserve(currentRef);
         }
       },
       {
         root: null,
-        rootMargin: "0px",
-        threshold,
+        rootMargin: "100px 0px 100px 0px",
+        threshold: 0.01,
       }
     );
 
     if (currentRef) {
-      observer.observe(currentRef);
+      // Immediate viewport check for Firefox/Safari initial render
+      const rect = currentRef.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+        setIsVisible(true);
+      } else {
+        observer.observe(currentRef);
+      }
     }
 
-    // Safety fallback: if IntersectionObserver hasn't fired after 4s,
+    // Safety fallback: if IntersectionObserver hasn't fired after 1s,
     // reveal content anyway. Prevents permanently invisible content
-    // on browsers with IntersectionObserver edge cases (e.g. Safari).
+    // on browsers with IntersectionObserver edge cases (e.g. Firefox/Safari).
     const fallbackTimer = setTimeout(() => {
       setIsVisible(true);
-    }, 4000);
+    }, 1000);
 
     return () => {
       if (currentRef) {
