@@ -19,7 +19,7 @@ import ROICalculatorSection from "@/components/sections/roi-calculator-section";
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground noise overflow-x-hidden">
+    <div className="bg-background text-foreground noise overflow-x-clip">
       <Nav />
       <Hero />
       <Trust />

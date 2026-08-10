@@ -86,8 +86,8 @@ export default function ROICalculatorSection() {
     <section id="roi-calculator" className="py-24 md:py-32 relative overflow-hidden bg-background">
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
-      <div className="absolute top-[30%] left-[20%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[140px] -z-10 mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] bg-accent/10 rounded-full blur-[155px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-[30%] left-[20%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[140px] -z-10 pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] bg-accent/10 rounded-full blur-[155px] -z-10 pointer-events-none" />
 
       <div className="section-divider mb-8" />
 
