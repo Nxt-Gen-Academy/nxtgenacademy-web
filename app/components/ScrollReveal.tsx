@@ -29,7 +29,7 @@ export default function ScrollReveal({
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
-      setIsVisible(true);
+      requestAnimationFrame(() => setIsVisible(true));
       return;
     }
 
@@ -59,7 +59,7 @@ export default function ScrollReveal({
     };
   }, [threshold]);
 
-  const baseClasses = "transition-all ease-out will-change-transform";
+  const baseClasses = "transition-all ease-out";
   
   const initialStyles = {
     up: "opacity-0 translate-y-12",
