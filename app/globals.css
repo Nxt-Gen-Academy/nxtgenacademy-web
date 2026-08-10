@@ -126,7 +126,6 @@
   }
   html {
     scroll-behavior: smooth;
-    overflow-x: clip;
     @apply font-sans;
   }
   body {
@@ -135,7 +134,6 @@
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
-    overflow-x: clip;
     @apply bg-background text-foreground;
   }
   h1, h2, h3, h4, h5 {
@@ -191,11 +189,13 @@
   }
   .noise {
     position: relative;
+    isolation: isolate;
   }
   .noise::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: -1;
     pointer-events: none;
     opacity: 0.02;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjAnIGhlaWdodD0nMTIwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9JzAuOScgLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbiknLz48L3N2Zz4=");

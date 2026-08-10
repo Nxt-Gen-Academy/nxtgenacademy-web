@@ -50,10 +50,10 @@ export default function Nav() {
     <>
       <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "pt-2" : "pt-4"}`}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className={`transition-all duration-300 rounded-2xl px-5 py-3 flex items-center justify-between ${
+          <div className={`transition-all duration-300 rounded-2xl px-5 py-3 flex items-center justify-between border ${
             isScrolled 
-              ? "glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-background/70" 
-              : "bg-transparent"
+              ? "bg-background/80 backdrop-blur-xl border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.37)]" 
+              : "bg-background/40 backdrop-blur-md border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
           }`}>
             <Link href="/" className="flex items-center gap-2 group">
               <div className="rounded-lg grid place-items-center transition-all duration-300 group-hover:scale-105">

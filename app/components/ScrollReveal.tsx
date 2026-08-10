@@ -52,10 +52,18 @@ export default function ScrollReveal({
       observer.observe(currentRef);
     }
 
+    // Safety fallback: if IntersectionObserver hasn't fired after 4s,
+    // reveal content anyway. Prevents permanently invisible content
+    // on browsers with IntersectionObserver edge cases (e.g. Safari).
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 4000);
+
     return () => {
       if (currentRef) {
         observer.unobserve(currentRef);
       }
+      clearTimeout(fallbackTimer);
     };
   }, [threshold]);
 
