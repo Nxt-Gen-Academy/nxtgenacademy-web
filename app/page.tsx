@@ -11,11 +11,11 @@ import Hero from "./components/Hero";
 import Journey from "./components/Journey";
 import Nav from "./components/Nav";
 import OutcomeRecipe from "./components/OutcomeRecipe";
-import Pricing from "./components/Pricing";
 import Programs from "./components/Programs";
 import Projects from "./components/Projects";
 import Trust from "./components/Trust";
 import WhyUs from "./components/WhyUs";
+import ROICalculatorSection from "@/components/sections/roi-calculator-section";
 
 export default function Home() {
   return (
@@ -24,6 +24,7 @@ export default function Home() {
       <Hero />
       <Trust />
       <Accreditations />
+      <ROICalculatorSection />
       <OutcomeRecipe />
       <Programs />
       <WhyUs />
@@ -41,4 +42,5 @@ export default function Home() {
     </div>
   );
 }
+
 
