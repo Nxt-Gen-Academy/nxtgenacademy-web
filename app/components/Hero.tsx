@@ -16,6 +16,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import SignUpForm from "./SignUpForm";
 import { authClient } from "@/lib/auth-client";
 import HeroParallaxCard from "./HeroParallaxCard";
+import BackgroundVideo from "./BackgroundVideo";
 
 const stats = [
   { label: "Companies Hiring", value: "800+", icon: Building2 },
@@ -60,15 +61,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative pt-36 pb-24 px-4 overflow-hidden">
-      <video
-        autoPlay
-        loop
-        muted={true}
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0 opacity-75"
-      >
-        <source src="/hero_bg_video.mp4" type="video/mp4" />
-      </video>
+      <BackgroundVideo />
       <div className="absolute inset-0 bg-background/85 z-0" />
       <div className="absolute inset-0 grid-pattern opacity-30 z-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-0 pointer-events-none" />
