@@ -65,9 +65,9 @@ export default function Hero() {
         loop
         muted={true}
         playsInline
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0 opacity-75"
+        className="absolute left-1/2 top-1/2 w-[70%] -translate-x-1/2 -translate-y-1/2 aspect-video object-cover pointer-events-none z-0 opacity-75"
       >
-        <source src="/hero_bg_video.mp4" type="video/mp4" />
+        <source src="/video.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-background/85 z-0" />
       <div className="absolute inset-0 grid-pattern opacity-30 z-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
