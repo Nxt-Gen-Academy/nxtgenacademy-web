@@ -1,5 +1,4 @@
 import Image from "next/image";
-import BackgroundVideo from "./BackgroundVideo";
 import SectionHeading from "./SectionHeading";
 import { Card, CardContent } from "@/components/ui/card";
 import ScrollReveal from "./ScrollReveal";
@@ -16,10 +15,8 @@ const referralLogos = [
 export default function OutcomeRecipe() {
   return (
     <section id="recipe" className="py-32 relative overflow-hidden bg-background">
-      <BackgroundVideo />
-      <div className="absolute inset-0 bg-background/85 z-0" />
       {/* Background Enhancements */}
-      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none z-0 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="section-divider" />
       
