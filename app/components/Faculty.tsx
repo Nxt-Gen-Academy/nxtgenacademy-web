@@ -7,28 +7,28 @@ import ScrollReveal from "./ScrollReveal";
 const facultyMembers = [
   {
     name: "Aditya Verma",
-    role: "Business analyst",
+    role: "Product Manager",
     image: "/mentors/aditya_verma.jpg",
     company: "Razorpay",
     companyLogo: "/logos/barclays.svg",
   },
   {
     name: "Vishal Sharma",
-    role: "Data analyst",
+    role: "Group Product Manager",
     image: "/mentors/vishal_sharma.jpg",
     company: "Zepto",
     companyLogo: "/logos/zepto.svg",
   },
   {
     name: "Rahul Jaiswal",
-    role: "Associate Product Manager",
+    role: "SDE III",
     image: "/mentors/rahul_jaisawal.jpg",
     company: "BOSCH",
     companyLogo: "/logos/ducat.svg",
   },
   {
     name: "Rohit Sen",
-    role: "Senior Software Engineer",
+    role: "Principle Product Manager",
     image: "/mentors/rohit_sen.jpg",
     company: "Adobe",
     companyLogo: "/logos/microsoft.svg",
@@ -70,7 +70,7 @@ export default function Faculty() {
   return (
     <section
       id="faculty"
-      className="py-32 relative overflow-hidden bg-background"
+      className="py-12 relative overflow-hidden"
     >
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />

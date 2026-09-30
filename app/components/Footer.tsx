@@ -4,7 +4,7 @@ import { LiaLinkedin, LiaInstagram, LiaYoutube } from "react-icons/lia";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border/50 bg-background overflow-hidden">
+    <footer className="relative border-t border-border/50 overflow-hidden">
       {/* Subtle top gradient */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50" />
       

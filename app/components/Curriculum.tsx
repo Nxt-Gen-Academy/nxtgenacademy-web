@@ -45,7 +45,7 @@ const stacks = [
 
 export default function Curriculum() {
   return (
-    <section id="curriculum" className="py-32 relative overflow-hidden bg-background">
+    <section id="curriculum" className="py-12 relative overflow-hidden">
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
