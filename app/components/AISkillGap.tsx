@@ -64,7 +64,7 @@ export default function AISkillGap() {
   };
 
   return (
-    <section id="skill-gap" className="py-12 relative overflow-hidden">
+    <section id="skill-gap" className="py-12 relative overflow-hidden bg-background">
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />

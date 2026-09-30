@@ -16,13 +16,10 @@ import Projects from "./components/Projects";
 import Trust from "./components/Trust";
 import WhyUs from "./components/WhyUs";
 import ROICalculatorSection from "@/components/sections/roi-calculator-section";
-import SectionBackgroundVideo from "./components/SectionBackgroundVideo";
 
 export default function Home() {
   return (
-    <div className="relative text-foreground noise overflow-x-clip">
-      <SectionBackgroundVideo />
-      <div className="relative z-10">
+    <div className="bg-background text-foreground noise overflow-x-clip">
       <Nav />
       <Hero />
       <Trust />
@@ -42,9 +39,6 @@ export default function Home() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      </div>
     </div>
   );
 }
-
-

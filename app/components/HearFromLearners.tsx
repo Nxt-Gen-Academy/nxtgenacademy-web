@@ -122,7 +122,7 @@ export default function HearFromLearners() {
   return (
     <section
       id="learners"
-      className="py-12 relative overflow-hidden"
+      className="py-12 relative overflow-hidden bg-background"
     >
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
@@ -140,11 +140,6 @@ export default function HearFromLearners() {
 
         {/* 3-Column Vertical Marquee Container */}
         <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md p-6 md:p-8 shadow-2xl">
-          
-          {/* Top/Bottom Fade Gradients matching page dark background */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background via-background/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background via-background/80 to-transparent z-10" />
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
             
             {/* Column 1 */}

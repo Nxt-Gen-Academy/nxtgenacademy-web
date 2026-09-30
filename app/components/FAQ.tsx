@@ -180,7 +180,7 @@ export default function FAQ() {
   const visibleQs = showAll ? qs : qs.slice(0, INITIAL_VISIBLE);
 
   return (
-    <section id="faq" className="py-12 relative overflow-hidden">
+    <section id="faq" className="py-12 relative overflow-hidden bg-background">
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[30%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
