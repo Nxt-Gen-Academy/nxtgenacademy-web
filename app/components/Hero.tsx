@@ -59,7 +59,17 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="top" className="relative pt-36 pb-10 px-4 overflow-hidden">
+    <section id="top" className="relative pt-36 pb-10 px-4 overflow-hidden h-screen">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0 opacity-75"
+      >
+        <source src="/hero_bg_video.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-background/85 z-0" />
       <div className="absolute inset-0 grid-pattern opacity-30 z-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto">

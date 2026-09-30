@@ -5,7 +5,7 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function FinalCTA() {
   return (
-    <section id="cta" className="py-10 px-4 pb-12 relative overflow-hidden">
+    <section id="cta" className="py-10 px-4 pb-12 relative">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up">
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] text-left group min-h-[400px]">
