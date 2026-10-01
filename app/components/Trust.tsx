@@ -50,7 +50,7 @@ const row3 = [
 
 export default function Trust() {
   return (
-    <section className="py-10 relative overflow-hidden bg-background">
+    <section className="py-12 relative overflow-hidden bg-background">
       {/* Ambient background glows */}
       <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10 -translate-y-1/2 pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] -z-10 -translate-y-1/2 pointer-events-none" />

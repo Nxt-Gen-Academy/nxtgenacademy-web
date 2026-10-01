@@ -14,7 +14,7 @@ const list = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-12 relative overflow-hidden bg-background">
+    <section id="projects" className="py-16 relative overflow-hidden bg-background">
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />

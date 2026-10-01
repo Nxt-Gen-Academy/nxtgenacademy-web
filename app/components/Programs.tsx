@@ -79,7 +79,7 @@ export default function Programs() {
   return (
     <section
       id="programs"
-      className="py-12 relative overflow-hidden bg-background"
+      className="py-16 relative overflow-hidden bg-background"
     >
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />

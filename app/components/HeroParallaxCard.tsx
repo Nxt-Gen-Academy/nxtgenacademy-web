@@ -56,11 +56,11 @@ const badges = [
 
 /* ─────────────────── position map ─────────────────── */
 const positionStyles: Record<string, string> = {
-  "top-left": "top-[-18px] left-[-20px]",
-  "top-right": "top-[40px] right-[-30px]",
-  "bottom-left": "bottom-[-24px] left-[-26px]",
-  "bottom-right": "bottom-[-28px] right-[-16px]",
-  "mid-right": "top-[50%] right-[-40px] -translate-y-1/2",
+  "top-left": "top-2 left-2 sm:top-[-18px] sm:left-[-20px]",
+  "top-right": "top-10 right-2 sm:top-[40px] sm:right-[-30px]",
+  "bottom-left": "bottom-2 left-2 sm:bottom-[-24px] sm:left-[-26px]",
+  "bottom-right": "bottom-2 right-2 sm:bottom-[-28px] sm:right-[-16px]",
+  "mid-right": "top-[42%] right-2 sm:top-[50%] sm:right-[-40px] -translate-y-1/2",
 };
 
 /* idle floating delays per badge index */
@@ -173,7 +173,7 @@ export default function HeroParallaxCard() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-[460px] mx-auto"
+      className="relative w-full max-w-[380px] sm:max-w-[460px] mx-auto px-1 pt-4 pb-8 sm:px-10 sm:pt-8 sm:pb-12"
       style={{
         perspective: animationDisabled ? "none" : "800px",
       }}
@@ -196,7 +196,7 @@ export default function HeroParallaxCard() {
         <div className="absolute bottom-0 right-0 w-48 h-48 bg-[oklch(0.78_0.18_245/0.08)] rounded-full blur-3xl" />
 
         {/* Card inner content */}
-        <div className="relative z-10 p-8 sm:p-10 flex flex-col items-center min-h-[420px] justify-center gap-6">
+        <div className="relative z-10 p-6 sm:p-10 flex flex-col items-center min-h-[340px] sm:min-h-[420px] justify-center gap-5 sm:gap-6">
           {/* Logo */}
           <div className="relative">
             <Image
