@@ -59,7 +59,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="top" className="relative pt-36 pb-10 px-4 overflow-hidden h-screen">
+    <section id="top" className="relative min-h-svh flex flex-col pt-28 pb-10 px-4 overflow-hidden">
       <video
         autoPlay
         loop
@@ -72,13 +72,13 @@ export default function Hero() {
       <div className="absolute inset-0 bg-background/85 z-0" />
       <div className="absolute inset-0 grid-pattern opacity-30 z-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
         {/* Decorative Ambient Glows */}
         <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/15 blur-[120px] pointer-events-none" />
 
         {/* ── Two-Column Hero Layout ── */}
-        <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+        <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-start lg:items-center">
           {/* ── LEFT COLUMN: Content ── */}
           <div className="max-w-2xl">
             {/* Eyebrow */}
@@ -170,7 +170,7 @@ export default function Hero() {
           </div>
 
           {/* ── RIGHT COLUMN: 3D Parallax Card ── */}
-          <div className="w-full flex justify-center lg:block mt-12 lg:mt-0">
+          <div className="w-full flex justify-center lg:block mt-8 lg:mt-0 shrink-0">
             <HeroParallaxCard />
           </div>
         </div>
