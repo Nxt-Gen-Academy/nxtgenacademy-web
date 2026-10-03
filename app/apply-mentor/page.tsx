@@ -184,7 +184,7 @@ export default function ApplyMentorPage() {
 
   const mutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await axios.post("/api/api-mentor", data);
+      const response = await axios.post("/api/apply-mentor", data);
       return response.data;
     },
     onSuccess: () => {

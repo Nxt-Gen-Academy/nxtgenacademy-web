@@ -2,38 +2,38 @@ import { PrismaClient } from "./generated/prisma";
 import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+const globalForPrisma = globalThis as unknown as {
+  prisma?: PrismaClient;
+  pgPool?: pg.Pool;
+};
 
-let prismaInstance: PrismaClient;
+function createPrisma() {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    throw new Error("DATABASE_URL is not set");
+  }
 
-if (typeof window === "undefined") {
-  const pool = new pg.Pool({
-    connectionString: process.env.DATABASE_URL,
-    stream: () => {
-      const net = require("net");
-      const socket = new net.Socket();
-      const originalConnect = socket.connect;
-      socket.connect = function (options: any, cb?: any) {
-        if (typeof options === "object") {
-          options.autoSelectFamily = false;
-          return originalConnect.call(this, options, cb);
-        } else {
-          return originalConnect.call(this, {
-            port: options,
-            host: cb,
-            autoSelectFamily: false,
-          });
-        }
-      };
-      return socket;
-    },
-  });
-  const adapter = new PrismaPg(pool);
-  prismaInstance = globalForPrisma.prisma || new PrismaClient({ adapter });
-  if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prismaInstance;
-} else {
-  prismaInstance = null as any;
+  const pool =
+    globalForPrisma.pgPool ??
+    new pg.Pool({
+      connectionString,
+      ssl: { rejectUnauthorized: false },
+      max: 5,
+      connectionTimeoutMillis: 10_000,
+      idleTimeoutMillis: 30_000,
+    });
+
+  if (process.env.NODE_ENV !== "production") {
+    globalForPrisma.pgPool = pool;
+  }
+
+  return new PrismaClient({ adapter: new PrismaPg(pool) });
 }
 
-export const prisma = prismaInstance;
+export const prisma = globalForPrisma.prisma ?? createPrisma();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
+
 export { PrismaClient };
