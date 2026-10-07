@@ -60,22 +60,23 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative min-h-svh flex flex-col pt-28 pb-10 px-4 overflow-hidden">
+      {/* Background Video */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0 opacity-75"
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0"
       >
-        <source src="/hero_bg_video.mp4" type="video/mp4" />
+        <source src="/hero_bg_new.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-background/85 z-0" />
-      <div className="absolute inset-0 grid-pattern opacity-30 z-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+
+      {/* Neutral black backdrop overlay over the video */}
+      <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-0 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
-        {/* Decorative Ambient Glows */}
-        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/15 blur-[120px] pointer-events-none" />
 
         {/* ── Two-Column Hero Layout ── */}
         <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-start lg:items-center">
@@ -88,13 +89,13 @@ export default function Hero() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="hero-headline font-heading leading-[1.08] font-extrabold tracking-[-0.02em] text-foreground">
+            <h1 className="hero-headline font-heading leading-[1.08] font-extrabold tracking-[-0.02em] text-foreground drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
               <span className="block">Build your career in</span>
               <span className="hero-accent-text block text-primary pb-2">AI &amp; Analytics</span>
             </h1>
 
             {/* Subheading */}
-            <p className="hero-subheading mt-7 text-muted-foreground leading-[1.6] max-w-[480px]">
+            <p className="hero-subheading mt-7 text-muted-foreground leading-[1.6] max-w-[480px] drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
               Equip yourself with the tools, projects, and mentorship needed to land high-paying roles. Join our expert-led cohorts today.
             </p>
 
