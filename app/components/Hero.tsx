@@ -73,7 +73,7 @@ export default function Hero() {
       </video>
 
       {/* Neutral black backdrop overlay over the video */}
-      <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/70 z-0 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-0 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
