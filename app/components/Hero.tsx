@@ -69,7 +69,7 @@ export default function Hero() {
         preload="auto"
         className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0"
       >
-        <source src="/hero_bg_new.mp4" type="video/mp4" />
+        <source src="/neon_hero_bg.mp4" type="video/mp4" />
       </video>
 
       {/* Neutral black backdrop overlay over the video */}
