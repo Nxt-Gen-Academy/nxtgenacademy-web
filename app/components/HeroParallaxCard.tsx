@@ -202,9 +202,9 @@ export default function HeroParallaxCard() {
             <Image
               src="/logo.png"
               alt="NxtGen Academy"
-              width={120}
-              height={40}
-              className="brightness-110"
+              width={90}
+              height={90}
+              className="h-20 w-20 sm:h-24 sm:w-24 object-contain rounded-2xl shadow-[0_8px_30px_oklch(0.583_0.222_258.6/0.3)] brightness-105"
             />
           </div>
 

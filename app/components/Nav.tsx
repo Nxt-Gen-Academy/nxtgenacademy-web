@@ -48,9 +48,9 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "pt-2" : "pt-4"}`}>
+      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? "pt-1.5" : "pt-2.5"}`}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className={`transition-all duration-300 rounded-2xl px-5 py-3 flex items-center justify-between border ${
+          <div className={`transition-all duration-300 rounded-2xl px-4 sm:px-5 py-2 flex items-center justify-between border ${
             isScrolled 
               ? "bg-background/80 backdrop-blur-xl border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.37)]" 
               : "bg-background/40 backdrop-blur-md border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
@@ -60,10 +60,10 @@ export default function Nav() {
                 <Image
                   src="/logo.png"
                   alt="logo"
-                  width={140}
-                  height={140}
+                  width={44}
+                  height={44}
                   priority
-                  className={`transition-all duration-300 ${isScrolled ? "w-[90px] h-auto" : "w-[140px] h-auto"}`}
+                  className={`transition-all duration-300 object-contain rounded-lg ${isScrolled ? "h-8 w-auto sm:h-8.5" : "h-9 w-auto sm:h-10"}`}
                 />
               </div>
             </Link>
@@ -86,21 +86,21 @@ export default function Nav() {
               <div className="hidden lg:flex items-center gap-3">
                 <Link
                   href="/apply-mentor"
-                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2.5 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all`}
+                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all`}
                 >
                   Apply as Mentor
                 </Link>
                 {session?.user && (
                   <Link
                     href="/dashboard"
-                    className={`${buttonVariants({ variant: "outline" })} rounded-xl px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground border-border/80 transition-all`}
+                    className={`${buttonVariants({ variant: "outline" })} rounded-xl px-4 py-2 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground border-border/80 transition-all`}
                   >
                     Go to Dashboard
                   </Link>
                 )}
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className={`${buttonVariants()} rounded-xl bg-foreground text-background px-5 py-2.5 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.62_0.22_258/0.4)] transition-all group/button border-0`}
+                  className={`${buttonVariants()} rounded-xl bg-foreground text-background px-4.5 py-2 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.4)] transition-all group/button border-0`}
                 >
                   Apply{" "}
                   <ArrowUpRight className="h-4 w-4 ml-1 group-hover/button:rotate-45 transition-transform" />

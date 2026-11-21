@@ -58,7 +58,7 @@ export default function Trust() {
       <div className="max-w-7xl mx-auto px-4 relative z-20">
         <ScrollReveal direction="up">
           <div className="flex justify-center mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary backdrop-blur-md shadow-[0_0_20px_oklch(0.58_0.20_255/0.15)]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary backdrop-blur-md shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.15)]">
               <span className="font-semibold text-primary/90">Trusted by Industry Leaders</span>
             </div>
           </div>

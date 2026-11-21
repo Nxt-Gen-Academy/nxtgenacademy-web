@@ -1,41 +1,111 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
+import Image from "next/image";
+import { Laptop, Layers, Users, Briefcase, ChevronRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
+const pillars = [
+  { label: "Live Programs", icon: Laptop },
+  { label: "Real Projects", icon: Layers },
+  { label: "1:1 Mentorship", icon: Users },
+  { label: "Placement Support", icon: Briefcase },
+];
+
 export default function FinalCTA() {
+  const handleOpenSignup = () => {
+    window.dispatchEvent(new CustomEvent("open-signup-dialog"));
+  };
+
   return (
-    <section id="cta" className="py-14 px-4 pb-16 relative">
+    <section id="cta" className="py-10 sm:py-16 px-4 relative">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up">
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] text-left group min-h-[400px]">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/40 sm:border-white/20 shadow-xl text-left w-full min-h-[410px] sm:min-h-[390px] md:min-h-0 md:aspect-[2170/725]">
+            {/* Background Image: Fits aspect ratio with smooth responsive positioning */}
+            <Image
+              src="/final_cta.jpg"
+              alt="Career Transformation with AI + Business + Technology"
+              fill
+              priority
+              className="object-cover object-[65%_center] sm:object-center pointer-events-none select-none"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1152px"
+            />
 
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/final_cta.jpg"
-                alt="Start your journey"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Content */}
-            <div className="relative z-10 p-10 sm:p-14 md:p-16 flex flex-col justify-center w-full max-w-2xl h-full min-h-[400px]">
-              <h2 className="font-heading text-[clamp(2rem,4vw,3rem)] leading-[1.1] font-medium text-foreground mb-6 max-w-xl">
-                Take First Step Towards Your AI Career Before It's Too Late
-              </h2>
+            {/* Subtle soft gradient overlay on mobile for enhanced legibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent pointer-events-none md:hidden" />
 
-              <p className="text-sm md:text-base text-muted-foreground mb-10 max-w-lg leading-relaxed font-medium">
-                Join 12,700+ professionals who've accelerated their careers through mentor-led, job-focused AI upskilling
-              </p>
+            {/* Content Layer */}
+            <div className="relative z-10 w-full h-full p-5 sm:p-7 md:p-9 lg:p-12 flex flex-col justify-center">
+              <div className="flex flex-col md:flex-row md:items-center gap-4 sm:gap-6 lg:gap-8 max-w-full md:max-w-[72%] lg:max-w-[70%]">
+                
+                {/* Left: Brand Logo, Apply Now Primary Button & Divider */}
+                <div className="flex items-center gap-4 lg:gap-6 shrink-0">
+                  <div className="flex flex-col items-start gap-2.5 sm:gap-3 w-[150px] sm:w-[165px] md:w-[175px] lg:w-[200px] shrink-0">
+                    <Image
+                      src="/logo_banner_tight.png"
+                      alt="NxtGen Academy"
+                      width={250}
+                      height={60}
+                      priority
+                      className="w-full h-auto object-contain"
+                    />
+                    
+                    {/* Primary Apply Now Button below Logo */}
+                    <button
+                      type="button"
+                      onClick={handleOpenSignup}
+                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground shadow-md shadow-primary/20 transition-colors duration-200 hover:bg-primary/90 cursor-pointer active:scale-[0.98]"
+                    >
+                      <span>Apply Now</span>
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
 
-              <div>
-                <button
-                  type="button"
-                  onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className="rounded-xl px-8 py-6 h-auto text-base font-semibold transition-all duration-300 border-0 cursor-pointer w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_oklch(0.62_0.22_258/0.3)] hover:shadow-[0_0_30px_oklch(0.62_0.22_258/0.5)] hover:-translate-y-0.5"
-                >
-                  Start Your AI Career Journey
-                </button>
+                  <div className="hidden md:block w-px h-24 lg:h-32 bg-slate-300/80 shrink-0" />
+                </div>
+
+                {/* Center: Headlines, Tagline, and Pillars */}
+                <div className="flex flex-col justify-center flex-1 min-w-0">
+                  {/* Headings */}
+                  <div className="space-y-0.5 sm:space-y-1">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-[#00164e] tracking-tight">
+                      Career Transformation with
+                    </p>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-black text-primary tracking-tight leading-tight">
+                      AI + Business + Technology
+                    </h2>
+                    <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 text-[11px] sm:text-xs md:text-sm font-bold text-[#00164e] pt-0.5">
+                      <span>Learn</span>
+                      <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary stroke-[3]" />
+                      <span>Build</span>
+                      <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary stroke-[3]" />
+                      <span>Practice</span>
+                      <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary stroke-[3]" />
+                      <span>Get Hired™</span>
+                    </div>
+                  </div>
+
+                  {/* 4 Feature Pillars: 2x2 frosted glass pills on mobile, 4-col divided row on desktop */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-0 sm:divide-x sm:divide-slate-300/80 pt-3 sm:pt-4 lg:pt-5 mt-2 sm:mt-3 lg:mt-4 max-w-xl">
+                    {pillars.map((p, idx) => {
+                      const Icon = p.icon;
+                      return (
+                        <div
+                          key={p.label}
+                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white/70 backdrop-blur-xs border border-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:bg-transparent sm:border-0 sm:shadow-none sm:backdrop-blur-none sm:flex-col sm:justify-center sm:text-center ${
+                            idx === 0 ? "sm:pr-3" : "sm:px-3"
+                          }`}
+                        >
+                          <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 text-primary sm:text-[#2d304a] stroke-[2] sm:stroke-[1.75] shrink-0" />
+                          <span className="text-[11px] sm:text-[10px] md:text-xs font-semibold text-slate-800 sm:text-[#2d304a] sm:mt-1 whitespace-nowrap">
+                            {p.label}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
               </div>
             </div>
 

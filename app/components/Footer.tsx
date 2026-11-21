@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="flex items-center gap-2 mb-6">
               <div className="rounded-lg bg-transparent">
-                <Image src="/logo.png" alt="logo" width={140} height={40} className="h-auto w-[140px]" />
+                <Image src="/logo.png" alt="NxtGen Academy" width={100} height={100} className="h-16 w-16 sm:h-20 sm:w-20 object-contain rounded-2xl shadow-md" />
               </div>
             </div>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed font-medium">

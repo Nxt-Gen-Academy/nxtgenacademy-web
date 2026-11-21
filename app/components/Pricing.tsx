@@ -79,7 +79,7 @@ export default function Pricing() {
               <Card
                 className={`relative rounded-3xl p-8 flex flex-col justify-between gap-0 overflow-visible h-full transition-all duration-500 hover:-translate-y-1 group ${
                   pl.featured 
-                    ? "bg-white/[0.04] border border-primary/30 z-10 shadow-[0_20px_40px_-15px_oklch(0.62_0.22_258/0.3)] backdrop-blur-lg" 
+                    ? "bg-white/[0.04] border border-primary/30 z-10 shadow-[0_20px_40px_-15px_oklch(0.583_0.222_258.6/0.3)] backdrop-blur-lg" 
                     : "bg-white/[0.02] border border-white/5 backdrop-blur-md shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] hover:border-white/20"
                 }`}
               >
@@ -95,7 +95,7 @@ export default function Pricing() {
                 )}
                 
                 {pl.featured && (
-                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.2em] bg-primary text-primary-foreground px-4 py-1.5 rounded-full shadow-[0_0_15px_oklch(0.62_0.22_258/0.5)] font-bold whitespace-nowrap">
+                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.2em] bg-primary text-primary-foreground px-4 py-1.5 rounded-full shadow-[0_0_15px_oklch(0.583_0.222_258.6/0.5)] font-bold whitespace-nowrap">
                     Most picked
                   </span>
                 )}
@@ -138,7 +138,7 @@ export default function Pricing() {
                     href="#cta"
                     className={`w-full h-auto py-4 rounded-xl flex items-center justify-center font-semibold text-sm transition-all duration-300 ease-out group/btn cursor-pointer ${
                       pl.featured
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_oklch(0.62_0.22_258/0.3)] hover:shadow-[0_0_30px_oklch(0.62_0.22_258/0.5)] hover:-translate-y-0.5"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.3)] hover:shadow-[0_0_30px_oklch(0.583_0.222_258.6/0.5)] hover:-translate-y-0.5"
                         : "border border-border/60 bg-card/30 text-foreground backdrop-blur-sm hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50"
                     }`}
                   >
