@@ -109,12 +109,11 @@ export default function IntroReveal() {
       <div
         className={`intro-logo-wrapper ${animating && !textExiting ? "intro-logo-in" : ""} ${textExiting ? "intro-logo-out" : ""}`}
       >
-        <div className="intro-logo-glow" />
         <Image
           src="/logo.png"
           alt="NxtGen Academy"
-          width={112}
-          height={112}
+          width={180}
+          height={180}
           priority
           className="intro-logo-img"
         />

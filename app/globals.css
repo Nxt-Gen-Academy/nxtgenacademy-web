@@ -356,10 +356,10 @@
 /* Intro Logo Reveal Animation */
 .intro-logo-wrapper {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   z-index: 2;
   opacity: 0;
-  transform: translateY(20px) scale(0.88);
+  transform: translateY(20px) scale(0.9);
   will-change: transform, opacity;
 }
 
@@ -374,7 +374,7 @@
 @keyframes intro-logo-reveal {
   0% {
     opacity: 0;
-    transform: translateY(20px) scale(0.88);
+    transform: translateY(20px) scale(0.9);
   }
   30% {
     opacity: 1;
@@ -392,29 +392,18 @@
   }
   100% {
     opacity: 0;
-    transform: translateY(-24px) scale(0.92);
+    transform: translateY(-24px) scale(0.94);
   }
 }
 
 .intro-logo-img {
-  width: clamp(4.5rem, 11vw, 7rem);
-  height: clamp(4.5rem, 11vw, 7rem);
+  width: clamp(7rem, 16vw, 11rem);
+  height: clamp(7rem, 16vw, 11rem);
   object-fit: contain;
-  border-radius: 1.5rem;
-  box-shadow: 0 16px 40px -8px oklch(0.583 0.222 258.6 / 0.45), 0 0 25px oklch(0.583 0.222 258.6 / 0.25);
-  border: 1px solid oklch(0.583 0.222 258.6 / 0.35);
+  border-radius: 2rem;
+  border: none;
+  box-shadow: none;
   position: relative;
-}
-
-.intro-logo-glow {
-  position: absolute;
-  inset: -20px;
-  border-radius: 50%;
-  background: radial-gradient(circle, oklch(0.583 0.222 258.6 / 0.5) 0%, transparent 70%);
-  filter: blur(20px);
-  pointer-events: none;
-  z-index: -1;
-  animation: pulse-glow 3s ease-in-out infinite;
 }
 
 /* Text wrapper — stacked two-line layout */

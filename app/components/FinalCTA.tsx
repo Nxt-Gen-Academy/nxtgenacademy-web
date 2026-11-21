@@ -17,47 +17,44 @@ export default function FinalCTA() {
   };
 
   return (
-    <section id="cta" className="py-12 sm:py-16 px-4 relative">
+    <section id="cta" className="py-10 sm:py-16 px-4 relative">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up">
-          <div
-            onClick={handleOpenSignup}
-            className="relative rounded-3xl overflow-hidden border border-white/20 shadow-xl text-left group cursor-pointer w-full aspect-[2170/725] min-h-[380px] md:min-h-[400px] lg:min-h-0"
-          >
-            {/* Background Image: Fits 2170x725 aspect ratio perfectly without scaling on hover */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/40 sm:border-white/20 shadow-xl text-left w-full min-h-[410px] sm:min-h-[390px] md:min-h-0 md:aspect-[2170/725]">
+            {/* Background Image: Fits aspect ratio with smooth responsive positioning */}
             <Image
               src="/final_cta.jpg"
               alt="Career Transformation with AI + Business + Technology"
               fill
               priority
-              className="object-cover object-center pointer-events-none select-none"
-              sizes="(max-width: 1280px) 100vw, 1152px"
+              className="object-cover object-[65%_center] sm:object-center pointer-events-none select-none"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1152px"
             />
 
+            {/* Subtle soft gradient overlay on mobile for enhanced legibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent pointer-events-none md:hidden" />
+
             {/* Content Layer */}
-            <div className="relative z-10 w-full h-full p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center">
-              <div className="flex flex-col md:flex-row md:items-center gap-5 sm:gap-6 lg:gap-8 max-w-full md:max-w-[72%] lg:max-w-[70%]">
+            <div className="relative z-10 w-full h-full p-5 sm:p-7 md:p-9 lg:p-12 flex flex-col justify-center">
+              <div className="flex flex-col md:flex-row md:items-center gap-4 sm:gap-6 lg:gap-8 max-w-full md:max-w-[72%] lg:max-w-[70%]">
                 
                 {/* Left: Brand Logo, Apply Now Primary Button & Divider */}
                 <div className="flex items-center gap-4 lg:gap-6 shrink-0">
-                  <div className="flex flex-col items-center sm:items-start gap-3 w-[140px] sm:w-[160px] md:w-[170px] lg:w-[195px] shrink-0">
+                  <div className="flex flex-col items-start gap-2.5 sm:gap-3 w-[150px] sm:w-[165px] md:w-[175px] lg:w-[200px] shrink-0">
                     <Image
                       src="/logo_banner_tight.png"
                       alt="NxtGen Academy"
                       width={250}
-                      height={120}
+                      height={60}
                       priority
-                      className="w-full h-auto object-contain drop-shadow-sm"
+                      className="w-full h-auto object-contain"
                     />
                     
                     {/* Primary Apply Now Button below Logo */}
                     <button
                       type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpenSignup();
-                      }}
-                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground transition-colors duration-200 hover:bg-primary/90 cursor-pointer"
+                      onClick={handleOpenSignup}
+                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold bg-primary text-primary-foreground shadow-md shadow-primary/20 transition-colors duration-200 hover:bg-primary/90 cursor-pointer active:scale-[0.98]"
                     >
                       <span>Apply Now</span>
                       <ChevronRight className="h-3.5 w-3.5" />
@@ -77,7 +74,7 @@ export default function FinalCTA() {
                     <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-black text-primary tracking-tight leading-tight">
                       AI + Business + Technology
                     </h2>
-                    <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm font-bold text-[#00164e] pt-0.5">
+                    <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 text-[11px] sm:text-xs md:text-sm font-bold text-[#00164e] pt-0.5">
                       <span>Learn</span>
                       <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary stroke-[3]" />
                       <span>Build</span>
@@ -88,19 +85,19 @@ export default function FinalCTA() {
                     </div>
                   </div>
 
-                  {/* 4 Feature Pillars */}
-                  <div className="grid grid-cols-4 divide-x divide-slate-300/80 pt-3 sm:pt-4 lg:pt-5 mt-2 sm:mt-3 lg:mt-4 max-w-xl">
+                  {/* 4 Feature Pillars: 2x2 frosted glass pills on mobile, 4-col divided row on desktop */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-0 sm:divide-x sm:divide-slate-300/80 pt-3 sm:pt-4 lg:pt-5 mt-2 sm:mt-3 lg:mt-4 max-w-xl">
                     {pillars.map((p, idx) => {
                       const Icon = p.icon;
                       return (
                         <div
                           key={p.label}
-                          className={`flex flex-col items-center text-center ${
-                            idx === 0 ? "pr-2 sm:pr-3" : "px-2 sm:px-3"
+                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white/70 backdrop-blur-xs border border-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:bg-transparent sm:border-0 sm:shadow-none sm:backdrop-blur-none sm:flex-col sm:justify-center sm:text-center ${
+                            idx === 0 ? "sm:pr-3" : "sm:px-3"
                           }`}
                         >
-                          <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 text-[#2d304a] stroke-[1.75]" />
-                          <span className="text-[8.5px] sm:text-[10px] md:text-xs font-semibold text-[#2d304a] mt-1 whitespace-nowrap">
+                          <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 text-primary sm:text-[#2d304a] stroke-[2] sm:stroke-[1.75] shrink-0" />
+                          <span className="text-[11px] sm:text-[10px] md:text-xs font-semibold text-slate-800 sm:text-[#2d304a] sm:mt-1 whitespace-nowrap">
                             {p.label}
                           </span>
                         </div>
