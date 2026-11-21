@@ -437,7 +437,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
             type="submit"
             disabled={isLoading || isSubmitting}
             size="lg"
-            className="w-full rounded-xl h-auto py-3 text-sm font-medium transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_oklch(0.58_0.20_255/0.2)] mt-2"
+            className="w-full rounded-xl h-auto py-3 text-sm font-medium transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_oklch(0.583_0.222_258.6/0.2)] mt-2"
           >
             {isSubmitting ? "Submitting..." : "Submit Enquiry"}
           </Button>

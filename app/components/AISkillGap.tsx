@@ -91,7 +91,7 @@ export default function AISkillGap() {
                 }}
                 className={`px-5 py-2.5 rounded-full text-[12px] font-bold border transition-all cursor-pointer ${
                   activeTab === tab
-                    ? "bg-primary/20 border-primary/50 text-primary shadow-[0_0_15px_oklch(0.58_0.20_255/0.25)] backdrop-blur-sm"
+                    ? "bg-primary/20 border-primary/50 text-primary shadow-[0_0_15px_oklch(0.583_0.222_258.6/0.25)] backdrop-blur-sm"
                     : "bg-white/[0.02] border-white/5 text-muted-foreground hover:border-white/20 hover:text-foreground backdrop-blur-sm"
                 }`}
               >

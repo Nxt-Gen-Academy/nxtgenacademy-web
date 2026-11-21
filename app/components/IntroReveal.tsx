@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const WORD1 = "NxtGen";
 const WORD2 = "Academy";
@@ -103,6 +104,21 @@ export default function IntroReveal() {
       {/* Accent glows */}
       <div className={`intro-glow intro-glow-1 ${bgExiting ? "intro-glow-exit" : ""}`} />
       <div className={`intro-glow intro-glow-2 ${bgExiting ? "intro-glow-exit" : ""}`} />
+
+      {/* Brand Logo */}
+      <div
+        className={`intro-logo-wrapper ${animating && !textExiting ? "intro-logo-in" : ""} ${textExiting ? "intro-logo-out" : ""}`}
+      >
+        <div className="intro-logo-glow" />
+        <Image
+          src="/logo.png"
+          alt="NxtGen Academy"
+          width={112}
+          height={112}
+          priority
+          className="intro-logo-img"
+        />
+      </div>
 
       {/* Two-line stacked text */}
       <div className="intro-text-wrapper">

@@ -69,7 +69,7 @@ export default function Curriculum() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-0" />
                 
                 <div className="relative z-10 flex items-center gap-4 mb-8 border-b border-white/5 pb-6">
-                  <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-mono text-sm font-bold border border-primary/20 shadow-sm group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_15px_oklch(0.58_0.20_255/0.4)] transition-all duration-300">
+                  <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-mono text-sm font-bold border border-primary/20 shadow-sm group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_15px_oklch(0.583_0.222_258.6/0.4)] transition-all duration-300">
                     0{idx + 1}
                   </div>
                   <h4 className="font-heading text-2xl font-medium text-foreground group-hover:text-primary transition-colors duration-300">{s.t}</h4>

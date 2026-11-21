@@ -83,7 +83,7 @@ export default function Hero() {
           {/* ── LEFT COLUMN: Content ── */}
           <div className="max-w-2xl">
             {/* Eyebrow */}
-            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-[0_0_20px_oklch(0.58_0.20_255/0.15)]">
+            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.15)]">
               <Flame className="h-3.5 w-3.5 text-amber-500" />
               <span className="font-semibold text-primary/90">Learn what matters</span>
             </div>
@@ -104,7 +104,7 @@ export default function Hero() {
               {session?.user ? (
                 <a
                   href="/dashboard"
-                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.3)]"
+                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.583_0.222_258.6/0.3)]"
                 >
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
                   <span className="relative flex items-center">
@@ -114,7 +114,7 @@ export default function Hero() {
               ) : (
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.3)] cursor-pointer"
+                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.583_0.222_258.6/0.3)] cursor-pointer"
                 >
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
                   <span className="relative flex items-center">

@@ -225,7 +225,7 @@ export default function ROICalculatorSection() {
                         }}
                         className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
                           isSelected
-                            ? "bg-primary/10 border-primary shadow-[0_0_12px_oklch(0.58_0.20_255/0.15)] text-foreground"
+                            ? "bg-primary/10 border-primary shadow-[0_0_12px_oklch(0.583_0.222_258.6/0.15)] text-foreground"
                             : "bg-white/[0.01] border-border/50 text-muted-foreground hover:border-border hover:bg-white/[0.03]"
                         }`}
                       >
@@ -255,7 +255,7 @@ export default function ROICalculatorSection() {
                 <button
                   onClick={handleGenerate}
                   disabled={stage === "printing"}
-                  className="w-full relative overflow-hidden inline-flex items-center justify-center rounded-xl py-4 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 hover:shadow-[0_8px_20px_oklch(0.58_0.20_255/0.25)] cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                  className="w-full relative overflow-hidden inline-flex items-center justify-center rounded-xl py-4 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 hover:shadow-[0_8px_20px_oklch(0.583_0.222_258.6/0.25)] cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
                 >
                   {stage === "printing" ? (
                     <span className="flex items-center gap-2 tracking-wider font-mono">
