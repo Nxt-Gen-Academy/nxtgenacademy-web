@@ -25,26 +25,29 @@ export function ShaderAnimation() {
   })
 
   useEffect(() => {
-    // Load Three.js dynamically
-    const script = document.createElement("script")
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"
-    script.onload = () => {
-      if (containerRef.current && window.THREE) {
-        initThreeJS()
+    let isMounted = true
+
+    // Check if Three.js is already available in window
+    if (typeof window !== "undefined" && window.THREE) {
+      initThreeJS()
+    } else {
+      const script = document.createElement("script")
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"
+      script.onload = () => {
+        if (isMounted && containerRef.current && window.THREE) {
+          initThreeJS()
+        }
       }
+      document.head.appendChild(script)
     }
-    document.head.appendChild(script)
 
     return () => {
-      // Cleanup
+      isMounted = false
       if (sceneRef.current.animationId) {
         cancelAnimationFrame(sceneRef.current.animationId)
       }
       if (sceneRef.current.renderer) {
         sceneRef.current.renderer.dispose()
-      }
-      if (script.parentNode) {
-        script.parentNode.removeChild(script)
       }
     }
   }, [])
@@ -81,7 +84,7 @@ export function ShaderAnimation() {
       }
     `
 
-    // Fragment shader
+    // Fragment shader tailored for vibrant light mode streams
     const fragmentShader = `
       precision highp float;
       uniform vec2 resolution;
@@ -104,77 +107,61 @@ export function ShaderAnimation() {
       }
 
       void main(void) {
-        // Normalized coordinates [0, 1]
         vec2 uv = gl_FragCoord.xy / resolution.xy;
-        // Aspect ratio corrected coordinates [-1, 1]
         vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
         
-        // Waterfall flow speed
         float t = time * 0.055;
         
-        // Brand & rich aesthetic colors:
-        // Deep Midnight Slate background
-        vec3 colorBg = vec3(0.012, 0.015, 0.022);
+        // Crisp, clean light background
+        vec3 colorBg = vec3(0.985, 0.988, 0.996);
         
-        // Channel 0: Electric Royal Blue (Brand)
-        vec3 colorElectric = vec3(0.302, 0.412, 0.871);
-        // Channel 1: Glow Cyan (Brand)
-        vec3 colorGlow = vec3(0.459, 0.659, 0.937);
-        // Channel 2: Cyber Purple / Violet (Brand Accent)
-        vec3 colorPurple = vec3(0.659, 0.333, 0.969);
-        // Channel 3: Soft Mint Teal (Cool Accent)
-        vec3 colorTeal = vec3(0.180, 0.804, 0.627);
-        // Channel 4: Champagne Gold (Warm Accent)
-        vec3 colorGold = vec3(0.847, 0.663, 0.424);
+        // Brand & aesthetic stream colors:
+        vec3 colorElectric = vec3(0.00, 0.447, 0.984); // Royal Blue #0072FB
+        vec3 colorCyan     = vec3(0.00, 0.640, 0.980); // Sky Cyan
+        vec3 colorPurple   = vec3(0.486, 0.227, 0.929); // Royal Purple
+        vec3 colorTeal     = vec3(0.050, 0.700, 0.600); // Teal Mint
+        vec3 colorIndigo   = vec3(0.200, 0.350, 0.950); // Deep Indigo
         
         vec3 col = colorBg;
         
-        // Accumulate 5 distinct chromatic vertical waterfall streams
+        // 5 vertical chromatic fluid waterfall streams
         for(int j = 0; j < 5; j++) {
-          float tShift = t + float(j) * 0.03;
-          float flowY = p.y + tShift * 1.8; // Constant downward flow coordinate offset
+          float tShift = t + float(j) * 0.038;
+          float flowY = p.y + tShift * 1.7;
           
-          // Waterfall mist spray amplitude (zero at top, high at bottom)
-          float sprayAmp = smoothstep(0.8, -1.1, p.y) * 0.32;
-          
-          // Noise warp to simulate turbulent water streams and mist particles
+          float sprayAmp = smoothstep(0.85, -1.0, p.y) * 0.35;
           float nX = noise(vec2(p.x * (1.3 + float(j) * 0.1), flowY * 0.8)) * sprayAmp;
           float nY = noise(vec2(p.y * 0.8, tShift * 0.4)) * 0.08;
           
           float posX = p.x + nX + nY;
           
-          // Generate multiple overlapping frequencies of vertical flows
           float r1 = sin(posX * (5.5 + float(j) * 1.1));
           float r2 = sin(posX * (11.0 + float(j) * 1.6) + flowY * 1.3);
           float r3 = cos(posX * (3.5 + float(j) * 0.75) - flowY * 0.65);
           
-          // Convert to clean, sharp-edged volumetric waterfall columns
-          float d1 = r1 * 2.8;
-          float d2 = r2 * 3.4;
-          float d3 = r3 * 1.9;
+          float d1 = r1 * 2.6;
+          float d2 = r2 * 3.2;
+          float d3 = r3 * 1.8;
           
-          float cascadeGlow = exp(-d1 * d1) * 0.42 + exp(-d2 * d2) * 0.28 + exp(-d3 * d3) * 0.32;
+          float cascadeGlow = exp(-d1 * d1) * 0.48 + exp(-d2 * d2) * 0.32 + exp(-d3 * d3) * 0.36;
           
-          // Dissolve envelope (bright at top, dispersing/fading into bottom mist)
-          float verticalFade = smoothstep(-1.2, 0.7, p.y);
+          float verticalFade = smoothstep(-1.3, 0.75, p.y);
           cascadeGlow *= verticalFade;
           
-          // Map each shifted phase to its respective aesthetic color
-          if (j == 0) col += cascadeGlow * colorElectric * 0.95;
-          if (j == 1) col += cascadeGlow * colorGlow * 0.85;
-          if (j == 2) col += cascadeGlow * colorPurple * 0.9;
-          if (j == 3) col += cascadeGlow * colorTeal * 0.7;
-          if (j == 4) col += cascadeGlow * colorGold * 0.55;
+          vec3 streamColor = colorElectric;
+          if (j == 1) streamColor = colorCyan;
+          if (j == 2) streamColor = colorPurple;
+          if (j == 3) streamColor = colorTeal;
+          if (j == 4) streamColor = colorIndigo;
+          
+          // Clearly blend streams into light background
+          col = mix(col, streamColor, cascadeGlow * 0.42);
         }
         
-        // Premium subtle analog film grain
-        float grain = hash(gl_FragCoord.xy + time) * 0.012;
-        col += vec3(grain);
-        
-        // Soft vignette to merge with page's deep black background
-        float vignette = uv.x * uv.y * (1.0 - uv.x) * (1.0 - uv.y);
-        vignette = clamp(pow(16.0 * vignette, 0.55), 0.0, 1.0);
-        col *= vignette;
+        // Soft edge feathering so it dissolves seamlessly into page background
+        float edgeFade = uv.x * uv.y * (1.0 - uv.x) * (1.0 - uv.y);
+        edgeFade = clamp(pow(16.0 * edgeFade, 0.35), 0.0, 1.0);
+        col = mix(colorBg, col, edgeFade);
         
         gl_FragColor = vec4(col, 1.0);
       }
@@ -192,8 +179,8 @@ export function ShaderAnimation() {
     scene.add(mesh)
 
     // Initialize renderer
-    const renderer = new THREE.WebGLRenderer()
-    renderer.setPixelRatio(window.devicePixelRatio)
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     container.appendChild(renderer.domElement)
 
     // Store references
@@ -207,8 +194,10 @@ export function ShaderAnimation() {
 
     // Handle resize
     const onWindowResize = () => {
-      const rect = container.getBoundingClientRect()
-      renderer.setSize(rect.width, rect.height)
+      if (!container || !renderer) return
+      const width = container.clientWidth || window.innerWidth
+      const height = container.clientHeight || window.innerHeight
+      renderer.setSize(width, height)
       uniforms.resolution.value.x = renderer.domElement.width
       uniforms.resolution.value.y = renderer.domElement.height
     }
@@ -229,7 +218,7 @@ export function ShaderAnimation() {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full absolute" 
+      className="w-full h-full absolute inset-0 pointer-events-none" 
     />
   )
 }

@@ -216,14 +216,9 @@ export default function ApplyMentorPage() {
       {/* Hero Section */}
       <div className="relative min-h-screen overflow-hidden bg-background w-full">
         {/* Shader Animation Background */}
-        <div className="absolute inset-0 z-0 opacity-40">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <ShaderAnimation />
-          {/* Overlay gradient for depth & readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background pointer-events-none" />
         </div>
-
-        {/* Glassmorphism overlay */}
-        <div className="absolute inset-0 z-[5] bg-background/60 backdrop-blur-md pointer-events-none" />
 
         <section className="relative pt-32 pb-24 px-6 z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
           {/* Left side: Text */}
@@ -235,30 +230,30 @@ export default function ApplyMentorPage() {
           >
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-xs font-medium text-primary mb-6 tracking-wide"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/30 bg-card/90 backdrop-blur-sm text-xs font-semibold text-primary mb-6 tracking-wide shadow-xs"
             >
               <span>Join Our Mission</span>
             </motion.div>
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-foreground mb-6 leading-[1.1]"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.08]"
             >
               Shape the <br className="hidden md:block" /><span className="text-primary">next generation</span><br className="hidden md:block" /> of tech leaders
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="text-lg text-muted-foreground max-w-xl leading-relaxed mb-8"
+              className="text-lg text-foreground/85 max-w-xl leading-relaxed mb-8 font-medium"
             >
               Join NxtGen Academy as a mentor and share your industry expertise with eager learners. Help bridge the gap between academia and industry.
             </motion.p>
             <motion.div
               variants={itemVariants}
-              className="flex items-center gap-4 text-sm text-muted-foreground font-medium"
+              className="flex items-center gap-4 text-sm text-foreground/85 font-semibold"
             >
               <div className="flex -space-x-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center">
-                    <span className="text-muted-foreground text-xs font-bold">M{i}</span>
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-card flex items-center justify-center shadow-xs">
+                    <span className="text-primary text-xs font-bold">M{i}</span>
                   </div>
                 ))}
               </div>
@@ -360,9 +355,6 @@ export default function ApplyMentorPage() {
               </div>
             </form>
           </motion.div>
-
-          {/* Smooth Fade to Next Section */}
-          <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-background/50 via-background/20 to-transparent pointer-events-none" />
         </section>
       </div>
 
