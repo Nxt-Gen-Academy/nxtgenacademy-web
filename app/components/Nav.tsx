@@ -52,8 +52,8 @@ export default function Nav() {
         <div className="max-w-7xl mx-auto px-4">
           <div className={`transition-all duration-300 rounded-2xl px-4 sm:px-5 py-2 flex items-center justify-between border ${
             isScrolled 
-              ? "bg-background/80 backdrop-blur-xl border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.37)]" 
-              : "bg-background/40 backdrop-blur-md border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+              ? "bg-background/85 backdrop-blur-xl border-border shadow-sm" 
+              : "bg-background/60 backdrop-blur-md border-border/50 shadow-xs"
           }`}>
             <Link href="/" className="flex items-center gap-2 group">
               <div className="rounded-lg grid place-items-center transition-all duration-300 group-hover:scale-105">
@@ -86,7 +86,7 @@ export default function Nav() {
               <div className="hidden lg:flex items-center gap-3">
                 <Link
                   href="/apply-mentor"
-                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all`}
+                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all`}
                 >
                   Apply as Mentor
                 </Link>

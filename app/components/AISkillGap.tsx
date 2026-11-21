@@ -91,8 +91,8 @@ export default function AISkillGap() {
                 }}
                 className={`px-5 py-2.5 rounded-full text-[12px] font-bold border transition-all cursor-pointer ${
                   activeTab === tab
-                    ? "bg-primary/20 border-primary/50 text-primary shadow-[0_0_15px_oklch(0.583_0.222_258.6/0.25)] backdrop-blur-sm"
-                    : "bg-white/[0.02] border-white/5 text-muted-foreground hover:border-white/20 hover:text-foreground backdrop-blur-sm"
+                    ? "bg-primary/15 border-primary/50 text-primary shadow-xs backdrop-blur-sm"
+                    : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-foreground backdrop-blur-sm"
                 }`}
               >
                 {tab}
@@ -103,7 +103,7 @@ export default function AISkillGap() {
 
         {/* Chart Container */}
         <ScrollReveal direction="up" delay={300}>
-          <div className="relative bg-white/[0.02] rounded-[32px] border border-white/5 shadow-2xl overflow-hidden w-full max-w-[1100px] mx-auto p-8 lg:p-16 backdrop-blur-md group">
+          <div className="relative bg-card rounded-[32px] border border-border shadow-xl overflow-hidden w-full max-w-[1100px] mx-auto p-8 lg:p-16 backdrop-blur-md group">
             {/* Spotlight gradient effect on hover */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
             <style>{`

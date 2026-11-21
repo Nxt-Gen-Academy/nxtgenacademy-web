@@ -41,7 +41,7 @@ const facultyLoop = [...facultyMembers, ...facultyMembers, ...facultyMembers];
 
 function FacultyCard({ member }: { member: (typeof facultyMembers)[number] }) {
   return (
-    <div className="flex-[0_0_300px] w-[300px] bg-slate-900/70 border border-white/10 border-t-white/20 border-l-white/20 backdrop-blur-md rounded-[20px] overflow-hidden transition-all duration-400 ease-in-out flex flex-col cursor-pointer hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-teal-400/40 group">
+    <div className="flex-[0_0_300px] w-[300px] bg-card border border-border backdrop-blur-md rounded-[20px] overflow-hidden transition-all duration-400 ease-in-out flex flex-col cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-primary/40 group">
       <div className="w-full h-[240px] overflow-hidden relative">
         <Image
           src={member.image}
@@ -52,13 +52,13 @@ function FacultyCard({ member }: { member: (typeof facultyMembers)[number] }) {
         />
       </div>
       <div className="p-[25px] relative flex flex-col grow">
-        <p className="text-[0.75rem] text-blue-500 uppercase tracking-widest font-semibold mb-1">
+        <p className="text-[0.75rem] text-primary uppercase tracking-widest font-semibold mb-1">
           {member.role}
         </p>
-        <h4 className="text-white text-[1.3rem] font-bold m-0 mb-2 font-display">
+        <h4 className="text-foreground text-[1.3rem] font-bold m-0 mb-2 font-display">
           {member.name}
         </h4>
-        <p className="text-slate-400 text-[0.95rem] font-medium mb-4">
+        <p className="text-muted-foreground text-[0.95rem] font-medium mb-4">
           {member.company}
         </p>
       </div>

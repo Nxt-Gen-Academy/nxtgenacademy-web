@@ -44,7 +44,7 @@ export default function OutcomeRecipe() {
                     companies actively hiring our graduates.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm p-5 grid grid-cols-3 gap-3 place-items-center shadow-xl group-hover:border-primary/20 transition-colors">
+                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 grid grid-cols-3 gap-3 place-items-center shadow-md group-hover:border-primary/30 transition-colors">
                   {referralLogos.map((logo, i) => (
                     <div
                       key={logo.alt}
@@ -81,7 +81,7 @@ export default function OutcomeRecipe() {
                     target companies based on actual recent interview experiences.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm p-5 shadow-xl group-hover:border-primary/20 transition-colors">
+                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 shadow-md group-hover:border-primary/30 transition-colors">
                   <div className="grid grid-cols-2 gap-3 text-[11px] font-mono uppercase text-muted-foreground">
                     <div className="rounded-xl border border-dashed border-border/80 bg-card/40 p-2 text-center group-hover:border-primary/40 transition-colors">
                       May 29
@@ -91,10 +91,10 @@ export default function OutcomeRecipe() {
                     </div>
                   </div>
                   <div className="mt-5 space-y-3">
-                    <div className="rounded-xl bg-amber-500/10 border border-amber-400/30 p-3.5 text-xs text-amber-200 shadow-sm transition-transform group-hover:translate-x-1">
+                    <div className="rounded-xl bg-amber-500/10 border border-amber-400/30 p-3.5 text-xs text-amber-800 shadow-xs transition-transform group-hover:translate-x-1">
                       Practice interview scheduled for Amazon
                     </div>
-                    <div className="rounded-xl bg-primary/15 border border-primary/40 p-3.5 text-xs text-foreground shadow-sm transition-transform group-hover:translate-x-1 delay-75">
+                    <div className="rounded-xl bg-primary/10 border border-primary/30 p-3.5 text-xs text-foreground shadow-xs transition-transform group-hover:translate-x-1 delay-75">
                       Round 1 interview scheduled for Amazon
                     </div>
                   </div>
@@ -119,15 +119,15 @@ export default function OutcomeRecipe() {
                     feedback from senior engineers.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm p-5 shadow-xl group-hover:border-primary/20 transition-colors">
+                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 shadow-md group-hover:border-primary/30 transition-colors">
                   <div className="flex items-center gap-2">
-                    <div className="h-10 w-10 rounded-full bg-primary/20 border border-primary/40 shadow-sm group-hover:scale-110 transition-transform" />
-                    <div className="h-10 w-10 rounded-full bg-secondary border border-border/80 shadow-sm group-hover:scale-110 transition-transform delay-75" />
-                    <div className="h-10 w-10 rounded-full bg-emerald-400/20 border border-emerald-400/40 shadow-sm group-hover:scale-110 transition-transform delay-150 flex items-center justify-center">
-                      <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
+                    <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/30 shadow-xs group-hover:scale-110 transition-transform" />
+                    <div className="h-10 w-10 rounded-full bg-secondary border border-border/80 shadow-xs group-hover:scale-110 transition-transform delay-75" />
+                    <div className="h-10 w-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 shadow-xs group-hover:scale-110 transition-transform delay-150 flex items-center justify-center">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
                     </div>
                   </div>
-                  <div className="mt-5 rounded-xl border border-border/80 bg-card p-4 text-xs text-muted-foreground shadow-sm group-hover:-translate-y-1 transition-transform duration-300">
+                  <div className="mt-5 rounded-xl border border-border/80 bg-card p-4 text-xs text-muted-foreground shadow-xs group-hover:-translate-y-1 transition-transform duration-300">
                     <div className="flex items-center justify-between border-b border-border/50 pb-2 mb-2">
                       <span className="font-medium text-foreground/80">Pair session</span>
                       <span className="text-primary font-medium flex items-center gap-1.5">
@@ -135,8 +135,8 @@ export default function OutcomeRecipe() {
                         Live
                       </span>
                     </div>
-                    <div className="font-mono text-[12px] text-foreground/90 bg-background/50 p-2 rounded border border-border/30">
-                      <span className="text-violet-400">const</span> solution = <span className="text-amber-300">optimize</span>(arr);
+                    <div className="font-mono text-[12px] text-foreground/90 bg-muted/60 p-2 rounded border border-border/50">
+                      <span className="text-violet-600 font-semibold">const</span> solution = <span className="text-amber-600 font-semibold">optimize</span>(arr);
                     </div>
                   </div>
                 </div>
@@ -160,7 +160,7 @@ export default function OutcomeRecipe() {
                     alumnus of NxtGen Academy for life.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm p-5 space-y-3 shadow-xl group-hover:border-primary/20 transition-colors">
+                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 space-y-3 shadow-md group-hover:border-primary/30 transition-colors">
                   <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-transform group-hover:translate-x-1 hover:border-primary/40 cursor-default">
                     <div className="font-semibold text-sm">Senior Data Scientist</div>
                     <div className="text-muted-foreground mt-0.5">

@@ -129,7 +129,7 @@ export default function Programs() {
                         {p.stack.map((s) => (
                           <span
                             key={s}
-                            className="text-[11px] px-3 py-1.5 rounded-full bg-white/[0.03] text-foreground/90 border border-white/5 shadow-sm backdrop-blur-md group-hover:bg-primary/10 group-hover:border-primary/30 group-hover:text-primary transition-colors duration-300"
+                            className="text-[11px] px-3 py-1.5 rounded-full bg-muted text-muted-foreground border border-border/80 shadow-xs backdrop-blur-md group-hover:bg-primary/10 group-hover:border-primary/30 group-hover:text-primary transition-colors duration-300"
                           >
                             {s}
                           </span>

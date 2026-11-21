@@ -38,11 +38,11 @@ export default function Journey() {
               >
                 <ScrollReveal direction={i % 2 === 0 ? "right" : "left"} delay={i * 150}>
                   {/* Timeline connector dot (visible on desktop) */}
-                  <div className={`hidden md:flex absolute top-1/2 -translate-y-1/2 h-5 w-5 rounded-full border-4 border-background bg-primary items-center justify-center shadow-[0_0_10px_oklch(0.583_0.222_258.6/0.5)] z-10 ${i % 2 === 0 ? "-right-[10px]" : "-left-[10px]"}`}>
-                    <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                  <div className={`hidden md:flex absolute top-1/2 -translate-y-1/2 h-5 w-5 rounded-full border-4 border-background bg-primary items-center justify-center shadow-xs z-10 ${i % 2 === 0 ? "-right-[10px]" : "-left-[10px]"}`}>
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
                   </div>
 
-                  <div className="card-premium p-6 sm:p-8 rounded-2xl group relative overflow-hidden bg-white/[0.02] border-white/5 backdrop-blur-md">
+                  <div className="card-premium p-6 sm:p-8 rounded-2xl group relative overflow-hidden bg-card border-border backdrop-blur-md">
                     {/* Spotlight gradient effect on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
 

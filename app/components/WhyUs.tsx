@@ -76,7 +76,7 @@ export default function WhyUs() {
                     <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shadow-sm group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.3)] transition-all duration-500">
                       {it.icon}
                     </div>
-                    <span className="font-heading text-5xl font-black text-white/[0.03] group-hover:text-white/[0.08] transition-colors duration-500 pointer-events-none drop-shadow-sm">
+                    <span className="font-heading text-5xl font-black text-foreground/[0.05] group-hover:text-primary/15 transition-colors duration-500 pointer-events-none">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>

@@ -193,7 +193,7 @@ export default function FAQ() {
           subtitle="Everything you need to know about our programs, placement support, and learning experience — so you can get started with confidence."
         />
 
-        <div className="mt-16 bg-white/[0.02] backdrop-blur-md border border-white/5 shadow-2xl rounded-3xl p-6 sm:p-10 relative overflow-hidden group">
+        <div className="mt-16 bg-card backdrop-blur-md border border-border shadow-xl rounded-3xl p-6 sm:p-10 relative overflow-hidden group">
           {/* Spotlight gradient effect on hover */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
           
@@ -203,7 +203,7 @@ export default function FAQ() {
               <ScrollReveal key={it.q} direction="up" delay={i * 50}>
                   <AccordionItem
                     value={`item-${i}`}
-                    className="border-b border-white/5 last:border-0"
+                    className="border-b border-border last:border-0"
                   >
                   <AccordionTrigger className="w-full flex items-center justify-between text-left py-6 font-heading text-lg sm:text-xl font-medium hover:text-primary transition-colors hover:no-underline group">
                     {it.q}
@@ -227,7 +227,7 @@ export default function FAQ() {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 px-8 py-3.5 text-sm font-semibold text-foreground hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.5)] transition-all duration-300 cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-full border border-border bg-card backdrop-blur-md hover:bg-muted hover:border-primary/40 px-8 py-3.5 text-sm font-semibold text-foreground shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
             >
               {showAll ? "View Less FAQs" : "View All FAQs"}
               <ChevronDown

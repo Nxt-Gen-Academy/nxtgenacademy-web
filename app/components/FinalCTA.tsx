@@ -20,7 +20,7 @@ export default function FinalCTA() {
     <section id="cta" className="py-10 sm:py-16 px-4 relative">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up">
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/40 sm:border-white/20 shadow-xl text-left w-full min-h-[410px] sm:min-h-[390px] md:min-h-0 md:aspect-[2170/725]">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-border/80 shadow-xl text-left w-full min-h-[410px] sm:min-h-[390px] md:min-h-0 md:aspect-[2170/725]">
             {/* Background Image: Fits aspect ratio with smooth responsive positioning */}
             <Image
               src="/final_cta.jpg"
@@ -32,7 +32,7 @@ export default function FinalCTA() {
             />
 
             {/* Subtle soft gradient overlay on mobile for enhanced legibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent pointer-events-none md:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 to-transparent pointer-events-none md:hidden" />
 
             {/* Content Layer */}
             <div className="relative z-10 w-full h-full p-5 sm:p-7 md:p-9 lg:p-12 flex flex-col justify-center">
@@ -42,7 +42,7 @@ export default function FinalCTA() {
                 <div className="flex items-center gap-4 lg:gap-6 shrink-0">
                   <div className="flex flex-col items-start gap-2.5 sm:gap-3 w-[150px] sm:w-[165px] md:w-[175px] lg:w-[200px] shrink-0">
                     <Image
-                      src="/logo_banner_tight.png"
+                      src="/logo_banner_transparent.png"
                       alt="NxtGen Academy"
                       width={250}
                       height={60}
@@ -61,20 +61,20 @@ export default function FinalCTA() {
                     </button>
                   </div>
 
-                  <div className="hidden md:block w-px h-24 lg:h-32 bg-slate-300/80 shrink-0" />
+                  <div className="hidden md:block w-px h-24 lg:h-32 bg-border shrink-0" />
                 </div>
 
                 {/* Center: Headlines, Tagline, and Pillars */}
                 <div className="flex flex-col justify-center flex-1 min-w-0">
                   {/* Headings */}
                   <div className="space-y-0.5 sm:space-y-1">
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-[#00164e] tracking-tight">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-foreground tracking-tight">
                       Career Transformation with
                     </p>
                     <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-black text-primary tracking-tight leading-tight">
                       AI + Business + Technology
                     </h2>
-                    <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 text-[11px] sm:text-xs md:text-sm font-bold text-[#00164e] pt-0.5">
+                    <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 text-[11px] sm:text-xs md:text-sm font-bold text-foreground pt-0.5">
                       <span>Learn</span>
                       <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary stroke-[3]" />
                       <span>Build</span>
@@ -86,18 +86,18 @@ export default function FinalCTA() {
                   </div>
 
                   {/* 4 Feature Pillars: 2x2 frosted glass pills on mobile, 4-col divided row on desktop */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-0 sm:divide-x sm:divide-slate-300/80 pt-3 sm:pt-4 lg:pt-5 mt-2 sm:mt-3 lg:mt-4 max-w-xl">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-0 sm:divide-x sm:divide-border pt-3 sm:pt-4 lg:pt-5 mt-2 sm:mt-3 lg:mt-4 max-w-xl">
                     {pillars.map((p, idx) => {
                       const Icon = p.icon;
                       return (
                         <div
                           key={p.label}
-                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white/70 backdrop-blur-xs border border-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:bg-transparent sm:border-0 sm:shadow-none sm:backdrop-blur-none sm:flex-col sm:justify-center sm:text-center ${
+                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-card/75 backdrop-blur-xs border border-border/70 shadow-xs sm:bg-transparent sm:border-0 sm:shadow-none sm:backdrop-blur-none sm:flex-col sm:justify-center sm:text-center ${
                             idx === 0 ? "sm:pr-3" : "sm:px-3"
                           }`}
                         >
-                          <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 text-primary sm:text-[#2d304a] stroke-[2] sm:stroke-[1.75] shrink-0" />
-                          <span className="text-[11px] sm:text-[10px] md:text-xs font-semibold text-slate-800 sm:text-[#2d304a] sm:mt-1 whitespace-nowrap">
+                          <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 text-primary sm:text-foreground stroke-[2] sm:stroke-[1.75] shrink-0" />
+                          <span className="text-[11px] sm:text-[10px] md:text-xs font-semibold text-foreground sm:mt-1 whitespace-nowrap">
                             {p.label}
                           </span>
                         </div>

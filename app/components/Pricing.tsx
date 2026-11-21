@@ -79,8 +79,8 @@ export default function Pricing() {
               <Card
                 className={`relative rounded-3xl p-8 flex flex-col justify-between gap-0 overflow-visible h-full transition-all duration-500 hover:-translate-y-1 group ${
                   pl.featured 
-                    ? "bg-white/[0.04] border border-primary/30 z-10 shadow-[0_20px_40px_-15px_oklch(0.583_0.222_258.6/0.3)] backdrop-blur-lg" 
-                    : "bg-white/[0.02] border border-white/5 backdrop-blur-md shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] hover:border-white/20"
+                    ? "bg-primary/5 border border-primary/30 z-10 shadow-lg backdrop-blur-lg" 
+                    : "bg-card border border-border backdrop-blur-md shadow-xs hover:shadow-md hover:border-primary/40"
                 }`}
               >
                 {/* Spotlight gradient effect on hover */}
@@ -120,7 +120,7 @@ export default function Pricing() {
                       EMI available · Scholarships open
                     </p>
                     
-                    <div className="w-full h-px bg-white/10 my-8" />
+                    <div className="w-full h-px bg-border my-8" />
                     
                     <ul className="space-y-4 text-sm">
                       {pl.f.map((x) => (

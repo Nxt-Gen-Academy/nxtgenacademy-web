@@ -72,9 +72,9 @@ export default function Hero() {
         <source src="/hero_bg_video.mp4" type="video/mp4" />
       </video>
 
-      {/* Neutral black backdrop overlay over the video */}
-      <div className="absolute inset-0 bg-black/70 z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-0 pointer-events-none" />
+      {/* Light backdrop overlay over the video */}
+      <div className="absolute inset-0 bg-background/85 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background z-0 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
 
@@ -83,19 +83,19 @@ export default function Hero() {
           {/* ── LEFT COLUMN: Content ── */}
           <div className="max-w-2xl">
             {/* Eyebrow */}
-            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.15)]">
+            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-xs">
               <Flame className="h-3.5 w-3.5 text-amber-500" />
               <span className="font-semibold text-primary/90">Learn what matters</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="hero-headline font-heading leading-[1.08] font-extrabold tracking-[-0.02em] text-foreground drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+            <h1 className="hero-headline font-heading leading-[1.08] font-medium tracking-[-0.02em] text-foreground">
               <span className="block">Build your career in</span>
               <span className="hero-accent-text block text-primary pb-2">AI &amp; Analytics</span>
             </h1>
 
             {/* Subheading */}
-            <p className="hero-subheading mt-7 text-muted-foreground leading-[1.6] max-w-[480px] drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <p className="hero-subheading mt-7 text-muted-foreground leading-[1.6] max-w-[480px]">
               Equip yourself with the tools, projects, and mentorship needed to land high-paying roles. Join our expert-led cohorts today.
             </p>
 
@@ -131,7 +131,7 @@ export default function Hero() {
             </div>
 
             {/* Stat Row */}
-            <div className="hero-stat-row mt-12 flex flex-wrap justify-center lg:justify-start gap-y-6 gap-x-6 sm:gap-x-10 p-5 sm:px-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl max-w-fit mx-auto lg:mx-0">
+            <div className="hero-stat-row mt-12 flex flex-wrap justify-center lg:justify-start gap-y-6 gap-x-6 sm:gap-x-10 p-5 sm:px-8 rounded-2xl border border-border/80 bg-card/85 backdrop-blur-md shadow-md max-w-fit mx-auto lg:mx-0">
               {stats.map((stat, i) => {
                 const Icon = stat.icon;
                 return (

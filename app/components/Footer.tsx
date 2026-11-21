@@ -21,15 +21,15 @@ export default function Footer() {
             </p>
             
             <div className="mt-8 flex gap-4 relative z-20">
-              <a href="https://www.linkedin.com/company/nxtgenacademy-ai/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
+              <a href="https://www.linkedin.com/company/nxtgenacademy-ai/" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border bg-card/60 backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-primary hover:border-primary/40 transition-all shadow-xs">
                 <LiaLinkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              <a href="https://www.instagram.com/nxtgen.academy.ai?igsh=MThjb3NmdXB6YzNsaA==" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
+              <a href="https://www.instagram.com/nxtgen.academy.ai?igsh=MThjb3NmdXB6YzNsaA==" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border bg-card/60 backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-primary hover:border-primary/40 transition-all shadow-xs">
                 <LiaInstagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </a>
-              <a href="https://www.youtube.com/@nxtgenacademy" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-white/5 bg-white/[0.03] backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-white/[0.08] hover:text-primary hover:border-white/20 transition-all shadow-sm">
+              <a href="https://www.youtube.com/@nxtgenacademy" target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl border border-border bg-card/60 backdrop-blur-md flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-primary hover:border-primary/40 transition-all shadow-xs">
                 <LiaYoutube className="h-5 w-5" />
                 <span className="sr-only">YouTube</span>
               </a>
@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
       </div>
       
-      <div className="border-t border-white/5 bg-black/40 backdrop-blur-sm relative z-20">
+      <div className="border-t border-border bg-muted/30 backdrop-blur-sm relative z-20">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground font-medium">
             © {new Date().getFullYear()} NxtGen Academy. All rights reserved.

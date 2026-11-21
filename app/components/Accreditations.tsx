@@ -34,7 +34,7 @@ export default function Accreditations() {
           {accreditations.map((item, idx) => (
             <ScrollReveal key={item.name} direction="up" delay={idx * 100}>
               <div
-                className="group flex flex-col items-center justify-center h-28 sm:h-32 px-6 py-4 rounded-2xl bg-white/95 border border-white/10 shadow-sm hover:shadow-[0_10px_30px_-10px_rgba(255,255,255,0.2)] hover:-translate-y-1 hover:bg-white transition-all duration-300 relative overflow-hidden"
+                className="group flex flex-col items-center justify-center h-28 sm:h-32 px-6 py-4 rounded-2xl bg-card border border-border shadow-xs hover:shadow-md hover:-translate-y-1 hover:border-primary/30 transition-all duration-300 relative overflow-hidden"
               >
                 {/* Subtle inner shadow to give depth to the white card */}
                 <div className="absolute inset-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.05)] pointer-events-none rounded-2xl" />
