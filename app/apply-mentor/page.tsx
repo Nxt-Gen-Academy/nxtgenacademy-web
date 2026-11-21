@@ -207,23 +207,23 @@ export default function ApplyMentorPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-black text-zinc-300 selection:bg-white/20 selection:text-white font-sans">
+    <main className="min-h-screen flex flex-col bg-background text-foreground font-sans">
       <Nav />
 
       {/* Minimal Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
 
       {/* Hero Section */}
-      <div className="relative min-h-screen overflow-hidden bg-black w-full">
+      <div className="relative min-h-screen overflow-hidden bg-background w-full">
         {/* Shader Animation Background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 opacity-40">
           <ShaderAnimation />
           {/* Overlay gradient for depth & readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black/80 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background pointer-events-none" />
         </div>
 
         {/* Glassmorphism overlay */}
-        <div className="absolute inset-0 z-[5] bg-zinc-950/40 backdrop-blur-md pointer-events-none" />
+        <div className="absolute inset-0 z-[5] bg-background/60 backdrop-blur-md pointer-events-none" />
 
         <section className="relative pt-32 pb-24 px-6 z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
           {/* Left side: Text */}
@@ -241,24 +241,24 @@ export default function ApplyMentorPage() {
             </motion.div>
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-white mb-6 leading-[1.1]"
+              className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-foreground mb-6 leading-[1.1]"
             >
               Shape the <br className="hidden md:block" /><span className="text-primary">next generation</span><br className="hidden md:block" /> of tech leaders
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="text-lg text-zinc-400 max-w-xl leading-relaxed mb-8"
+              className="text-lg text-muted-foreground max-w-xl leading-relaxed mb-8"
             >
               Join NxtGen Academy as a mentor and share your industry expertise with eager learners. Help bridge the gap between academia and industry.
             </motion.p>
             <motion.div
               variants={itemVariants}
-              className="flex items-center gap-4 text-sm text-zinc-500 font-medium"
+              className="flex items-center gap-4 text-sm text-muted-foreground font-medium"
             >
               <div className="flex -space-x-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center">
-                    <span className="text-zinc-400 text-xs">M{i}</span>
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center">
+                    <span className="text-muted-foreground text-xs font-bold">M{i}</span>
                   </div>
                 ))}
               </div>
@@ -271,47 +271,47 @@ export default function ApplyMentorPage() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 85, damping: 15, delay: 0.25 }}
-            className="w-full max-w-xl mx-auto lg:mx-0 p-6 md:p-8 mt-12 lg:mt-0"
+            className="w-full max-w-xl mx-auto lg:mx-0 p-6 md:p-8 mt-12 lg:mt-0 rounded-3xl bg-card border border-border shadow-xl backdrop-blur-xl"
           >
-            <h2 className="text-2xl font-semibold text-white mb-2">Ready to join us?</h2>
-            <p className="text-sm text-zinc-400 mb-6">Fill out the form below to start your journey.</p>
+            <h2 className="text-2xl font-semibold text-foreground mb-2">Ready to join us?</h2>
+            <p className="text-sm text-muted-foreground mb-6">Fill out the form below to start your journey.</p>
 
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="fullName" className="text-zinc-300 text-xs">Full Name</Label>
-                  <Input id="fullName" {...register("fullName")} className="bg-black/50 border-zinc-800 text-white focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="John Doe" />
+                  <Label htmlFor="fullName" className="text-foreground text-xs font-medium">Full Name</Label>
+                  <Input id="fullName" {...register("fullName")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="John Doe" />
                   {errors.fullName && <p className="text-destructive text-xs">{errors.fullName.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-zinc-300 text-xs">Email Address</Label>
-                  <Input id="email" type="email" {...register("email")} className="bg-black/50 border-zinc-800 text-white focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="john@example.com" />
+                  <Label htmlFor="email" className="text-foreground text-xs font-medium">Email Address</Label>
+                  <Input id="email" type="email" {...register("email")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="john@example.com" />
                   {errors.email && <p className="text-destructive text-xs">{errors.email.message}</p>}
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-zinc-300 text-xs">Phone Number</Label>
-                  <Input id="phone" type="tel" {...register("phone")} className="bg-black/50 border-zinc-800 text-white focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="+91 98765 43210" />
+                  <Label htmlFor="phone" className="text-foreground text-xs font-medium">Phone Number</Label>
+                  <Input id="phone" type="tel" {...register("phone")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="+91 98765 43210" />
                   {errors.phone && <p className="text-destructive text-xs">{errors.phone.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="linkedin" className="text-zinc-300 text-xs">LinkedIn Profile</Label>
-                  <Input id="linkedin" type="url" {...register("linkedin")} className="bg-black/50 border-zinc-800 text-white focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="https://linkedin.com/in/johndoe" />
+                  <Label htmlFor="linkedin" className="text-foreground text-xs font-medium">LinkedIn Profile</Label>
+                  <Input id="linkedin" type="url" {...register("linkedin")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="https://linkedin.com/in/johndoe" />
                   {errors.linkedin && <p className="text-destructive text-xs">{errors.linkedin.message}</p>}
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-zinc-300 text-xs">Area of Expertise</Label>
+                  <Label className="text-foreground text-xs font-medium">Area of Expertise</Label>
                   <Controller
                     control={control}
                     name="expertise"
                     render={({ field }) => (
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger className="w-full bg-black/50 border-zinc-800 text-white focus:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50">
+                        <SelectTrigger className="w-full bg-background border-input text-foreground focus:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50">
                           <SelectValue placeholder="Select domain" />
                         </SelectTrigger>
                         <SelectContent>
@@ -328,15 +328,15 @@ export default function ApplyMentorPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="experience" className="text-zinc-300 text-xs">Years of Experience</Label>
-                  <Input id="experience" type="number" min="0" {...register("experience", { valueAsNumber: true })} className="bg-black/50 border-zinc-800 text-white focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="e.g. 5" />
+                  <Label htmlFor="experience" className="text-foreground text-xs font-medium">Years of Experience</Label>
+                  <Input id="experience" type="number" min="0" {...register("experience", { valueAsNumber: true })} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="e.g. 5" />
                   {errors.experience && <p className="text-destructive text-xs">{errors.experience.message}</p>}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="goals" className="text-zinc-300 text-xs">Mentorship goals</Label>
-                <Textarea id="goals" rows={3} {...register("goals")} className="bg-black/50 border-zinc-800 text-white focus-visible:ring-primary/50 resize-none text-sm transition-all duration-300 focus:border-primary/50" placeholder="I want to help students understand practical system design..." />
+                <Label htmlFor="goals" className="text-foreground text-xs font-medium">Mentorship goals</Label>
+                <Textarea id="goals" rows={3} {...register("goals")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 resize-none text-sm transition-all duration-300 focus:border-primary/50" placeholder="I want to help students understand practical system design..." />
                 {errors.goals && <p className="text-destructive text-xs">{errors.goals.message}</p>}
               </div>
 
@@ -345,7 +345,7 @@ export default function ApplyMentorPage() {
                   <Button
                     type="submit"
                     disabled={mutation.isPending}
-                    className="w-full rounded-lg h-11 font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-primary/20"
+                    className="w-full rounded-lg h-11 font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-primary/20"
                   >
                     {mutation.isPending ? (
                       <>
@@ -362,21 +362,21 @@ export default function ApplyMentorPage() {
           </motion.div>
 
           {/* Smooth Fade to Next Section */}
-          <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-zinc-950/30 via-zinc-950/10 to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-background/50 via-background/20 to-transparent pointer-events-none" />
         </section>
       </div>
 
       {/* Benefits Section */}
-      <section className="py-24 px-6 relative z-10 bg-zinc-950/30">
+      <section className="py-24 px-6 relative z-10 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20 text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
               Why Join
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
               Perks of Mentorship
             </h2>
-            <p className="text-zinc-400 text-lg">
+            <p className="text-muted-foreground text-lg">
               Join a community of elite professionals and unlock exclusive benefits while shaping the future.
             </p>
           </div>
@@ -398,30 +398,30 @@ export default function ApplyMentorPage() {
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden"
                   }}
-                  className={`group relative rounded-[32px] border border-white/[0.08] bg-zinc-950/80 hover:bg-zinc-950 ${benefit.borderClass} transition-all duration-500 overflow-hidden shadow-2xl flex flex-col justify-between pt-10 px-8 sm:px-10`}
+                  className={`group relative rounded-[32px] border border-border bg-card hover:bg-card/90 ${benefit.borderClass} transition-all duration-500 overflow-hidden shadow-sm flex flex-col justify-between pt-10 px-8 sm:px-10`}
                 >
                   {/* Subtle top/left gradient glow */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${benefit.glowClass} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
                   <div className="relative z-10 flex flex-col items-start mb-8">
-                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-3">
                       {benefit.title}
                     </span>
-                    <h3 className={`text-xl md:text-2xl font-semibold tracking-tight text-white mb-4 leading-snug ${benefit.textHoverClass} transition-colors duration-300`}>
+                    <h3 className={`text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-4 leading-snug ${benefit.textHoverClass} transition-colors duration-300`}>
                       {benefit.description}
                     </h3>
                   </div>
 
                   {/* Simulated Workspace Window Container */}
-                  <div className="mt-auto overflow-hidden rounded-t-[20px] border-t border-x border-zinc-800/80 bg-zinc-900/30">
+                  <div className="mt-auto overflow-hidden rounded-t-[20px] border-t border-x border-border bg-muted/40">
                     {/* Simulated Window Titlebar */}
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800/80 bg-zinc-900/50 select-none">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/70 select-none">
                       <div className="flex items-center gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-zinc-800" />
-                        <div className="w-2 h-2 rounded-full bg-zinc-800" />
-                        <div className="w-2 h-2 rounded-full bg-zinc-800" />
+                        <div className="w-2 h-2 rounded-full bg-muted-foreground/30" />
+                        <div className="w-2 h-2 rounded-full bg-muted-foreground/30" />
+                        <div className="w-2 h-2 rounded-full bg-muted-foreground/30" />
                       </div>
-                      <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
+                      <div className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest">
                         WORKSPACE
                       </div>
                       <div className="w-10" /> {/* Balance spacer */}
@@ -444,16 +444,16 @@ export default function ApplyMentorPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 px-6 relative z-10 border-t border-white/5 bg-black">
+      <section className="py-24 px-6 relative z-10 border-t border-border bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20 text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
               Process
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
               How to Get Started
             </h2>
-            <p className="text-zinc-400 text-lg">
+            <p className="text-muted-foreground text-lg">
               Four simple steps to begin your journey as a NxtGen Academy mentor.
             </p>
           </div>
@@ -475,13 +475,13 @@ export default function ApplyMentorPage() {
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden"
                   }}
-                  className={`flex-1 group relative rounded-3xl border border-white/[0.08] bg-zinc-950/80 hover:bg-zinc-950 ${step.borderClass} transition-all duration-500 overflow-hidden shadow-2xl flex flex-col p-6`}
+                  className={`flex-1 group relative rounded-3xl border border-border bg-card hover:bg-card/90 ${step.borderClass} transition-all duration-500 overflow-hidden shadow-sm flex flex-col p-6`}
                 >
                   {/* Subtle top/left gradient glow */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${step.glowClass} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
                   {/* Step Image at the Top */}
-                  <div className="relative z-10 w-full overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/30 mb-5 aspect-[16/10]">
+                  <div className="relative z-10 w-full overflow-hidden rounded-2xl border border-border bg-muted/40 mb-5 aspect-[16/10]">
                     <img
                       src={step.image}
                       alt={step.title}
@@ -491,13 +491,13 @@ export default function ApplyMentorPage() {
 
                   {/* Step Info at the Bottom */}
                   <div className="relative z-10 flex flex-col items-start text-left mt-auto">
-                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
                       Step {step.step}
                     </span>
-                    <h3 className={`text-lg font-bold text-white mb-2 ${step.textHoverClass} transition-colors duration-300`}>
+                    <h3 className={`text-lg font-bold text-foreground mb-2 ${step.textHoverClass} transition-colors duration-300`}>
                       {step.title}
                     </h3>
-                    <p className="text-zinc-400 text-xs leading-relaxed">
+                    <p className="text-muted-foreground text-xs leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -506,7 +506,7 @@ export default function ApplyMentorPage() {
                 {/* Connecting Arrow (drawn in between steps) */}
                 {idx < steps.length - 1 && (
                   <div className="flex items-center justify-center lg:rotate-0 rotate-90 my-2 lg:my-0 flex-shrink-0 self-center z-20">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-zinc-950/60 backdrop-blur-sm shadow-lg text-primary/60 hover:text-primary transition-colors duration-300">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full border border-border bg-card/80 backdrop-blur-sm shadow-sm text-primary/60 hover:text-primary transition-colors duration-300">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
@@ -521,16 +521,16 @@ export default function ApplyMentorPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 px-6 relative z-10 border-t border-white/5 bg-zinc-950/50">
+      <section className="py-24 px-6 relative z-10 border-t border-border bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20 text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
               Wall of Love
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
               Hear From Our Mentors
             </h2>
-            <p className="text-zinc-400 text-lg">
+            <p className="text-muted-foreground text-lg">
               Discover what our community has to say about their mentoring experience.
             </p>
           </div>
@@ -551,27 +551,27 @@ export default function ApplyMentorPage() {
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden"
                 }}
-                className={`group relative p-8 sm:p-10 rounded-[32px] border border-white/[0.08] bg-zinc-950/80 hover:bg-zinc-950 ${t.borderClass} transition-all duration-500 flex flex-col h-full shadow-2xl overflow-hidden`}
+                className={`group relative p-8 sm:p-10 rounded-[32px] border border-border bg-card hover:bg-card/90 ${t.borderClass} transition-all duration-500 flex flex-col h-full shadow-sm overflow-hidden`}
               >
                 {/* Dynamic Inside Glow on Hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${t.glowClass} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
-                <div className="absolute top-8 right-8 text-white/[0.03] group-hover:text-white/[0.06] transition-colors duration-500 pointer-events-none">
+                <div className="absolute top-8 right-8 text-foreground/[0.04] group-hover:text-foreground/[0.08] transition-colors duration-500 pointer-events-none">
                   <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" /></svg>
                 </div>
 
                 <div className="relative z-10 flex-1">
-                  <p className="text-zinc-300 leading-relaxed mb-10 text-base font-medium">&quot;{t.text}&quot;</p>
+                  <p className="text-foreground/90 leading-relaxed mb-10 text-base font-medium">&quot;{t.text}&quot;</p>
                 </div>
 
-                <div className="relative z-10 flex items-center gap-4 mt-auto pt-6 border-t border-white/[0.06]">
+                <div className="relative z-10 flex items-center gap-4 mt-auto pt-6 border-t border-border">
                   {/* Portrait Avatar */}
-                  <div className={`h-12 w-12 rounded-full overflow-hidden border border-white/10 ${t.avatarBorderClass} transition-all duration-500 shadow-md flex-shrink-0`}>
+                  <div className={`h-12 w-12 rounded-full overflow-hidden border border-border ${t.avatarBorderClass} transition-all duration-500 shadow-sm flex-shrink-0`}>
                     <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white text-sm">{t.name}</h4>
-                    <p className={`text-xs text-zinc-500 font-medium mt-0.5 ${t.roleHoverClass} transition-colors duration-300`}>{t.role}</p>
+                    <h4 className="font-bold text-foreground text-sm">{t.name}</h4>
+                    <p className={`text-xs text-muted-foreground font-medium mt-0.5 ${t.roleHoverClass} transition-colors duration-300`}>{t.role}</p>
                   </div>
                 </div>
               </motion.div>

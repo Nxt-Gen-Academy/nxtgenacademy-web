@@ -153,7 +153,7 @@ export default function DashboardPage() {
               onClick={handleLogout}
               disabled={isLoggingOut}
               variant="outline"
-              className="w-full max-w-sm rounded-xl mt-6 border-red-500/20 bg-red-500/5 text-red-400 hover:bg-red-500 hover:text-white transition-all text-xs py-2.5 h-auto"
+              className="w-full max-w-sm rounded-xl mt-6 border-destructive/20 bg-destructive/5 text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all text-xs py-2.5 h-auto"
             >
               {isLoggingOut ? (
                 <>

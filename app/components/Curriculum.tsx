@@ -63,12 +63,12 @@ export default function Curriculum() {
           {stacks.map((s, idx) => (
             <ScrollReveal key={s.t} direction="up" delay={idx * 150}>
               <div
-                className="card-premium p-8 h-full group relative overflow-hidden bg-white/[0.02] border-white/5 backdrop-blur-md hover:border-white/20 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+                className="card-premium p-8 h-full group relative overflow-hidden bg-card border-border backdrop-blur-md hover:border-primary/40 hover:shadow-lg"
               >
                 {/* Spotlight gradient effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none z-0" />
                 
-                <div className="relative z-10 flex items-center gap-4 mb-8 border-b border-white/5 pb-6">
+                <div className="relative z-10 flex items-center gap-4 mb-8 border-b border-border pb-6">
                   <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-mono text-sm font-bold border border-primary/20 shadow-sm group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_15px_oklch(0.583_0.222_258.6/0.4)] transition-all duration-300">
                     0{idx + 1}
                   </div>
@@ -81,11 +81,11 @@ export default function Curriculum() {
                     return (
                       <li
                         key={i}
-                        className="flex items-center justify-between p-3 rounded-xl hover:bg-white/[0.03] transition-colors duration-300 border border-transparent hover:border-white/10"
+                        className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/60 transition-colors duration-300 border border-transparent hover:border-border"
                         style={{ transitionDelay: `${itemIdx * 30}ms` }}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="h-8 w-8 rounded-lg bg-card/50 border border-white/10 flex items-center justify-center text-muted-foreground group-hover:text-foreground group-hover:border-primary/30 transition-all shadow-sm">
+                          <div className="h-8 w-8 rounded-lg bg-muted border border-border flex items-center justify-center text-muted-foreground group-hover:text-foreground group-hover:border-primary/30 transition-all shadow-xs">
                             {Icon && <Icon className="w-4 h-4" />}
                           </div>
                           <span className="font-medium text-foreground/90">{i}</span>

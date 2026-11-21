@@ -3,8 +3,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --font-display: var(--font-display), system-ui, sans-serif;
   --font-sans: var(--font-sans), system-ui, sans-serif;
@@ -71,51 +69,51 @@
 :root {
   --radius: 0.75rem;
 
-  /* Core palette — sleeker midnight slate, vibrant royal blue */
-  --background: oklch(0.10 0.01 250);
-  --foreground: oklch(0.98 0.005 250);
+  /* Core palette — Clean modern light mode with vibrant royal blue primary */
+  --background: oklch(0.985 0.005 250);
+  --foreground: oklch(0.16 0.03 255);
 
-  --ink: oklch(0.06 0.01 250);
+  --ink: oklch(0.14 0.02 255);
   --electric: oklch(0.583 0.222 258.6);
-  --glow: oklch(0.74 0.16 245);
+  --glow: oklch(0.70 0.16 250);
 
-  --card: oklch(0.14 0.015 250);
-  --card-foreground: oklch(0.98 0.005 250);
-  --popover: oklch(0.12 0.01 250);
-  --popover-foreground: oklch(0.98 0.005 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.03 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.03 255);
 
   --primary: oklch(0.583 0.222 258.6);
-  --primary-foreground: oklch(0.98 0.01 250);
+  --primary-foreground: oklch(0.99 0 0);
 
-  --secondary: oklch(0.18 0.02 250);
-  --secondary-foreground: oklch(0.98 0.005 250);
+  --secondary: oklch(0.95 0.012 250);
+  --secondary-foreground: oklch(0.20 0.03 255);
 
-  --muted: oklch(0.16 0.015 250);
-  --muted-foreground: oklch(0.68 0.02 250);
+  --muted: oklch(0.955 0.008 250);
+  --muted-foreground: oklch(0.48 0.03 250);
 
-  --accent: oklch(0.74 0.16 245);
-  --accent-foreground: oklch(0.10 0.01 250);
+  --accent: oklch(0.94 0.035 258.6);
+  --accent-foreground: oklch(0.25 0.12 258.6);
 
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(0.24 0.02 250 / 60%);
-  --input: oklch(0.20 0.02 250);
+  --border: oklch(0.90 0.012 250);
+  --input: oklch(0.88 0.012 250);
   --ring: oklch(0.583 0.222 258.6);
 
   --chart-1: oklch(0.583 0.222 258.6);
-  --chart-2: oklch(0.74 0.16 245);
-  --chart-3: oklch(0.72 0.16 160);
-  --chart-4: oklch(0.6 0.22 25);
-  --chart-5: oklch(0.14 0.015 250);
+  --chart-2: oklch(0.65 0.18 245);
+  --chart-3: oklch(0.68 0.16 160);
+  --chart-4: oklch(0.58 0.22 25);
+  --chart-5: oklch(0.20 0.03 255);
 
-  --sidebar: oklch(0.14 0.015 250);
-  --sidebar-foreground: oklch(0.98 0.005 250);
+  --sidebar: oklch(0.98 0.005 250);
+  --sidebar-foreground: oklch(0.16 0.03 255);
   --sidebar-primary: oklch(0.583 0.222 258.6);
-  --sidebar-primary-foreground: oklch(0.98 0.01 250);
-  --sidebar-accent: oklch(0.18 0.02 250);
-  --sidebar-accent-foreground: oklch(0.98 0.005 250);
-  --sidebar-border: oklch(0.24 0.02 250 / 60%);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.035 258.6);
+  --sidebar-accent-foreground: oklch(0.25 0.12 258.6);
+  --sidebar-border: oklch(0.90 0.012 250);
   --sidebar-ring: oklch(0.583 0.222 258.6);
 }
 
@@ -148,7 +146,7 @@
   }
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
     .text-gradient {
-      background-image: linear-gradient(135deg, oklch(0.97 0.005 250) 0%, var(--electric) 60%, var(--glow) 100%);
+      background-image: linear-gradient(135deg, var(--foreground) 0%, var(--primary) 65%, var(--electric) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -159,11 +157,11 @@
     }
   }
   .glass {
-    background: linear-gradient(180deg, oklch(0.18 0.03 252 / 0.4), oklch(0.10 0.02 252 / 0.25));
+    background: linear-gradient(180deg, var(--card) / 0.85, var(--card) / 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid oklch(0.4 0.08 252 / 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   }
   .glow-border {
     position: relative;
@@ -183,8 +181,8 @@
   }
   .grid-pattern {
     background-image:
-      linear-gradient(oklch(0.4 0.08 252 / 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(0.4 0.08 252 / 0.06) 1px, transparent 1px);
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 64px 64px;
   }
   .noise {
@@ -219,12 +217,12 @@
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, oklch(0.22 0.03 252 / 0.8), transparent);
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
   }
 
   /* Premium Card utilities */
   .card-premium {
-    @apply relative overflow-hidden rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-border hover:bg-card/60 shadow-sm hover:shadow-md;
+    @apply relative overflow-hidden rounded-2xl border border-border/80 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card shadow-sm hover:shadow-md;
   }
 
   .nav-link-underline {
@@ -292,16 +290,16 @@
   }
   .page-bg::before {
     background:
-      radial-gradient(520px 280px at 10% 25%, oklch(0.72 0.18 190 / 0.18), transparent 70%),
-      radial-gradient(420px 260px at 78% 10%, oklch(0.78 0.2 45 / 0.2), transparent 70%),
-      radial-gradient(520px 320px at 88% 70%, oklch(0.68 0.2 320 / 0.16), transparent 70%);
+      radial-gradient(520px 280px at 10% 25%, oklch(0.92 0.05 258 / 0.4), transparent 70%),
+      radial-gradient(420px 260px at 78% 10%, oklch(0.94 0.04 45 / 0.3), transparent 70%),
+      radial-gradient(520px 320px at 88% 70%, oklch(0.93 0.05 320 / 0.3), transparent 70%);
   }
   .page-bg::after {
     inset: auto 0 -10% 0;
     height: 60vh;
     background:
-      radial-gradient(520px 320px at 18% 80%, oklch(0.78 0.2 45 / 0.18), transparent 70%),
-      radial-gradient(420px 240px at 80% 70%, oklch(0.72 0.18 190 / 0.2), transparent 72%);
+      radial-gradient(520px 320px at 18% 80%, oklch(0.94 0.04 45 / 0.3), transparent 70%),
+      radial-gradient(420px 240px at 80% 70%, oklch(0.92 0.05 258 / 0.4), transparent 72%);
   }
 
 }
@@ -316,7 +314,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: oklch(0.08 0.02 250);
+  background: var(--background);
   gap: 0;
   overflow: hidden;
 }
@@ -342,7 +340,7 @@
   height: 400px;
   top: 30%;
   left: 35%;
-  background: radial-gradient(circle, oklch(0.583 0.222 258.6 / 0.22), transparent 70%);
+  background: radial-gradient(circle, oklch(0.583 0.222 258.6 / 0.12), transparent 70%);
 }
 
 .intro-glow-2 {
@@ -350,7 +348,7 @@
   height: 300px;
   top: 45%;
   right: 30%;
-  background: radial-gradient(circle, oklch(0.74 0.16 245 / 0.15), transparent 70%);
+  background: radial-gradient(circle, oklch(0.74 0.16 245 / 0.10), transparent 70%);
 }
 
 /* Intro Logo Reveal Animation */
@@ -429,15 +427,14 @@
   letter-spacing: -0.03em;
 }
 
-/* Line 1: "NxtGen" — premium silver/white gradient */
+/* Line 1: "NxtGen" — clean brand gradient */
 .intro-text-line-1 {
   font-size: clamp(2.5rem, 12vw, 8.5rem);
   font-weight: 800;
-  filter: drop-shadow(0 4px 12px oklch(1 0 0 / 0.15));
 }
 
 .intro-text-line-1 .intro-char {
-  background-image: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.92 0.01 250) 40%, oklch(0.75 0.02 250) 100%);
+  background-image: linear-gradient(135deg, var(--foreground) 0%, var(--primary) 65%, var(--electric) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -447,10 +444,10 @@
 /* Line 2: "Academy" — elegant wide tracking */
 .intro-text-line-2 {
   font-size: clamp(1.25rem, 7vw, 5rem);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: oklch(0.95 0.01 250 / 0.65);
+  color: var(--muted-foreground);
   margin-left: 0.15em; /* optically center due to wide letter-spacing */
 }
 
@@ -493,7 +490,7 @@
   width: 0;
   height: 1px;
   margin-top: 1.5rem;
-  background: linear-gradient(90deg, transparent, oklch(0.583 0.222 258.6 / 0.5), transparent);
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
   position: relative;
   z-index: 1;
 }
@@ -514,7 +511,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: oklch(0.65 0.025 250 / 0);
+  color: transparent;
   position: relative;
   z-index: 1;
 }
@@ -525,7 +522,7 @@
 }
 
 @keyframes intro-tagline-fade {
-  to { color: oklch(0.65 0.025 250 / 0.6); }
+  to { color: var(--muted-foreground); }
 }
 
 /* Reduced motion: skip everything */
@@ -540,7 +537,7 @@
     transform: none !important;
     opacity: 1 !important;
     stroke-dashoffset: 0 !important;
-    fill: oklch(0.98 0.005 250) !important;
+    fill: var(--foreground) !important;
   }
 }
 
@@ -553,7 +550,7 @@
 
 /* Accent line gradient text */
 .hero-accent-text {
-  background-image: linear-gradient(135deg, oklch(0.62 0.22 258) 0%, oklch(0.78 0.18 245) 100%);
+  background-image: linear-gradient(135deg, var(--primary) 0%, var(--electric) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -575,11 +572,11 @@
 
 /* Glass badge for floating cards */
 .hero-glass-badge {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--card);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 /* Idle floating animation for badges */
@@ -720,21 +717,23 @@
   height: 3.5rem;
   width: 100%;
   max-width: 150px;
-  background-color: #ffffff;
+  background-color: var(--card);
+  border: 1px solid var(--border);
   border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .logo-white-card:hover {
   opacity: 1;
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary);
 }
 
 .logo-white-card-img {

@@ -32,7 +32,7 @@ export default function Projects() {
           {list.map((p, i) => (
             <ScrollReveal key={p.t} direction="up" delay={i * 100}>
               <div
-                className="group relative aspect-[4/5] rounded-3xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-white/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+                className="group relative aspect-[4/5] rounded-3xl border border-border bg-card overflow-hidden hover:border-primary/40 transition-all duration-500 hover:-translate-y-1 shadow-sm hover:shadow-xl"
               >
                 {/* Background image */}
                 {p.img ? (
@@ -48,7 +48,7 @@ export default function Projects() {
                 )}
 
                 {/* Premium Gradient overlays for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 group-hover:from-black group-hover:via-black/60 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/75 to-card/10 group-hover:from-card group-hover:via-card/85 transition-all duration-500" />
 
                 {/* Subtle Glow effect on hover */}
                 <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700" />
@@ -56,21 +56,21 @@ export default function Projects() {
                 {/* Content */}
                 <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                   <div className="flex justify-between items-start">
-                    <span className="inline-flex items-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-white/90 shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:bg-primary/30 group-hover:text-white group-hover:border-primary/50 transition-colors">
+                    <span className="inline-flex items-center rounded-full border border-border/80 bg-card/85 backdrop-blur-md px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground shadow-xs group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-colors">
                       {p.k}
                     </span>
-                    <span className="font-mono text-sm font-bold text-white/30 group-hover:text-white/50 transition-colors">
+                    <span className="font-mono text-sm font-bold text-muted-foreground/60 group-hover:text-foreground transition-colors">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
                   
                   <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    <h4 className="font-heading text-xl sm:text-2xl font-medium leading-tight text-white drop-shadow-md">
+                    <h4 className="font-heading text-xl sm:text-2xl font-medium leading-tight text-foreground">
                       {p.t}
                     </h4>
                     <div className="mt-3 flex items-center gap-2">
                       <span className="h-px w-4 bg-primary/80 transition-all duration-500 group-hover:w-8" />
-                      <p className="text-sm font-medium text-white/70 tracking-wide">{p.s}</p>
+                      <p className="text-sm font-medium text-muted-foreground tracking-wide">{p.s}</p>
                     </div>
                   </div>
                 </div>

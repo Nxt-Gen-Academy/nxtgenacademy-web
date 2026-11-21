@@ -185,15 +185,15 @@ export default function HeroParallaxCard() {
         style={{
           transformStyle: "preserve-3d",
           willChange: animationDisabled ? "auto" : "transform",
-          boxShadow: "0 20px 40px -12px rgba(0,0,0,0.4), 0 8px 24px -8px rgba(0,0,0,0.3)",
+          boxShadow: "0 12px 30px -8px rgba(0,0,0,0.08), 0 4px 12px -4px rgba(0,0,0,0.04)",
         }}
       >
-        {/* Card background – dark gradient with brand tint */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.12_0.04_258)] via-[oklch(0.09_0.03_252)] to-[oklch(0.06_0.02_245)]" />
-        <div className="absolute inset-0 grid-pattern opacity-20" />
+        {/* Card background – clean light gradient with brand tint */}
+        <div className="absolute inset-0 bg-gradient-to-br from-card via-card/95 to-secondary/40 border border-border/80" />
+        <div className="absolute inset-0 grid-pattern opacity-10" />
         {/* Subtle accent glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-primary/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-48 h-48 bg-[oklch(0.78_0.18_245/0.08)] rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl" />
 
         {/* Card inner content */}
         <div className="relative z-10 p-6 sm:p-10 flex flex-col items-center min-h-[340px] sm:min-h-[420px] justify-center gap-5 sm:gap-6">
@@ -204,23 +204,23 @@ export default function HeroParallaxCard() {
               alt="NxtGen Academy"
               width={90}
               height={90}
-              className="h-20 w-20 sm:h-24 sm:w-24 object-contain rounded-2xl shadow-[0_8px_30px_oklch(0.583_0.222_258.6/0.3)] brightness-105"
+              className="h-20 w-20 sm:h-24 sm:w-24 object-contain rounded-2xl shadow-md"
             />
           </div>
 
           {/* LIVE badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 px-4 py-1.5">
+          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-4 py-1.5">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="hero-live-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+              <span className="hero-live-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
             </span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-emerald-300 font-medium">
+            <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-emerald-700 font-semibold">
               Live Cohorts
             </span>
           </div>
 
           {/* Tagline */}
-          <p className="text-center text-sm text-muted-foreground/80 max-w-[260px] leading-relaxed">
+          <p className="text-center text-sm text-muted-foreground max-w-[260px] leading-relaxed">
             Engineering Tech Careers with Expert-Led Training
           </p>
 
@@ -247,7 +247,7 @@ export default function HeroParallaxCard() {
         </div>
 
         {/* Subtle border overlay */}
-        <div className="absolute inset-0 rounded-3xl border border-white/[0.08] pointer-events-none" />
+        <div className="absolute inset-0 rounded-3xl border border-border/80 pointer-events-none" />
       </div>
 
       {/* ── Floating Badges ── */}

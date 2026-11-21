@@ -39,7 +39,7 @@ export default function AlumniNetwork() {
         “{item.quote}”
       </p>
       <div className="flex gap-3 pt-6 border-t border-border/50">
-        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-white/5 flex-shrink-0">
+        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border">
           <img
             alt={item.name}
             loading="lazy"

@@ -85,7 +85,7 @@ export default function HearFromLearners() {
         {/* Card Header */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center font-bold text-xs tracking-wider shrink-0 border border-white/10 shadow-inner`}>
+            <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center font-bold text-xs tracking-wider shrink-0 border border-border/80 shadow-xs`}>
               {item.initials}
             </div>
             <div>
@@ -139,7 +139,7 @@ export default function HearFromLearners() {
         />
 
         {/* 3-Column Vertical Marquee Container */}
-        <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md p-6 md:p-8 shadow-2xl">
+        <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-border bg-card/60 backdrop-blur-md p-6 md:p-8 shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
             
             {/* Column 1 */}
