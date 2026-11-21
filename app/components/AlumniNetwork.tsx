@@ -125,7 +125,7 @@ export default function AlumniNetwork() {
       {/* Stats Counter Section */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
         <ScrollReveal direction="up" delay={100} duration={500}>
-          <div className="bg-card/30 rounded-lg md:rounded-xl border border-border/50 py-8 px-6 backdrop-blur-sm shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
+          <div className="bg-card rounded-2xl border border-border/60 py-8 px-6 shadow-[0_10px_30px_-5px_oklch(0.16_0.03_255/0.05),0_4px_10px_-2px_oklch(0.16_0.03_255/0.02)]">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-border/50">
               <div className="text-center">
                 <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">

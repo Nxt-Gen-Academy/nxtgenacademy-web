@@ -89,7 +89,7 @@ export default function Hero() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="hero-headline font-heading leading-[1.08] font-extrabold tracking-[-0.02em] text-foreground">
+            <h1 className="hero-headline font-heading leading-[1.08] font-medium tracking-[-0.02em] text-foreground">
               <span className="block">Build your career in</span>
               <span className="hero-accent-text block text-primary pb-2">AI &amp; Analytics</span>
             </h1>
