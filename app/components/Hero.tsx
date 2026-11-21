@@ -73,8 +73,8 @@ export default function Hero() {
       </video>
 
       {/* Light backdrop overlay over the video */}
-      <div className="absolute inset-0 bg-background/85 z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-background/55 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/5 via-background/35 to-background z-0 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
 
