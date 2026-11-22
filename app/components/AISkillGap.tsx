@@ -80,29 +80,28 @@ export default function AISkillGap() {
           </ScrollReveal>
 
           {/* Headline with Swoop Underline on Accelerating */}
-          <WordStaggerHeading
-            as="h2"
-            className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-foreground leading-[1.08]"
-          >
-            The AI Skills Curve is <br />
-            <span className="relative inline-block text-primary font-medium mt-1">
-              Accelerating
-              {/* Dynamic curved swoop underline */}
-              <svg
-                className="absolute -bottom-2.5 left-0 w-full h-3.5 text-primary/80 overflow-visible"
-                viewBox="0 0 250 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 10C75 2 185 2 246 8"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-          </WordStaggerHeading>
+          <ScrollReveal direction="up" delay={100}>
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-foreground leading-[1.08]">
+              The AI Skills Curve is <br />
+              <span className="relative inline-block text-primary font-medium mt-1">
+                Accelerating
+                {/* Dynamic curved swoop underline */}
+                <svg
+                  className="absolute -bottom-2.5 left-0 w-full h-3.5 text-primary/80 overflow-visible"
+                  viewBox="0 0 250 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 10C75 2 185 2 246 8"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h2>
+          </ScrollReveal>
 
           {/* Subtitle */}
           <ScrollReveal direction="up" delay={200}>

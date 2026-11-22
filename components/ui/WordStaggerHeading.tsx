@@ -80,6 +80,16 @@ function parseTokens(children: React.ReactNode, prefix = "w"): { tokens: ParsedT
         return;
       }
 
+      // Treat SVG and its child tags as an atomic element (never decompose SVG tags into HTML spans)
+      if (node.type === "svg") {
+        tokens.push({
+          type: "element",
+          content: node,
+          key: `${prefix}-svg-${counter++}`,
+        });
+        return;
+      }
+
       // Check if node has children
       const props = node.props as { children?: React.ReactNode; className?: string };
       const combinedClass = [inheritedClassName, props?.className].filter(Boolean).join(" ");
