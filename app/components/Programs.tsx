@@ -57,6 +57,8 @@ export default function Programs() {
       <div className="absolute top-[25%] left-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[160px] -z-10 pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[160px] -z-10 pointer-events-none" />
 
+      <div className="section-divider" />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         {/* ── Section Header ── */}
         <div className="text-center max-w-3xl mx-auto mb-14">

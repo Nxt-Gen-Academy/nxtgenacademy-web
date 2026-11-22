@@ -19,6 +19,7 @@ export default function FinalCTA() {
 
   return (
     <section id="cta" className="py-10 sm:py-16 px-4 relative">
+      <div className="section-divider" />
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up">
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-border/80 shadow-xl text-left w-full min-h-[410px] sm:min-h-[390px] md:min-h-0 md:aspect-[2170/725]">

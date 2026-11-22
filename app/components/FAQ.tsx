@@ -189,7 +189,7 @@ export default function FAQ() {
           <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
             <ScrollReveal direction="right" delay={100}>
               {/* Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/80 bg-muted/40 text-xs sm:text-sm font-medium text-muted-foreground shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs sm:text-sm font-semibold text-primary shadow-2xs">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 Frequently Asked Questions
               </div>
