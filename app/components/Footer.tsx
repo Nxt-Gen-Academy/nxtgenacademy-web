@@ -78,15 +78,22 @@ export default function Footer() {
       </div>
       
       <div className="border-t border-border bg-muted/30 backdrop-blur-sm relative z-20">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground font-medium">
-            © {new Date().getFullYear()} NxtGen Academy. All rights reserved.
-          </p>
-          <div className="flex gap-6 text-xs text-muted-foreground font-medium">
-            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link href="/refund" className="hover:text-primary transition-colors">Refund Policy</Link>
+        <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-border/50 pb-6">
+            <p className="text-sm font-semibold text-foreground">
+              © {new Date().getFullYear()} NxtGen Academy™. All Rights Reserved.
+            </p>
+            <nav aria-label="Legal" className="flex flex-wrap items-center gap-6 text-xs font-medium text-muted-foreground">
+              <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-primary transition-colors">Terms &amp; Conditions</Link>
+              <Link href="/intellectual-property" className="hover:text-primary transition-colors">Intellectual Property</Link>
+              <Link href="/refund" className="hover:text-primary transition-colors">Refund Policy</Link>
+            </nav>
           </div>
+
+          <p className="text-[11px] leading-relaxed text-muted-foreground/80 max-w-5xl">
+            All original content, graphics, designs, photographs, videos, educational materials, project documentation and software code on this website are protected by applicable intellectual property laws. Unauthorised copying, reproduction, distribution or commercial use is prohibited without prior written permission, except as permitted by law.
+          </p>
         </div>
       </div>
     </footer>
