@@ -1,15 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import { motion, useInView, useReducedMotion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 
-interface ScrollRevealProps {
+export interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
   direction?: "up" | "down" | "left" | "right" | "fade";
   delay?: number;
   duration?: number;
   threshold?: number;
+  once?: boolean;
 }
 
 export default function ScrollReveal({
@@ -17,109 +19,55 @@ export default function ScrollReveal({
   className,
   direction = "up",
   delay = 0,
-  duration = 700,
+  duration = 600,
   threshold = 0.1,
+  once = true,
 }: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isSafari, setIsSafari] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    once,
+    amount: threshold,
+    margin: "0px 0px -40px 0px",
+  });
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
-    const ua = window.navigator.userAgent.toLowerCase();
-    const safari =
-      ua.includes("safari") &&
-      !ua.includes("chrome") &&
-      !ua.includes("chromium") &&
-      !ua.includes("android");
+  const offset = 28;
 
-    setIsSafari(safari);
-
-    if (safari) {
-      setIsVisible(true);
-      return;
-    }
-
-    const currentRef = ref.current;
-    
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      requestAnimationFrame(() => setIsVisible(true));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (currentRef) observer.unobserve(currentRef);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "100px 0px 100px 0px",
-        threshold: 0.01,
-      }
-    );
-
-    if (currentRef) {
-      // Immediate viewport check for Firefox initial render
-      const rect = currentRef.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
-        setIsVisible(true);
-      } else {
-        observer.observe(currentRef);
-      }
-    }
-
-    // Safety fallback: if IntersectionObserver hasn't fired after 1s,
-    // reveal content anyway. Prevents permanently invisible content
-    // on browsers with IntersectionObserver edge cases (e.g. Firefox).
-    const fallbackTimer = setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-      clearTimeout(fallbackTimer);
-    };
-  }, [threshold]);
-
-  const baseClasses = isSafari ? "" : "transition-all ease-out";
-  
-  const initialStyles = {
-    up: isSafari ? "" : "opacity-0 translate-y-12",
-    down: isSafari ? "" : "opacity-0 -translate-y-12",
-    left: isSafari ? "" : "opacity-0 translate-x-12",
-    right: isSafari ? "" : "opacity-0 -translate-x-12",
-    fade: isSafari ? "" : "opacity-0",
+  const initialVariants = {
+    up: { opacity: 0, y: offset, x: 0 },
+    down: { opacity: 0, y: -offset, x: 0 },
+    left: { opacity: 0, x: offset, y: 0 },
+    right: { opacity: 0, x: -offset, y: 0 },
+    fade: { opacity: 0, x: 0, y: 0 },
   };
 
-  const finalStyles = isSafari ? "" : "opacity-100 translate-y-0 translate-x-0";
+  const variants: Variants = {
+    hidden: initialVariants[direction],
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
+        duration: duration / 1000,
+        delay: delay / 1000,
+        ease: [0.21, 0.47, 0.32, 0.98] as const,
+      },
+    },
+  };
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={cn(
-        baseClasses,
-        isVisible ? finalStyles : initialStyles[direction],
-        className
-      )}
-      style={
-        isSafari
-          ? {}
-          : {
-              transitionDuration: `${duration}ms`,
-              transitionDelay: `${delay}ms`,
-            }
-      }
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={variants}
+      className={cn("will-change-[transform,opacity]", className)}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
-

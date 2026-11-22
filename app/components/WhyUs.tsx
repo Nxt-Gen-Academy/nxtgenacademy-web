@@ -58,36 +58,31 @@ export default function WhyUs() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Why NxtGen"
-          title="Why students choose NxtGen Academy"
+          title={<>Why Students Choose <span className="text-primary font-medium">NxtGen Academy</span></>}
           subtitle="We bridge the gap between academic knowledge and industry expectations, transforming you into a top-tier candidate."
         />
         
         <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
           {items.map((it, i) => (
             <ScrollReveal key={it.t} direction="up" delay={i * 100}>
-              <Card
-                className="card-premium h-full group relative overflow-hidden"
+              <div
+                className="card-hover-primary h-full group relative overflow-hidden rounded-3xl bg-card border border-border/80 p-7 shadow-sm cursor-pointer"
               >
-                {/* Spotlight gradient effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
-                
-                <CardContent className="p-7 relative z-10">
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shadow-sm group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.3)] transition-all duration-500">
-                      {it.icon}
-                    </div>
-                    <span className="font-heading text-5xl font-black text-foreground/[0.05] group-hover:text-primary/15 transition-colors duration-500 pointer-events-none">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
+                <div className="flex justify-between items-start mb-6">
+                  <div className="card-icon h-12 w-12 rounded-2xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shadow-xs transition-colors duration-200">
+                    {it.icon}
                   </div>
-                  <h4 className="font-heading text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                    {it.t}
-                  </h4>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed font-medium">
-                    {it.d}
-                  </p>
-                </CardContent>
-              </Card>
+                  <span className="font-heading text-5xl font-black text-foreground/[0.05] transition-colors duration-200 pointer-events-none">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h4 className="font-heading text-lg font-semibold text-foreground transition-colors duration-200">
+                  {it.t}
+                </h4>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed font-medium transition-colors duration-200">
+                  {it.d}
+                </p>
+              </div>
             </ScrollReveal>
           ))}
         </div>

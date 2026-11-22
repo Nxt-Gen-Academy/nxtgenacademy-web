@@ -1,281 +1,370 @@
 "use client";
 
-import { useState } from "react";
-import SectionHeading from "./SectionHeading";
+import React, { useState } from "react";
+import { 
+  BarChart3, 
+  Sparkles, 
+  ArrowUpRight, 
+  TrendingUp 
+} from "lucide-react";
+import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 import ScrollReveal from "./ScrollReveal";
 
-interface DataPoint {
+interface Milestone {
   year: number;
-  avgSal: string;
-  perfSal: string;
-  yVal: number;
+  x: number;
+  y: number;
+  label: string;
+  salary: string;
+  multiplier: string;
 }
 
-const tabData: Record<string, DataPoint[]> = {
-  "AI Product Management": [
-    { year: 2026, avgSal: "₹10L", perfSal: "₹15L", yVal: 400 },
-    { year: 2028, avgSal: "₹12L", perfSal: "₹35L", yVal: 266 },
-    { year: 2030, avgSal: "₹14L", perfSal: "₹48L", yVal: 180 },
-    { year: 2032, avgSal: "₹17L", perfSal: "₹63L", yVal: 80 },
-    { year: 2035, avgSal: "₹20L", perfSal: "₹72L", yVal: 20 },
-  ],
-  "Business Analyst": [
-    { year: 2026, avgSal: "₹6L", perfSal: "₹12L", yVal: 420 },
-    { year: 2028, avgSal: "₹8L", perfSal: "₹28L", yVal: 313 },
-    { year: 2030, avgSal: "₹10L", perfSal: "₹38L", yVal: 246 },
-    { year: 2032, avgSal: "₹12L", perfSal: "₹50L", yVal: 166 },
-    { year: 2035, avgSal: "₹15L", perfSal: "₹62L", yVal: 86 },
-  ],
-  "AI Data Science": [
-    { year: 2026, avgSal: "₹12L", perfSal: "₹18L", yVal: 380 },
-    { year: 2028, avgSal: "₹15L", perfSal: "₹40L", yVal: 233 },
-    { year: 2030, avgSal: "₹18L", perfSal: "₹55L", yVal: 133 },
-    { year: 2032, avgSal: "₹22L", perfSal: "₹70L", yVal: 33 },
-    { year: 2035, avgSal: "₹26L", perfSal: "₹82L", yVal: 0 },
-  ],
-  "Data Analyst": [
-    { year: 2026, avgSal: "₹8L", perfSal: "₹14L", yVal: 406 },
-    { year: 2028, avgSal: "₹10L", perfSal: "₹32L", yVal: 286 },
-    { year: 2030, avgSal: "₹12L", perfSal: "₹45L", yVal: 200 },
-    { year: 2032, avgSal: "₹15L", perfSal: "₹60L", yVal: 100 },
-    { year: 2035, avgSal: "₹18L", perfSal: "₹75L", yVal: 0 },
-  ],
-  "Advanced Generative AI": [
-    { year: 2026, avgSal: "₹14L", perfSal: "₹20L", yVal: 366 },
-    { year: 2028, avgSal: "₹18L", perfSal: "₹45L", yVal: 200 },
-    { year: 2030, avgSal: "₹22L", perfSal: "₹62L", yVal: 86 },
-    { year: 2032, avgSal: "₹27L", perfSal: "₹75L", yVal: 0 },
-    { year: 2035, avgSal: "₹32L", perfSal: "₹88L", yVal: -20 },
-  ],
-};
-
-const tabs = Object.keys(tabData);
+const MILESTONES: Milestone[] = [
+  { year: 2026, x: 50, y: 155, label: "Foundation & AI Workflows", salary: "₹12L - ₹15L", multiplier: "1.5X" },
+  { year: 2028, x: 220, y: 125, label: "AI Automation & Analytics", salary: "₹24L - ₹28L", multiplier: "2.3X" },
+  { year: 2030, x: 395, y: 95, label: "Strategic AI Implementation", salary: "₹38L - ₹45L", multiplier: "3.0X" },
+  { year: 2032, x: 570, y: 65, label: "Enterprise AI Architecture", salary: "₹52L - ₹60L", multiplier: "3.5X" },
+  { year: 2035, x: 745, y: 25, label: "Executive AI Leadership", salary: "₹75L+ CTC", multiplier: "4.0X" },
+];
 
 export default function AISkillGap() {
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [hoveredDot, setHoveredDot] = useState<number | null>(null);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-  const points = tabData[activeTab];
+  // Smooth cubic-bezier curve matching the reference illustration
+  const curvePath = "M 50,155 C 130,145 165,132 220,125 C 285,116 335,102 395,95 C 465,86 515,72 570,65 C 630,56 685,35 745,25";
+  const areaPath = `${curvePath} L 745,195 L 50,195 Z`;
 
-  // Helper to construct cubic bezier path dynamically based on yVal coordinates
-  const getPathD = (pts: DataPoint[]) => {
-    const [p0, p1, p2, p3, p4] = pts;
-    return `M 0,${p0.yVal} C 125,${p0.yVal} 125,${p1.yVal} 250,${p1.yVal} C 375,${p1.yVal} 375,${p2.yVal} 500,${p2.yVal} C 625,${p2.yVal} 625,${p3.yVal} 750,${p3.yVal} C 875,${p3.yVal} 875,${p4.yVal} 1000,${p4.yVal}`;
+  // Gentle harmonic curve states for smooth continuous organic motion
+  const curveStateA = "M 50,155 C 130,145 165,132 220,125 C 285,116 335,102 395,95 C 465,86 515,72 570,65 C 630,56 685,35 745,25";
+  const curveStateB = "M 50,156 C 130,142 165,134 220,122 C 285,118 335,98 395,97 C 465,84 515,74 570,63 C 630,58 685,33 745,25";
+  const curveStateC = "M 50,154 C 130,148 165,130 220,128 C 285,114 335,105 395,93 C 465,88 515,70 570,67 C 630,54 685,37 745,25";
+
+  const areaStateA = `${curveStateA} L 745,195 L 50,195 Z`;
+  const areaStateB = `${curveStateB} L 745,195 L 50,195 Z`;
+  const areaStateC = `${curveStateC} L 745,195 L 50,195 Z`;
+
+  const handleOpenExplore = () => {
+    const el = document.getElementById("programs");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.dispatchEvent(new CustomEvent("open-signup-dialog"));
+    }
   };
 
   return (
-    <section id="skill-gap" className="py-16 relative overflow-hidden bg-background">
-      {/* Background Enhancements */}
+    <section id="skill-gap" className="py-20 lg:py-28 relative overflow-hidden bg-background">
+      {/* Background Lighting Accents */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
-      <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
-      
+      <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[160px] -z-10 pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[160px] -z-10 pointer-events-none" />
+
       <div className="section-divider" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeading
-          eyebrow="AI Skills Curve"
-          title="The AI Skills Curve is Accelerating"
-          subtitle="Traditional workflows are rapidly evolving. Mastering AI, data analytics, and automation is the ultimate edge for modern professionals."
-          align="center"
-        />
 
-        {/* Tab pills */}
-        <ScrollReveal direction="up" delay={200}>
-          <div className="flex flex-wrap justify-center gap-3 mt-12 mb-16 max-w-4xl mx-auto">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => {
-                  setActiveTab(tab);
-                  setHoveredDot(null);
-                }}
-                className={`px-5 py-2.5 rounded-full text-[12px] font-bold border transition-all cursor-pointer ${
-                  activeTab === tab
-                    ? "bg-primary/15 border-primary/50 text-primary shadow-xs backdrop-blur-sm"
-                    : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-foreground backdrop-blur-sm"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </ScrollReveal>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+        
+        {/* ── Section Header ── */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          
+          {/* Eyebrow Badge */}
+          <ScrollReveal direction="up" delay={50}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs font-semibold text-primary tracking-wide mb-6 shadow-xs backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              <span>AI Skills for Modern Professionals</span>
+            </div>
+          </ScrollReveal>
 
-        {/* Chart Container */}
+          {/* Headline with Swoop Underline on Accelerating */}
+          <ScrollReveal direction="up" delay={100}>
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-medium tracking-tight text-foreground leading-[1.08]">
+              The AI Skills Curve is <br />
+              <span className="relative inline-block text-primary font-medium mt-1">
+                Accelerating
+                {/* Dynamic curved swoop underline */}
+                <svg
+                  className="absolute -bottom-2.5 left-0 w-full h-3.5 text-primary/80 overflow-visible"
+                  viewBox="0 0 250 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 10C75 2 185 2 246 8"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h2>
+          </ScrollReveal>
+
+          {/* Subtitle */}
+          <ScrollReveal direction="up" delay={200}>
+            <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto font-normal">
+              Traditional workflows are evolving fast. Build AI, analytics and automation skills to stay ahead and unlock higher career opportunities.
+            </p>
+          </ScrollReveal>
+
+        </div>
+
+        {/* ── Main Growth Curve Card ── */}
         <ScrollReveal direction="up" delay={300}>
-          <div className="relative bg-card rounded-[32px] border border-border shadow-xl overflow-hidden w-full max-w-[1100px] mx-auto p-8 lg:p-16 backdrop-blur-md group">
-            {/* Spotlight gradient effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
-            <style>{`
-              @keyframes draw-chart-line {
-                  0% { stroke-dashoffset: 1500; }
-                  40% { stroke-dashoffset: 0; }
-                  100% { stroke-dashoffset: 0; }
-              }
-              @keyframes dot-appear {
-                  0%, 15% { transform: scale(0); opacity: 0; }
-                  25%, 100% { transform: scale(1); opacity: 1; }
-              }
-              @keyframes glow-pulse {
-                  0%, 100% { opacity: 0.3; }
-                  50% { opacity: 0.7; }
-              }
-              .draw-path-blue {
-                  stroke-dasharray: 1500;
-                  stroke-dashoffset: 1500;
-                  animation: draw-chart-line 6s ease-in-out infinite;
-              }
-              .chart-dot {
-                  transform-origin: center;
-                  animation: dot-appear 6s ease-out infinite;
-                  transition: r 0.2s ease, fill 0.2s ease;
-              }
-              .chart-glow {
-                  animation: glow-pulse 6s ease-in-out infinite;
-              }
-              .chart-path-transition {
-                  transition: d 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-              }
-            `}</style>
-
-            <div className="relative w-full aspect-[2/1] min-h-[320px]">
-              {/* Legend */}
-              <div className="absolute top-0 left-0 lg:left-10 flex flex-wrap gap-6 items-center text-[10px] lg:text-[11px] font-mono tracking-widest uppercase text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-[2px] border-b-[2px] border-dashed border-muted-foreground/60"></div>
-                  <span>Average Analytics</span>
+          <div className="card-premium rounded-3xl p-6 sm:p-10 shadow-sm border border-border/80 bg-card/95 backdrop-blur-md relative overflow-hidden">
+            
+            {/* Top Row: Metric Header & Faster Growth Badge */}
+            <div className="flex items-center justify-between gap-4 mb-6">
+              
+              {/* Left Label */}
+              <div className="flex items-center gap-3">
+                <div className="h-11 w-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 shadow-xs">
+                  <BarChart3 className="h-5 w-5" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-[3px] bg-primary"></div>
-                  <span className="text-foreground font-semibold">Performance Analytics (AI Upskilled)</span>
+                <div>
+                  <h3 className="font-heading font-medium text-lg sm:text-xl text-foreground leading-tight">
+                    Career Growth
+                  </h3>
+                  <span className="text-xs text-muted-foreground font-normal">
+                    (with AI Skills)
+                  </span>
                 </div>
               </div>
 
-              {/* Grid Lines & Y-Axis Labels */}
-              <div className="absolute top-[60px] bottom-8 left-[40px] lg:left-[50px] right-0 flex flex-col justify-between pointer-events-none">
-                {["₹75L", "₹60L", "₹45L", "₹30L", "₹15L", "₹0L"].map((label, idx) => (
-                  <div key={label} className="relative w-full border-t border-border/20 h-0">
-                    <span className="absolute -top-3 -left-[38px] lg:-left-[48px] w-8 text-right text-[10px] lg:text-[11px] font-mono font-medium text-muted-foreground">
-                      {label}
-                    </span>
-                  </div>
-                ))}
+              {/* Right Floating Badge */}
+              <div className="bg-primary text-primary-foreground px-4 py-2 rounded-2xl shadow-md shadow-primary/25 text-right flex flex-col items-end">
+                <span className="text-sm sm:text-base font-bold tracking-tight leading-none">
+                  2–4X
+                </span>
+                <span className="text-[10px] font-semibold text-primary-foreground/90 uppercase tracking-wider mt-0.5">
+                  Faster Growth
+                </span>
               </div>
 
-              {/* X-Axis Timeline Labels */}
-              <div className="absolute bottom-0 left-[35px] sm:left-[40px] lg:left-[50px] right-0 flex justify-between px-0 text-[10px] lg:text-[11px] font-mono font-medium text-muted-foreground transform translate-y-1/2 select-none pointer-events-none">
-                <span className="-ml-2">2026</span>
-                <span>2028</span>
-                <span>2030</span>
-                <span>2032</span>
-                <span className="-mr-2">2035</span>
-              </div>
+            </div>
 
-              {/* Interactive Tooltip overlays */}
-              {hoveredDot !== null && (
-                <div
-                  className="absolute z-30 bg-card border border-border rounded-xl p-3 px-4 shadow-xl pointer-events-none transition-all duration-300 -translate-x-1/2 -translate-y-full mb-3 flex flex-col gap-1 min-w-[150px] backdrop-blur-md"
+            {/* SVG Curve Container */}
+            <div className="relative pt-4 pb-2">
+              
+              {/* Inline keyframes for beam flow animation */}
+              <style>{`
+                @keyframes curveBeamMovement {
+                  0% {
+                    stroke-dashoffset: 950;
+                  }
+                  100% {
+                    stroke-dashoffset: -950;
+                  }
+                }
+                .curve-flowing-beam {
+                  stroke-dasharray: 140 800;
+                  animation: curveBeamMovement 4s linear infinite;
+                }
+              `}</style>
+
+              {/* Floating Tooltip when node is hovered */}
+              {hoveredIdx !== null && (
+                <div 
+                  className="absolute z-20 -top-6 transform -translate-x-1/2 pointer-events-none transition-all duration-200"
                   style={{
-                    left: `${hoveredDot * 25}%`,
-                    top: `${(points[hoveredDot].yVal / 500) * 100}%`,
-                    marginLeft: hoveredDot === 0 ? "40px" : hoveredDot === 4 ? "-40px" : "25px",
-                    marginTop: "30px"
+                    left: `${(MILESTONES[hoveredIdx].x / 800) * 100}%`
                   }}
                 >
-                  <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
-                    Year {points[hoveredDot].year}
-                  </div>
-                  <div className="flex items-center justify-between gap-4 mt-1">
-                    <span className="text-xs text-muted-foreground">Average:</span>
-                    <span className="text-xs font-mono font-semibold text-foreground/80">
-                      {points[hoveredDot].avgSal}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-xs text-primary font-medium">AI Upskilled:</span>
-                    <span className="text-xs font-mono font-bold text-primary">
-                      {points[hoveredDot].perfSal}
-                    </span>
+                  <div className="bg-popover text-popover-foreground border border-border shadow-lg rounded-xl px-3.5 py-1.5 text-xs text-center whitespace-nowrap">
+                    <span className="font-semibold text-primary">{MILESTONES[hoveredIdx].year}</span>:{" "}
+                    <span className="text-foreground">{MILESTONES[hoveredIdx].salary}</span>{" "}
+                    <span className="text-muted-foreground font-mono">({MILESTONES[hoveredIdx].multiplier})</span>
                   </div>
                 </div>
               )}
 
-              {/* SVG Plotting */}
               <svg
-                className="absolute top-[60px] bottom-8 left-[35px] sm:left-[40px] lg:left-[50px] right-2 sm:right-4 w-[calc(100%-45px)] sm:w-[calc(100%-55px)] h-[calc(100%-60px-32px)] overflow-visible"
-                viewBox="0 0 1000 500"
-                preserveAspectRatio="none"
+                viewBox="0 0 800 200"
+                className="w-full h-auto overflow-visible select-none"
               >
-                {/* Glow Backdrop Path */}
+                <defs>
+                  {/* Soft area gradient */}
+                  <linearGradient id="growthAreaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.32">
+                      <animate attributeName="stopOpacity" values="0.25;0.38;0.25" dur="4s" repeatCount="indefinite" />
+                    </stop>
+                    <stop offset="60%" stopColor="var(--color-primary)" stopOpacity="0.08" />
+                    <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0.0" />
+                  </linearGradient>
+
+                  {/* Beam flow gradient for continuous smooth light beam */}
+                  <linearGradient id="beamGlowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+                    <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+                  </linearGradient>
+
+                  {/* Curve Glow */}
+                  <filter id="curveGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="var(--color-primary)" floodOpacity="0.3" />
+                  </filter>
+                  <filter id="orbGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+                  </filter>
+                </defs>
+
+                {/* Shaded Area Under Curve with smooth organic breathing */}
                 <path
-                  d={getPathD(points)}
+                  d={areaPath}
+                  fill="url(#growthAreaGradient)"
+                  className="transition-all duration-500 ease-out"
+                >
+                  <animate
+                    attributeName="d"
+                    dur="6s"
+                    repeatCount="indefinite"
+                    values={`${areaStateA}; ${areaStateB}; ${areaStateC}; ${areaStateA}`}
+                  />
+                </path>
+
+                {/* Base Blue Curve with smooth harmonic animation */}
+                <path
+                  d={curvePath}
                   fill="none"
                   stroke="var(--color-primary)"
-                  strokeWidth="12"
-                  className="chart-glow blur-xl opacity-35 chart-path-transition"
+                  strokeWidth="3.5"
                   strokeLinecap="round"
-                />
+                  filter="url(#curveGlow)"
+                  className="transition-all duration-500 ease-out"
+                >
+                  <animate
+                    attributeName="d"
+                    dur="6s"
+                    repeatCount="indefinite"
+                    values={`${curveStateA}; ${curveStateB}; ${curveStateC}; ${curveStateA}`}
+                  />
+                </path>
 
-                {/* Average linear growth line */}
+                {/* Travelling Continuous Glowing Light Stream along the Curve */}
                 <path
-                  d="M 0,433 L 250,416 L 500,400 L 750,383 L 1000,366"
+                  d={curvePath}
                   fill="none"
-                  stroke="var(--color-muted-foreground)"
-                  strokeWidth="2"
-                  strokeDasharray="8 8"
-                  className="opacity-40"
-                />
-
-                {/* Performance Analytics glowing line */}
-                <path
-                  d={getPathD(points)}
-                  fill="none"
-                  stroke="var(--color-primary)"
+                  stroke="url(#beamGlowGradient)"
                   strokeWidth="4"
-                  className="draw-path-blue chart-path-transition"
                   strokeLinecap="round"
+                  className="curve-flowing-beam pointer-events-none"
                 />
 
-                {/* Average line markers */}
-                <circle cx="0" cy="433" r="3" fill="var(--color-card)" stroke="var(--color-muted-foreground)" strokeWidth="1.5" className="opacity-50" />
-                <circle cx="250" cy="416" r="3" fill="var(--color-card)" stroke="var(--color-muted-foreground)" strokeWidth="1.5" className="opacity-50" />
-                <circle cx="500" cy="400" r="3" fill="var(--color-card)" stroke="var(--color-muted-foreground)" strokeWidth="1.5" className="opacity-50" />
-                <circle cx="750" cy="383" r="3" fill="var(--color-card)" stroke="var(--color-muted-foreground)" strokeWidth="1.5" className="opacity-50" />
-                <circle cx="1000" cy="366" r="3" fill="var(--color-card)" stroke="var(--color-muted-foreground)" strokeWidth="1.5" className="opacity-50" />
+                {/* Smooth Glowing Traveling Orb Particle */}
+                <g className="pointer-events-none">
+                  {/* Outer glow ring */}
+                  <circle r="11" fill="var(--color-primary)" opacity="0.35">
+                    <animateMotion
+                      path={curvePath}
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  {/* Inner crisp core */}
+                  <circle r="4" fill="#ffffff" filter="url(#orbGlow)">
+                    <animateMotion
+                      path={curvePath}
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle r="2.5" fill="#ffffff">
+                    <animateMotion
+                      path={curvePath}
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </g>
 
-                {/* Performance Interactive Circles (larger hover targets) */}
-                {points.map((p, idx) => (
-                  <g key={idx}>
-                    {/* Pulsing Outer circle */}
-                    <circle
-                      cx={idx * 250}
-                      cy={p.yVal}
-                      r="12"
-                      fill="transparent"
-                      className="cursor-pointer pointer-events-auto"
-                      onMouseEnter={() => setHoveredDot(idx)}
-                      onMouseLeave={() => setHoveredDot(null)}
-                    />
-                    
-                    {/* Visual Dot */}
-                    <circle
-                      cx={idx * 250}
-                      cy={p.yVal}
-                      r={hoveredDot === idx ? "8" : "6"}
-                      fill="var(--color-foreground)"
-                      stroke="var(--color-primary)"
-                      strokeWidth="3"
-                      className="chart-dot cursor-pointer"
-                      style={{ animationDelay: `${idx * 0.4}s` }}
-                      onMouseEnter={() => setHoveredDot(idx)}
-                      onMouseLeave={() => setHoveredDot(null)}
-                    />
-                  </g>
-                ))}
+                {/* Milestone Nodes */}
+                {MILESTONES.map((pt, idx) => {
+                  const isLast = idx === MILESTONES.length - 1;
+                  const isHovered = hoveredIdx === idx;
+
+                  return (
+                    <g key={pt.year} className="cursor-pointer">
+                      {/* Pulse effect on 2035 node */}
+                      {isLast && (
+                        <circle
+                          cx={pt.x}
+                          cy={pt.y}
+                          r="12"
+                          fill="var(--color-primary)"
+                          className="animate-ping opacity-30"
+                        />
+                      )}
+
+                      {/* Transparent Hover Target */}
+                      <circle
+                        cx={pt.x}
+                        cy={pt.y}
+                        r="20"
+                        fill="transparent"
+                        onMouseEnter={() => setHoveredIdx(idx)}
+                        onMouseLeave={() => setHoveredIdx(null)}
+                      />
+
+                      {/* Outer White / Card Circle */}
+                      <circle
+                        cx={pt.x}
+                        cy={pt.y}
+                        r={isHovered ? 8 : 6}
+                        fill="var(--color-card)"
+                        stroke="var(--color-primary)"
+                        strokeWidth="3"
+                        className="transition-all duration-200"
+                        onMouseEnter={() => setHoveredIdx(idx)}
+                        onMouseLeave={() => setHoveredIdx(null)}
+                      />
+
+                      {/* Center Point */}
+                      <circle
+                        cx={pt.x}
+                        cy={pt.y}
+                        r={isHovered ? 3.5 : 2.5}
+                        fill="var(--color-primary)"
+                        className="transition-all duration-200"
+                        pointerEvents="none"
+                      />
+                    </g>
+                  );
+                })}
               </svg>
+
+              {/* Timeline Years on X-Axis */}
+              <div className="flex justify-between items-center w-full pt-3 px-1 text-xs font-mono font-medium text-muted-foreground select-none">
+                {MILESTONES.map((pt, idx) => (
+                  <span 
+                    key={pt.year} 
+                    className={`transition-colors cursor-pointer ${
+                      hoveredIdx === idx ? "text-primary font-bold" : "hover:text-foreground"
+                    }`}
+                    onMouseEnter={() => setHoveredIdx(idx)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                  >
+                    {pt.year}
+                  </span>
+                ))}
+              </div>
+
             </div>
+
           </div>
         </ScrollReveal>
+
+        {/* ── Action Buttons matching Image ── */}
+        <ScrollReveal direction="up" delay={400}>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            {/* Primary Action Button */}
+            <button
+              onClick={handleOpenExplore}
+              className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-medium text-sm sm:text-base bg-primary text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-primary/40 cursor-pointer active:scale-[0.98]"
+            >
+              <span>Explore Our Programs</span>
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+          </div>
+        </ScrollReveal>
+
       </div>
     </section>
   );

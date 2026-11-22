@@ -23,7 +23,7 @@ export default function Journey() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Learning Journey"
-          title="Your Career Transformation Roadmap"
+          title={<>Your Career <span className="text-primary font-medium">Transformation Roadmap</span></>}
           subtitle="A structured, step-by-step approach designed to take you from a learner to a hired professional."
         />
 
@@ -42,19 +42,16 @@ export default function Journey() {
                     <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
                   </div>
 
-                  <div className="card-premium p-6 sm:p-8 rounded-2xl group relative overflow-hidden bg-card border-border backdrop-blur-md">
-                    {/* Spotlight gradient effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
-
+                  <div className="card-hover-primary p-6 sm:p-8 rounded-3xl group relative overflow-hidden bg-card border border-border/80 shadow-sm cursor-pointer">
                     <div
                       className={`relative z-10 inline-flex items-center gap-3 ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}
                     >
-                      <span className="font-mono text-[11px] font-bold text-primary uppercase tracking-[0.2em] bg-primary/10 border border-primary/30 rounded-md px-3 py-1.5 backdrop-blur-sm group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_oklch(0.583_0.222_258.6/0.25)] transition-all duration-300">
+                      <span className="card-badge font-mono text-[11px] font-bold text-primary uppercase tracking-[0.2em] bg-primary/10 border border-primary/30 rounded-md px-3 py-1.5 backdrop-blur-sm transition-colors duration-200">
                         STEP {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
 
-                    <h4 className="relative z-10 mt-6 font-display text-xl sm:text-2xl font-semibold leading-tight text-foreground group-hover:text-primary transition-colors duration-300">
+                    <h4 className="relative z-10 mt-6 font-display text-xl sm:text-2xl font-semibold leading-tight text-foreground transition-colors duration-200">
                       {s}
                     </h4>
                   </div>
@@ -65,6 +62,5 @@ export default function Journey() {
         </div>
       </div>
     </section>
-  )
-
+  );
 }

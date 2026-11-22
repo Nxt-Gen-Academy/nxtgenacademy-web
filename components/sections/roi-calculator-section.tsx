@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useId } from "react";
 import { TrendingUp, BadgeCheck, ArrowRight, Sparkles } from "lucide-react";
 import ScrollReveal from "@/app/components/ScrollReveal";
+import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 
 const TRACKS = [
   { id: "ba", name: "Business Analytics with Gen AI", range: "45–65%", hike: 0.55 },
@@ -89,7 +90,7 @@ export default function ROICalculatorSection() {
       <div className="absolute top-[30%] left-[20%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[140px] -z-10 pointer-events-none" />
       <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] bg-accent/10 rounded-full blur-[155px] -z-10 pointer-events-none" />
 
-      <div className="section-divider mb-8" />
+      <div className="section-divider" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-start">
@@ -97,19 +98,22 @@ export default function ROICalculatorSection() {
           {/* Left Side: Context / Marketing */}
           <div className="flex flex-col justify-center">
             <ScrollReveal direction="up" delay={100}>
-              <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-accent mb-6">
+              <div className="flex items-center gap-3 text-xs sm:text-sm font-mono uppercase tracking-widest text-primary font-semibold mb-6">
                 <span className="relative flex items-center justify-center">
-                  <span className="h-px w-8 bg-accent/80" />
-                  <span className="absolute right-0 h-1 w-1 rounded-full bg-accent" />
+                  <span className="h-px w-8 bg-primary/70" />
+                  <span className="absolute right-0 h-1.5 w-1.5 rounded-full bg-primary" />
                 </span>
                 Career ROI Calculator
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={200}>
-              <h2 className="font-heading text-[clamp(2.2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight">
-                See what your next career move could be worth.
-              </h2>
+              <WordStaggerHeading
+                as="h2"
+                className="font-heading text-[clamp(2.2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight"
+              >
+                See what your next career move <span className="text-primary font-medium">could be worth.</span>
+              </WordStaggerHeading>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={300}>
@@ -131,7 +135,7 @@ export default function ROICalculatorSection() {
               </div>
 
               <div className="flex items-start gap-4 p-4 rounded-xl border border-border/40 bg-card/20 backdrop-blur-sm">
-                <div className="h-10 w-10 rounded-lg bg-accent/10 text-accent grid place-items-center border border-accent/20 shrink-0">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
@@ -151,7 +155,7 @@ export default function ROICalculatorSection() {
                   <div className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase">
                     CTC Statement No. {stampId}
                   </div>
-                  <div className="text-xs font-mono text-accent mt-0.5 uppercase tracking-wide">
+                  <div className="text-xs font-mono text-primary font-semibold mt-0.5 uppercase tracking-wide">
                     Issued: {todayStr}
                   </div>
                 </div>
@@ -241,7 +245,7 @@ export default function ROICalculatorSection() {
                             {t.name}
                           </span>
                         </div>
-                        <span className="text-xs font-mono font-medium shrink-0 ml-3 text-accent/80">
+                        <span className="text-xs font-mono font-semibold shrink-0 ml-3 text-primary">
                           {t.range} hike
                         </span>
                       </button>
@@ -291,7 +295,7 @@ export default function ROICalculatorSection() {
                       </div>
                       <div>
                         <div className="text-xs text-muted-foreground mb-1">Projected CTC</div>
-                        <div className="text-3xl font-mono font-extrabold text-accent leading-none">
+                        <div className="text-3xl font-mono font-extrabold text-primary leading-none">
                           ₹{fmtLPA(displayVal)}
                           {capped && stage === "done" ? "+" : ""} LPA
                         </div>
@@ -338,7 +342,7 @@ export default function ROICalculatorSection() {
                       </div>
                       <div className="h-2 w-full bg-muted/40 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-500"
+                          className="h-full bg-gradient-to-r from-primary to-sky-400 rounded-full transition-all duration-500"
                           style={{ width: `${Math.min(100, (displayVal / 48) * 100)}%` }}
                         />
                       </div>
@@ -366,7 +370,7 @@ export default function ROICalculatorSection() {
                     <div className="flex flex-col sm:flex-row gap-3 pt-5 border-t border-border/40">
                       <button
                         onClick={handleOpenSignup}
-                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl py-3 px-4 font-semibold text-sm bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-[0_0_15px_oklch(0.74_0.16_245/0.25)] transition-all cursor-pointer font-mono uppercase tracking-wide"
+                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl py-3 px-4 font-semibold text-sm bg-primary text-white hover:bg-primary/90 hover:shadow-[0_0_15px_oklch(0.50_0.20_258/0.25)] transition-all cursor-pointer font-mono uppercase tracking-wide"
                       >
                         <Sparkles className="h-4 w-4" /> Book Mentor Session
                       </button>

@@ -52,8 +52,8 @@ export default function Nav() {
         <div className="max-w-7xl mx-auto px-4">
           <div className={`transition-all duration-300 rounded-2xl px-4 sm:px-5 py-2 flex items-center justify-between border ${
             isScrolled 
-              ? "bg-background/85 backdrop-blur-xl border-border shadow-sm" 
-              : "bg-background/60 backdrop-blur-md border-border/50 shadow-xs"
+              ? "bg-background/85 backdrop-blur-xl border-border shadow-sm text-foreground" 
+              : "bg-[#000a20]/75 backdrop-blur-md border-white/10 shadow-xs text-white"
           }`}>
             <Link href="/" className="flex items-center gap-2 group">
               <div className="rounded-lg grid place-items-center transition-all duration-300 group-hover:scale-105">
@@ -68,25 +68,34 @@ export default function Nav() {
               </div>
             </Link>
             
-            <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.href}
-                  href={link.href} 
-                  className={`nav-link-underline transition-colors hover:text-foreground ${
-                    activeSection === link.href.split('#')[1] ? "text-foreground active" : ""
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.split('#')[1];
+                return (
+                  <Link 
+                    key={link.href}
+                    href={link.href} 
+                    className={`nav-link-underline transition-colors ${
+                      isScrolled
+                        ? isActive ? "text-foreground active font-semibold" : "text-muted-foreground hover:text-foreground"
+                        : isActive ? "text-white active font-semibold" : "text-blue-100/80 hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
             
             <div className="flex items-center gap-3">
               <div className="hidden lg:flex items-center gap-3">
                 <Link
                   href="/apply-mentor"
-                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all`}
+                  className={`${buttonVariants({ variant: "ghost" })} rounded-xl px-4 py-2 h-auto text-sm font-medium transition-all ${
+                    isScrolled
+                      ? "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      : "text-blue-100/85 hover:text-white hover:bg-white/10"
+                  }`}
                 >
                   Apply as Mentor
                 </Link>
@@ -100,7 +109,7 @@ export default function Nav() {
                 )}
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className={`${buttonVariants()} rounded-xl bg-foreground text-background px-4.5 py-2 h-auto text-sm font-medium hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.583_0.222_258.6/0.4)] transition-all group/button border-0`}
+                  className={`${buttonVariants()} rounded-xl bg-primary text-primary-foreground px-4.5 py-2 h-auto text-sm font-semibold hover:bg-primary/90 shadow-md shadow-primary/30 transition-all group/button border-0 cursor-pointer`}
                 >
                   Apply{" "}
                   <ArrowUpRight className="h-4 w-4 ml-1 group-hover/button:rotate-45 transition-transform" />
@@ -108,7 +117,7 @@ export default function Nav() {
               </div>
               
               <button 
-                className="lg:hidden p-2 text-foreground"
+                className={`lg:hidden p-2 transition-colors ${isScrolled ? "text-foreground" : "text-white"}`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle mobile menu"
               >

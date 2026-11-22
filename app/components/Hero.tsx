@@ -2,27 +2,25 @@
 
 import { useState, useEffect } from "react";
 import {
-  ArrowUpRight,
-  Flame,
-  Star,
-  Building2,
-  GraduationCap,
-  TrendingUp,
+  ArrowRight,
+  Calendar,
+  Layers,
   Users,
+  Briefcase,
   Sparkles,
 } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import SignUpForm from "./SignUpForm";
 import { authClient } from "@/lib/auth-client";
-import HeroParallaxCard from "./HeroParallaxCard";
+import HeroLaptopPreview from "./HeroLaptopPreview";
+import HeroFluidBackground from "./HeroFluidBackground";
+import ScrollReveal from "./ScrollReveal";
 
-const stats = [
-  { label: "Companies Hiring", value: "800+", icon: Building2 },
-  { label: "Students Placed", value: "1,500+", icon: GraduationCap },
-  { label: "Highest Package", value: "48 LPA", icon: TrendingUp },
-  { label: "Industry Experts", value: "1200+", icon: Users },
-  { label: "Highest Salary Hike", value: "400%", icon: Sparkles },
+const pillars = [
+  { label: "Live Cohorts", icon: Calendar },
+  { label: "Real Projects", icon: Layers },
+  { label: "1:1 Mentorship", icon: Users },
+  { label: "Career Support", icon: Briefcase },
 ];
 
 export default function Hero() {
@@ -40,7 +38,6 @@ export default function Hero() {
 
     if (!hasPoppedUp) {
       sessionStorage.setItem("heroPopupPopped", "true");
-      // Intro animation takes ~3.5s on first visit. We want 2.5s delay after it exits.
       const isIntroSkipped = sessionStorage.getItem("introPlayed");
       const delay = isIntroSkipped ? 2500 : 6000;
 
@@ -58,125 +55,101 @@ export default function Hero() {
     };
   }, []);
 
+  const handleOpenExplore = () => {
+    const el = document.getElementById("programs");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      setIsDialogOpen(true);
+    }
+  };
+
   return (
-    <section id="top" className="relative min-h-svh flex flex-col pt-28 pb-10 px-4 overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none z-0"
-      >
-        <source src="/hero_bg_video.mp4" type="video/mp4" />
-      </video>
+    <section id="top" className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#000a20]">
+      {/* ── Dynamic Glowing Blue Fluid Silk Waves Background ── */}
+      <HeroFluidBackground />
 
-      {/* Light backdrop overlay over the video */}
-      <div className="absolute inset-0 bg-background/55 z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/5 via-background/35 to-background z-0 pointer-events-none" />
+      {/* ── Subtle Blackish Overlay (keeps text content and laptop crisp above via z-10/z-20) ── */}
+      <div 
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.52) 100%), rgba(0, 5, 18, 0.38)",
+          boxShadow: "inset 0 0 120px rgba(0, 0, 0, 0.65)"
+        }}
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full my-auto py-8">
+        {/* ── Two-Column Layout ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* ── LEFT COLUMN: Text & CTAs ── */}
+          <div className="lg:col-span-6 flex flex-col items-start text-left z-20">
+            
+            {/* Pill Eyebrow Badge */}
+            <ScrollReveal direction="up" delay={50}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-400/30 bg-blue-500/10 text-xs font-semibold text-blue-200 tracking-wide mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+                <Sparkles className="h-3.5 w-3.5 text-[#38bdf8]" />
+                <span>AI • Business • Career Transformation</span>
+              </div>
+            </ScrollReveal>
 
-        {/* ── Two-Column Hero Layout ── */}
-        <div className="relative z-10 grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 items-start lg:items-center">
-          {/* ── LEFT COLUMN: Content ── */}
-          <div className="max-w-2xl">
-            {/* Eyebrow */}
-            <div className="hero-eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-6 backdrop-blur-md shadow-xs">
-              <Flame className="h-3.5 w-3.5 text-amber-500" />
-              <span className="font-semibold text-primary/90">Learn what matters</span>
-            </div>
-
-            {/* Main Heading */}
-            <h1 className="hero-headline font-heading leading-[1.08] font-medium tracking-[-0.02em] text-foreground">
-              <span className="block">Build your career in</span>
-              <span className="hero-accent-text block text-primary pb-2">AI &amp; Analytics</span>
-            </h1>
+            {/* Main Headline */}
+            <ScrollReveal direction="up" delay={100}>
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-medium tracking-tight text-white leading-[1.08]">
+                Don&apos;t Just Learn AI. <br />
+                <span className="text-[#38bdf8] bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#93c5fd] bg-clip-text text-transparent font-medium block mt-1">
+                  Build a Career With It.
+                </span>
+              </h1>
+            </ScrollReveal>
 
             {/* Subheading */}
-            <p className="hero-subheading mt-7 text-muted-foreground leading-[1.6] max-w-[480px]">
-              Equip yourself with the tools, projects, and mentorship needed to land high-paying roles. Join our expert-led cohorts today.
-            </p>
+            <ScrollReveal direction="up" delay={150}>
+              <p className="mt-5 sm:mt-6 text-base sm:text-lg text-blue-100/80 leading-relaxed max-w-xl font-normal">
+                Industry-led programs in AI Product Management, Business Analysis and Data Analytics with real projects, 1:1 mentorship and portfolio-first learning.
+              </p>
+            </ScrollReveal>
 
-            {/* CTA Buttons */}
-            <div className="mt-10 flex flex-wrap gap-4">
-              {session?.user ? (
-                <a
-                  href="/dashboard"
-                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.583_0.222_258.6/0.3)]"
-                >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
-                  <span className="relative flex items-center">
-                    Go to Dashboard <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </a>
-              ) : (
+            {/* CTA Button */}
+            <ScrollReveal direction="up" delay={200}>
+              <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-4">
                 <button
-                  onClick={() => window.dispatchEvent(new CustomEvent("open-signup-dialog"))}
-                  className="hero-btn-primary group relative overflow-hidden inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_oklch(0.583_0.222_258.6/0.3)] cursor-pointer"
+                  onClick={handleOpenExplore}
+                  className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 font-semibold text-sm bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(27,91,214,0.5)] cursor-pointer active:scale-[0.98]"
                 >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] group-hover:animate-shimmer-sweep" />
-                  <span className="relative flex items-center">
-                    Explore Cohorts <ArrowUpRight className="h-4 w-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
+                  <span>Explore Programs</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
-              )}
-              <a
-                href="#curriculum"
-                className="hero-btn-ghost inline-flex items-center justify-center rounded-xl px-7 py-3.5 font-semibold text-sm border border-border/60 bg-card/30 text-foreground backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/50"
-              >
-                View Curriculum
-              </a>
-            </div>
-
-            {/* Stat Row */}
-            <div className="hero-stat-row mt-12 flex flex-wrap justify-center lg:justify-start gap-y-6 gap-x-6 sm:gap-x-10 p-5 sm:px-8 rounded-2xl border border-border/80 bg-card/85 backdrop-blur-md shadow-md max-w-fit mx-auto lg:mx-0">
-              {stats.map((stat, i) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={stat.label} className="flex items-center min-w-[130px] sm:min-w-[150px]">
-                    <div className="flex items-center gap-3.5 w-full">
-                      <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-primary/10 text-primary grid place-items-center border border-primary/20 shrink-0 shadow-inner">
-                        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-xl sm:text-[26px] font-heading font-bold tracking-tight text-foreground leading-none">
-                          {stat.value}
-                        </div>
-                        <div className="text-[10px] sm:text-[13px] text-muted-foreground mt-1 sm:mt-1.5 leading-tight font-medium">
-                          {stat.label}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Social proof line */}
-            <div className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star
-                    key={index}
-                    className="h-3.5 w-3.5 text-amber-400"
-                    fill={index < 4 ? "currentColor" : "none"}
-                  />
-                ))}
               </div>
-              <span className="font-medium text-foreground/80">4.8/5</span>
-              <span className="text-muted-foreground/60">from 1500+ reviews</span>
-            </div>
+            </ScrollReveal>
+
+            {/* Bottom 4 Horizontal Feature Items */}
+            <ScrollReveal direction="up" delay={250} className="w-full">
+              <div className="mt-10 sm:mt-12 pt-6 sm:pt-7 border-t border-white/10 w-full flex flex-wrap items-center gap-y-3 gap-x-6 sm:gap-x-8 text-xs font-medium text-blue-100/85">
+                {pillars.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.label} className="flex items-center gap-2">
+                      <Icon className="w-4 h-4 text-[#38bdf8] stroke-[2]" />
+                      <span className="whitespace-nowrap">{item.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </ScrollReveal>
+
           </div>
 
-          {/* ── RIGHT COLUMN: 3D Parallax Card ── */}
-          <div className="w-full flex justify-center lg:block mt-8 lg:mt-0 shrink-0">
-            <HeroParallaxCard />
+          {/* ── RIGHT COLUMN: Animated 3D Laptop Preview & Floating Cards ── */}
+          <div className="lg:col-span-6 w-full flex justify-center items-center mt-6 lg:mt-0 z-20">
+            <HeroLaptopPreview />
           </div>
+
         </div>
       </div>
 
+      {/* ── Enquiry / Booking Dialog ── */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl sm:max-w-2xl p-6 sm:p-7 rounded-3xl border border-border bg-card/95 backdrop-blur shadow-2xl">
           <div className="relative">

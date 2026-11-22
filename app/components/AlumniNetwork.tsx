@@ -13,7 +13,7 @@ export default function AlumniNetwork() {
   const renderCard = (item: typeof testimonials[0], key: string) => (
     <div
       key={key}
-      className="w-[300px] sm:w-[340px] flex-shrink-0 bg-card/40 backdrop-blur-sm rounded-lg md:rounded-xl p-6 border border-border/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-border hover:bg-card/60"
+      className="card-hover-primary w-[300px] sm:w-[340px] flex-shrink-0 bg-card rounded-2xl p-6 border border-border/80 shadow-sm cursor-pointer group"
     >
       <div className="flex gap-0.5 mb-4">
         {Array.from({ length: item.rating }).map((_, i) => (
@@ -35,11 +35,11 @@ export default function AlumniNetwork() {
           </svg>
         ))}
       </div>
-      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px]">
+      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px] transition-colors duration-200">
         “{item.quote}”
       </p>
-      <div className="flex gap-3 pt-6 border-t border-border/50">
-        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border">
+      <div className="card-divider flex gap-3 pt-6 border-t border-border/50 transition-colors duration-200">
+        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border transition-colors duration-200">
           <img
             alt={item.name}
             loading="lazy"
@@ -49,19 +49,17 @@ export default function AlumniNetwork() {
             src={item.image}
           />
         </div>
-        <div className="">
-          <div className="flex flex-col justify-center">
-            <p className="text-sm font-heading font-semibold text-foreground truncate">
-              {item.name}
-            </p>
-            <p className="text-muted-foreground text-xs truncate">
-              {item.role}, {item.company}
-            </p>
-          </div>
+        <div className="flex flex-col justify-center min-w-0">
+          <p className="text-sm font-heading font-semibold text-foreground transition-colors duration-200 truncate">
+            {item.name}
+          </p>
+          <p className="text-muted-foreground text-xs transition-colors duration-200 truncate">
+            {item.role}, {item.company}
+          </p>
         </div>
       </div>
       <div className="self-start mt-3">
-        <span className="text-emerald-400 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded whitespace-nowrap">
+        <span className="card-badge text-emerald-500 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded transition-colors duration-200 whitespace-nowrap">
           {item.tag}
         </span>
       </div>
@@ -80,77 +78,87 @@ export default function AlumniNetwork() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 mb-12">
         <SectionHeading
           eyebrow="Student Testimonials"
-          title="What Our learners Say About NxtGen Academy"
+          title={<>What Our Learners Say About <span className="text-primary font-medium">NxtGen Academy</span></>}
           subtitle="Real stories from professionals who transformed their careers through our programs."
           align="center"
         />
       </div>
 
       {/* Row 1: Left moving marquee */}
-      <div className="relative mb-6">
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      <ScrollReveal direction="fade" delay={100} duration={700}>
+        <div className="relative mb-6">
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
-        <div className="flex animate-marquee-left hover:[animation-play-state:paused]">
-          {/* Loop 1: First 5 cards (with right margin padding equal to standard card gaps) */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row1Items.map((item, idx) => renderCard(item, `row1-loop1-${idx}`))}
-          </div>
-          {/* Loop 2: Duplicate 5 cards to provide the seamless reset loop */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row1Items.map((item, idx) => renderCard(item, `row1-loop2-${idx}`))}
+          {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
+          <div className="flex animate-marquee-left hover:[animation-play-state:paused]">
+            {/* Loop 1: First 5 cards (with right margin padding equal to standard card gaps) */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row1Items.map((item, idx) => renderCard(item, `row1-loop1-${idx}`))}
+            </div>
+            {/* Loop 2: Duplicate 5 cards to provide the seamless reset loop */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row1Items.map((item, idx) => renderCard(item, `row1-loop1-dup-${idx}`))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Row 2: Right moving marquee */}
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        {/* Row 2: Right moving marquee */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
-        <div className="flex animate-marquee-right hover:[animation-play-state:paused]">
-          {/* Loop 1: First 5 cards */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row2Items.map((item, idx) => renderCard(item, `row2-loop1-${idx}`))}
-          </div>
-          {/* Loop 2: Duplicate 5 cards */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row2Items.map((item, idx) => renderCard(item, `row2-loop2-${idx}`))}
+          {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
+          <div className="flex animate-marquee-right hover:[animation-play-state:paused]">
+            {/* Loop 1: First 5 cards */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row2Items.map((item, idx) => renderCard(item, `row2-loop1-${idx}`))}
+            </div>
+            {/* Loop 2: Duplicate 5 cards */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row2Items.map((item, idx) => renderCard(item, `row2-loop1-dup-${idx}`))}
+            </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* Stats Counter Section */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
-        <ScrollReveal direction="up" delay={100} duration={500}>
+        <ScrollReveal direction="up" delay={100} duration={600}>
           <div className="bg-card rounded-2xl border border-border/60 py-8 px-6 shadow-[0_10px_30px_-5px_oklch(0.16_0.03_255/0.05),0_4px_10px_-2px_oklch(0.16_0.03_255/0.02)]">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-border/50">
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>800+</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Alumni Placed</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>95%</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Placement Rate</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>150+</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Hiring Partners</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>72%</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Avg. Salary Hike</p>
-              </div>
+              <ScrollReveal direction="up" delay={150} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>800+</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Alumni Placed</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={230} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>95%</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Placement Rate</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={310} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>150+</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Hiring Partners</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={390} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>72%</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Avg. Salary Hike</p>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </ScrollReveal>

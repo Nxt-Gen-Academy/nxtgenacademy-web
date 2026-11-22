@@ -6,7 +6,6 @@ import Faculty from "./components/Faculty";
 import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
-import HearFromLearners from "./components/HearFromLearners";
 import Hero from "./components/Hero";
 import Journey from "./components/Journey";
 import Nav from "./components/Nav";
@@ -15,7 +14,7 @@ import Programs from "./components/Programs";
 import Projects from "./components/Projects";
 import Trust from "./components/Trust";
 import WhyUs from "./components/WhyUs";
-import ROICalculatorSection from "@/components/sections/roi-calculator-section";
+import CareerTransitionPlanner from "@/components/sections/career-transition-planner";
 
 export default function Home() {
   return (
@@ -24,15 +23,14 @@ export default function Home() {
       <Hero />
       <Trust />
       <Accreditations />
-      <ROICalculatorSection />
-      <OutcomeRecipe />
+      <CareerTransitionPlanner />
       <Programs />
-      <WhyUs />
-      <HearFromLearners />
+      <Projects />
       <AISkillGap />
+      <OutcomeRecipe />
+      <WhyUs />
       <Faculty />
       <Journey />
-      <Projects />
       <AlumniNetwork />
       <Curriculum />
       {/* <Pricing /> */}

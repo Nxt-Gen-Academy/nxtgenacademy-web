@@ -22,10 +22,12 @@ export default function Accreditations() {
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
       <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-primary/10 rounded-[100%] blur-[120px] -z-10 pointer-events-none" />
       
+      <div className="section-divider" />
+
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Our Accreditations"
-          title="Recognized By Industry Leaders"
+          title={<>Recognized By <span className="text-primary font-medium">Industry Leaders</span></>}
           subtitle="Backed by the most prestigious organizations and government bodies in the technology and education sectors."
           align="center"
         />

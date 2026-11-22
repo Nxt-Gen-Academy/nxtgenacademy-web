@@ -1,14 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import SectionHeading from "./SectionHeading";
-import { ChevronDown } from "lucide-react";
+import { Plus, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import ScrollReveal from "./ScrollReveal";
 
 const qs = [
@@ -172,72 +166,152 @@ const qs = [
   },
 ];
 
-const INITIAL_VISIBLE = 6;
+const INITIAL_VISIBLE = 8;
 
 export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [showAll, setShowAll] = useState(false);
 
   const visibleQs = showAll ? qs : qs.slice(0, INITIAL_VISIBLE);
 
   return (
-    <section id="faq" className="py-16 relative overflow-hidden bg-background">
+    <section id="faq" className="py-20 relative overflow-hidden bg-background">
       {/* Background Enhancements */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
-      <div className="absolute top-[30%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
+      <div className="absolute top-[25%] left-[15%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] -z-10 pointer-events-none" />
       
       <div className="section-divider" />
-      <div className="max-w-4xl mx-auto relative z-10 px-4">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="We've answered the most common queries."
-          subtitle="Everything you need to know about our programs, placement support, and learning experience — so you can get started with confidence."
-        />
-
-        <div className="mt-16 bg-card backdrop-blur-md border border-border shadow-xl rounded-3xl p-6 sm:p-10 relative overflow-hidden group">
-          {/* Spotlight gradient effect on hover */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          <div className="relative z-10">
-            <Accordion defaultValue={["item-0"]}>
-            {visibleQs.map((it, i) => (
-              <ScrollReveal key={it.q} direction="up" delay={i * 50}>
-                  <AccordionItem
-                    value={`item-${i}`}
-                    className="border-b border-border last:border-0"
-                  >
-                  <AccordionTrigger className="w-full flex items-center justify-between text-left py-6 font-heading text-lg sm:text-xl font-medium hover:text-primary transition-colors hover:no-underline group">
-                    {it.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-8 space-y-4 pr-6">
-                    {it.a.map((paragraph, pIdx) => (
-                      <p key={pIdx} className="whitespace-pre-line font-medium">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              </ScrollReveal>
-            ))}
-            </Accordion>
-          </div>
-        </div>
+          {/* Left Column: Eyebrow, Heading, and Contact Card */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:flex lg:flex-col lg:justify-between space-y-8 lg:space-y-0 pb-2">
+            {/* Top Content: Eyebrow + Main Heading + Description */}
+            <ScrollReveal direction="right" delay={100}>
+              {/* Eyebrow Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs sm:text-sm font-semibold text-primary shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                Frequently Asked Questions
+              </div>
 
-        <ScrollReveal direction="up" delay={200}>
-          <div className="mt-12 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="group inline-flex items-center gap-2 rounded-full border border-border bg-card backdrop-blur-md hover:bg-muted hover:border-primary/40 px-8 py-3.5 text-sm font-semibold text-foreground shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
-            >
-              {showAll ? "View Less FAQs" : "View All FAQs"}
-              <ChevronDown
-                className={`h-4 w-4 text-primary transition-transform duration-500 ${
-                  showAll ? "rotate-180" : ""
-                }`}
-              />
-            </button>
+              {/* Main Heading */}
+              <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-heading font-normal tracking-tight text-foreground leading-[1.18]">
+                Answers to Your Questions About{" "}
+                <span className="text-primary font-medium block mt-1">NxtGen Academy</span>
+              </h2>
+
+              <p className="mt-4 text-muted-foreground text-base leading-relaxed max-w-md">
+                Everything you need to know about our programs, placement support, and learning experience — so you can get started with confidence.
+              </p>
+            </ScrollReveal>
+
+            {/* Bottom Content: Help & Contact Card Stuck to the Bottom */}
+            <ScrollReveal direction="up" delay={200} className="mt-8 lg:mt-auto">
+              <div className="bg-muted/50 rounded-3xl p-6 sm:p-7 border border-border/70 relative overflow-hidden backdrop-blur-sm shadow-xs">
+                <p className="text-sm sm:text-base font-medium text-foreground leading-relaxed">
+                  Have more questions for us? Our team can help you out. Get in touch with us!
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(new CustomEvent("open-signup-dialog"));
+                    }
+                  }}
+                  className="mt-6 inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-card hover:bg-primary hover:text-white text-foreground font-semibold text-sm shadow-xs border border-border/70 transition-all duration-300 cursor-pointer"
+                >
+                  Contact Us
+                </button>
+              </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+
+          {/* Right Column: Individual Floating FAQ Accordion Cards */}
+          <div className="lg:col-span-7 space-y-3.5">
+            {visibleQs.map((it, i) => {
+              const isOpen = openIndex === i;
+              return (
+                <ScrollReveal key={it.q} direction="up" delay={Math.min(i * 40, 300)}>
+                  <div
+                    className={`bg-card rounded-2xl border transition-all duration-300 overflow-hidden ${
+                      isOpen
+                        ? "border-primary/40 shadow-sm ring-1 ring-primary/20"
+                        : "border-border/80 shadow-2xs hover:border-border hover:shadow-xs"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenIndex(isOpen ? null : i)}
+                      className="w-full p-5 sm:p-6 flex items-start justify-between gap-4 text-left cursor-pointer group"
+                      aria-expanded={isOpen}
+                    >
+                      <span className="font-heading text-base sm:text-lg font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
+                        {it.q}
+                      </span>
+                      <span
+                        className={`shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex items-center justify-center transition-all ${
+                          isOpen
+                            ? "bg-primary/10 border-primary/30 text-primary"
+                            : "bg-background/80 border-border/80 text-muted-foreground group-hover:text-primary group-hover:border-primary/40"
+                        }`}
+                      >
+                        <Plus
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            isOpen ? "rotate-45" : ""
+                          }`}
+                        />
+                      </span>
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 sm:px-6 pb-6 pt-1 text-muted-foreground text-sm sm:text-base leading-relaxed space-y-3.5 border-t border-border/40">
+                            {it.a.map((paragraph, pIdx) => (
+                              <p
+                                key={pIdx}
+                                className="whitespace-pre-line font-medium text-muted-foreground/90"
+                              >
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+
+            {/* View All / View Less FAQs button */}
+            <ScrollReveal direction="up" delay={150}>
+              <div className="pt-4 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowAll((prev) => !prev)}
+                  className="group inline-flex items-center gap-2 rounded-full border border-border bg-card hover:bg-muted hover:border-primary/40 px-8 py-3.5 text-sm font-semibold text-foreground shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+                >
+                  {showAll ? "View Less FAQs" : "View All FAQs"}
+                  <ChevronDown
+                    className={`h-4 w-4 text-primary transition-transform duration-300 ${
+                      showAll ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </div>
+            </ScrollReveal>
+          </div>
+
+        </div>
       </div>
     </section>
   );
