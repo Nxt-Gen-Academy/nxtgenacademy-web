@@ -24,7 +24,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Real Industry Projects"
-          title="Real industry projects. Real portfolio outcomes."
+          title={<>Real Industry Projects. <span className="text-primary font-medium">Real Portfolio Outcomes.</span></>}
           subtitle="Stop doing generic tutorials. Build an investor-grade portfolio with real datasets and production-ready applications."
         />
         

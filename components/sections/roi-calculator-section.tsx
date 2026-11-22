@@ -112,7 +112,7 @@ export default function ROICalculatorSection() {
                 as="h2"
                 className="font-heading text-[clamp(2.2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight"
               >
-                See what your next career move could be worth.
+                See what your next career move <span className="text-primary font-medium">could be worth.</span>
               </WordStaggerHeading>
             </ScrollReveal>
 

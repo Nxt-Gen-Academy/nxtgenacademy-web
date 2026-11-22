@@ -35,6 +35,15 @@ export default function AISkillGap() {
   const curvePath = "M 50,155 C 130,145 165,132 220,125 C 285,116 335,102 395,95 C 465,86 515,72 570,65 C 630,56 685,35 745,25";
   const areaPath = `${curvePath} L 745,195 L 50,195 Z`;
 
+  // Gentle harmonic curve states for smooth continuous organic motion
+  const curveStateA = "M 50,155 C 130,145 165,132 220,125 C 285,116 335,102 395,95 C 465,86 515,72 570,65 C 630,56 685,35 745,25";
+  const curveStateB = "M 50,156 C 130,142 165,134 220,122 C 285,118 335,98 395,97 C 465,84 515,74 570,63 C 630,58 685,33 745,25";
+  const curveStateC = "M 50,154 C 130,148 165,130 220,128 C 285,114 335,105 395,93 C 465,88 515,70 570,67 C 630,54 685,37 745,25";
+
+  const areaStateA = `${curveStateA} L 745,195 L 50,195 Z`;
+  const areaStateB = `${curveStateB} L 745,195 L 50,195 Z`;
+  const areaStateC = `${curveStateC} L 745,195 L 50,195 Z`;
+
   const handleOpenExplore = () => {
     const el = document.getElementById("programs");
     if (el) {
@@ -141,6 +150,22 @@ export default function AISkillGap() {
             {/* SVG Curve Container */}
             <div className="relative pt-4 pb-2">
               
+              {/* Inline keyframes for beam flow animation */}
+              <style>{`
+                @keyframes curveBeamMovement {
+                  0% {
+                    stroke-dashoffset: 950;
+                  }
+                  100% {
+                    stroke-dashoffset: -950;
+                  }
+                }
+                .curve-flowing-beam {
+                  stroke-dasharray: 140 800;
+                  animation: curveBeamMovement 4s linear infinite;
+                }
+              `}</style>
+
               {/* Floating Tooltip when node is hovered */}
               {hoveredIdx !== null && (
                 <div 
@@ -159,30 +184,49 @@ export default function AISkillGap() {
 
               <svg
                 viewBox="0 0 800 200"
-                className="w-full h-auto overflow-visible"
+                className="w-full h-auto overflow-visible select-none"
               >
                 <defs>
                   {/* Soft area gradient */}
                   <linearGradient id="growthAreaGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.32" />
+                    <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.32">
+                      <animate attributeName="stopOpacity" values="0.25;0.38;0.25" dur="4s" repeatCount="indefinite" />
+                    </stop>
                     <stop offset="60%" stopColor="var(--color-primary)" stopOpacity="0.08" />
                     <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0.0" />
+                  </linearGradient>
+
+                  {/* Beam flow gradient for continuous smooth light beam */}
+                  <linearGradient id="beamGlowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+                    <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
                   </linearGradient>
 
                   {/* Curve Glow */}
                   <filter id="curveGlow" x="-20%" y="-20%" width="140%" height="140%">
                     <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="var(--color-primary)" floodOpacity="0.3" />
                   </filter>
+                  <filter id="orbGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+                  </filter>
                 </defs>
 
-                {/* Shaded Area Under Curve */}
+                {/* Shaded Area Under Curve with smooth organic breathing */}
                 <path
                   d={areaPath}
                   fill="url(#growthAreaGradient)"
                   className="transition-all duration-500 ease-out"
-                />
+                >
+                  <animate
+                    attributeName="d"
+                    dur="6s"
+                    repeatCount="indefinite"
+                    values={`${areaStateA}; ${areaStateB}; ${areaStateC}; ${areaStateA}`}
+                  />
+                </path>
 
-                {/* Glowing Blue Curve */}
+                {/* Base Blue Curve with smooth harmonic animation */}
                 <path
                   d={curvePath}
                   fill="none"
@@ -191,7 +235,51 @@ export default function AISkillGap() {
                   strokeLinecap="round"
                   filter="url(#curveGlow)"
                   className="transition-all duration-500 ease-out"
+                >
+                  <animate
+                    attributeName="d"
+                    dur="6s"
+                    repeatCount="indefinite"
+                    values={`${curveStateA}; ${curveStateB}; ${curveStateC}; ${curveStateA}`}
+                  />
+                </path>
+
+                {/* Travelling Continuous Glowing Light Stream along the Curve */}
+                <path
+                  d={curvePath}
+                  fill="none"
+                  stroke="url(#beamGlowGradient)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  className="curve-flowing-beam pointer-events-none"
                 />
+
+                {/* Smooth Glowing Traveling Orb Particle */}
+                <g className="pointer-events-none">
+                  {/* Outer glow ring */}
+                  <circle r="11" fill="var(--color-primary)" opacity="0.35">
+                    <animateMotion
+                      path={curvePath}
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  {/* Inner crisp core */}
+                  <circle r="4" fill="#ffffff" filter="url(#orbGlow)">
+                    <animateMotion
+                      path={curvePath}
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle r="2.5" fill="#ffffff">
+                    <animateMotion
+                      path={curvePath}
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </g>
 
                 {/* Milestone Nodes */}
                 {MILESTONES.map((pt, idx) => {

@@ -25,7 +25,7 @@ export default function Accreditations() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Our Accreditations"
-          title="Recognized By Industry Leaders"
+          title={<>Recognized By <span className="text-primary font-medium">Industry Leaders</span></>}
           subtitle="Backed by the most prestigious organizations and government bodies in the technology and education sectors."
           align="center"
         />

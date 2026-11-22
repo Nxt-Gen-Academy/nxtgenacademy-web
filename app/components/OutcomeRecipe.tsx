@@ -22,7 +22,7 @@ export default function OutcomeRecipe() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Welcome to the Outcome Powerhouse"
-          title="Your Recipe for a Next Gen Learner"
+          title={<>Your Recipe for a <span className="text-primary font-medium">Next Gen Learner</span></>}
           subtitle="We don't just teach skills. We engineer your entire career transition path with a proven methodology."
         />
         

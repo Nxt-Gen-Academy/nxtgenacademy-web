@@ -41,7 +41,7 @@ const facultyLoop = [...facultyMembers, ...facultyMembers, ...facultyMembers];
 
 function FacultyCard({ member }: { member: (typeof facultyMembers)[number] }) {
   return (
-    <div className="flex-[0_0_300px] w-[300px] bg-card border border-border/80 rounded-[20px] overflow-hidden transition-all duration-200 ease-out flex flex-col cursor-pointer hover:bg-primary hover:border-primary hover:shadow-xl hover:shadow-primary/25 group">
+    <div className="card-hover-primary flex-[0_0_300px] w-[300px] bg-card border border-border/80 rounded-[20px] overflow-hidden flex flex-col cursor-pointer group">
       <div className="w-full h-[240px] overflow-hidden relative">
         <Image
           src={member.image}
@@ -52,13 +52,13 @@ function FacultyCard({ member }: { member: (typeof facultyMembers)[number] }) {
         />
       </div>
       <div className="p-[25px] relative flex flex-col grow">
-        <p className="text-[0.75rem] text-primary group-hover:text-blue-100 uppercase tracking-widest font-semibold mb-1 transition-colors duration-200">
+        <p className="text-[0.75rem] text-primary uppercase tracking-widest font-semibold mb-1 transition-colors duration-200">
           {member.role}
         </p>
-        <h4 className="text-foreground group-hover:text-white text-[1.3rem] font-bold m-0 mb-2 font-display transition-colors duration-200">
+        <h4 className="text-foreground text-[1.3rem] font-bold m-0 mb-2 font-display transition-colors duration-200">
           {member.name}
         </h4>
-        <p className="text-muted-foreground group-hover:text-white/85 text-[0.95rem] font-medium mb-4 transition-colors duration-200">
+        <p className="text-muted-foreground text-[0.95rem] font-medium mb-4 transition-colors duration-200">
           {member.company}
         </p>
       </div>
@@ -106,7 +106,7 @@ export default function Faculty() {
         <div className="text-center mb-12 flex flex-col items-center">
           <SectionHeading
             eyebrow="Introducing the Faculty"
-            title="Learn From The Best. Get Hired from the Best."
+            title={<>Learn From The Best. <span className="text-primary font-medium">Get Hired by the Best.</span></>}
             subtitle="Get mentored directly by active practitioners working at top Multi-National companies."
           />
         </div>

@@ -13,7 +13,7 @@ export default function AlumniNetwork() {
   const renderCard = (item: typeof testimonials[0], key: string) => (
     <div
       key={key}
-      className="w-[300px] sm:w-[340px] flex-shrink-0 bg-card rounded-2xl p-6 border border-border/80 shadow-sm transition-all duration-200 ease-out hover:bg-primary hover:border-primary hover:shadow-xl hover:shadow-primary/25 group cursor-pointer"
+      className="card-hover-primary w-[300px] sm:w-[340px] flex-shrink-0 bg-card rounded-2xl p-6 border border-border/80 shadow-sm cursor-pointer group"
     >
       <div className="flex gap-0.5 mb-4">
         {Array.from({ length: item.rating }).map((_, i) => (
@@ -35,11 +35,11 @@ export default function AlumniNetwork() {
           </svg>
         ))}
       </div>
-      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px] transition-colors duration-200 group-hover:text-white">
+      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px] transition-colors duration-200">
         “{item.quote}”
       </p>
-      <div className="flex gap-3 pt-6 border-t border-border/50 transition-colors duration-200 group-hover:border-white/20">
-        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border transition-colors duration-200 group-hover:border-white/30">
+      <div className="card-divider flex gap-3 pt-6 border-t border-border/50 transition-colors duration-200">
+        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border transition-colors duration-200">
           <img
             alt={item.name}
             loading="lazy"
@@ -50,16 +50,16 @@ export default function AlumniNetwork() {
           />
         </div>
         <div className="flex flex-col justify-center min-w-0">
-          <p className="text-sm font-heading font-semibold text-foreground transition-colors duration-200 group-hover:text-white truncate">
+          <p className="text-sm font-heading font-semibold text-foreground transition-colors duration-200 truncate">
             {item.name}
           </p>
-          <p className="text-muted-foreground text-xs transition-colors duration-200 group-hover:text-white/85 truncate">
+          <p className="text-muted-foreground text-xs transition-colors duration-200 truncate">
             {item.role}, {item.company}
           </p>
         </div>
       </div>
       <div className="self-start mt-3">
-        <span className="text-emerald-500 group-hover:text-emerald-200 text-xs font-medium bg-emerald-500/10 group-hover:bg-white/20 px-2 py-0.5 rounded transition-colors duration-200 whitespace-nowrap">
+        <span className="card-badge text-emerald-500 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded transition-colors duration-200 whitespace-nowrap">
           {item.tag}
         </span>
       </div>
@@ -78,7 +78,7 @@ export default function AlumniNetwork() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 mb-12">
         <SectionHeading
           eyebrow="Student Testimonials"
-          title="What Our learners Say About NxtGen Academy"
+          title={<>What Our Learners Say About <span className="text-primary font-medium">NxtGen Academy</span></>}
           subtitle="Real stories from professionals who transformed their careers through our programs."
           align="center"
         />

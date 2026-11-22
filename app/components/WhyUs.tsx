@@ -58,7 +58,7 @@ export default function WhyUs() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Why NxtGen"
-          title="Why students choose NxtGen Academy"
+          title={<>Why Students Choose <span className="text-primary font-medium">NxtGen Academy</span></>}
           subtitle="We bridge the gap between academic knowledge and industry expectations, transforming you into a top-tier candidate."
         />
         

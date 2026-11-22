@@ -23,7 +23,7 @@ export default function Journey() {
       <div className="max-w-7xl mx-auto relative z-10 px-4">
         <SectionHeading
           eyebrow="Learning Journey"
-          title="Your Career Transformation Roadmap"
+          title={<>Your Career <span className="text-primary font-medium">Transformation Roadmap</span></>}
           subtitle="A structured, step-by-step approach designed to take you from a learner to a hired professional."
         />
 
@@ -42,16 +42,16 @@ export default function Journey() {
                     <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
                   </div>
 
-                  <div className="card-premium p-6 sm:p-8 rounded-3xl group relative overflow-hidden bg-card border border-border/80 shadow-sm transition-all duration-200 ease-out hover:bg-primary hover:border-primary hover:shadow-xl hover:shadow-primary/25 cursor-pointer">
+                  <div className="card-hover-primary p-6 sm:p-8 rounded-3xl group relative overflow-hidden bg-card border border-border/80 shadow-sm cursor-pointer">
                     <div
                       className={`relative z-10 inline-flex items-center gap-3 ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}
                     >
-                      <span className="font-mono text-[11px] font-bold text-primary uppercase tracking-[0.2em] bg-primary/10 border border-primary/30 rounded-md px-3 py-1.5 backdrop-blur-sm transition-colors duration-200 group-hover:bg-white/20 group-hover:text-white group-hover:border-white/25">
+                      <span className="card-badge font-mono text-[11px] font-bold text-primary uppercase tracking-[0.2em] bg-primary/10 border border-primary/30 rounded-md px-3 py-1.5 backdrop-blur-sm transition-colors duration-200">
                         STEP {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
 
-                    <h4 className="relative z-10 mt-6 font-display text-xl sm:text-2xl font-semibold leading-tight text-foreground transition-colors duration-200 group-hover:text-white">
+                    <h4 className="relative z-10 mt-6 font-display text-xl sm:text-2xl font-semibold leading-tight text-foreground transition-colors duration-200">
                       {s}
                     </h4>
                   </div>

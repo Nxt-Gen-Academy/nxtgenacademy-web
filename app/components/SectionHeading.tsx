@@ -1,9 +1,10 @@
+import React from "react";
 import ScrollReveal from "./ScrollReveal";
 import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 
 type SectionHeadingProps = {
   eyebrow: string;
-  title: string;
+  title: React.ReactNode;
   subtitle?: string;
   align?: "left" | "center";
 };
