@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useId } from "react";
 import { TrendingUp, BadgeCheck, ArrowRight, Sparkles } from "lucide-react";
 import ScrollReveal from "@/app/components/ScrollReveal";
+import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 
 const TRACKS = [
   { id: "ba", name: "Business Analytics with Gen AI", range: "45–65%", hike: 0.55 },
@@ -107,9 +108,12 @@ export default function ROICalculatorSection() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={200}>
-              <h2 className="font-heading text-[clamp(2.2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight">
+              <WordStaggerHeading
+                as="h2"
+                className="font-heading text-[clamp(2.2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight"
+              >
                 See what your next career move could be worth.
-              </h2>
+              </WordStaggerHeading>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={300}>

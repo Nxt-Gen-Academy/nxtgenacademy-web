@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ShaderAnimation } from "@/components/ui/ShaderAnimation";
 import { useMutation } from "@tanstack/react-query";
@@ -234,12 +235,12 @@ export default function ApplyMentorPage() {
             >
               <span>Join Our Mission</span>
             </motion.div>
-            <motion.h1
-              variants={itemVariants}
+            <WordStaggerHeading
+              as="h1"
               className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.08]"
             >
               Shape the <br className="hidden md:block" /><span className="text-primary">next generation</span><br className="hidden md:block" /> of tech leaders
-            </motion.h1>
+            </WordStaggerHeading>
             <motion.p
               variants={itemVariants}
               className="text-lg text-foreground/85 max-w-xl leading-relaxed mb-8 font-medium"
@@ -365,9 +366,12 @@ export default function ApplyMentorPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
               Why Join
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
+            <WordStaggerHeading
+              as="h2"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+            >
               Perks of Mentorship
-            </h2>
+            </WordStaggerHeading>
             <p className="text-muted-foreground text-lg">
               Join a community of elite professionals and unlock exclusive benefits while shaping the future.
             </p>
@@ -442,9 +446,12 @@ export default function ApplyMentorPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
               Process
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
+            <WordStaggerHeading
+              as="h2"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+            >
               How to Get Started
-            </h2>
+            </WordStaggerHeading>
             <p className="text-muted-foreground text-lg">
               Four simple steps to begin your journey as a NxtGen Academy mentor.
             </p>
@@ -519,9 +526,12 @@ export default function ApplyMentorPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
               Wall of Love
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
+            <WordStaggerHeading
+              as="h2"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+            >
               Hear From Our Mentors
-            </h2>
+            </WordStaggerHeading>
             <p className="text-muted-foreground text-lg">
               Discover what our community has to say about their mentoring experience.
             </p>

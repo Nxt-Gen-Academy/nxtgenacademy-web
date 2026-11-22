@@ -14,6 +14,7 @@ import SignUpForm from "./SignUpForm";
 import { authClient } from "@/lib/auth-client";
 import HeroLaptopPreview from "./HeroLaptopPreview";
 import HeroFluidBackground from "./HeroFluidBackground";
+import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 
 const pillars = [
   { label: "Live Cohorts", icon: Calendar },
@@ -81,12 +82,15 @@ export default function Hero() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.3rem] xl:text-[3.75rem] font-bold tracking-tight text-white leading-[1.08]">
+            <WordStaggerHeading
+              as="h1"
+              className="font-heading text-4xl sm:text-5xl lg:text-[3.3rem] xl:text-[3.75rem] font-bold tracking-tight text-white leading-[1.08]"
+            >
               Don&apos;t Just Learn AI. <br />
               <span className="text-[#38bdf8] bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#93c5fd] bg-clip-text text-transparent">
                 Build a Career With It.
               </span>
-            </h1>
+            </WordStaggerHeading>
 
             {/* Subheading */}
             <p className="mt-5 sm:mt-6 text-base sm:text-lg text-blue-100/80 leading-relaxed max-w-xl font-normal">

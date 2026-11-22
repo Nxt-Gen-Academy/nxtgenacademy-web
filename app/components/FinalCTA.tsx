@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Laptop, Layers, Users, Briefcase, ChevronRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 
 const pillars = [
   { label: "Live Programs", icon: Laptop },
@@ -71,9 +72,12 @@ export default function FinalCTA() {
                     <p className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-foreground tracking-tight">
                       Career Transformation with
                     </p>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-black text-primary tracking-tight leading-tight">
+                    <WordStaggerHeading
+                      as="h2"
+                      className="text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-black text-primary tracking-tight leading-tight"
+                    >
                       AI + Business + Technology
-                    </h2>
+                    </WordStaggerHeading>
                     <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 text-[11px] sm:text-xs md:text-sm font-bold text-foreground pt-0.5">
                       <span>Learn</span>
                       <ChevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary stroke-[3]" />
