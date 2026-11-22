@@ -6,7 +6,6 @@ import Faculty from "./components/Faculty";
 import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
-import HearFromLearners from "./components/HearFromLearners";
 import Hero from "./components/Hero";
 import Journey from "./components/Journey";
 import Nav from "./components/Nav";
@@ -28,7 +27,6 @@ export default function Home() {
       <OutcomeRecipe />
       <Programs />
       <WhyUs />
-      <HearFromLearners />
       <AISkillGap />
       <Faculty />
       <Journey />
