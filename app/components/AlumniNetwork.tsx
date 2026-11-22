@@ -13,7 +13,7 @@ export default function AlumniNetwork() {
   const renderCard = (item: typeof testimonials[0], key: string) => (
     <div
       key={key}
-      className="w-[300px] sm:w-[340px] flex-shrink-0 bg-card/40 backdrop-blur-sm rounded-lg md:rounded-xl p-6 border border-border/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-border hover:bg-card/60"
+      className="w-[300px] sm:w-[340px] flex-shrink-0 bg-card rounded-2xl p-6 border border-border/80 shadow-sm transition-all duration-200 ease-out hover:bg-primary hover:border-primary hover:shadow-xl hover:shadow-primary/25 group cursor-pointer"
     >
       <div className="flex gap-0.5 mb-4">
         {Array.from({ length: item.rating }).map((_, i) => (
@@ -35,11 +35,11 @@ export default function AlumniNetwork() {
           </svg>
         ))}
       </div>
-      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px]">
+      <p className="text-foreground/90 text-sm leading-relaxed mb-6 min-h-[80px] transition-colors duration-200 group-hover:text-white">
         “{item.quote}”
       </p>
-      <div className="flex gap-3 pt-6 border-t border-border/50">
-        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border">
+      <div className="flex gap-3 pt-6 border-t border-border/50 transition-colors duration-200 group-hover:border-white/20">
+        <div className="relative h-10 w-10 rounded-full overflow-hidden bg-muted flex-shrink-0 border border-border transition-colors duration-200 group-hover:border-white/30">
           <img
             alt={item.name}
             loading="lazy"
@@ -49,19 +49,17 @@ export default function AlumniNetwork() {
             src={item.image}
           />
         </div>
-        <div className="">
-          <div className="flex flex-col justify-center">
-            <p className="text-sm font-heading font-semibold text-foreground truncate">
-              {item.name}
-            </p>
-            <p className="text-muted-foreground text-xs truncate">
-              {item.role}, {item.company}
-            </p>
-          </div>
+        <div className="flex flex-col justify-center min-w-0">
+          <p className="text-sm font-heading font-semibold text-foreground transition-colors duration-200 group-hover:text-white truncate">
+            {item.name}
+          </p>
+          <p className="text-muted-foreground text-xs transition-colors duration-200 group-hover:text-white/85 truncate">
+            {item.role}, {item.company}
+          </p>
         </div>
       </div>
       <div className="self-start mt-3">
-        <span className="text-emerald-400 text-xs font-medium bg-emerald-500/10 px-2 py-0.5 rounded whitespace-nowrap">
+        <span className="text-emerald-500 group-hover:text-emerald-200 text-xs font-medium bg-emerald-500/10 group-hover:bg-white/20 px-2 py-0.5 rounded transition-colors duration-200 whitespace-nowrap">
           {item.tag}
         </span>
       </div>
@@ -100,7 +98,7 @@ export default function AlumniNetwork() {
             </div>
             {/* Loop 2: Duplicate 5 cards to provide the seamless reset loop */}
             <div className="flex gap-6 flex-shrink-0 pr-6">
-              {row1Items.map((item, idx) => renderCard(item, `row1-loop2-${idx}`))}
+              {row1Items.map((item, idx) => renderCard(item, `row1-loop1-dup-${idx}`))}
             </div>
           </div>
         </div>
@@ -118,7 +116,7 @@ export default function AlumniNetwork() {
             </div>
             {/* Loop 2: Duplicate 5 cards */}
             <div className="flex gap-6 flex-shrink-0 pr-6">
-              {row2Items.map((item, idx) => renderCard(item, `row2-loop2-${idx}`))}
+              {row2Items.map((item, idx) => renderCard(item, `row2-loop1-dup-${idx}`))}
             </div>
           </div>
         </div>

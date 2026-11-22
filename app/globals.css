@@ -222,7 +222,56 @@
 
   /* Premium Card utilities */
   .card-premium {
-    @apply relative overflow-hidden rounded-2xl border border-border/80 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card shadow-sm hover:shadow-md;
+    @apply relative overflow-hidden rounded-2xl border border-border/80 bg-card transition-all duration-300 shadow-sm hover:shadow-md;
+  }
+
+  /* Card Hover to Primary Effect */
+  .card-hover-primary {
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease !important;
+  }
+
+  .card-hover-primary:hover {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 20px 25px -5px rgba(27, 91, 214, 0.25), 0 8px 10px -6px rgba(27, 91, 214, 0.2) !important;
+  }
+
+  .card-hover-primary:hover h1,
+  .card-hover-primary:hover h2,
+  .card-hover-primary:hover h3,
+  .card-hover-primary:hover h4,
+  .card-hover-primary:hover h5,
+  .card-hover-primary:hover h6 {
+    color: #ffffff !important;
+  }
+
+  .card-hover-primary:hover p {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .card-hover-primary:hover span:not(.no-hover-white) {
+    color: #ffffff !important;
+  }
+
+  .card-hover-primary:hover .card-icon {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  .card-hover-primary:hover .card-badge {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .card-hover-primary:hover .card-arrow {
+    background-color: #ffffff !important;
+    color: var(--primary) !important;
+  }
+
+  .card-hover-primary:hover .card-divider {
+    border-color: rgba(255, 255, 255, 0.2) !important;
   }
 
   .nav-link-underline {

@@ -41,24 +41,24 @@ const facultyLoop = [...facultyMembers, ...facultyMembers, ...facultyMembers];
 
 function FacultyCard({ member }: { member: (typeof facultyMembers)[number] }) {
   return (
-    <div className="flex-[0_0_300px] w-[300px] bg-card border border-border backdrop-blur-md rounded-[20px] overflow-hidden transition-all duration-400 ease-in-out flex flex-col cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-primary/40 group">
+    <div className="flex-[0_0_300px] w-[300px] bg-card border border-border/80 rounded-[20px] overflow-hidden transition-all duration-200 ease-out flex flex-col cursor-pointer hover:bg-primary hover:border-primary hover:shadow-xl hover:shadow-primary/25 group">
       <div className="w-full h-[240px] overflow-hidden relative">
         <Image
           src={member.image}
           alt={member.name}
           fill
-          className="object-cover transition-transform duration-500 ease group-hover:scale-105"
+          className="object-cover"
           sizes="300px"
         />
       </div>
       <div className="p-[25px] relative flex flex-col grow">
-        <p className="text-[0.75rem] text-primary uppercase tracking-widest font-semibold mb-1">
+        <p className="text-[0.75rem] text-primary group-hover:text-blue-100 uppercase tracking-widest font-semibold mb-1 transition-colors duration-200">
           {member.role}
         </p>
-        <h4 className="text-foreground text-[1.3rem] font-bold m-0 mb-2 font-display">
+        <h4 className="text-foreground group-hover:text-white text-[1.3rem] font-bold m-0 mb-2 font-display transition-colors duration-200">
           {member.name}
         </h4>
-        <p className="text-muted-foreground text-[0.95rem] font-medium mb-4">
+        <p className="text-muted-foreground group-hover:text-white/85 text-[0.95rem] font-medium mb-4 transition-colors duration-200">
           {member.company}
         </p>
       </div>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
-import { Card, CardContent } from "@/components/ui/card";
 import ScrollReveal from "./ScrollReveal";
 
 const referralLogos = [
@@ -28,27 +27,27 @@ export default function OutcomeRecipe() {
         />
         
         <div className="mt-20 grid gap-6 md:gap-8 lg:grid-cols-2">
+          {/* Card 1: Referrals */}
           <ScrollReveal direction="up" delay={100}>
-            <Card className="card-premium h-full group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <CardContent className="relative z-10 p-7 md:p-8 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
+            <div className="card-hover-primary h-full group relative overflow-hidden rounded-3xl bg-card border border-border/80 shadow-sm p-7 md:p-8 cursor-pointer">
+              <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
                 <div>
-                  <span className="inline-flex items-center rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)] backdrop-blur-md transition-colors group-hover:bg-amber-500/20 group-hover:border-amber-400/50">
+                  <span className="card-badge inline-flex items-center rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-amber-500 backdrop-blur-md transition-colors duration-200">
                     Access 3000+ Companies
                   </span>
-                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground">
+                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground transition-colors duration-200">
                     Get Referrals
                   </h3>
-                  <p className="mt-3 text-base text-muted-foreground leading-relaxed">
+                  <p className="mt-3 text-base text-muted-foreground leading-relaxed transition-colors duration-200">
                     Boost your job prospects with referrals from our vast network of
                     companies actively hiring our graduates.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 grid grid-cols-3 gap-3 place-items-center shadow-md group-hover:border-primary/30 transition-colors">
+                <div className="card-divider rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 grid grid-cols-3 gap-3 place-items-center shadow-md transition-colors duration-200">
                   {referralLogos.map((logo, i) => (
                     <div
                       key={logo.alt}
-                      className="logo-white-card w-full h-10 transition-transform hover:scale-110"
+                      className="logo-white-card w-full h-10 transition-colors"
                       style={{ animationDelay: `${i * 0.5}s` }}
                     >
                       <Image
@@ -61,127 +60,123 @@ export default function OutcomeRecipe() {
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </ScrollReveal>
 
+          {/* Card 2: Company-Specific Prep */}
           <ScrollReveal direction="up" delay={200}>
-            <Card className="card-premium h-full group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <CardContent className="relative z-10 p-7 md:p-8 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
+            <div className="card-hover-primary h-full group relative overflow-hidden rounded-3xl bg-card border border-border/80 shadow-sm p-7 md:p-8 cursor-pointer">
+              <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
                 <div>
-                  <span className="inline-flex items-center rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.15)] backdrop-blur-md transition-colors group-hover:bg-sky-500/20 group-hover:border-sky-400/50">
+                  <span className="card-badge inline-flex items-center rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-sky-500 backdrop-blur-md transition-colors duration-200">
                     Tailored Interview Prep
                   </span>
-                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground">
+                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground transition-colors duration-200">
                     Company-Specific Prep
                   </h3>
-                  <p className="mt-3 text-base text-muted-foreground leading-relaxed">
-                    Get ready for interviews with customized preparation for your
-                    target companies based on actual recent interview experiences.
+                  <p className="mt-3 text-base text-muted-foreground leading-relaxed transition-colors duration-200">
+                    Crack company-specific interviews with targeted question banks, system
+                    design sessions, and domain mock panels.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 shadow-md group-hover:border-primary/30 transition-colors">
-                  <div className="grid grid-cols-2 gap-3 text-[11px] font-mono uppercase text-muted-foreground">
-                    <div className="rounded-xl border border-dashed border-border/80 bg-card/40 p-2 text-center group-hover:border-primary/40 transition-colors">
-                      May 29
-                    </div>
-                    <div className="rounded-xl border border-dashed border-border/80 bg-card/40 p-2 text-center group-hover:border-primary/40 transition-colors">
-                      May 30
-                    </div>
+                <div className="card-divider rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 space-y-3 shadow-md transition-colors duration-200">
+                  <div className="flex items-center justify-between text-xs font-mono border-b border-border/50 pb-2 transition-colors duration-200">
+                    <span className="text-muted-foreground">Topic</span>
+                    <span className="text-foreground font-semibold">Target Firm</span>
                   </div>
-                  <div className="mt-5 space-y-3">
-                    <div className="rounded-xl bg-amber-500/10 border border-amber-400/30 p-3.5 text-xs text-amber-800 shadow-xs transition-transform group-hover:translate-x-1">
-                      Practice interview scheduled for Amazon
-                    </div>
-                    <div className="rounded-xl bg-primary/10 border border-primary/30 p-3.5 text-xs text-foreground shadow-xs transition-transform group-hover:translate-x-1 delay-75">
-                      Round 1 interview scheduled for Amazon
-                    </div>
+                  <div className="flex items-center justify-between text-xs bg-muted/40 p-2.5 rounded-lg border border-border/50 transition-colors duration-200">
+                    <span className="text-foreground">AI PRD Design</span>
+                    <span className="text-primary font-medium">Google</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs bg-muted/40 p-2.5 rounded-lg border border-border/50 transition-colors duration-200">
+                    <span className="text-foreground">SQL Optimization</span>
+                    <span className="text-primary font-medium">Amazon</span>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </ScrollReveal>
 
+          {/* Card 3: AI Portfolio */}
           <ScrollReveal direction="up" delay={300}>
-            <Card className="card-premium h-full group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <CardContent className="relative z-10 p-7 md:p-8 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
+            <div className="card-hover-primary h-full group relative overflow-hidden rounded-3xl bg-card border border-border/80 shadow-sm p-7 md:p-8 cursor-pointer">
+              <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
                 <div>
-                  <span className="inline-flex items-center rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.15)] backdrop-blur-md transition-colors group-hover:bg-violet-500/20 group-hover:border-violet-400/50">
-                    Interactive Coding Sessions
+                  <span className="card-badge inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-primary backdrop-blur-md transition-colors duration-200">
+                    Stand Out To Recruiters
                   </span>
-                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground">
-                    Live Coding Practice
+                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground transition-colors duration-200">
+                    Build a Real AI Portfolio
                   </h3>
-                  <p className="mt-3 text-base text-muted-foreground leading-relaxed">
-                    Improve your skills with live coding exercises, pair programming, and real-time
-                    feedback from senior engineers.
+                  <p className="mt-3 text-base text-muted-foreground leading-relaxed transition-colors duration-200">
+                    Build end-to-end, investor-grade products and analysis dashboards that
+                    prove your problem-solving capabilities.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 shadow-md group-hover:border-primary/30 transition-colors">
-                  <div className="flex items-center gap-2">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/30 shadow-xs group-hover:scale-110 transition-transform" />
-                    <div className="h-10 w-10 rounded-full bg-secondary border border-border/80 shadow-xs group-hover:scale-110 transition-transform delay-75" />
-                    <div className="h-10 w-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 shadow-xs group-hover:scale-110 transition-transform delay-150 flex items-center justify-center">
+                <div className="card-divider rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 shadow-md transition-colors duration-200">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/30 shadow-xs transition-colors duration-200" />
+                    <div className="h-10 w-10 rounded-full bg-secondary border border-border/80 shadow-xs transition-colors duration-200" />
+                    <div className="h-10 w-10 rounded-full bg-emerald-500/10 border border-emerald-500/30 shadow-xs flex items-center justify-center transition-colors duration-200">
                       <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
                     </div>
                   </div>
-                  <div className="mt-5 rounded-xl border border-border/80 bg-card p-4 text-xs text-muted-foreground shadow-xs group-hover:-translate-y-1 transition-transform duration-300">
-                    <div className="flex items-center justify-between border-b border-border/50 pb-2 mb-2">
-                      <span className="font-medium text-foreground/80">Pair session</span>
-                      <span className="text-primary font-medium flex items-center gap-1.5">
+                  <div className="rounded-xl border border-border/80 bg-card p-4 text-xs text-muted-foreground shadow-xs transition-colors duration-200">
+                    <div className="flex items-center justify-between border-b border-border/50 pb-2 mb-2 transition-colors duration-200">
+                      <span className="font-medium text-foreground/80 transition-colors duration-200">Pair session</span>
+                      <span className="text-primary font-medium flex items-center gap-1.5 transition-colors duration-200">
                         <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
                         Live
                       </span>
                     </div>
-                    <div className="font-mono text-[12px] text-foreground/90 bg-muted/60 p-2 rounded border border-border/50">
-                      <span className="text-violet-600 font-semibold">const</span> solution = <span className="text-amber-600 font-semibold">optimize</span>(arr);
+                    <div className="font-mono text-[12px] text-foreground/90 bg-muted/60 p-2 rounded border border-border/50 transition-colors duration-200">
+                      <span>const solution = optimize(arr);</span>
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </ScrollReveal>
 
+          {/* Card 4: Career Support */}
           <ScrollReveal direction="up" delay={400}>
-            <Card className="card-premium h-full group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <CardContent className="relative z-10 p-7 md:p-8 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
+            <div className="card-hover-primary h-full group relative overflow-hidden rounded-3xl bg-card border border-border/80 shadow-sm p-7 md:p-8 cursor-pointer">
+              <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,240px)] w-full h-full items-center">
                 <div>
-                  <span className="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.15)] backdrop-blur-md transition-colors group-hover:bg-emerald-500/20 group-hover:border-emerald-400/50">
+                  <span className="card-badge inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-emerald-500 backdrop-blur-md transition-colors duration-200">
                     Lifetime Placement Assurance
                   </span>
-                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground">
+                  <h3 className="mt-6 font-heading text-2xl font-medium text-foreground transition-colors duration-200">
                     Career Support
                   </h3>
-                  <p className="mt-3 text-base text-muted-foreground leading-relaxed">
+                  <p className="mt-3 text-base text-muted-foreground leading-relaxed transition-colors duration-200">
                     Continue to receive job opportunities and interview support as a valued
                     alumnus of NxtGen Academy for life.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 space-y-3 shadow-md group-hover:border-primary/30 transition-colors">
-                  <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-transform group-hover:translate-x-1 hover:border-primary/40 cursor-default">
-                    <div className="font-semibold text-sm">Senior Data Scientist</div>
-                    <div className="text-muted-foreground mt-0.5">
+                <div className="card-divider rounded-2xl border border-border bg-card/60 backdrop-blur-sm p-5 space-y-3 shadow-md transition-colors duration-200">
+                  <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-colors duration-200 cursor-default">
+                    <div className="font-semibold text-sm transition-colors duration-200">Senior Data Scientist</div>
+                    <div className="text-muted-foreground transition-colors duration-200 mt-0.5">
                       Microsoft · Full-time
                     </div>
                   </div>
-                  <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-transform group-hover:translate-x-1 delay-75 hover:border-primary/40 cursor-default">
-                    <div className="font-semibold text-sm">Product Manager</div>
-                    <div className="text-muted-foreground mt-0.5">
+                  <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-colors duration-200 cursor-default">
+                    <div className="font-semibold text-sm transition-colors duration-200">Product Manager</div>
+                    <div className="text-muted-foreground transition-colors duration-200 mt-0.5">
                       Razorpay · Full-time
                     </div>
                   </div>
-                  <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-transform group-hover:translate-x-1 delay-150 hover:border-primary/40 cursor-default">
-                    <div className="font-semibold text-sm">AI Engineer</div>
-                    <div className="text-muted-foreground mt-0.5">
+                  <div className="rounded-xl bg-card border border-border/80 p-3.5 text-xs text-foreground shadow-sm transition-colors duration-200 cursor-default">
+                    <div className="font-semibold text-sm transition-colors duration-200">AI Engineer</div>
+                    <div className="text-muted-foreground transition-colors duration-200 mt-0.5">
                       Flipkart · Full-time
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </ScrollReveal>
         </div>
       </div>

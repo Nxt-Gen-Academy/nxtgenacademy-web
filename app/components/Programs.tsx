@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { ArrowRight, BarChart3, Boxes, Database, Sparkles } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
@@ -41,8 +41,6 @@ const programsData: ProgramItem[] = [
 ];
 
 export default function Programs() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
   const handleOpenProgram = (programTitle: string) => {
     window.dispatchEvent(
       new CustomEvent("open-signup-dialog", { detail: { program: programTitle } }),
@@ -89,99 +87,47 @@ export default function Programs() {
 
         {/* ── 3 Program Cards Grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {programsData.map((prog, idx) => {
-            const isHovered = hoveredId === prog.id;
-
-            return (
-              <ScrollReveal key={prog.id} direction="up" delay={150 * (idx + 1)}>
-                <div
-                  onClick={() => handleOpenProgram(prog.title)}
-                  onMouseEnter={() => setHoveredId(prog.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  className={`group relative rounded-3xl p-8 sm:p-9 flex flex-col justify-between min-h-[310px] cursor-pointer transition-all duration-300 ease-out hover:-translate-y-2 border ${
-                    isHovered
-                      ? "bg-gradient-to-br from-[#1b5bd6] via-[#1651c6] to-[#0f3d99] text-white shadow-2xl shadow-primary/30 border-blue-400/30"
-                      : "bg-card text-foreground border-border/80 hover:border-blue-400/30 shadow-sm hover:shadow-2xl hover:shadow-primary/30 hover:bg-gradient-to-br hover:from-[#1b5bd6] hover:via-[#1651c6] hover:to-[#0f3d99]"
-                  }`}
-                >
-                  {/* Top: Icon & Duration Badge */}
-                  <div>
-                    <div className="flex items-center justify-between mb-8">
-                      <div
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs ${
-                          isHovered
-                            ? "bg-white/20 text-white border border-white/25 backdrop-blur-md scale-110"
-                            : "bg-primary/10 text-primary border border-primary/20 group-hover:bg-white/20 group-hover:text-white group-hover:border-white/25 group-hover:backdrop-blur-md group-hover:scale-110"
-                        }`}
-                      >
-                        {prog.icon}
-                      </div>
-                      <span
-                        className={`text-xs font-mono font-medium px-3.5 py-1 rounded-full transition-all duration-300 ${
-                          isHovered
-                            ? "bg-white/20 text-white border border-white/15"
-                            : "bg-muted text-muted-foreground border border-border/60 group-hover:bg-white/20 group-hover:text-white group-hover:border-white/15"
-                        }`}
-                      >
-                        {prog.duration}
-                      </span>
+          {programsData.map((prog, idx) => (
+            <ScrollReveal key={prog.id} direction="up" delay={150 * (idx + 1)}>
+              <div
+                onClick={() => handleOpenProgram(prog.title)}
+                className="card-hover-primary group relative rounded-3xl p-8 sm:p-9 flex flex-col justify-between min-h-[310px] cursor-pointer bg-card text-foreground border border-border/80 shadow-sm"
+              >
+                {/* Top: Icon & Duration Badge */}
+                <div>
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="card-icon w-14 h-14 rounded-2xl flex items-center justify-center bg-primary/10 text-primary border border-primary/20 shadow-xs transition-colors duration-200">
+                      {prog.icon}
                     </div>
-
-                    {/* Title */}
-                    <h3
-                      className={`font-heading text-2xl font-medium tracking-tight mb-3 transition-colors duration-300 ${
-                        isHovered
-                          ? "text-white"
-                          : "text-foreground group-hover:text-white"
-                      }`}
-                    >
-                      {prog.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p
-                      className={`text-sm sm:text-base leading-relaxed transition-colors duration-300 ${
-                        isHovered
-                          ? "text-blue-50/90"
-                          : "text-muted-foreground group-hover:text-blue-50/90"
-                      }`}
-                    >
-                      {prog.description}
-                    </p>
+                    <span className="card-badge text-xs font-mono font-medium px-3.5 py-1 rounded-full bg-muted text-muted-foreground border border-border/60 transition-colors duration-200">
+                      {prog.duration}
+                    </span>
                   </div>
 
-                  {/* Bottom: Action Arrow */}
-                  <div
-                    className={`pt-8 flex items-center justify-between border-t transition-colors duration-300 mt-6 ${
-                      isHovered
-                        ? "border-white/20"
-                        : "border-border/60 group-hover:border-white/20"
-                    }`}
-                  >
-                    <span
-                      className={`text-xs font-semibold uppercase tracking-wider transition-colors duration-300 ${
-                        isHovered
-                          ? "text-white"
-                          : "text-muted-foreground group-hover:text-white"
-                      }`}
-                    >
-                      View Details
-                    </span>
+                  {/* Title */}
+                  <h3 className="font-heading text-2xl font-medium tracking-tight mb-3 text-foreground transition-colors duration-200">
+                    {prog.title}
+                  </h3>
 
-                    <div
-                      className={`w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
-                        isHovered
-                          ? "bg-white text-primary scale-110 shadow-md"
-                          : "bg-primary/10 text-primary group-hover:bg-white group-hover:text-primary group-hover:scale-110 group-hover:shadow-md"
-                      }`}
-                    >
-                      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    </div>
+                  {/* Description */}
+                  <p className="text-sm sm:text-base leading-relaxed text-muted-foreground transition-colors duration-200">
+                    {prog.description}
+                  </p>
+                </div>
+
+                {/* Bottom: Action Arrow */}
+                <div className="card-divider pt-8 flex items-center justify-between border-t border-border/60 transition-colors duration-200 mt-6">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors duration-200">
+                    View Details
+                  </span>
+
+                  <div className="card-arrow w-11 h-11 rounded-full flex items-center justify-center shadow-xs bg-primary/10 text-primary transition-colors duration-200">
+                    <ArrowRight className="h-5 w-5" />
                   </div>
                 </div>
-              </ScrollReveal>
-            );
-          })}
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>
