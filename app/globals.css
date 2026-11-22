@@ -69,8 +69,8 @@
 :root {
   --radius: 0.75rem;
 
-  /* Core palette — Clean modern light mode with vibrant royal blue primary */
-  --background: oklch(0.985 0.005 250);
+  /* Core palette — Clean modern pure white mode with vibrant royal blue primary */
+  --background: oklch(1 0 0);
   --foreground: oklch(0.16 0.03 255);
 
   --ink: oklch(0.14 0.02 255);
