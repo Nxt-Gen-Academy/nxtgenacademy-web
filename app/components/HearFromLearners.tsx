@@ -3,6 +3,7 @@
 import { Star } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Card, CardContent } from "@/components/ui/card";
+import ScrollReveal from "./ScrollReveal";
 
 const allTestimonials = [
   {
@@ -139,32 +140,34 @@ export default function HearFromLearners() {
         />
 
         {/* 3-Column Vertical Marquee Container */}
-        <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-border bg-card/60 backdrop-blur-md p-6 md:p-8 shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
-            
-            {/* Column 1 */}
-            <div className="flex flex-col h-full overflow-hidden">
-              <div className="marquee-vertical-track-1">
-                {col1Items.map((item, idx) => renderCard(item, idx, "col1"))}
+        <ScrollReveal direction="up" delay={150}>
+          <div className="relative mt-16 max-w-6xl mx-auto h-[600px] overflow-hidden rounded-3xl border border-border bg-card/60 backdrop-blur-md p-6 md:p-8 shadow-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
+              
+              {/* Column 1 */}
+              <div className="flex flex-col h-full overflow-hidden">
+                <div className="marquee-vertical-track-1">
+                  {col1Items.map((item, idx) => renderCard(item, idx, "col1"))}
+                </div>
               </div>
-            </div>
 
-            {/* Column 2 */}
-            <div className="hidden md:flex flex-col h-full overflow-hidden">
-              <div className="marquee-vertical-track-2">
-                {col2Items.map((item, idx) => renderCard(item, idx, "col2"))}
+              {/* Column 2 */}
+              <div className="hidden md:flex flex-col h-full overflow-hidden">
+                <div className="marquee-vertical-track-2">
+                  {col2Items.map((item, idx) => renderCard(item, idx, "col2"))}
+                </div>
               </div>
-            </div>
 
-            {/* Column 3 */}
-            <div className="hidden lg:flex flex-col h-full overflow-hidden">
-              <div className="marquee-vertical-track-3">
-                {col3Items.map((item, idx) => renderCard(item, idx, "col3"))}
+              {/* Column 3 */}
+              <div className="hidden lg:flex flex-col h-full overflow-hidden">
+                <div className="marquee-vertical-track-3">
+                  {col3Items.map((item, idx) => renderCard(item, idx, "col3"))}
+                </div>
               </div>
-            </div>
 
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -87,70 +87,80 @@ export default function AlumniNetwork() {
       </div>
 
       {/* Row 1: Left moving marquee */}
-      <div className="relative mb-6">
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      <ScrollReveal direction="fade" delay={100} duration={700}>
+        <div className="relative mb-6">
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
-        <div className="flex animate-marquee-left hover:[animation-play-state:paused]">
-          {/* Loop 1: First 5 cards (with right margin padding equal to standard card gaps) */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row1Items.map((item, idx) => renderCard(item, `row1-loop1-${idx}`))}
-          </div>
-          {/* Loop 2: Duplicate 5 cards to provide the seamless reset loop */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row1Items.map((item, idx) => renderCard(item, `row1-loop2-${idx}`))}
+          {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
+          <div className="flex animate-marquee-left hover:[animation-play-state:paused]">
+            {/* Loop 1: First 5 cards (with right margin padding equal to standard card gaps) */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row1Items.map((item, idx) => renderCard(item, `row1-loop1-${idx}`))}
+            </div>
+            {/* Loop 2: Duplicate 5 cards to provide the seamless reset loop */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row1Items.map((item, idx) => renderCard(item, `row1-loop2-${idx}`))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Row 2: Right moving marquee */}
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        {/* Row 2: Right moving marquee */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
-        <div className="flex animate-marquee-right hover:[animation-play-state:paused]">
-          {/* Loop 1: First 5 cards */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row2Items.map((item, idx) => renderCard(item, `row2-loop1-${idx}`))}
-          </div>
-          {/* Loop 2: Duplicate 5 cards */}
-          <div className="flex gap-6 flex-shrink-0 pr-6">
-            {row2Items.map((item, idx) => renderCard(item, `row2-loop2-${idx}`))}
+          {/* Infinite scrolling track container (no container gaps, using half-width translation) */}
+          <div className="flex animate-marquee-right hover:[animation-play-state:paused]">
+            {/* Loop 1: First 5 cards */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row2Items.map((item, idx) => renderCard(item, `row2-loop1-${idx}`))}
+            </div>
+            {/* Loop 2: Duplicate 5 cards */}
+            <div className="flex gap-6 flex-shrink-0 pr-6">
+              {row2Items.map((item, idx) => renderCard(item, `row2-loop2-${idx}`))}
+            </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* Stats Counter Section */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
-        <ScrollReveal direction="up" delay={100} duration={500}>
+        <ScrollReveal direction="up" delay={100} duration={600}>
           <div className="bg-card rounded-2xl border border-border/60 py-8 px-6 shadow-[0_10px_30px_-5px_oklch(0.16_0.03_255/0.05),0_4px_10px_-2px_oklch(0.16_0.03_255/0.02)]">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-border/50">
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>800+</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Alumni Placed</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>95%</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Placement Rate</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>150+</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Hiring Partners</p>
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
-                  <span>72%</span>
-                </p>
-                <p className="text-muted-foreground text-sm">Avg. Salary Hike</p>
-              </div>
+              <ScrollReveal direction="up" delay={150} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>800+</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Alumni Placed</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={230} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>95%</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Placement Rate</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={310} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>150+</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Hiring Partners</p>
+                </div>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={390} duration={500}>
+                <div className="text-center">
+                  <p className="font-heading font-semibold text-foreground text-3xl md:text-4xl mb-1">
+                    <span>72%</span>
+                  </p>
+                  <p className="text-muted-foreground text-sm">Avg. Salary Hike</p>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </ScrollReveal>

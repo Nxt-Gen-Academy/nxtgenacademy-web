@@ -15,6 +15,7 @@ import { authClient } from "@/lib/auth-client";
 import HeroLaptopPreview from "./HeroLaptopPreview";
 import HeroFluidBackground from "./HeroFluidBackground";
 import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
+import ScrollReveal from "./ScrollReveal";
 
 const pillars = [
   { label: "Live Cohorts", icon: Calendar },
@@ -119,17 +120,19 @@ export default function Hero() {
             </div>
 
             {/* Bottom 4 Horizontal Feature Items */}
-            <div className="mt-10 sm:mt-12 pt-6 sm:pt-7 border-t border-white/10 w-full flex flex-wrap items-center gap-y-3 gap-x-6 sm:gap-x-8 text-xs font-medium text-blue-100/85">
-              {pillars.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} className="flex items-center gap-2">
-                    <Icon className="w-4 h-4 text-[#38bdf8] stroke-[2]" />
-                    <span className="whitespace-nowrap">{item.label}</span>
-                  </div>
-                );
-              })}
-            </div>
+            <ScrollReveal direction="up" delay={250} className="w-full">
+              <div className="mt-10 sm:mt-12 pt-6 sm:pt-7 border-t border-white/10 w-full flex flex-wrap items-center gap-y-3 gap-x-6 sm:gap-x-8 text-xs font-medium text-blue-100/85">
+                {pillars.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.label} className="flex items-center gap-2">
+                      <Icon className="w-4 h-4 text-[#38bdf8] stroke-[2]" />
+                      <span className="whitespace-nowrap">{item.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </ScrollReveal>
 
           </div>
 

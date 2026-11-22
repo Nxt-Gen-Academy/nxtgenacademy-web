@@ -380,7 +380,7 @@ export default function ApplyMentorPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-40px" }}
             className="grid md:grid-cols-2 gap-8 lg:gap-10"
           >
             {benefits.map((benefit, idx) => {
@@ -460,7 +460,7 @@ export default function ApplyMentorPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-40px" }}
             className="flex flex-col lg:flex-row items-stretch justify-between w-full gap-4 lg:gap-3"
           >
             {steps.map((step, idx) => (
@@ -540,7 +540,7 @@ export default function ApplyMentorPage() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-40px" }}
             className="grid md:grid-cols-3 gap-6"
           >
             {testimonials.map((t, idx) => (
