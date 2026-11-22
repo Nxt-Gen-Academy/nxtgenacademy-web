@@ -93,8 +93,12 @@ function parseTokens(children: React.ReactNode, prefix = "w"): { tokens: ParsedT
       // Check if node has children
       const props = node.props as { children?: React.ReactNode; className?: string };
       const combinedClass = [inheritedClassName, props?.className].filter(Boolean).join(" ");
-      if (props && props.children) {
-        traverse(props.children, combinedClass || undefined);
+      if (props && props.children !== undefined) {
+        if (Array.isArray(props.children)) {
+          props.children.forEach((child) => traverse(child, combinedClass || undefined));
+        } else {
+          traverse(props.children, combinedClass || undefined);
+        }
       } else {
         tokens.push({
           type: "element",
@@ -175,16 +179,18 @@ export function WordStaggerHeading({
 
   if (shouldReduceMotion) {
     return (
-      <Tag id={id} className={cn("inline-block", className)}>
+      <Tag id={id} className={cn("inline-block", className)} suppressHydrationWarning>
         {children}
       </Tag>
     );
   }
 
   return (
-    <Tag id={id} className={cn("inline-block", className)}>
+    <Tag id={id} className={cn("inline-block", className)} suppressHydrationWarning>
       {/* Screen-reader accessible full text representation */}
-      <span className="sr-only">{textContent}</span>
+      <span className="sr-only" suppressHydrationWarning>
+        {textContent}
+      </span>
 
       {/* Visually animated words with bottom-to-top staggered reveal */}
       <motion.span

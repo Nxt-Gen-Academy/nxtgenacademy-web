@@ -9,17 +9,6 @@ import { authClient } from "@/lib/auth-client";
 import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 import ScrollReveal from "./ScrollReveal";
 
-const partnerLogos = [
-  { name: "Amazon", src: "/logos/amazon.svg", width: 75 },
-  { name: "Microsoft", src: "/logos/microsoft.svg", width: 90 },
-  { name: "Deloitte", src: "/logos/deloitte.svg", width: 80 },
-  { name: "Goldman Sachs", src: "/logos/goldmansachs.svg", width: 95 },
-  { name: "Flipkart", src: "/logos/flipkart.svg", width: 80 },
-  { name: "Zepto", src: "/logos/zepto.svg", width: 70 },
-  { name: "IBM", src: "/logos/ibm.svg", width: 60 },
-  { name: "Accenture", src: "/logos/accenture.svg", width: 80 },
-];
-
 export default function Hero() {
   const { data: session } = authClient.useSession();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -62,7 +51,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="top" className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-between pt-28 sm:pt-36 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#070b14]">
+    <section id="top" className="relative min-h-[88vh] sm:min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#070b14]">
       {/* ── Photographic Editorial Background ── */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -83,7 +72,7 @@ export default function Hero() {
       </div>
 
       {/* ── Main Hero Content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full my-auto py-8">
+      <div className="relative z-10 max-w-7xl mx-auto w-full py-8">
         <div className="max-w-2xl text-left">
           
           {/* Rating / Review Pill Badge */}
@@ -140,31 +129,6 @@ export default function Hero() {
           </ScrollReveal>
 
         </div>
-      </div>
-
-      {/* ── Bottom Section: Trusted by Hiring Partners + Logos Strip ── */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full pt-8 pb-2">
-        <ScrollReveal direction="up" delay={250}>
-          <div className="border-t border-white/15 pt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
-            <div className="text-xs sm:text-sm text-white/80 font-medium tracking-wide shrink-0">
-              Trusted by 800+ hiring partners across top tech companies
-            </div>
-
-            <div className="flex items-center flex-wrap gap-6 sm:gap-8 opacity-80 hover:opacity-100 transition-opacity">
-              {partnerLogos.map((l) => (
-                <div key={l.name} className="flex items-center justify-center">
-                  <Image
-                    src={l.src}
-                    alt={l.name}
-                    width={l.width}
-                    height={24}
-                    className="h-5 sm:h-5.5 w-auto object-contain brightness-0 invert opacity-75 hover:opacity-100 transition-opacity duration-200"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
 
       {/* ── Enquiry / Booking Dialog ── */}

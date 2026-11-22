@@ -1,6 +1,5 @@
 import React from "react";
 import ScrollReveal from "./ScrollReveal";
-import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 
 type SectionHeadingProps = {
   eyebrow: string;
@@ -28,12 +27,9 @@ export default function SectionHeading({
       </ScrollReveal>
       
       <ScrollReveal direction="up" delay={200}>
-        <WordStaggerHeading
-          as="h2"
-          className="mt-5 font-heading text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight"
-        >
+        <h2 className="mt-5 font-heading text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.08] font-medium text-foreground tracking-tight">
           {title}
-        </WordStaggerHeading>
+        </h2>
       </ScrollReveal>
 
       {subtitle && (
