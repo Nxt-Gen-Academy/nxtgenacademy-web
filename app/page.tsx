@@ -14,7 +14,6 @@ import Programs from "./components/Programs";
 import Projects from "./components/Projects";
 import Trust from "./components/Trust";
 import WhyUs from "./components/WhyUs";
-import ROICalculatorSection from "@/components/sections/roi-calculator-section";
 import CareerTransitionPlanner from "@/components/sections/career-transition-planner";
 
 export default function Home() {
@@ -24,11 +23,10 @@ export default function Home() {
       <Hero />
       <Trust />
       <Accreditations />
-      <ROICalculatorSection />
+      <CareerTransitionPlanner />
       <OutcomeRecipe />
       <AISkillGap />
       <Programs />
-      <CareerTransitionPlanner />
       <WhyUs />
       <Faculty />
       <Journey />

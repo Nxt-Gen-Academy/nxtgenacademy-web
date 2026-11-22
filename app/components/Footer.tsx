@@ -277,23 +277,16 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Bottom Section (Copyright + Center Monogram + Legal Box) ── */}
-        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+        {/* ── Bottom Section (Copyright + Legal Notice) ── */}
+        <div className="pt-8 flex flex-col items-start gap-4">
           
-          {/* Left: Copyright */}
-          <div className="text-xs sm:text-sm text-white/90 text-center lg:text-left font-medium">
+          {/* Copyright */}
+          <div className="text-xs sm:text-sm text-white/90 font-medium">
             © {new Date().getFullYear()} NxtGen Academy™ · All Rights Reserved.
           </div>
 
-          {/* Center: Brand Monogram Icon */}
-          <div className="flex items-center justify-center">
-            <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-sm font-heading font-bold text-white shadow-inner">
-              +
-            </div>
-          </div>
-
-          {/* Right: Bordered IP Disclaimer Box */}
-          <div className="border border-white/25 rounded-xl p-3.5 max-w-md bg-white/10">
+          {/* Bordered IP Disclaimer Box */}
+          <div className="border border-white/25 rounded-xl p-3.5 max-w-xl bg-white/10">
             <p className="text-[10px] sm:text-[11px] leading-relaxed text-white/90">
               *All original website content, text, graphics, designs, and code are protected by applicable intellectual property and copyright laws. No part of this website may be reproduced without prior written permission.
             </p>
