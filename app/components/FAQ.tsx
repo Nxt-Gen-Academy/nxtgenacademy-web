@@ -186,7 +186,8 @@ export default function FAQ() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Left Column: Eyebrow, Heading, and Contact Card */}
-          <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
+          <div className="lg:col-span-5 lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:flex lg:flex-col lg:justify-between space-y-8 lg:space-y-0 pb-2">
+            {/* Top Content: Eyebrow + Main Heading + Description */}
             <ScrollReveal direction="right" delay={100}>
               {/* Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs sm:text-sm font-semibold text-primary shadow-2xs">
@@ -203,9 +204,11 @@ export default function FAQ() {
               <p className="mt-4 text-muted-foreground text-base leading-relaxed max-w-md">
                 Everything you need to know about our programs, placement support, and learning experience — so you can get started with confidence.
               </p>
+            </ScrollReveal>
 
-              {/* Help & Contact Card */}
-              <div className="mt-8 bg-muted/50 rounded-3xl p-6 sm:p-7 border border-border/70 relative overflow-hidden">
+            {/* Bottom Content: Help & Contact Card Stuck to the Bottom */}
+            <ScrollReveal direction="up" delay={200} className="mt-8 lg:mt-auto">
+              <div className="bg-muted/50 rounded-3xl p-6 sm:p-7 border border-border/70 relative overflow-hidden backdrop-blur-sm shadow-xs">
                 <p className="text-sm sm:text-base font-medium text-foreground leading-relaxed">
                   Have more questions for us? Our team can help you out. Get in touch with us!
                 </p>
