@@ -1,535 +1,475 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { 
-  Compass, 
-  Sparkles, 
-  ArrowRight, 
-  CheckCircle2, 
-  Layers, 
-  Briefcase, 
-  Code2, 
-  GraduationCap, 
-  Target, 
-  TrendingUp, 
-  User, 
-  ChevronDown, 
-  Check, 
-  Zap,
-  Rocket
-} from "lucide-react";
+import React, { useState } from "react";
 import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
 import ScrollReveal from "@/app/components/ScrollReveal";
+import { 
+  GraduationCap, 
+  BookOpen, 
+  Code2, 
+  Rocket, 
+  TrendingUp, 
+  Lightbulb, 
+  Sparkles, 
+  ChevronDown, 
+  ArrowRight 
+} from "lucide-react";
 
 const CURRENT_ROLES = [
   "Business Analyst",
-  "Software Engineer",
-  "Data Analyst / Excel Pro",
-  "Product / Project Coordinator",
-  "Operations / Marketing / Non-Tech",
-  "Student / College Graduate",
+  "Software Developer",
+  "QA / Test Engineer",
+  "Data Analyst",
+  "Project Manager",
+  "Operations Executive",
+  "Fresher / Student",
 ];
 
-const TARGET_GOALS = [
-  {
-    id: "ai-ba",
-    label: "AI Business Analyst",
-    program: "Business Analytics with Gen AI",
-    duration: "6 Months",
-    hike: "+55% – 85%",
-    impact: "Bridge Business Strategy with AI Automation",
-    skills: [
-      "AI Prompt Engineering",
-      "Process Automation",
-      "SQL & Advanced Excel",
-      "Power BI & Tableau",
-      "KPI Intelligence",
-      "Business Case Modeling"
-    ],
-    projects: [
-      { name: "BankMate AI", tag: "Fintech Risk Automation" },
-      { name: "RetailPulse BI", tag: "Customer Retention Hub" },
-      { name: "Workflow AI Agent", tag: "No-Code Process Optimizer" }
-    ],
-    outcomes: ["AI Business Analyst", "Product Analyst", "BI Specialist", "Business Systems Analyst"],
-  },
-  {
-    id: "ai-pm",
-    label: "AI Product Manager",
-    program: "AI Product Management",
-    duration: "6 Months",
-    hike: "+70% – 120%",
-    impact: "Lead Next-Gen AI Products from Concept to Scale",
-    skills: [
-      "AI Product Strategy",
-      "PRD Writing for LLMs",
-      "AI Product Lifecycle",
-      "User Research & Testing",
-      "Roadmapping & Scrum",
-      "AI APIs & Architecture"
-    ],
-    projects: [
-      { name: "Nexora AI", tag: "Enterprise Support Platform" },
-      { name: "HealthCopilot", tag: "Generative Diagnosis Assistant" },
-      { name: "AI GTM Case Study", tag: "B2B Market Penetration PRD" }
-    ],
-    outcomes: ["AI Product Manager", "Associate PM", "Product Growth Lead", "Technical Product Manager"],
-  },
-  {
-    id: "data-genai",
-    label: "Data Analytics with Gen AI",
-    program: "Data Analytics with Gen AI",
-    duration: "6 Months",
-    hike: "+60% – 95%",
-    impact: "Extract Real-Time Insights & Train AI Data Agents",
-    skills: [
-      "Python for Data Science",
-      "SQL Data Warehouses",
-      "Pandas & NumPy",
-      "Predictive Modeling",
-      "Generative AI Analytics",
-      "Automated Reporting"
-    ],
-    projects: [
-      { name: "Customer Churn AI", tag: "Predictive ML Classifier" },
-      { name: "E-Commerce Lakehouse", tag: "Multi-Source BI Dashboard" },
-      { name: "GenAI Resume Parser", tag: "LLM Talent Matcher" }
-    ],
-    outcomes: ["Data Analyst", "Analytics Engineer", "BI Consultant", "Junior Data Scientist"],
-  },
-  {
-    id: "ai-auto",
-    label: "AI Automation Specialist",
-    program: "AI Engineering & Automation Workflows",
-    duration: "6 Months",
-    hike: "+65% – 110%",
-    impact: "Build Autonomous Workflow Pipelines & Agent Swarms",
-    skills: [
-      "Multi-Agent Systems",
-      "Python Automation Scripts",
-      "LLM API Integrations",
-      "Vector Search & RAG",
-      "n8n & Enterprise Webhooks",
-      "Autonomous Agents"
-    ],
-    projects: [
-      { name: "Enterprise Agent Swarm", tag: "Automated Ticket Resolution" },
-      { name: "Financial Doc Extractor", tag: "Vision & OCR Intelligence" },
-      { name: "CRM Lead Enricher", tag: "Automated Prospect Analysis" }
-    ],
-    outcomes: ["AI Automation Consultant", "Solutions Engineer", "Workflow Architect", "AI Integration Specialist"],
-  },
-];
+interface GoalData {
+  prog: string;
+  mo: number;
+  skills: string;
+  proj: string;
+  out: string;
+}
 
-const EXPERIENCE_LEVELS = [
-  { id: "0-2", label: "0 – 2 Years", subtitle: "Early Career / Fresher", range: "₹6L – ₹14L CTC" },
-  { id: "3-5", label: "3 – 5 Years", subtitle: "Mid Career Switch", range: "₹14L – ₹26L CTC" },
-  { id: "5+", label: "5+ Years", subtitle: "Senior / Leadership", range: "₹24L – ₹48L+ CTC" },
+const GOALS: Record<string, GoalData> = {
+  "AI Business Analyst": {
+    prog: "AI Business Analyst",
+    mo: 4,
+    skills: "AI Tools, Requirement Analysis, Process Automation, Data Insights",
+    proj: "BankMate AI, Nexora AI, Process Automation",
+    out: "AI Business Analyst, Product Analyst, Business Systems Analyst",
+  },
+  "AI Product Manager": {
+    prog: "AI Product Management",
+    mo: 5,
+    skills: "Product Strategy, LLM Capabilities, Prompt Design, Roadmapping, Metrics",
+    proj: "AI Copilot PRD, Feature Prioritization Board, Launch Plan",
+    out: "AI Product Manager, Associate PM, Product Owner",
+  },
+  "AI Engineer": {
+    prog: "Applied AI Engineering",
+    mo: 6,
+    skills: "Python, LLM APIs, RAG, Agents, Deployment",
+    proj: "RAG Chatbot, Agent Workflow, Model Evaluation Suite",
+    out: "AI Engineer, ML Engineer, LLM Developer",
+  },
+  "Data / AI Analyst": {
+    prog: "AI-Powered Data Analytics",
+    mo: 4,
+    skills: "SQL, Python, Dashboards, Generative AI for Analysis, Storytelling",
+    proj: "Sales Insights Dashboard, Churn Predictor, Auto-Reporting Bot",
+    out: "AI Data Analyst, Analytics Engineer, BI Specialist",
+  },
+  "AI QA Engineer": {
+    prog: "AI Test Automation",
+    mo: 3,
+    skills: "Test Automation, AI Test Generation, LLM Evaluation, CI Pipelines",
+    proj: "Self-healing Test Suite, LLM Eval Harness",
+    out: "AI QA Engineer, SDET, Quality Automation Lead",
+  },
+};
+
+const PAY: Record<string, [number, number][]> = {
+  "AI Business Analyst": [[6, 10], [11, 17], [18, 27]],
+  "AI Product Manager": [[8, 13], [14, 22], [24, 38]],
+  "AI Engineer": [[9, 14], [16, 26], [26, 45]],
+  "Data / AI Analyst": [[7, 11], [12, 19], [19, 30]],
+  "AI QA Engineer": [[6, 10], [11, 17], [17, 26]],
+};
+
+const TODAY = [3.5, 7, 12];
+const EXPERIENCE_NOTES = [
+  "Start with fundamentals and build your first portfolio fast.",
+  "Leverage your experience: focus on applied projects and tools.",
+  "Fast-track track: leadership-ready projects and strategy focus.",
 ];
+const MONTH_OFFSETS = [0, -1, -1];
 
 export default function CareerTransitionPlanner() {
-  const [currentRole, setCurrentRole] = useState(CURRENT_ROLES[0]);
-  const [targetGoalId, setTargetGoalId] = useState(TARGET_GOALS[0].id);
-  const [experienceId, setExperienceId] = useState(EXPERIENCE_LEVELS[0].id);
-  const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
-  const [isGoalDropdownOpen, setIsGoalDropdownOpen] = useState(false);
+  const [currentRole, setCurrentRole] = useState<string>("Business Analyst");
+  const [targetGoal, setTargetGoal] = useState<string>("AI Business Analyst");
+  const [expIndex, setExpIndex] = useState<number>(0);
+  const [isGenerated, setIsGenerated] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const selectedGoal = useMemo(() => {
-    return TARGET_GOALS.find((g) => g.id === targetGoalId) || TARGET_GOALS[0];
-  }, [targetGoalId]);
+  const handleGenerate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentRole || !targetGoal) {
+      setErrorMessage("Select your current role and target role to continue.");
+      return;
+    }
+    if (currentRole === targetGoal) {
+      setErrorMessage("Pick a target role that differs from your current role.");
+      return;
+    }
+    setErrorMessage("");
+    setIsGenerated(true);
+  };
 
-  const selectedExp = useMemo(() => {
-    return EXPERIENCE_LEVELS.find((e) => e.id === experienceId) || EXPERIENCE_LEVELS[0];
-  }, [experienceId]);
+  const handleExpChange = (idx: number) => {
+    setExpIndex(idx);
+  };
 
-  const handleOpenCounseling = () => {
-    window.dispatchEvent(new CustomEvent("open-signup-dialog"));
+  const goalData = GOALS[targetGoal] || GOALS["AI Business Analyst"];
+  const durationMonths = Math.max(2, goalData.mo + MONTH_OFFSETS[expIndex]);
+
+  const payRanges = PAY[targetGoal] || PAY["AI Business Analyst"];
+  const [lo, hi] = payRanges[expIndex];
+  const td = TODAY[expIndex];
+  const growthPercent = Math.round((((lo + hi) / 2 / td) - 1) * 100);
+  const y3Low = Math.round(lo * 1.5);
+  const y3High = Math.round(hi * 1.5);
+  const maxPay = y3High;
+
+  const todayWidth = Math.min(100, Math.round((td / maxPay) * 100));
+  const year1Width = Math.min(100, Math.round((hi / maxPay) * 100));
+  const year3Width = 100;
+
+  const handleOpenConsultation = () => {
+    window.dispatchEvent(new CustomEvent("open-signup-dialog", { detail: { program: goalData.prog } }));
   };
 
   return (
-    <section id="planner" className="py-20 lg:py-28 relative overflow-hidden bg-background">
-      {/* Background Lighting Elements */}
+    <section id="planner" className="py-16 md:py-24 relative overflow-hidden bg-background">
+      {/* Background Lighting Accents */}
       <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
-      <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
-      
+      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
+
       <div className="section-divider" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         
-        {/* Header Block with Stepping Stones Journey */}
-        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-20">
+        {/* ── Section Header ── */}
+        <div className="max-w-3xl mx-auto text-center mb-12">
           <ScrollReveal direction="up" delay={50}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs font-semibold text-primary tracking-wide mb-6 shadow-xs backdrop-blur-md">
-              <Compass className="h-3.5 w-3.5 text-primary" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs font-semibold text-primary tracking-wide mb-5 shadow-xs backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
               <span>Career Transition Planner</span>
             </div>
           </ScrollReveal>
 
           <WordStaggerHeading
             as="h2"
-            className="font-heading text-[clamp(2.1rem,4.5vw,3.6rem)] font-bold text-foreground tracking-tight leading-[1.08]"
+            className="font-heading text-4xl sm:text-5xl lg:text-[3.25rem] font-medium tracking-tight text-foreground leading-[1.12]"
           >
             Map Your Next{" "}
-            <span className="text-primary bg-gradient-to-r from-primary via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Career in AI
-            </span>
+            <span className="text-primary">Career in AI</span>
           </WordStaggerHeading>
 
-          <ScrollReveal direction="up" delay={200}>
-            <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto font-normal">
-              Tell us where you are today, and get a personalized, data-backed roadmap with the right program, high-value skills, real projects, and career outcomes.
+          <ScrollReveal direction="up" delay={150}>
+            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto font-normal">
+              Tell us where you are today, and get a personalized roadmap with the right program, skills, projects and career outcomes.
             </p>
-          </ScrollReveal>
-
-          {/* ── 3D Stepping Stones Roadmap Graphic ── */}
-          <ScrollReveal direction="up" delay={300} className="mt-10 max-w-4xl mx-auto">
-            <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md shadow-sm relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-sky-500/5 to-transparent pointer-events-none" />
-              
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 relative z-10 items-center text-center">
-                
-                {/* Step 1 */}
-                <div className="flex flex-col items-center p-3 rounded-xl bg-background/80 border border-border/60 shadow-xs">
-                  <div className="h-9 w-9 rounded-lg bg-primary/10 border border-primary/25 flex items-center justify-center text-primary mb-2 shadow-xs">
-                    <User className="h-4 w-4" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider font-semibold">Step 01</span>
-                  <span className="text-xs font-bold text-foreground mt-0.5 truncate max-w-full">Your Current Role</span>
-                </div>
-
-                {/* Step 2 */}
-                <div className="flex flex-col items-center p-3 rounded-xl bg-background/80 border border-border/60 shadow-xs">
-                  <div className="h-9 w-9 rounded-lg bg-blue-500/10 border border-blue-400/25 flex items-center justify-center text-primary mb-2 shadow-xs">
-                    <GraduationCap className="h-4 w-4" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider font-semibold">Step 02</span>
-                  <span className="text-xs font-bold text-foreground mt-0.5">Learn</span>
-                </div>
-
-                {/* Step 3 */}
-                <div className="flex flex-col items-center p-3 rounded-xl bg-background/80 border border-border/60 shadow-xs">
-                  <div className="h-9 w-9 rounded-lg bg-sky-500/10 border border-sky-400/25 flex items-center justify-center text-[#0284c7] mb-2 shadow-xs">
-                    <Code2 className="h-4 w-4" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider font-semibold">Step 03</span>
-                  <span className="text-xs font-bold text-foreground mt-0.5">Build</span>
-                </div>
-
-                {/* Step 4 */}
-                <div className="flex flex-col items-center p-3 rounded-xl bg-background/80 border border-border/60 shadow-xs">
-                  <div className="h-9 w-9 rounded-lg bg-indigo-500/10 border border-indigo-400/25 flex items-center justify-center text-indigo-600 mb-2 shadow-xs">
-                    <Target className="h-4 w-4" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase text-muted-foreground tracking-wider font-semibold">Step 04</span>
-                  <span className="text-xs font-bold text-foreground mt-0.5">Practice</span>
-                </div>
-
-                {/* Step 5 - Peak Goal */}
-                <div className="col-span-2 sm:col-span-1 flex flex-col items-center p-3 rounded-xl bg-gradient-to-br from-primary to-blue-700 text-primary-foreground shadow-md border border-primary/40 relative">
-                  <div className="h-9 w-9 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center text-white mb-2 shadow-xs">
-                    <Rocket className="h-4 w-4 animate-pulse" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase text-blue-100 tracking-wider font-bold">Outcome</span>
-                  <span className="text-xs font-extrabold text-white mt-0.5 whitespace-nowrap">Your Next AI Role</span>
-                </div>
-
-              </div>
-            </div>
           </ScrollReveal>
         </div>
 
-        {/* ── Main Interactive Planner Card ── */}
+        {/* ── Planner Panel Card ── */}
         <ScrollReveal direction="up" delay={250}>
-          <div className="bg-card rounded-3xl border border-border/80 shadow-xl overflow-hidden backdrop-blur-md">
-            <div className="grid lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-border/60">
+          <div className="card-premium rounded-3xl p-6 sm:p-8 lg:p-10 border border-border/80 bg-card/95 shadow-xl shadow-primary/5 backdrop-blur-md">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               
-              {/* ── LEFT PANEL: Form Inputs ── */}
-              <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-card/50">
-                <div className="space-y-7">
+              {/* Left Column: Form Controls */}
+              <form onSubmit={handleGenerate} className="lg:col-span-5 flex flex-col justify-between h-full space-y-6">
+                <div>
                   
-                  {/* Field 1: Current Role */}
-                  <div>
-                    <label className="flex items-center gap-2.5 text-xs font-semibold text-foreground tracking-wider uppercase font-mono mb-2.5">
-                      <span className="h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold">1</span>
+                  {/* Step 1: Current Role */}
+                  <div className="mb-6">
+                    <label className="flex items-center gap-2.5 text-sm sm:text-base font-medium text-foreground mb-2.5">
+                      <span className="w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center">
+                        1
+                      </span>
                       Your Current Role
                     </label>
                     <div className="relative">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsRoleDropdownOpen(!isRoleDropdownOpen);
-                          setIsGoalDropdownOpen(false);
+                      <select
+                        value={currentRole}
+                        onChange={(e) => {
+                          setCurrentRole(e.target.value);
+                          setErrorMessage("");
                         }}
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-border/80 bg-background text-foreground text-sm font-medium hover:border-primary/50 transition-colors cursor-pointer text-left shadow-2xs"
+                        className="w-full appearance-none px-4 py-3.5 rounded-2xl border border-border/80 bg-background text-foreground text-sm font-medium shadow-xs transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer pr-10"
+                        aria-label="Current role"
                       >
-                        <div className="flex items-center gap-2.5 truncate">
-                          <Briefcase className="h-4 w-4 text-primary shrink-0" />
-                          <span className="truncate">{currentRole}</span>
-                        </div>
-                        <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 shrink-0 ${isRoleDropdownOpen ? "rotate-180" : ""}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {isRoleDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute top-full left-0 right-0 mt-1.5 z-50 rounded-xl border border-border bg-card shadow-xl p-1.5 space-y-1 max-h-56 overflow-y-auto"
-                          >
-                            {CURRENT_ROLES.map((role) => (
-                              <button
-                                key={role}
-                                type="button"
-                                onClick={() => {
-                                  setCurrentRole(role);
-                                  setIsRoleDropdownOpen(false);
-                                }}
-                                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-left transition-colors cursor-pointer ${
-                                  currentRole === role ? "bg-primary text-primary-foreground font-semibold" : "text-foreground hover:bg-muted"
-                                }`}
-                              >
-                                <span>{role}</span>
-                                {currentRole === role && <Check className="h-3.5 w-3.5" />}
-                              </button>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                        <option value="">Select your current role</option>
+                        {CURRENT_ROLES.map((role) => (
+                          <option key={role} value={role}>
+                            {role}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                     </div>
                   </div>
 
-                  {/* Field 2: Target Career Goal */}
-                  <div>
-                    <label className="flex items-center gap-2.5 text-xs font-semibold text-foreground tracking-wider uppercase font-mono mb-2.5">
-                      <span className="h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold">2</span>
+                  {/* Step 2: Target Goal */}
+                  <div className="mb-6">
+                    <label className="flex items-center gap-2.5 text-sm sm:text-base font-medium text-foreground mb-2.5">
+                      <span className="w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center">
+                        2
+                      </span>
                       Your Career Goal
                     </label>
                     <div className="relative">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsGoalDropdownOpen(!isGoalDropdownOpen);
-                          setIsRoleDropdownOpen(false);
+                      <select
+                        value={targetGoal}
+                        onChange={(e) => {
+                          setTargetGoal(e.target.value);
+                          setErrorMessage("");
                         }}
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-border/80 bg-background text-foreground text-sm font-medium hover:border-primary/50 transition-colors cursor-pointer text-left shadow-2xs"
+                        className="w-full appearance-none px-4 py-3.5 rounded-2xl border border-border/80 bg-background text-foreground text-sm font-medium shadow-xs transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer pr-10"
+                        aria-label="Target role"
                       >
-                        <div className="flex items-center gap-2.5 truncate">
-                          <Target className="h-4 w-4 text-primary shrink-0" />
-                          <span className="truncate">{selectedGoal.label}</span>
-                        </div>
-                        <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 shrink-0 ${isGoalDropdownOpen ? "rotate-180" : ""}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {isGoalDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute top-full left-0 right-0 mt-1.5 z-50 rounded-xl border border-border bg-card shadow-xl p-1.5 space-y-1"
-                          >
-                            {TARGET_GOALS.map((goal) => (
-                              <button
-                                key={goal.id}
-                                type="button"
-                                onClick={() => {
-                                  setTargetGoalId(goal.id);
-                                  setIsGoalDropdownOpen(false);
-                                }}
-                                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-left transition-colors cursor-pointer ${
-                                  targetGoalId === goal.id ? "bg-primary text-primary-foreground font-semibold" : "text-foreground hover:bg-muted"
-                                }`}
-                              >
-                                <span>{goal.label}</span>
-                                {targetGoalId === goal.id && <Check className="h-3.5 w-3.5" />}
-                              </button>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                        <option value="">Select your target role</option>
+                        {Object.keys(GOALS).map((goal) => (
+                          <option key={goal} value={goal}>
+                            {goal}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                     </div>
                   </div>
 
-                  {/* Field 3: Experience Level */}
-                  <div>
-                    <label className="flex items-center gap-2.5 text-xs font-semibold text-foreground tracking-wider uppercase font-mono mb-2.5">
-                      <span className="h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold">3</span>
+                  {/* Step 3: Experience Level */}
+                  <div className="mb-6">
+                    <label className="flex items-center gap-2.5 text-sm sm:text-base font-medium text-foreground mb-2.5">
+                      <span className="w-6 h-6 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center">
+                        3
+                      </span>
                       Experience Level
                     </label>
-                    <div className="grid grid-cols-3 gap-2">
-                      {EXPERIENCE_LEVELS.map((exp) => (
-                        <button
-                          key={exp.id}
-                          type="button"
-                          onClick={() => setExperienceId(exp.id)}
-                          className={`flex flex-col items-center justify-center py-2.5 px-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                            experienceId === exp.id
-                              ? "bg-primary text-primary-foreground border-primary shadow-sm scale-[1.02]"
-                              : "bg-background border-border/80 text-muted-foreground hover:text-foreground hover:border-primary/40"
-                          }`}
-                        >
-                          <span>{exp.label}</span>
-                        </button>
-                      ))}
+                    <div className="grid grid-cols-3 gap-2.5">
+                      {["0 – 2 Years", "3 – 5 Years", "5+ Years"].map((label, idx) => {
+                        const isActive = expIndex === idx;
+                        return (
+                          <button
+                            key={label}
+                            type="button"
+                            onClick={() => handleExpChange(idx)}
+                            aria-pressed={isActive}
+                            className={`py-3 px-2 rounded-2xl text-xs sm:text-sm font-medium border transition-all text-center cursor-pointer ${
+                              isActive
+                                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                                : "bg-background text-muted-foreground border-border/80 hover:text-foreground hover:border-primary/40"
+                            }`}
+                          >
+                            {label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
                 </div>
 
-                {/* Primary Action Button */}
-                <div className="mt-8 pt-6 border-t border-border/50">
+                {/* Submit CTA */}
+                <div>
                   <button
-                    type="button"
-                    onClick={handleOpenCounseling}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground py-3.5 px-6 font-semibold text-sm shadow-md shadow-primary/25 transition-all duration-300 hover:bg-primary/90 hover:shadow-primary/40 hover:-translate-y-0.5 cursor-pointer active:scale-[0.98]"
+                    type="submit"
+                    className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-primary to-blue-600 hover:from-primary/95 hover:to-blue-700 text-white font-medium text-sm sm:text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
                   >
-                    <Sparkles className="h-4 w-4" />
-                    <span>Get My Full Career Roadmap</span>
+                    <span>✨ Get My Personalized Roadmap</span>
                     <ArrowRight className="h-4 w-4" />
                   </button>
-                  <p className="text-[11px] text-muted-foreground text-center mt-2.5 font-medium">
-                    100% Free · 1:1 Senior Mentor Guidance · Personalized Portfolio Plan
-                  </p>
+
+                  {errorMessage && (
+                    <div className="text-destructive text-xs sm:text-sm font-medium mt-3" role="alert">
+                      {errorMessage}
+                    </div>
+                  )}
+                </div>
+              </form>
+
+              {/* Right Column: Dynamic Personalized Roadmap Display */}
+              <div className="lg:col-span-7 bg-muted/40 dark:bg-card/60 border border-border/70 rounded-3xl p-6 sm:p-8 relative">
+                
+                {/* Roadmap Header Badge */}
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Your Personalized Roadmap
+                  </span>
+                  <span className="text-xs font-mono text-muted-foreground">
+                    Target: ₹{lo}L – ₹{hi}L CTC
+                  </span>
                 </div>
 
-              </div>
+                {/* Role Transition Title */}
+                <h3 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-foreground mb-1">
+                  {currentRole || "Select Role"}{" "}
+                  <span className="text-primary font-medium">→ {targetGoal}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-6">
+                  📈 Higher Impact Roles &nbsp;|&nbsp; Better Earning Potential
+                </p>
 
-              {/* ── RIGHT PANEL: Dynamic Output Roadmap ── */}
-              <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-gradient-to-br from-card via-card to-primary/[0.03]">
-                <div>
+                {/* Roadmap Info Items */}
+                <div className="space-y-4 border-t border-border/60 pt-4">
                   
-                  {/* Top Result Banner */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/25 bg-primary/10 text-[11px] font-semibold text-primary">
-                      <Sparkles className="h-3 w-3" />
-                      Your Personalized Roadmap
-                    </span>
-
-                    <span className="text-xs font-mono font-semibold text-muted-foreground">
-                      Target Salary: <strong className="text-foreground">{selectedExp.range}</strong>
-                    </span>
-                  </div>
-
-                  {/* Transition Heading */}
-                  <div className="mb-6">
-                    <h3 className="font-heading text-xl sm:text-2xl lg:text-[1.75rem] font-bold text-foreground leading-snug">
-                      <span className="text-muted-foreground/80">{currentRole}</span>{" "}
-                      <span className="text-primary font-black mx-1">→</span>{" "}
-                      <span className="text-primary bg-gradient-to-r from-primary via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        {selectedGoal.label}
-                      </span>
-                    </h3>
-
-                    {/* Value Pill Tags */}
-                    <div className="flex flex-wrap items-center gap-2 mt-3">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
-                        <TrendingUp className="h-3.5 w-3.5" />
-                        Avg Hike: {selectedGoal.hike}
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20 text-primary text-xs font-semibold">
-                        <Zap className="h-3.5 w-3.5" />
-                        {selectedGoal.impact}
-                      </span>
+                  {/* Recommended Program */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20">
+                      <GraduationCap className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                        Recommended Program
+                      </h4>
+                      <p className="text-sm sm:text-base font-medium text-foreground">
+                        {goalData.prog} <span className="text-primary font-semibold">({durationMonths} Months)</span>
+                      </p>
                     </div>
                   </div>
 
-                  {/* Step-by-Step Breakdown Timeline */}
-                  <div className="space-y-5 pt-4 border-t border-border/50">
-                    
-                    {/* Item 1: Recommended Program */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="h-7 w-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5 border border-primary/20">
-                        <GraduationCap className="h-4 w-4" />
+                  {/* Skills You'll Build */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0 border border-sky-400/20">
+                      <BookOpen className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                        Skills You'll Build
+                      </h4>
+                      <p className="text-sm font-medium text-foreground mt-0.5">
+                        {goalData.skills}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Portfolio Projects */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 border border-indigo-400/20">
+                      <Code2 className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                        Portfolio Projects
+                      </h4>
+                      <p className="text-sm font-medium text-foreground mt-0.5">
+                        {goalData.proj}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Career Outcome */}
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-400/20">
+                      <Rocket className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                        Career Outcome
+                      </h4>
+                      <p className="text-sm font-medium text-foreground mt-0.5">
+                        {goalData.out}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 💰 Package Growth Visualization */}
+                  <div className="border-t border-border/60 pt-4 mt-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4 text-emerald-500" />
+                        <h4 className="text-sm font-semibold text-foreground">
+                          Package Growth
+                        </h4>
                       </div>
+                      <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        +{growthPercent}% on average
+                      </span>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      {/* Today */}
                       <div>
-                        <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">
-                          Recommended Program
+                        <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                          <span>Today (typical)</span>
+                          <span className="font-semibold text-foreground">₹{td} LPA</span>
                         </div>
-                        <div className="text-sm font-bold text-foreground mt-0.5 flex items-center gap-2">
-                          <span>{selectedGoal.program}</span>
-                          <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-muted border border-border/70 text-muted-foreground">
-                            {selectedGoal.duration}
-                          </span>
+                        <div className="h-2 rounded-full bg-border/60 overflow-hidden">
+                          <div 
+                            className="h-full bg-muted-foreground/40 rounded-full transition-all duration-500"
+                            style={{ width: `${todayWidth}%` }}
+                          />
                         </div>
                       </div>
-                    </div>
 
-                    {/* Item 2: Skills You'll Build */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="h-7 w-7 rounded-lg bg-blue-500/10 text-primary flex items-center justify-center shrink-0 mt-0.5 border border-blue-400/20">
-                        <Layers className="h-4 w-4" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold mb-1.5">
-                          Skills You&apos;ll Build
-                        </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {selectedGoal.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="text-[11px] px-2.5 py-1 rounded-md bg-muted/80 text-foreground font-medium border border-border/60"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Item 3: Portfolio Projects */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="h-7 w-7 rounded-lg bg-sky-500/10 text-[#0284c7] flex items-center justify-center shrink-0 mt-0.5 border border-sky-400/20">
-                        <Code2 className="h-4 w-4" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold mb-1.5">
-                          Portfolio Projects You Will Ship
-                        </div>
-                        <div className="grid sm:grid-cols-3 gap-2">
-                          {selectedGoal.projects.map((proj) => (
-                            <div key={proj.name} className="p-2.5 rounded-lg bg-card border border-border/70 shadow-2xs">
-                              <p className="text-xs font-bold text-foreground truncate">{proj.name}</p>
-                              <p className="text-[10px] text-muted-foreground truncate mt-0.5">{proj.tag}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Item 4: Career Outcomes */}
-                    <div className="flex items-start gap-3.5">
-                      <div className="h-7 w-7 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-500/20">
-                        <Rocket className="h-4 w-4" />
-                      </div>
+                      {/* Year 1 */}
                       <div>
-                        <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-semibold">
-                          Target Career Roles
+                        <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                          <span>After the program (year 1)</span>
+                          <span className="font-semibold text-primary">₹{lo} – ₹{hi} LPA</span>
                         </div>
-                        <p className="text-xs font-semibold text-foreground mt-0.5">
-                          {selectedGoal.outcomes.join(" • ")}
-                        </p>
+                        <div className="h-2 rounded-full bg-border/60 overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-primary to-blue-500 rounded-full transition-all duration-500"
+                            style={{ width: `${year1Width}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Year 3 */}
+                      <div>
+                        <div className="flex justify-between text-xs text-muted-foreground mb-1">
+                          <span>In 3 years with growth</span>
+                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">₹{y3Low} – ₹{y3High} LPA</span>
+                        </div>
+                        <div className="h-2 rounded-full bg-border/60 overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full transition-all duration-500"
+                            style={{ width: `${year3Width}%` }}
+                          />
+                        </div>
                       </div>
                     </div>
 
+                    <p className="text-[11px] text-muted-foreground leading-normal mt-2.5 italic">
+                      Indicative ranges in LPA for strong performers. Actual offers vary by company, city, skills and interview performance.
+                    </p>
                   </div>
 
-                </div>
+                  {/* Level Specific Guidance */}
+                  <div className="flex items-start gap-3.5 border-t border-border/60 pt-4">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 border border-amber-400/20">
+                      <Lightbulb className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+                        For your level
+                      </h4>
+                      <p className="text-xs sm:text-sm text-foreground/90 font-medium mt-0.5">
+                        {EXPERIENCE_NOTES[expIndex]}
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Bottom Assurance Note */}
-                <div className="mt-8 pt-5 border-t border-border/50 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                    <span>Includes 1:1 Mock Interviews &amp; Placement Support</span>
+                  {/* 5-Step Pipeline Chips */}
+                  <div className="flex items-center gap-1.5 flex-wrap pt-3 border-t border-border/60 text-xs font-medium">
+                    <span className="px-2.5 py-1 rounded-lg bg-background border border-border/80 text-foreground">
+                      {currentRole || "Current Role"}
+                    </span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-background border border-border/80 text-foreground">
+                      Learn
+                    </span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-background border border-border/80 text-foreground">
+                      Build
+                    </span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-background border border-border/80 text-foreground">
+                      Practice
+                    </span>
+                    <span className="text-muted-foreground">→</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-primary text-primary-foreground font-semibold">
+                      {targetGoal}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                    <span>Written Job Assurance Agreement</span>
-                  </div>
+
                 </div>
 
               </div>

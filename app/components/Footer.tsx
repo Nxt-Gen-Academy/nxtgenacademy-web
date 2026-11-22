@@ -80,9 +80,9 @@ export default function Footer() {
       <div className="border-t border-border bg-muted/30 backdrop-blur-sm relative z-20">
         <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-border/50 pb-6">
-            <p className="text-sm font-semibold text-foreground">
-              © {new Date().getFullYear()} NxtGen Academy™. All Rights Reserved.
-            </p>
+            <div className="text-sm font-semibold text-foreground">
+              © {new Date().getFullYear()} NxtGen Academy™ · All Rights Reserved.
+            </div>
             <nav aria-label="Legal" className="flex flex-wrap items-center gap-6 text-xs font-medium text-muted-foreground">
               <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-primary transition-colors">Terms &amp; Conditions</Link>
@@ -91,9 +91,25 @@ export default function Footer() {
             </nav>
           </div>
 
-          <p className="text-[11px] leading-relaxed text-muted-foreground/80 max-w-5xl">
-            All original content, graphics, designs, photographs, videos, educational materials, project documentation and software code on this website are protected by applicable intellectual property laws. Unauthorised copying, reproduction, distribution or commercial use is prohibited without prior written permission, except as permitted by law.
-          </p>
+          <div className="space-y-2.5 text-[11px] leading-relaxed text-muted-foreground/85 max-w-5xl">
+            <p>
+              All original website content, text, graphics, designs, illustrations, photographs, videos, educational materials, project documentation and software code published on this website are protected by applicable intellectual property and copyright laws.
+            </p>
+            <p>
+              No part of this website or its original materials may be copied, reproduced, republished, distributed, modified or commercially exploited without prior written permission from NxtGen Academy, except as permitted by law.
+            </p>
+            <p className="text-muted-foreground font-medium pt-0.5">
+              Website:{" "}
+              <a 
+                href="https://www.nxtgenacademy.co.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-primary hover:underline font-semibold"
+              >
+                www.nxtgenacademy.co.in
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

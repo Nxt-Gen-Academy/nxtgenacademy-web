@@ -26,10 +26,10 @@ export default function Home() {
       <Accreditations />
       <ROICalculatorSection />
       <OutcomeRecipe />
+      <AISkillGap />
       <Programs />
       <CareerTransitionPlanner />
       <WhyUs />
-      <AISkillGap />
       <Faculty />
       <Journey />
       <Projects />

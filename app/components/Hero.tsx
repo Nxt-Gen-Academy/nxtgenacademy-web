@@ -85,10 +85,10 @@ export default function Hero() {
             {/* Main Headline */}
             <WordStaggerHeading
               as="h1"
-              className="font-heading text-4xl sm:text-5xl lg:text-[3.3rem] xl:text-[3.75rem] font-bold tracking-tight text-white leading-[1.08]"
+              className="font-heading text-4xl sm:text-5xl lg:text-[3.3rem] xl:text-[3.75rem] font-medium tracking-tight text-white leading-[1.08]"
             >
               Don&apos;t Just Learn AI. <br />
-              <span className="text-[#38bdf8] bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#93c5fd] bg-clip-text text-transparent">
+              <span className="text-[#38bdf8] bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#93c5fd] bg-clip-text text-transparent font-medium">
                 Build a Career With It.
               </span>
             </WordStaggerHeading>
