@@ -3,7 +3,16 @@
 import { Fragment } from "react";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
-import { BookOpen, Trophy, Sparkles, ArrowRight, Network, Loader2 } from "lucide-react";
+import { 
+  Sparkles, 
+  ArrowRight, 
+  Loader2, 
+  ShieldCheck, 
+  UserCheck,
+  BookOpen,
+  Network,
+  Trophy
+} from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -17,7 +26,7 @@ import { ShaderAnimation } from "@/components/ui/ShaderAnimation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -32,36 +41,28 @@ type FormValues = z.infer<typeof formSchema>;
 
 const benefits = [
   {
-    title: "Share Knowledge",
-    description: "Give back to the community by guiding the next generation of tech professionals.",
-    image: "/perk_knowledge.png",
-    glowClass: "from-blue-500/15",
-    borderClass: "group-hover:border-blue-500/30",
-    textHoverClass: "group-hover:text-blue-400",
+    icon: BookOpen,
+    tag: "Share Knowledge",
+    title: "Shape Future Talent",
+    description: "Give back to the tech community by guiding the next generation of engineers, analysts, and product leaders.",
   },
   {
-    title: "Network",
-    description: "Connect with other industry leaders, experts, and bright minds in our exclusive network.",
-    image: "/perk_network.png",
-    glowClass: "from-teal-500/15",
-    borderClass: "group-hover:border-teal-500/30",
-    textHoverClass: "group-hover:text-teal-400",
+    icon: Network,
+    tag: "Elite Network",
+    title: "Exclusive Community",
+    description: "Connect with fellow senior leaders, domain directors, and industry pioneers across global tech companies.",
   },
   {
-    title: "Earn Rewards",
-    description: "Get compensated for your time while making a tangible impact on students' careers.",
-    image: "/perk_rewards.png",
-    glowClass: "from-emerald-500/15",
-    borderClass: "group-hover:border-emerald-500/30",
-    textHoverClass: "group-hover:text-emerald-400",
+    icon: Trophy,
+    tag: "Earn Rewards",
+    title: "Competitive Honorarium",
+    description: "Get handsomely compensated for your time and expertise with transparent, high-tier hourly honorariums.",
   },
   {
-    title: "Build Brand",
-    description: "Establish yourself as a thought leader and subject matter expert in your domain.",
-    image: "/perk_brand.png",
-    glowClass: "from-purple-500/15",
-    borderClass: "group-hover:border-purple-500/30",
-    textHoverClass: "group-hover:text-purple-400",
+    icon: Sparkles,
+    tag: "Build Brand",
+    title: "Thought Leadership",
+    description: "Establish yourself as a recognized subject matter authority, keynote mentor, and hiring partner.",
   },
 ];
 
@@ -153,11 +154,13 @@ const containerVariants = {
 const itemVariants = {
   hidden: {
     opacity: 0,
+    y: 16,
   },
   visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.45,
       ease: "easeOut",
     },
   },
@@ -207,252 +210,363 @@ export default function ApplyMentorPage() {
     mutation.mutate(data);
   };
 
+  const scrollToApply = () => {
+    const el = document.getElementById("apply-form");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      const input = document.getElementById("fullName");
+      if (input) input.focus();
+    }
+  };
+
+  const scrollToPerks = () => {
+    const el = document.getElementById("perks");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main className="min-h-screen flex flex-col bg-background text-foreground font-sans">
       <Nav />
 
-      {/* Minimal Grid Background */}
-      <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
-
-      {/* Hero Section */}
-      <div className="relative min-h-screen overflow-hidden bg-background w-full">
-        {/* Shader Animation Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* ── Public.com Inspired Split Hero Section ── */}
+      <section className="relative min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-16 lg:pb-12 overflow-hidden bg-background">
+        
+        {/* Full-Height Shader Background on Right Side (Stretches full height, hidden on smaller screens) */}
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[45%] xl:w-[48%] h-full z-0 overflow-hidden pointer-events-none">
           <ShaderAnimation />
+          {/* Subtle soft gradient fade into the left side for clean edge blending */}
+          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-background via-background/40 to-transparent pointer-events-none z-10" />
         </div>
 
-        <section className="relative pt-32 pb-24 px-6 z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen">
-          {/* Left side: Text */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+          
+          {/* ── LEFT HALF: Clean Editorial Text & CTAs ── */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-start text-left p-8 md:p-10"
+            className="lg:col-span-6 xl:col-span-6 flex flex-col items-start text-left z-10 pr-0 lg:pr-4 py-4 lg:py-10"
           >
+            {/* Eyebrow Pill */}
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/30 bg-card/90 backdrop-blur-sm text-xs font-semibold text-primary mb-6 tracking-wide shadow-xs"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/25 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-wide shadow-2xs"
             >
-              <span>Join Our Mission</span>
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              <span>Join Our Mission • NxtGen Mentor Network</span>
             </motion.div>
-            <WordStaggerHeading
-              as="h1"
-              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.08]"
+
+            {/* Giant Editorial Headline */}
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-heading font-medium tracking-tight text-foreground leading-[1.1] mb-6"
             >
-              Shape the <br className="hidden md:block" /><span className="text-primary">next generation</span><br className="hidden md:block" /> of tech leaders
-            </WordStaggerHeading>
+              Shape the <br />
+              <span className="text-primary font-medium">next generation</span> <br />
+              of tech leaders
+            </motion.h1>
+
+            {/* Subtitle Copy */}
             <motion.p
               variants={itemVariants}
-              className="text-lg text-foreground/85 max-w-xl leading-relaxed mb-8 font-medium"
+              className="text-base sm:text-lg text-muted-foreground max-w-lg leading-relaxed mb-8 font-normal"
             >
-              Join NxtGen Academy as a mentor and share your industry expertise with eager learners. Help bridge the gap between academia and industry.
+              Join NxtGen Academy as a mentor and share your industry expertise with eager learners. Guide aspiring product managers, business analysts, and data specialists while earning competitive honorariums.
             </motion.p>
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center gap-4 text-sm text-foreground/85 font-semibold"
-            >
-              <div className="flex -space-x-3">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-card flex items-center justify-center shadow-xs">
-                    <span className="text-primary text-xs font-bold">M{i}</span>
-                  </div>
-                ))}
+
+            {/* Action Buttons (Matching Public.com Hero Buttons) */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3.5 mb-10">
+              <button
+                onClick={scrollToApply}
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-3.5 font-semibold text-sm bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer active:scale-[0.98]"
+              >
+                <span>Apply as Mentor</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+
+              <button
+                onClick={scrollToPerks}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border/90 hover:border-primary/50 bg-card hover:bg-muted text-foreground px-7 py-3.5 text-sm font-semibold shadow-xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer active:scale-[0.98]"
+              >
+                <span>Explore Perks</span>
+              </button>
+            </motion.div>
+
+            {/* Mentor Social Proof Counter */}
+            <motion.div variants={itemVariants} className="w-full pt-6 border-t border-border/70 flex items-center gap-3">
+              <div className="flex -space-x-2.5">
+                <div className="w-8 h-8 rounded-full border-2 border-background bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
+                  KA
+                </div>
+                <div className="w-8 h-8 rounded-full border-2 border-background bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
+                  RD
+                </div>
+                <div className="w-8 h-8 rounded-full border-2 border-background bg-cyan-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
+                  AR
+                </div>
               </div>
-              <p>Join 50+ expert mentors</p>
+              <span className="text-xs font-medium text-muted-foreground">
+                Joined by <strong className="text-foreground font-semibold">50+ Senior Leaders &amp; Specialists</strong>
+              </span>
             </motion.div>
           </motion.div>
 
-          {/* Right side: Form */}
+          {/* ── RIGHT HALF: Application Form Card positioned over full-height shader ── */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ type: "spring", stiffness: 85, damping: 15, delay: 0.25 }}
-            className="w-full max-w-xl mx-auto lg:mx-0 p-6 md:p-8 mt-12 lg:mt-0 rounded-3xl bg-card border border-border shadow-xl backdrop-blur-xl"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            id="apply-form"
+            className="lg:col-span-6 xl:col-span-6 relative w-full z-10 my-4 lg:my-0"
           >
-            <h2 className="text-2xl font-semibold text-foreground mb-2">Ready to join us?</h2>
-            <p className="text-sm text-muted-foreground mb-6">Fill out the form below to start your journey.</p>
-
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="fullName" className="text-foreground text-xs font-medium">Full Name</Label>
-                  <Input id="fullName" {...register("fullName")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="John Doe" />
-                  {errors.fullName && <p className="text-destructive text-xs">{errors.fullName.message}</p>}
+            <div className="w-full p-6 sm:p-8 rounded-3xl bg-card/95 backdrop-blur-xl border border-white/80 dark:border-border/80 shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+              {/* Form Card Header */}
+              <div className="mb-5 sm:mb-6">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/25 bg-primary/10 text-xs font-semibold text-primary mb-2.5">
+                  <UserCheck className="h-3.5 w-3.5" />
+                  <span>Mentor Application</span>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground text-xs font-medium">Email Address</Label>
-                  <Input id="email" type="email" {...register("email")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="john@example.com" />
-                  {errors.email && <p className="text-destructive text-xs">{errors.email.message}</p>}
-                </div>
+                <h3 className="text-2xl sm:text-3xl font-heading font-medium tracking-tight text-foreground">
+                  Ready to Join Us?
+                </h3>
+                <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                  Share your expertise with eager learners. We will review your profile within 24 hours.
+                </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-foreground text-xs font-medium">Phone Number</Label>
-                  <Input id="phone" type="tel" {...register("phone")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="+91 98765 43210" />
-                  {errors.phone && <p className="text-destructive text-xs">{errors.phone.message}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="linkedin" className="text-foreground text-xs font-medium">LinkedIn Profile</Label>
-                  <Input id="linkedin" type="url" {...register("linkedin")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="https://linkedin.com/in/johndoe" />
-                  {errors.linkedin && <p className="text-destructive text-xs">{errors.linkedin.message}</p>}
-                </div>
-              </div>
+              {/* Form Fields */}
+              <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+                {/* Row 1: Name & Email */}
+                <div className="grid sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="fullName" className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                      Full Name
+                    </Label>
+                    <Input 
+                      id="fullName" 
+                      {...register("fullName")} 
+                      className="bg-background/90 border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all focus:border-primary" 
+                      placeholder="e.g. John Doe" 
+                    />
+                    {errors.fullName && <p className="text-destructive text-xs">{errors.fullName.message}</p>}
+                  </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label className="text-foreground text-xs font-medium">Area of Expertise</Label>
-                  <Controller
-                    control={control}
-                    name="expertise"
-                    render={({ field }) => (
-                      <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger className="w-full bg-background border-input text-foreground focus:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50">
-                          <SelectValue placeholder="Select domain" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Data Science & AI">Data Science & AI</SelectItem>
-                          <SelectItem value="Full Stack Development">Full Stack Development</SelectItem>
-                          <SelectItem value="Cloud & DevOps">Cloud & DevOps</SelectItem>
-                          <SelectItem value="Cybersecurity">Cybersecurity</SelectItem>
-                          <SelectItem value="Product Management">Product Management</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    )}
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email" className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                      Work or Personal Email
+                    </Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      {...register("email")} 
+                      className="bg-background/90 border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all focus:border-primary" 
+                      placeholder="john@example.com" 
+                    />
+                    {errors.email && <p className="text-destructive text-xs">{errors.email.message}</p>}
+                  </div>
+                </div>
+
+                {/* Row 2: Phone & LinkedIn */}
+                <div className="grid sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="phone" className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                      Phone / WhatsApp
+                    </Label>
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      {...register("phone")} 
+                      className="bg-background/90 border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all focus:border-primary" 
+                      placeholder="+91 98765 43210" 
+                    />
+                    {errors.phone && <p className="text-destructive text-xs">{errors.phone.message}</p>}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="linkedin" className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                      LinkedIn Profile URL
+                    </Label>
+                    <Input 
+                      id="linkedin" 
+                      type="url" 
+                      {...register("linkedin")} 
+                      className="bg-background/90 border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all focus:border-primary" 
+                      placeholder="https://linkedin.com/in/username" 
+                    />
+                    {errors.linkedin && <p className="text-destructive text-xs">{errors.linkedin.message}</p>}
+                  </div>
+                </div>
+
+                {/* Row 3: Expertise & Experience */}
+                <div className="grid sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1.5">
+                    <Label className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                      Area of Expertise
+                    </Label>
+                    <Controller
+                      control={control}
+                      name="expertise"
+                      render={({ field }) => (
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger className="w-full bg-background/90 border-input text-foreground focus:ring-primary/50 h-10 text-sm transition-all focus:border-primary">
+                            <SelectValue placeholder="Select primary domain" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="AI Product Management">AI Product Management</SelectItem>
+                            <SelectItem value="AI Business Analysis">AI Business Analysis</SelectItem>
+                            <SelectItem value="Data Science & Machine Learning">Data Science &amp; Machine Learning</SelectItem>
+                            <SelectItem value="Data Analytics & BI">Data Analytics &amp; BI</SelectItem>
+                            <SelectItem value="GenAI & Prompt Engineering">GenAI &amp; Prompt Engineering</SelectItem>
+                            <SelectItem value="Full Stack Development">Full Stack Development</SelectItem>
+                            <SelectItem value="Cloud & DevOps">Cloud &amp; DevOps</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {errors.expertise && <p className="text-destructive text-xs">{errors.expertise.message}</p>}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="experience" className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                      Years of Experience
+                    </Label>
+                    <Input 
+                      id="experience" 
+                      type="number" 
+                      min="0" 
+                      {...register("experience", { valueAsNumber: true })} 
+                      className="bg-background/90 border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all focus:border-primary" 
+                      placeholder="e.g. 5" 
+                    />
+                    {errors.experience && <p className="text-destructive text-xs">{errors.experience.message}</p>}
+                  </div>
+                </div>
+
+                {/* Row 4: Mentorship Goals */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="goals" className="text-foreground text-[11px] font-semibold uppercase tracking-wider">
+                    Mentorship Goals &amp; Availability
+                  </Label>
+                  <Textarea 
+                    id="goals" 
+                    rows={2} 
+                    {...register("goals")} 
+                    className="bg-background/90 border-input text-foreground focus-visible:ring-primary/50 resize-none text-sm transition-all focus:border-primary" 
+                    placeholder="Preferred topics, availability, or how you want to guide learners..." 
                   />
-                  {errors.expertise && <p className="text-destructive text-xs">{errors.expertise.message}</p>}
+                  {errors.goals && <p className="text-destructive text-xs">{errors.goals.message}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="experience" className="text-foreground text-xs font-medium">Years of Experience</Label>
-                  <Input id="experience" type="number" min="0" {...register("experience", { valueAsNumber: true })} className="bg-background border-input text-foreground focus-visible:ring-primary/50 h-10 text-sm transition-all duration-300 focus:border-primary/50" placeholder="e.g. 5" />
-                  {errors.experience && <p className="text-destructive text-xs">{errors.experience.message}</p>}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="goals" className="text-foreground text-xs font-medium">Mentorship goals</Label>
-                <Textarea id="goals" rows={3} {...register("goals")} className="bg-background border-input text-foreground focus-visible:ring-primary/50 resize-none text-sm transition-all duration-300 focus:border-primary/50" placeholder="I want to help students understand practical system design..." />
-                {errors.goals && <p className="text-destructive text-xs">{errors.goals.message}</p>}
-              </div>
-
-              <div className="pt-2">
-                <motion.div whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.985 }}>
+                {/* Submit Button */}
+                <div className="pt-2">
                   <Button
                     type="submit"
                     disabled={mutation.isPending}
-                    className="w-full rounded-lg h-11 font-medium text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-primary/20"
+                    className="w-full rounded-full h-11 font-semibold text-sm sm:text-base bg-primary text-primary-foreground hover:bg-primary/95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-primary/25 hover:shadow-primary/35"
                   >
                     {mutation.isPending ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>Submitting...</span>
+                        <span>Submitting Application...</span>
                       </>
                     ) : (
-                      "Submit Application"
+                      <>
+                        <span>Submit Mentor Application</span>
+                        <ArrowRight className="h-4 w-4" />
+                      </>
                     )}
                   </Button>
-                </motion.div>
-              </div>
-            </form>
-          </motion.div>
-        </section>
-      </div>
+                </div>
 
-      {/* Benefits Section */}
-      <section className="py-24 px-6 relative z-10 bg-muted/30">
+                <div className="flex items-center justify-center gap-2 text-[11px] text-muted-foreground pt-0.5">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 flex-shrink-0" />
+                  <span>Protected by our privacy and mentor network guidelines.</span>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ── Benefits Section ── */}
+      <section id="perks" className="py-24 px-6 relative z-10 bg-muted/30">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
+          <div className="mb-16 flex flex-col items-center text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-5 tracking-widest uppercase">
               Why Join
             </div>
             <WordStaggerHeading
               as="h2"
-              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+              className="block w-full text-3xl sm:text-4xl lg:text-5xl font-heading font-medium tracking-tight text-foreground mb-4 leading-tight"
             >
               Perks of Mentorship
             </WordStaggerHeading>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Join a community of elite professionals and unlock exclusive benefits while shaping the future.
             </p>
           </div>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            className="grid md:grid-cols-2 gap-8 lg:gap-10"
-          >
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, idx) => {
+              const Icon = benefit.icon;
               return (
-                <motion.div
+                <div
                   key={idx}
-                  variants={itemVariants}
-                  whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                  style={{
-                    willChange: "transform, opacity, filter",
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden"
-                  }}
-                  className={`group relative rounded-[32px] border border-border bg-card hover:bg-card/90 ${benefit.borderClass} transition-all duration-500 overflow-hidden shadow-sm flex flex-col justify-between pt-10 px-8 sm:px-10`}
+                  className="card-hover-primary group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between min-h-[300px] sm:min-h-[320px] cursor-pointer bg-card text-foreground border border-border/80 shadow-xs"
                 >
-                  {/* Subtle top/left gradient glow */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${benefit.glowClass} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                  {/* Top Row: Icon & Circular Action Arrow */}
+                  <div>
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="card-icon w-12 h-12 rounded-2xl flex items-center justify-center bg-primary/10 text-primary border border-primary/20 shadow-xs transition-colors duration-200">
+                        <Icon className="h-6 w-6 stroke-[1.8]" />
+                      </div>
 
-                  <div className="relative z-10 flex flex-col items-start mb-8">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                      <div className="card-arrow w-9 h-9 rounded-full flex items-center justify-center bg-primary/10 text-primary shadow-xs transition-all duration-200 group-hover:scale-105">
+                        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      </div>
+                    </div>
+
+                    {/* Benefit Title */}
+                    <h3 className="font-heading text-xl sm:text-2xl font-medium tracking-tight mb-2.5 text-foreground transition-colors duration-200">
                       {benefit.title}
-                    </span>
-                    <h3 className={`text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-4 leading-snug ${benefit.textHoverClass} transition-colors duration-300`}>
-                      {benefit.description}
                     </h3>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground transition-colors duration-200">
+                      {benefit.description}
+                    </p>
                   </div>
 
-                  {/* Simulated Workspace Window Container */}
-                  <div className="mt-auto overflow-hidden rounded-t-[20px] border-t border-x border-border bg-muted/40">
-                    {/* Simulated Window Titlebar */}
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/70 select-none">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-muted-foreground/30" />
-                        <div className="w-2 h-2 rounded-full bg-muted-foreground/30" />
-                        <div className="w-2 h-2 rounded-full bg-muted-foreground/30" />
-                      </div>
-                      <div className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest">
-                        WORKSPACE
-                      </div>
-                      <div className="w-10" /> {/* Balance spacer */}
-                    </div>
-
-                    {/* Window Content / Mock Image */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden">
-                      <img
-                        src={benefit.image}
-                        alt={benefit.title}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    </div>
+                  {/* Bottom Metadata Pill */}
+                  <div className="pt-6 mt-auto">
+                    <span className="card-badge inline-block text-[11px] font-mono font-medium px-3 py-1 rounded-full border border-border/70 bg-muted/70 text-muted-foreground transition-colors duration-200">
+                      {benefit.tag}
+                    </span>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Process Section */}
+      {/* ── Process Section ── */}
       <section className="py-24 px-6 relative z-10 border-t border-border bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
+          <div className="mb-16 flex flex-col items-center text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-5 tracking-widest uppercase">
               Process
             </div>
             <WordStaggerHeading
               as="h2"
-              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+              className="block w-full text-3xl sm:text-4xl lg:text-5xl font-heading font-medium tracking-tight text-foreground mb-4 leading-tight"
             >
               How to Get Started
             </WordStaggerHeading>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Four simple steps to begin your journey as a NxtGen Academy mentor.
             </p>
           </div>
@@ -502,7 +616,7 @@ export default function ApplyMentorPage() {
                   </div>
                 </motion.div>
 
-                {/* Connecting Arrow (drawn in between steps) */}
+                {/* Connecting Arrow */}
                 {idx < steps.length - 1 && (
                   <div className="flex items-center justify-center lg:rotate-0 rotate-90 my-2 lg:my-0 flex-shrink-0 self-center z-20">
                     <div className="flex items-center justify-center w-8 h-8 rounded-full border border-border bg-card/80 backdrop-blur-sm shadow-sm text-primary/60 hover:text-primary transition-colors duration-300">
@@ -519,20 +633,20 @@ export default function ApplyMentorPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* ── Testimonials ── */}
       <section className="py-24 px-6 relative z-10 border-t border-border bg-muted/30">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-6 tracking-widest uppercase">
+          <div className="mb-16 flex flex-col items-center text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary mb-5 tracking-widest uppercase">
               Wall of Love
             </div>
             <WordStaggerHeading
               as="h2"
-              className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight"
+              className="block w-full text-3xl sm:text-4xl lg:text-5xl font-heading font-medium tracking-tight text-foreground mb-4 leading-tight"
             >
               Hear From Our Mentors
             </WordStaggerHeading>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Discover what our community has to say about their mentoring experience.
             </p>
           </div>

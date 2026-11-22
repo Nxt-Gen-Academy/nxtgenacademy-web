@@ -5,7 +5,6 @@ import {
   BarChart3, 
   Sparkles, 
   ArrowUpRight, 
-  Play, 
   TrendingUp 
 } from "lucide-react";
 import { WordStaggerHeading } from "@/components/ui/WordStaggerHeading";
@@ -51,10 +50,6 @@ export default function AISkillGap() {
     } else {
       window.dispatchEvent(new CustomEvent("open-signup-dialog"));
     }
-  };
-
-  const handleOpenVideo = () => {
-    window.dispatchEvent(new CustomEvent("open-signup-dialog"));
   };
 
   return (
@@ -359,7 +354,6 @@ export default function AISkillGap() {
         {/* ── Action Buttons matching Image ── */}
         <ScrollReveal direction="up" delay={400}>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            
             {/* Primary Action Button */}
             <button
               onClick={handleOpenExplore}
@@ -368,18 +362,6 @@ export default function AISkillGap() {
               <span>Explore Our Programs</span>
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
-
-            {/* Secondary Action Button */}
-            <button
-              onClick={handleOpenVideo}
-              className="inline-flex items-center justify-center gap-2.5 rounded-full border border-border/80 hover:border-primary/40 bg-card hover:bg-muted text-foreground px-6 py-3.5 text-sm sm:text-base font-medium shadow-xs transition-all duration-200 ease-out hover:-translate-y-0.5 cursor-pointer active:scale-[0.98]"
-            >
-              <span className="w-5 h-5 rounded-full border border-border flex items-center justify-center bg-primary/10 text-primary">
-                <Play className="w-2.5 h-2.5 fill-primary text-primary ml-0.5" />
-              </span>
-              <span>How It Works</span>
-            </button>
-
           </div>
         </ScrollReveal>
 

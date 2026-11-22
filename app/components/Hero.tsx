@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import {
   ArrowRight,
-  Play,
   Calendar,
   Layers,
   Users,
@@ -112,7 +111,7 @@ export default function Hero() {
               </p>
             </ScrollReveal>
 
-            {/* CTA Buttons */}
+            {/* CTA Button */}
             <ScrollReveal direction="up" delay={200}>
               <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-4">
                 <button
@@ -121,16 +120,6 @@ export default function Hero() {
                 >
                   <span>Explore Programs</span>
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
-
-                <button
-                  onClick={() => setIsDialogOpen(true)}
-                  className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white px-6 py-3.5 text-sm font-medium backdrop-blur-md transition-all duration-200 ease-out hover:-translate-y-0.5 cursor-pointer active:scale-[0.98]"
-                >
-                  <span className="w-5 h-5 rounded-full border border-white/40 flex items-center justify-center bg-white/10">
-                    <Play className="w-2.5 h-2.5 fill-white text-white ml-0.5" />
-                  </span>
-                  <span>Watch How It Works</span>
                 </button>
               </div>
             </ScrollReveal>
