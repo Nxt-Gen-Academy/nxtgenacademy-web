@@ -24,13 +24,13 @@ export default function Home() {
       <Trust />
       <Accreditations />
       <CareerTransitionPlanner />
-      <OutcomeRecipe />
-      <AISkillGap />
       <Programs />
+      <Projects />
+      <AISkillGap />
+      <OutcomeRecipe />
       <WhyUs />
       <Faculty />
       <Journey />
-      <Projects />
       <AlumniNetwork />
       <Curriculum />
       {/* <Pricing /> */}

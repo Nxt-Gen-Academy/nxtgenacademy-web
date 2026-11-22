@@ -1,25 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LiaLinkedin, LiaInstagram, LiaYoutube } from "react-icons/lia";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && email.includes("@")) {
-      setIsSubscribed(true);
-      setTimeout(() => {
-        setIsSubscribed(false);
-        setEmail("");
-      }, 4000);
-    }
-  };
 
   return (
     <footer className="w-full bg-background pt-4 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8">
@@ -56,36 +42,6 @@ export default function Footer() {
               <p className="text-sm sm:text-base text-white/90 leading-relaxed font-normal max-w-lg">
                 A premium, outcome-driven learning ecosystem designed to engineer your transition into high-growth tech careers.
               </p>
-
-              {/* Newsletter / Stay Connected Form */}
-              <form onSubmit={handleSubscribe} className="mt-8 max-w-md">
-                <div className="relative mb-4">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    className="w-full bg-transparent border-b border-white/40 px-1 py-3 text-sm sm:text-base text-white placeholder-white/70 focus:outline-none focus:border-white transition-colors"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-3.5 px-6 rounded-full bg-white text-primary hover:bg-white/95 font-semibold text-sm sm:text-base transition-all duration-200 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
-                >
-                  {isSubscribed ? (
-                    <>
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                      <span>Thank you for subscribing!</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Subscribe</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </>
-                  )}
-                </button>
-              </form>
             </div>
 
             {/* Social Links Icons */}

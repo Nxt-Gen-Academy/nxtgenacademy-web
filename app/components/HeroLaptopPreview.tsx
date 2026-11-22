@@ -23,6 +23,7 @@ export default function HeroLaptopPreview() {
   const card2Ref = useRef<HTMLDivElement>(null);
   const card3Ref = useRef<HTMLDivElement>(null);
   const rafId = useRef<number>(0);
+  const isMoving = useRef(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
@@ -31,129 +32,104 @@ export default function HeroLaptopPreview() {
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
 
-  // Ambient natural 3D levitation when not hovering
-  useEffect(() => {
-    let animId: number;
-    const startTime = Date.now();
-
-    const tick = () => {
-      if (!isHovering && laptopRef.current && !isTouchDevice) {
-        const elapsed = (Date.now() - startTime) / 1000;
-        const floatY = Math.sin(elapsed * 1.4) * 6;
-        const tiltX = Math.sin(elapsed * 0.9) * 1.5;
-        const tiltY = Math.cos(elapsed * 0.7) * 1.8;
-
-        laptopRef.current.style.transform = `perspective(1200px) rotateX(${4 + tiltX}deg) rotateY(${tiltY}deg) translateY(${floatY}px)`;
-
-        if (card1Ref.current) {
-          card1Ref.current.style.transform = `translate3d(${Math.sin(elapsed * 1.2) * 4}px, ${Math.cos(elapsed * 1.2) * 5}px, 35px)`;
-        }
-        if (card2Ref.current) {
-          card2Ref.current.style.transform = `translate3d(${Math.cos(elapsed * 1.1) * 4}px, ${Math.sin(elapsed * 1.3) * 5}px, 25px)`;
-        }
-        if (card3Ref.current) {
-          card3Ref.current.style.transform = `translate3d(${Math.sin(elapsed * 1.3) * -4}px, ${Math.cos(elapsed * 1.0) * 5}px, 30px)`;
-        }
-      }
-      animId = requestAnimationFrame(tick);
-    };
-
-    animId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animId);
-  }, [isHovering, isTouchDevice]);
-
-  // Mouse move 3D parallax handler
+  // Butter-smooth 60/120fps mousemove parallax with RAF debouncing
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       if (!containerRef.current || !laptopRef.current || isTouchDevice) return;
 
-      cancelAnimationFrame(rafId.current);
-      rafId.current = requestAnimationFrame(() => {
-        const rect = containerRef.current!.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
+      if (!isMoving.current) {
+        isMoving.current = true;
+        rafId.current = requestAnimationFrame(() => {
+          if (!containerRef.current || !laptopRef.current) {
+            isMoving.current = false;
+            return;
+          }
 
-        // Normalized offsets from -1 to 1
-        const nx = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2)));
-        const ny = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
+          const rect = containerRef.current.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
 
-        const maxTilt = 14; // degrees
-        const tiltX = nx * maxTilt;
-        const tiltY = -ny * (maxTilt * 0.75);
+          // Normalized offsets [-1, 1]
+          const nx = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2)));
+          const ny = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
 
-        // 3D Parallax tilt on laptop
-        laptopRef.current!.style.transform = `perspective(1200px) rotateX(${tiltY + 4}deg) rotateY(${tiltX}deg) scale3d(1.01, 1.01, 1.01)`;
+          const maxTilt = 12; // degrees
+          const tiltX = nx * maxTilt;
+          const tiltY = -ny * (maxTilt * 0.7);
 
-        // Floating card 1: Top-Left (Depth: 2.2)
-        if (card1Ref.current) {
-          const offsetX = nx * 22;
-          const offsetY = ny * 18;
-          card1Ref.current.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 45px)`;
-        }
+          // Apply hardware-accelerated 3D transforms
+          laptopRef.current.style.transform = `perspective(1200px) rotateX(${tiltY + 4}deg) rotateY(${tiltX}deg) scale3d(1.01, 1.01, 1.01)`;
 
-        // Floating card 2: Bottom-Left (Depth: 1.6)
-        if (card2Ref.current) {
-          const offsetX = nx * 16;
-          const offsetY = ny * 14;
-          card2Ref.current.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 30px)`;
-        }
+          if (card1Ref.current) {
+            card1Ref.current.style.transform = `translate3d(${nx * 18}px, ${ny * 14}px, 40px)`;
+          }
+          if (card2Ref.current) {
+            card2Ref.current.style.transform = `translate3d(${nx * 14}px, ${ny * 10}px, 28px)`;
+          }
+          if (card3Ref.current) {
+            card3Ref.current.style.transform = `translate3d(${nx * 16}px, ${ny * 14}px, 34px)`;
+          }
 
-        // Floating card 3: Right (Depth: 2.0)
-        if (card3Ref.current) {
-          const offsetX = nx * 20;
-          const offsetY = ny * 18;
-          card3Ref.current.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 38px)`;
-        }
-      });
+          isMoving.current = false;
+        });
+      }
     },
     [isTouchDevice]
   );
 
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+    // Smooth transition into interactive position
+    if (laptopRef.current) {
+      laptopRef.current.style.transition = "transform 0.25s cubic-bezier(0.2, 0.8, 0.4, 1)";
+    }
+    [card1Ref, card2Ref, card3Ref].forEach((ref) => {
+      if (ref.current) {
+        ref.current.style.transition = "transform 0.25s cubic-bezier(0.2, 0.8, 0.4, 1)";
+      }
+    });
+  };
+
   const handleMouseLeave = useCallback(() => {
     setIsHovering(false);
-    if (!laptopRef.current || isTouchDevice) return;
-
     cancelAnimationFrame(rafId.current);
-    laptopRef.current.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
-    laptopRef.current.style.transform = "perspective(1200px) rotateX(4deg) rotateY(0deg) translateY(0px)";
+    isMoving.current = false;
+
+    // Smoothly animate back to neutral rest position
+    if (laptopRef.current) {
+      laptopRef.current.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
+      laptopRef.current.style.transform = "";
+    }
 
     [card1Ref, card2Ref, card3Ref].forEach((ref) => {
       if (ref.current) {
-        ref.current.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
-        ref.current.style.transform = "translate3d(0, 0, 0)";
+        ref.current.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
+        ref.current.style.transform = "";
       }
     });
 
-    const resetTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (laptopRef.current) laptopRef.current.style.transition = "";
       [card1Ref, card2Ref, card3Ref].forEach((ref) => {
         if (ref.current) ref.current.style.transition = "";
       });
-    }, 600);
+    }, 500);
 
-    return () => clearTimeout(resetTimer);
-  }, [isTouchDevice]);
-
-  const handleMouseEnter = () => {
-    setIsHovering(true);
-    if (laptopRef.current) laptopRef.current.style.transition = "";
-    [card1Ref, card2Ref, card3Ref].forEach((ref) => {
-      if (ref.current) ref.current.style.transition = "";
-    });
-  };
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el || isTouchDevice) return;
 
-    el.addEventListener("mousemove", handleMouseMove);
-    el.addEventListener("mouseleave", handleMouseLeave);
+    el.addEventListener("mousemove", handleMouseMove, { passive: true });
     el.addEventListener("mouseenter", handleMouseEnter);
+    el.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       el.removeEventListener("mousemove", handleMouseMove);
-      el.removeEventListener("mouseleave", handleMouseLeave);
       el.removeEventListener("mouseenter", handleMouseEnter);
+      el.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(rafId.current);
     };
   }, [handleMouseMove, handleMouseLeave, isTouchDevice]);
@@ -163,20 +139,68 @@ export default function HeroLaptopPreview() {
       ref={containerRef}
       className="relative w-full max-w-[640px] mx-auto select-none py-6 px-2 sm:px-4"
     >
+      {/* Hardware-accelerated CSS Keyframes for zero-CPU ambient floating */}
+      <style jsx global>{`
+        @keyframes heroLaptopFloat {
+          0%, 100% {
+            transform: perspective(1200px) rotateX(4deg) rotateY(0deg) translateY(0px);
+          }
+          50% {
+            transform: perspective(1200px) rotateX(5.5deg) rotateY(1.5deg) translateY(-8px);
+          }
+        }
+        @keyframes heroCard1Float {
+          0%, 100% {
+            transform: translate3d(0px, 0px, 40px);
+          }
+          50% {
+            transform: translate3d(3px, -6px, 40px);
+          }
+        }
+        @keyframes heroCard2Float {
+          0%, 100% {
+            transform: translate3d(0px, 0px, 28px);
+          }
+          50% {
+            transform: translate3d(-3px, 5px, 28px);
+          }
+        }
+        @keyframes heroCard3Float {
+          0%, 100% {
+            transform: translate3d(0px, 0px, 34px);
+          }
+          50% {
+            transform: translate3d(4px, -5px, 34px);
+          }
+        }
+        .anim-laptop-levitate {
+          animation: heroLaptopFloat 6s ease-in-out infinite;
+        }
+        .anim-card-1 {
+          animation: heroCard1Float 5.2s ease-in-out infinite;
+        }
+        .anim-card-2 {
+          animation: heroCard2Float 6.4s ease-in-out infinite;
+        }
+        .anim-card-3 {
+          animation: heroCard3Float 5.8s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* Soft ambient back-glow under and behind the laptop */}
-      <div className="absolute -inset-10 bg-gradient-to-tr from-blue-600/30 via-cyan-500/20 to-indigo-600/20 rounded-full blur-3xl opacity-75 pointer-events-none" />
+      <div className="absolute -inset-10 bg-gradient-to-tr from-blue-600/25 via-cyan-500/15 to-indigo-600/15 rounded-full blur-3xl opacity-75 pointer-events-none" />
 
       {/* ── Laptop Chassis & Screen Wrapper with 3D Parallax ── */}
       <div
         ref={laptopRef}
-        className="relative z-10 will-change-transform"
+        className={`relative z-10 will-change-transform ${!isHovering ? "anim-laptop-levitate" : ""}`}
         style={{ 
           transform: "perspective(1200px) rotateX(4deg) rotateY(0deg)",
           transformStyle: "preserve-3d" 
         }}
       >
         {/* Laptop Lid / Screen Bezel */}
-        <div className="relative rounded-t-2xl sm:rounded-t-3xl border border-slate-700/80 bg-gradient-to-b from-[#161f33] via-[#0d1629] to-[#070d1d] p-2.5 sm:p-3.5 shadow-[0_30px_70px_-15px_rgba(0,14,45,0.9)]">
+        <div className="relative rounded-t-2xl sm:rounded-t-3xl border border-slate-700/80 bg-gradient-to-b from-[#161f33] via-[#0d1629] to-[#070d1d] p-2.5 sm:p-3.5 shadow-[0_25px_60px_-15px_rgba(0,14,45,0.9)]">
           
           {/* Top Camera Notch Dot */}
           <div className="absolute top-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20">
@@ -188,7 +212,7 @@ export default function HeroLaptopPreview() {
           <div className="relative rounded-xl overflow-hidden bg-[#03091e] border border-blue-500/30 shadow-inner flex flex-col aspect-[16/10.5] text-white">
             
             {/* Top Navigation Bar of NxtGen Academy AI Screen */}
-            <div className="px-3.5 py-2.5 border-b border-blue-900/60 bg-[#061234]/95 flex items-center justify-between backdrop-blur-md">
+            <div className="px-3.5 py-2.5 border-b border-blue-900/60 bg-[#061234]/95 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-[#1b5bd6] to-blue-700 flex items-center justify-center p-0.5 shadow-xs">
                   <Image
@@ -222,7 +246,7 @@ export default function HeroLaptopPreview() {
             <div className="flex-1 flex overflow-hidden">
               
               {/* Left Sidebar */}
-              <div className="w-24 sm:w-28 border-r border-blue-950/80 bg-[#040b22]/75 p-2 flex flex-col gap-1 shrink-0">
+              <div className="w-24 sm:w-28 border-r border-blue-950/80 bg-[#040b22]/90 p-2 flex flex-col gap-1 shrink-0">
                 <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-600/30 text-blue-300 font-semibold text-[10px] border border-blue-500/30">
                   <LayoutDashboard className="h-3 w-3 shrink-0" />
                   <span>Dashboard</span>
@@ -263,7 +287,7 @@ export default function HeroLaptopPreview() {
                 {/* 3 Metric KPI Cards */}
                 <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
                   {/* KPI 1 */}
-                  <div className="p-2 sm:p-2.5 rounded-lg bg-[#07153a]/80 border border-blue-500/20 backdrop-blur-sm shadow-xs">
+                  <div className="p-2 sm:p-2.5 rounded-lg bg-[#07153a]/90 border border-blue-500/20 shadow-xs">
                     <span className="text-[8px] sm:text-[9px] text-blue-200/70 block uppercase tracking-wider font-medium truncate">
                       Skill Mastery
                     </span>
@@ -276,7 +300,7 @@ export default function HeroLaptopPreview() {
                   </div>
 
                   {/* KPI 2 */}
-                  <div className="p-2 sm:p-2.5 rounded-lg bg-[#07153a]/80 border border-blue-500/20 backdrop-blur-sm shadow-xs">
+                  <div className="p-2 sm:p-2.5 rounded-lg bg-[#07153a]/90 border border-blue-500/20 shadow-xs">
                     <span className="text-[8px] sm:text-[9px] text-blue-200/70 block uppercase tracking-wider font-medium truncate">
                       Real Projects
                     </span>
@@ -289,7 +313,7 @@ export default function HeroLaptopPreview() {
                   </div>
 
                   {/* KPI 3 */}
-                  <div className="p-2 sm:p-2.5 rounded-lg bg-[#07153a]/80 border border-blue-500/20 backdrop-blur-sm shadow-xs">
+                  <div className="p-2 sm:p-2.5 rounded-lg bg-[#07153a]/90 border border-blue-500/20 shadow-xs">
                     <span className="text-[8px] sm:text-[9px] text-blue-200/70 block uppercase tracking-wider font-medium truncate">
                       Placement Score
                     </span>
@@ -311,22 +335,15 @@ export default function HeroLaptopPreview() {
                   <svg 
                     viewBox="0 0 300 80" 
                     fill="none" 
-                    className="w-full h-full preserve-3d"
+                    className="w-full h-full"
                     preserveAspectRatio="none"
                   >
                     <defs>
                       <linearGradient id="nxtWaveGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.45" />
-                        <stop offset="65%" stopColor="#1b5bd6" stopOpacity="0.15" />
+                        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.4" />
+                        <stop offset="65%" stopColor="#1b5bd6" stopOpacity="0.12" />
                         <stop offset="100%" stopColor="#03153b" stopOpacity="0.0" />
                       </linearGradient>
-                      <filter id="nxtGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
                     </defs>
 
                     {/* Gradient Fill under wave */}
@@ -335,21 +352,29 @@ export default function HeroLaptopPreview() {
                       fill="url(#nxtWaveGradient)"
                     />
 
-                    {/* Glowing Stroke Path */}
+                    {/* Subtle outer glow path */}
                     <path
                       d="M 0 60 Q 40 30, 80 50 T 160 40 T 230 20 T 300 35"
                       stroke="#38bdf8"
-                      strokeWidth="2.5"
+                      strokeWidth="5"
+                      strokeOpacity="0.25"
                       strokeLinecap="round"
-                      filter="url(#nxtGlow)"
                     />
 
-                    {/* Glowing Accent Nodes */}
-                    <circle cx="80" cy="50" r="3.5" fill="#38bdf8" className="animate-ping" style={{ transformOrigin: "80px 50px" }} />
-                    <circle cx="80" cy="50" r="2.5" fill="#ffffff" />
+                    {/* Main sharp stroke path */}
+                    <path
+                      d="M 0 60 Q 40 30, 80 50 T 160 40 T 230 20 T 300 35"
+                      stroke="#38bdf8"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                    />
 
-                    <circle cx="230" cy="20" r="3.5" fill="#38bdf8" className="animate-ping" style={{ transformOrigin: "230px 20px" }} />
-                    <circle cx="230" cy="20" r="2.5" fill="#ffffff" />
+                    {/* Accent Nodes with CSS pulse (0 paint thrashing) */}
+                    <circle cx="80" cy="50" r="3" fill="#38bdf8" className="animate-pulse" />
+                    <circle cx="80" cy="50" r="1.8" fill="#ffffff" />
+
+                    <circle cx="230" cy="20" r="3" fill="#38bdf8" className="animate-pulse" />
+                    <circle cx="230" cy="20" r="1.8" fill="#ffffff" />
                   </svg>
                 </div>
 
@@ -364,12 +389,12 @@ export default function HeroLaptopPreview() {
         </div>
       </div>
 
-      {/* ── 3 Floating Glassmorphic Cards with Independent Parallax Depths ── */}
+      {/* ── 3 Floating Cards with Independent Floating Animations ── */}
 
       {/* 1. Top-Left Floating Card: "Real AI Projects" */}
       <div
         ref={card1Ref}
-        className="absolute -top-4 -left-3 sm:-top-5 sm:-left-6 z-30 flex items-center gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-[#08183d]/90 border border-blue-400/40 backdrop-blur-xl shadow-[0_10px_35px_-5px_rgba(0,102,255,0.45)] text-white hover:scale-105 transition-all duration-300 cursor-default will-change-transform"
+        className={`absolute -top-4 -left-3 sm:-top-5 sm:-left-6 z-30 flex items-center gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-[#08183d]/95 border border-blue-400/40 shadow-[0_10px_30px_rgba(0,14,45,0.7)] text-white hover:scale-105 transition-all duration-300 cursor-default will-change-transform ${!isHovering ? "anim-card-1" : ""}`}
       >
         <div className="h-7 w-7 rounded-xl bg-gradient-to-br from-blue-500/30 to-cyan-500/20 border border-blue-400/40 flex items-center justify-center text-[#38bdf8] shrink-0">
           <Layers className="h-4 w-4" />
@@ -382,7 +407,7 @@ export default function HeroLaptopPreview() {
       {/* 2. Bottom-Left Floating Card: "Work on Industry Use-Cases" */}
       <div
         ref={card2Ref}
-        className="absolute -bottom-4 -left-2 sm:-bottom-5 sm:-left-4 z-30 flex items-center gap-2.5 px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-2xl bg-[#08183d]/90 border border-blue-400/40 backdrop-blur-xl shadow-[0_10px_35px_-5px_rgba(0,102,255,0.45)] text-white hover:scale-105 transition-all duration-300 cursor-default will-change-transform"
+        className={`absolute -bottom-4 -left-2 sm:-bottom-5 sm:-left-4 z-30 flex items-center gap-2.5 px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-2xl bg-[#08183d]/95 border border-blue-400/40 shadow-[0_10px_30px_rgba(0,14,45,0.7)] text-white hover:scale-105 transition-all duration-300 cursor-default will-change-transform ${!isHovering ? "anim-card-2" : ""}`}
       >
         <div className="h-7 w-7 rounded-xl bg-gradient-to-br from-blue-500/30 to-cyan-500/20 border border-blue-400/40 flex items-center justify-center text-[#38bdf8] shrink-0">
           <Target className="h-4 w-4" />
@@ -398,7 +423,7 @@ export default function HeroLaptopPreview() {
       {/* 3. Right Floating Card: "Build Your Portfolio" */}
       <div
         ref={card3Ref}
-        className="absolute top-1/3 -right-2 sm:-right-6 z-30 flex items-center gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-[#08183d]/90 border border-blue-400/40 backdrop-blur-xl shadow-[0_10px_35px_-5px_rgba(0,102,255,0.45)] text-white hover:scale-105 transition-all duration-300 cursor-default will-change-transform"
+        className={`absolute top-1/3 -right-2 sm:-right-6 z-30 flex items-center gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl bg-[#08183d]/95 border border-blue-400/40 shadow-[0_10px_30px_rgba(0,14,45,0.7)] text-white hover:scale-105 transition-all duration-300 cursor-default will-change-transform ${!isHovering ? "anim-card-3" : ""}`}
       >
         <div className="h-7 w-7 rounded-xl bg-gradient-to-br from-blue-500/30 to-cyan-500/20 border border-blue-400/40 flex items-center justify-center text-[#38bdf8] shrink-0">
           <Briefcase className="h-4 w-4" />
