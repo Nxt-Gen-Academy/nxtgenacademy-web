@@ -186,7 +186,7 @@ export default function FAQ() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Left Column: Eyebrow, Heading, and Contact Card */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:flex lg:flex-col lg:justify-between space-y-8 lg:space-y-0 pb-2">
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
             {/* Top Content: Eyebrow + Main Heading + Description */}
             <ScrollReveal direction="right" delay={100}>
               {/* Eyebrow Badge */}
@@ -206,8 +206,8 @@ export default function FAQ() {
               </p>
             </ScrollReveal>
 
-            {/* Bottom Content: Help & Contact Card Stuck to the Bottom */}
-            <ScrollReveal direction="up" delay={200} className="mt-8 lg:mt-auto">
+            {/* Help & Contact Card */}
+            <ScrollReveal direction="up" delay={200}>
               <div className="bg-muted/50 rounded-3xl p-6 sm:p-7 border border-border/70 relative overflow-hidden backdrop-blur-sm shadow-xs">
                 <p className="text-sm sm:text-base font-medium text-foreground leading-relaxed">
                   Have more questions for us? Our team can help you out. Get in touch with us!
