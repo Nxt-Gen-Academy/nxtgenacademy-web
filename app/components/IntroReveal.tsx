@@ -120,13 +120,13 @@ export default function IntroReveal() {
       </div>
 
       {/* Two-line stacked text */}
-      <div className="intro-text-wrapper">
+      <div className="intro-text-wrapper text-primary">
         {/* Line 1: "NxtGen" — bold */}
-        <div className="intro-text-line intro-text-line-1">
+        <div className="intro-text-line intro-text-line-1 text-primary">
           {WORD1.split("").map((char, i) => (
             <span key={i} className="intro-char-mask">
               <span
-                className={`intro-char ${animating && !textExiting ? "intro-char-in" : ""} ${textExiting ? "intro-char-out" : ""}`}
+                className={`intro-char text-primary ${animating && !textExiting ? "intro-char-in" : ""} ${textExiting ? "intro-char-out" : ""}`}
                 style={{ animationDelay: `${textExiting ? i * STAGGER : i * STAGGER}ms` }}
               >
                 {char}
@@ -136,11 +136,11 @@ export default function IntroReveal() {
         </div>
 
         {/* Line 2: "Academy" — lighter weight */}
-        <div className="intro-text-line intro-text-line-2">
+        <div className="intro-text-line intro-text-line-2 text-primary">
           {WORD2.split("").map((char, i) => (
             <span key={i} className="intro-char-mask">
               <span
-                className={`intro-char ${animating && !textExiting ? "intro-char-in" : ""} ${textExiting ? "intro-char-out" : ""}`}
+                className={`intro-char text-primary ${animating && !textExiting ? "intro-char-in" : ""} ${textExiting ? "intro-char-out" : ""}`}
                 style={{ animationDelay: `${textExiting ? (i * STAGGER) + 100 : WORD2_OFFSET + i * STAGGER}ms` }}
               >
                 {char}
@@ -154,7 +154,7 @@ export default function IntroReveal() {
       <div className={`intro-line ${animating ? "intro-line-in" : ""}`} />
 
       {/* Subtle tagline */}
-      <div className={`intro-tagline ${animating ? "intro-tagline-in" : ""}`}>
+      <div className={`intro-tagline text-primary ${animating ? "intro-tagline-in" : ""}`}>
         Engineering Tech Careers
       </div>
     </div>
