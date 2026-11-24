@@ -371,6 +371,15 @@
 
 /* ═══════════════ Intro Reveal ═══════════════ */
 
+/* Mobile safeguard: Never show or render intro overlay on mobile viewports (<768px) */
+@media (max-width: 767px) {
+  .intro-overlay {
+    display: none !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }
+}
+
 .intro-overlay {
   position: fixed;
   inset: 0;
@@ -382,10 +391,21 @@
   background: var(--background);
   gap: 0;
   overflow: hidden;
+  /* CSS fail-safe: automatically fade out and yield pointer-events after 3.8s even if JS halts */
+  animation: intro-failsafe-exit 400ms ease 3800ms forwards;
+}
+
+@keyframes intro-failsafe-exit {
+  to {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
 }
 
 .intro-overlay-exit {
-  animation: intro-overlay-fade 750ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  pointer-events: none !important;
+  animation: intro-overlay-fade 750ms cubic-bezier(0.65, 0, 0.35, 1) forwards !important;
 }
 
 @keyframes intro-overlay-fade {

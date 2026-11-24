@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const WORD1 = "NxtGen";
 const WORD2 = "Academy";
@@ -16,39 +17,48 @@ const BG_EXIT_DURATION = 750;
 type Phase = "pending" | "reveal" | "hold" | "text-exit" | "bg-exit" | "done";
 
 export default function IntroReveal() {
+  const pathname = usePathname();
   const [phase, setPhase] = useState<Phase>("pending");
 
-  // Manage body scroll-lock declaratively based on animation phase
   useEffect(() => {
-    if (phase !== "done" && phase !== "pending") {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      document.body.style.removeProperty("overflow");
-      document.documentElement.style.removeProperty("overflow");
+    // Only run intro reveal on the root homepage
+    if (pathname !== "/") {
+      setPhase("done");
+      return;
     }
-    return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      document.body.style.removeProperty("overflow");
-      document.documentElement.style.removeProperty("overflow");
-    };
-  }, [phase]);
 
-  useEffect(() => {
+    // Skip on mobile devices / small viewports for instant load and to eliminate Mobile Safari hangs
+    const isMobile =
+      typeof window !== "undefined" &&
+      (window.innerWidth < 768 ||
+        /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+
+    if (isMobile) {
+      try {
+        sessionStorage.setItem("introPlayed", "true");
+      } catch {}
+      setPhase("done");
+      return;
+    }
+
     // Respect reduced motion — skip animation
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      requestAnimationFrame(() => setPhase("done"));
-      return;
-    }
+    try {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setPhase("done");
+        return;
+      }
+    } catch {}
 
-    if (sessionStorage.getItem("introPlayed")) {
-      requestAnimationFrame(() => setPhase("done"));
-      return;
+    // Check if intro has already played in this browser session (safe for Safari Private Browsing)
+    try {
+      if (sessionStorage.getItem("introPlayed")) {
+        setPhase("done");
+        return;
+      }
+      sessionStorage.setItem("introPlayed", "true");
+    } catch {
+      // In Safari Private Browsing or restricted environments, proceed safely
     }
-    sessionStorage.setItem("introPlayed", "true");
 
     const t0 = setTimeout(() => setPhase("reveal"), 60);
     const t1 = setTimeout(() => setPhase("hold"), 60 + ALL_IN);
@@ -58,10 +68,30 @@ export default function IntroReveal() {
       setPhase("done");
     }, 60 + ALL_IN + HOLD + TEXT_EXIT_DURATION + BG_EXIT_DURATION + 80);
 
+    // Hard fail-safe timeout: unconditionally dismiss overlay even if timers are throttled by the OS/browser
+    const safetyTimer = setTimeout(() => {
+      setPhase("done");
+    }, 3600);
+
     return () => {
-      [t0, t1, t2, t3, t4].forEach((t) => clearTimeout(t));
+      [t0, t1, t2, t3, t4, safetyTimer].forEach((t) => clearTimeout(t));
     };
-  }, []);
+  }, [pathname]);
+
+  // Manage body scroll-lock declaratively based on animation phase
+  useEffect(() => {
+    if (phase !== "done" && phase !== "pending") {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
+    }
+    return () => {
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
+    };
+  }, [phase]);
 
   /* Sync hero fade-in when background exit phase starts */
   useEffect(() => {
@@ -90,7 +120,21 @@ export default function IntroReveal() {
     }
   }, [phase]);
 
-  if (phase === "done") return null;
+  // Unconditional fail-safe cleanup on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
+      const hero = document.querySelector("#top > .relative");
+      if (hero instanceof HTMLElement) {
+        hero.style.removeProperty("opacity");
+        hero.style.removeProperty("transform");
+        hero.style.removeProperty("transition");
+      }
+    };
+  }, []);
+
+  if (phase === "done" || pathname !== "/") return null;
 
   const animating = phase === "reveal" || phase === "hold" || phase === "text-exit" || phase === "bg-exit";
   const textExiting = phase === "text-exit" || phase === "bg-exit";

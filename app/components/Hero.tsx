@@ -29,17 +29,35 @@ export default function Hero() {
 
   useEffect(() => {
     // If returning from Google sign-in redirect with a pending enquiry, open dialog immediately
-    if (typeof window !== "undefined" && localStorage.getItem("pending_enquiry_flag") === "true") {
-      setIsDialogOpen(true);
+    try {
+      if (typeof window !== "undefined" && localStorage.getItem("pending_enquiry_flag") === "true") {
+        setIsDialogOpen(true);
+      }
+    } catch {}
+
+    let hasPoppedUp = false;
+    let isIntroSkipped = false;
+    try {
+      hasPoppedUp = !!sessionStorage.getItem("heroPopupPopped");
+      isIntroSkipped = !!sessionStorage.getItem("introPlayed");
+    } catch {
+      hasPoppedUp = false;
+      isIntroSkipped = true;
     }
 
-    const hasPoppedUp = sessionStorage.getItem("heroPopupPopped");
+    const isMobileDevice =
+      typeof window !== "undefined" &&
+      (window.innerWidth < 768 ||
+        /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+
     let timer: NodeJS.Timeout;
 
     if (!hasPoppedUp) {
-      sessionStorage.setItem("heroPopupPopped", "true");
-      const isIntroSkipped = sessionStorage.getItem("introPlayed");
-      const delay = isIntroSkipped ? 2500 : 6000;
+      try {
+        sessionStorage.setItem("heroPopupPopped", "true");
+      } catch {}
+
+      const delay = (isIntroSkipped || isMobileDevice) ? 2500 : 6000;
 
       timer = setTimeout(() => {
         setIsDialogOpen(true);

@@ -77,24 +77,26 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
       if (session.user.email) setValue("email", session.user.email);
 
       if (typeof window !== "undefined") {
-        const flag = localStorage.getItem("pending_enquiry_flag");
-        if (flag === "true") {
-          // Clear flag immediately to prevent double detection
-          localStorage.removeItem("pending_enquiry_flag");
+        try {
+          const flag = localStorage.getItem("pending_enquiry_flag");
+          if (flag === "true") {
+            // Clear flag immediately to prevent double detection
+            localStorage.removeItem("pending_enquiry_flag");
 
-          const cachedPhone = localStorage.getItem("pending_enquiry_phone");
-          const cachedCourse = localStorage.getItem("pending_enquiry_course");
-          const cachedWhatsApp = localStorage.getItem("pending_enquiry_whatsapp");
+            const cachedPhone = localStorage.getItem("pending_enquiry_phone");
+            const cachedCourse = localStorage.getItem("pending_enquiry_course");
+            const cachedWhatsApp = localStorage.getItem("pending_enquiry_whatsapp");
 
-          if (cachedPhone) setValue("phone", cachedPhone);
-          if (cachedCourse) setValue("course", cachedCourse);
-          if (cachedWhatsApp) setValue("whatsAppUpdates", cachedWhatsApp !== "false");
+            if (cachedPhone) setValue("phone", cachedPhone);
+            if (cachedCourse) setValue("course", cachedCourse);
+            if (cachedWhatsApp) setValue("whatsAppUpdates", cachedWhatsApp !== "false");
 
-          // Clean up cache
-          localStorage.removeItem("pending_enquiry_phone");
-          localStorage.removeItem("pending_enquiry_course");
-          localStorage.removeItem("pending_enquiry_whatsapp");
-        }
+            // Clean up cache
+            localStorage.removeItem("pending_enquiry_phone");
+            localStorage.removeItem("pending_enquiry_course");
+            localStorage.removeItem("pending_enquiry_whatsapp");
+          }
+        } catch {}
       }
     }
   }, [session, setValue]);
@@ -105,10 +107,12 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
 
     // Cache current form choices so they persist across the redirect
     if (typeof window !== "undefined") {
-      localStorage.setItem("pending_enquiry_phone", currentPhone || "");
-      localStorage.setItem("pending_enquiry_course", currentCourse || "");
-      localStorage.setItem("pending_enquiry_whatsapp", String(currentWhatsApp));
-      localStorage.setItem("pending_enquiry_flag", "true");
+      try {
+        localStorage.setItem("pending_enquiry_phone", currentPhone || "");
+        localStorage.setItem("pending_enquiry_course", currentCourse || "");
+        localStorage.setItem("pending_enquiry_whatsapp", String(currentWhatsApp));
+        localStorage.setItem("pending_enquiry_flag", "true");
+      } catch {}
     }
 
     try {
@@ -121,7 +125,9 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
       setError("Authentication failed. Please try again.");
       // Clear storage on failure
       if (typeof window !== "undefined") {
-        localStorage.removeItem("pending_enquiry_flag");
+        try {
+          localStorage.removeItem("pending_enquiry_flag");
+        } catch {}
       }
     } finally {
       setIsLoading(false);
