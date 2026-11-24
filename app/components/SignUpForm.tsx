@@ -363,7 +363,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
                 name="course"
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value} disabled={isSubmitting}>
-                    <SelectTrigger className={`h-auto px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus:ring-2 focus:ring-primary/50 w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.course ? 'border-red-500' : 'border-border'}`}>
+                    <SelectTrigger className={`h-auto min-h-[42px] px-3 py-2.5 rounded-xl border bg-card/60 text-sm focus:ring-2 focus:ring-primary/50 w-full disabled:opacity-70 disabled:cursor-not-allowed ${errors.course ? 'border-red-500' : 'border-border'}`}>
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
                     <SelectContent className="rounded-xl border-border bg-card">
@@ -388,7 +388,7 @@ export default function SignUpForm({ idPrefix = "" }: { idPrefix?: string }) {
               name="source"
               render={({ field }) => (
                 <Select onValueChange={field.onChange} value={field.value} disabled={isSubmitting}>
-                  <SelectTrigger className="h-auto px-3 py-2.5 rounded-xl border bg-card/60 border-border text-sm focus:ring-2 focus:ring-primary/50 w-full disabled:opacity-70 disabled:cursor-not-allowed">
+                  <SelectTrigger className="h-auto min-h-[42px] px-3 py-2.5 rounded-xl border bg-card/60 border-border text-sm focus:ring-2 focus:ring-primary/50 w-full disabled:opacity-70 disabled:cursor-not-allowed">
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                   <SelectContent className="rounded-xl border-border bg-card">
