@@ -87,7 +87,19 @@ export default function TermsPage() {
 
           <section className="space-y-4">
             <h2 className="text-xl md:text-2xl font-heading font-medium text-foreground border-b border-border/50 pb-2 tracking-tight">
-              8. Contact Information
+              8. Governing Law and Jurisdiction
+            </h2>
+            <p>
+              These Terms and Conditions shall be governed by and construed in accordance with the laws of India.
+            </p>
+            <p>
+              Any disputes arising out of or in connection with the use of this website, enrollment in our programs, or services provided by NxtGen Academy Private Limited shall be subject to the jurisdiction of the competent courts at Gurugram, Haryana, India, subject to applicable laws.
+            </p>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl md:text-2xl font-heading font-medium text-foreground border-b border-border/50 pb-2 tracking-tight">
+              9. Contact Information
             </h2>
             <p>
               For any questions regarding these terms, contact us at{" "}
