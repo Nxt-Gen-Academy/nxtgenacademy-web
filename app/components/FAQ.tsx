@@ -212,6 +212,9 @@ export default function FAQ() {
                 <p className="text-sm sm:text-base font-medium text-foreground leading-relaxed">
                   Have more questions for us? Our team can help you out. Get in touch with us!
                 </p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Operated by: NxtGen Academy Private Limited
+                </p>
                 <button
                   type="button"
                   onClick={() => {

@@ -183,6 +183,9 @@ export default function Footer() {
                   Contact
                 </h4>
                 <ul className="space-y-2.5 text-xs sm:text-sm text-white">
+                  <li className="text-xs text-white/95 font-medium">
+                    Operated by: NxtGen Academy Private Limited
+                  </li>
                   <li>
                     <a href="mailto:info@nxtgenacademy.co.in" className="hover:text-white/80 hover:underline transition-colors block break-all">
                       info@nxtgenacademy.co.in
@@ -237,8 +240,13 @@ export default function Footer() {
         <div className="pt-8 flex flex-col items-start gap-4">
           
           {/* Copyright */}
-          <div className="text-xs sm:text-sm text-white/90 font-medium">
-            © {new Date().getFullYear()} NxtGen Academy™ · All Rights Reserved.
+          <div className="space-y-1">
+            <div className="text-xs sm:text-sm text-white/90 font-medium">
+              © {new Date().getFullYear()} NxtGen Academy™ · All Rights Reserved.
+            </div>
+            <div className="text-xs text-white/85">
+              Operated by: NxtGen Academy Private Limited
+            </div>
           </div>
 
           {/* Bordered IP Disclaimer Box */}
