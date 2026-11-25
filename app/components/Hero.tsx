@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import SignUpForm from "./SignUpForm";
 import { authClient } from "@/lib/auth-client";
 import HeroLaptopPreview from "./HeroLaptopPreview";
-import HeroFluidBackground from "./HeroFluidBackground";
+import { ShaderAnimation } from "@/components/ui/shader-animation";
 import ScrollReveal from "./ScrollReveal";
 
 const pillars = [
@@ -83,20 +83,21 @@ export default function Hero() {
   };
 
   return (
-    <section id="top" className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#000a20]">
-      {/* ── Dynamic Glowing Blue Fluid Silk Waves Background ── */}
-      <HeroFluidBackground />
+    <section id="top" className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#000714]">
+      {/* ── Custom WebGL Shader Animation Background ── */}
+      <ShaderAnimation className="z-0 opacity-90" />
 
-      {/* ── Subtle Blackish Overlay (keeps text content and laptop crisp above via z-10/z-20) ── */}
+      {/* ── Blackish Overlay (tones down the shader so text & laptop stand out with rich contrast) ── */}
       <div 
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[2] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.52) 100%), rgba(0, 5, 18, 0.38)",
-          boxShadow: "inset 0 0 120px rgba(0, 0, 0, 0.65)"
+          background: "radial-gradient(ellipse 85% 75% at 50% 50%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 4, 15, 0.75) 100%), rgba(0, 0, 0, 0.35)",
+          boxShadow: "inset 0 0 120px rgba(0, 0, 0, 0.85)"
         }}
         aria-hidden="true"
       />
 
+      {/* ── Foreground Content: Text & Laptop situated above the overlay ── */}
       <div className="relative z-10 max-w-7xl mx-auto w-full my-auto py-8">
         {/* ── Two-Column Layout ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
