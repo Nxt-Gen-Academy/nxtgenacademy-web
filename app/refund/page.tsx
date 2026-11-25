@@ -9,9 +9,10 @@ export default function RefundPage() {
         <h1 className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-heading font-medium leading-[1.05] mb-4 text-foreground tracking-tight">
           Refund Policy
         </h1>
-        <p className="text-muted-foreground text-sm mb-12">
-          Last updated: June 2026
-        </p>
+        <div className="text-muted-foreground text-sm mb-12 space-y-1">
+          <p>Last updated: June 2026</p>
+          <p className="text-foreground/90 font-medium">Operated by: NxtGen Academy Private Limited</p>
+        </div>
 
         <div className="prose prose-invert max-w-none space-y-10 text-muted-foreground leading-relaxed text-sm md:text-base">
           <p className="text-foreground font-medium">
